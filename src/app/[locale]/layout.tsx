@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cairo, Montserrat } from "next/font/google";
 import "@/app/[locale]/globals.css";
+// import "react-image-gallery/styles/css/image-gallery.css";
 import { ThemeProvider } from "@/components/custom/ThemeProvider";
 
 import Header from "@/components/custom/Header";
@@ -26,7 +27,7 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
-
+  console.log("heloo");
   return (
     <html lang={locale} dir="rtl">
       <body className={`${cairo.className}`}>

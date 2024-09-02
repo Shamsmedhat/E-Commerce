@@ -12,8 +12,7 @@ export default function TabNavContent() {
   // data will be change after API arrive
   const allCategories = categories;
   const allProducts = products;
-  const data = allProducts.map((ele) => ele.data);
-
+  const data = allProducts.map((ele) => ele);
   return (
     <>
       {allCategories.map((category) => (
@@ -22,24 +21,24 @@ export default function TabNavContent() {
           <div>
             <ul className="grid auto-rows-auto grid-cols-4 gap-4">
               {data
-                .filter((product) => product.category === category.name)
+                .filter((product) => product.data.category === category.name)
                 .map((filteredProduct, i) => (
                   <>
                     {
                       //is first product to be rendered differently
                       i === 0 ? (
                         <li
-                          key={filteredProduct.name}
+                          key={filteredProduct.data.name}
                           className="col-span-2 row-span-2 flex h-fit flex-col items-center justify-between bg-white p-5 shadow-sm"
                         >
                           {/* product full info */}
-                          <Link href={category.path}>
+                          <Link href={`/product/${filteredProduct.id}`}>
                             <div className="flex h-[20rem] flex-row-reverse gap-[1.5rem]">
                               {/* product image */}
                               <div className="relative h-[20rem] w-[75%]">
                                 <Image
-                                  src={filteredProduct.images[0]}
-                                  alt={filteredProduct.name}
+                                  src={filteredProduct.data.images[0]}
+                                  alt={filteredProduct.data.name}
                                   fill
                                   className="object-cover"
                                 />
@@ -48,15 +47,15 @@ export default function TabNavContent() {
                               <div className="space-y-7">
                                 {/* sub category */}
                                 <span className="font-bold text-primary-foreground/70">
-                                  {filteredProduct.subCategory}
+                                  {filteredProduct.data.subCategory}
                                 </span>
                                 {/* Product title */}
                                 <h3 className="text-2xl font-bold text-primary-foreground">
-                                  {filteredProduct.name}
+                                  {filteredProduct.data.name}
                                 </h3>
                                 {/* Product description */}
                                 <p className="text-primary-foreground/70">
-                                  {filteredProduct.overview.overview
+                                  {filteredProduct.data.overview.overview
                                     .split(" ")
                                     .slice(0, 15)
                                     .join(" ")}{" "}
@@ -70,7 +69,7 @@ export default function TabNavContent() {
                                     10000 جنية
                                   </span>
                                   <span className="text-xl font-extrabold text-primary-foreground">
-                                    {filteredProduct.price} جنية
+                                    {filteredProduct.data.price} جنية
                                   </span>
                                 </span>
                               </div>
@@ -107,23 +106,23 @@ export default function TabNavContent() {
                       ) : //is Sec & 3rd product to be rendered differently
                       i === 1 || i === 2 ? (
                         <li
-                          key={filteredProduct.name}
+                          key={filteredProduct.data.name}
                           className="col-span-2 row-span-1 bg-white p-5 shadow-sm"
                         >
                           <Link href={category.path}>
-                            <div>{filteredProduct.name}</div>
-                            <div>{filteredProduct.category}</div>
+                            <div>{filteredProduct.data.name}</div>
+                            <div>{filteredProduct.data.category}</div>
                           </Link>
                         </li>
                       ) : (
                         //Rest of products
                         <li
-                          key={filteredProduct.name}
+                          key={filteredProduct.data.name}
                           className="col-span-1 row-span-1 bg-white p-5 shadow-sm"
                         >
                           <Link href={category.path}>
-                            <div>{filteredProduct.name}</div>
-                            <div>{filteredProduct.category}</div>
+                            <div>{filteredProduct.data.name}</div>
+                            <div>{filteredProduct.data.category}</div>
                           </Link>
                         </li>
                       )

@@ -1,43 +1,35 @@
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import React from "react";
+import { products } from "@/_lib/data";
+import ProductGallary from "./components/ProductGallary";
 
-export default function ProductPage() {
+const images = [
+  "https://m.media-amazon.com/images/I/71hDhuRKjqL._AC_SL1500_.jpg",
+  "https://m.media-amazon.com/images/I/613y-nNxiwL._AC_SL1080_.jpg",
+  "https://m.media-amazon.com/images/I/5123opPZhgL._AC_SL1500_.jpg",
+  "https://m.media-amazon.com/images/I/81bhWT9lUnL._AC_SL1500_.jpg",
+];
+export default function ProductPage({ params }) {
+  const {
+    data: { category, name, overview: overview, rating, price },
+  } = products.filter((p) => p.id === params.productId[0])[0];
+
   return (
     <section className="mt-7">
-      <div className="bg-white">
-        <div className="">
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            orientation="vertical"
-            className="w-full max-w-xs"
-          >
-            <CarouselContent className="-mt-1 h-[200px]">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <CarouselItem key={index} className="pt-1 md:basis-1/2">
-                  <div className="p-1">
-                    <Card>
-                      <CardContent className="flex items-center justify-center p-6">
-                        <span className="text-3xl font-semibold">
-                          {index + 1}
-                        </span>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>{" "}
+      <div className="flex bg-white py-8">
+        <div className="w-1/2">
+          <ProductGallary />
+        </div>
+        <div className="w-1/2">
+          <span>{category}</span>
+          <h2>{name}</h2>
+          <p>{overview.overview}</p>
+          <span>{rating}</span>
+          <span>{price}</span>
+          <div>
+            <button>test</button>
+            <button>test</button>
+            <button>test</button>
+            <button>test</button>
+          </div>
         </div>
       </div>
     </section>
