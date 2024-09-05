@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, ZoomIn } from "lucide-react";
 import { useRef, useState } from "react";
 import styles from "../productStyle.module.css";
 
@@ -25,12 +25,10 @@ export default function ProductGallery() {
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [isZoomVisible, setIsZoomVisible] = useState(false);
 
-  const handleMouseMove = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
-    const { offsetWidth, offsetHeight } = event.currentTarget;
-    const x = (event.nativeEvent.offsetX * 100) / offsetWidth;
-    const y = (event.nativeEvent.offsetY * 100) / offsetHeight;
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const { offsetWidth, offsetHeight } = e.currentTarget;
+    const x = (e.nativeEvent.offsetX * 100) / offsetWidth;
+    const y = (e.nativeEvent.offsetY * 100) / offsetHeight;
 
     setPointer({ x, y });
     setIsZoomVisible(true);
@@ -55,13 +53,13 @@ export default function ProductGallery() {
   }
 
   return (
-    <div className="flex flex-row-reverse justify-center gap-7">
+    <div className="flex w-full flex-shrink flex-row-reverse justify-center justify-between pe-8">
       {/* Main Image Display */}
       <div
         onMouseLeave={handleMouseLeave}
         onMouseMove={handleMouseMove}
         ref={imageZoomRef}
-        className={`${styles.imageZoom} relative flex w-[60%] items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-4`}
+        className={`${styles.imageZoom} relative flex w-full items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-4`}
         style={
           {
             "--url": `url(${currentImg})`,
@@ -74,9 +72,16 @@ export default function ProductGallery() {
       >
         <img
           src={currentImg}
-          className="relative z-50 h-[500px] w-full object-contain transition-all duration-500 ease-in-out"
+          className="relative z-50 h-full w-full object-contain transition-all duration-500 ease-in-out"
           alt="Current Product"
         />
+
+        <span className="absolute bottom-[10%] z-50 flex gap-x-2 rounded-xl bg-primary-foreground/70 p-3 text-slate-100">
+          <span> Hover to zoom</span>
+          <span>
+            <ZoomIn />
+          </span>
+        </span>
       </div>
 
       {/* Thumbnail and Controls Section */}
@@ -102,11 +107,12 @@ export default function ProductGallery() {
           >
             {images.map((img, index) => (
               <button
-                className={`rounded-lg border-2 p-1 transition duration-300 ${
+                className={cn(
                   currentImg === img
-                    ? "scale-105 border-primary"
-                    : "border-primary-foreground/10 hover:scale-105 hover:border-primary"
-                }`}
+                    ? "scale-105 border-primary shadow-md shadow-primary/60 backdrop-blur-3xl"
+                    : "border-primary-foreground/10 shadow-sm hover:scale-105 hover:border-primary hover:shadow-primary/60 hover:backdrop-blur-3xl",
+                  "rounded-lg border-2 p-1 transition duration-300",
+                )}
                 key={img}
                 onClick={() => {
                   setCurrentImg(img);

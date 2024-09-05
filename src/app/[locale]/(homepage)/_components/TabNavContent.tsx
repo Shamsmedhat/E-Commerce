@@ -2,13 +2,12 @@ import React from "react";
 import { categories, products } from "@/_lib/data";
 import { TabsContent } from "@/components/ui/tabs";
 import Image from "next/image";
-import RatingStars from "./RatingStars";
-import { Heart, Scale, ShoppingCartIcon } from "lucide-react";
+import RatingStars from "@/components/common/RatingStars";
+import { Heart, Scale } from "lucide-react";
 import { Link } from "@/navigarion";
-import { useTranslations } from "next-intl";
+import AddToCart from "@/components/common/AddToCart";
 
 export default function TabNavContent() {
-  const t = useTranslations();
   // data will be change after API arrive
   const allCategories = categories;
   const allProducts = products;
@@ -78,19 +77,7 @@ export default function TabNavContent() {
 
                           {/* Buttons Section */}
                           <div className="flex w-full items-center justify-start gap-3">
-                            <div className="w-[9.5rem]">
-                              <button className="flex items-center justify-start gap-3 rounded-full bg-primary py-1 pe-4 ps-1 align-middle text-sm text-white transition-colors hover:bg-primary/80">
-                                <span className="rounded-full bg-white p-2">
-                                  <ShoppingCartIcon
-                                    className="text-primary-foreground"
-                                    size={15}
-                                  />
-                                </span>
-                                <Link href="/cart">
-                                  {t("-k0yk9GUHIDLWvq7B4mRs")}
-                                </Link>
-                              </button>
-                            </div>
+                            <AddToCart />
                             <button>
                               <div className="rounded-full bg-primary-foreground/20 p-2">
                                 <Heart strokeWidth={1} size={18} />
