@@ -1,7 +1,7 @@
 "use client"; // Error boundaries must be Client Components
 
 import MyButton from "@/components/common/MyButton";
-import { Ban } from "lucide-react";
+import { LuBan } from "react-icons/lu";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -21,7 +21,7 @@ export default function Error({
     <div className="flex h-dvh w-full items-center justify-center bg-slate-200">
       <div className="flex flex-col items-center justify-center rounded-md bg-secondary p-8 text-center shadow-md">
         <div className="mb-10 w-fit rounded-full bg-primary/70 p-4">
-          <Ban className="text-primary-foreground" width={100} height={100} />
+          <LuBan className="text-primary-foreground" width={100} height={100} />
         </div>
         <h2 className="mb-8 text-xl font-black">
           نأســف لقد حدث خطـأ ما يمكنك العودة للصفـحة الرئيسية لمواصلة التصـفح!

@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ChevronDown, ChevronUp, ZoomIn } from "lucide-react";
+import { LuChevronDown, LuChevronUp, LuZoomIn } from "react-icons/lu";
+
 import { useRef, useState } from "react";
 import styles from "../productStyle.module.css";
 
@@ -53,7 +54,7 @@ export default function ProductGallery() {
   }
 
   return (
-    <div className="flex w-full flex-shrink flex-row-reverse justify-center justify-between pe-8">
+    <div className="flex w-full flex-shrink flex-row-reverse justify-between px-8 md:pe-8">
       {/* Main Image Display */}
       <div
         onMouseLeave={handleMouseLeave}
@@ -79,7 +80,7 @@ export default function ProductGallery() {
         <span className="absolute bottom-[10%] z-50 flex gap-x-2 rounded-xl bg-primary-foreground/70 p-3 text-slate-100">
           <span> Hover to zoom</span>
           <span>
-            <ZoomIn />
+            <LuZoomIn />
           </span>
         </span>
       </div>
@@ -91,7 +92,7 @@ export default function ProductGallery() {
           onClick={onClickUp}
           disabled={currentImgIndex === 0}
         >
-          <ChevronUp size={20} className="text-primary-foreground/40" />
+          <LuChevronUp size={20} className="text-primary-foreground/40" />
         </button>
         <div className={cn("overflow-hidden")}>
           <div
@@ -101,7 +102,8 @@ export default function ProductGallery() {
             style={{
               transform: `translateY(-${Math.min(
                 currentImgIndex * 70, // Adjust this value based on thumbnail size and spacing
-                (images.length - 6) * 80, // Ensure it doesn't translate too far if near the end
+                // [5] for the number of thumbnail images want to show in page
+                (images.length - 5) * 80, // Ensure it doesn't translate too far if near the end
               )}px)`,
             }}
           >
@@ -133,7 +135,7 @@ export default function ProductGallery() {
           onClick={onClickDown}
           disabled={currentImgIndex === images.length - 1}
         >
-          <ChevronDown
+          <LuChevronDown
             size={20}
             className="cursor-pointer text-primary-foreground/40"
           />

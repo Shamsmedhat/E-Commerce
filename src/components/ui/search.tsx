@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { SearchIcon } from "lucide-react";
+import { LuSearchCode } from "react-icons/lu";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -11,7 +11,7 @@ const Search = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex h-10 items-center overflow-hidden rounded-full border border-input bg-background text-sm ring-offset-background has-[input:disabled]:cursor-not-allowed has-[input:disabled]:opacity-50 has-[input:focus-visible]:outline-none has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-ring has-[input:focus-visible]:ring-offset-2">
         <span className="ms-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary">
-          <SearchIcon className="w-5 text-white" />
+          <LuSearchCode className="w-5 text-white" />
         </span>
         <input
           type="search"

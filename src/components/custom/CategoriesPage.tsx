@@ -2,7 +2,8 @@ import { PRODUCT } from "@/models/products";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "../ui/checkbox";
 import { ComboboxDemo } from "../ui/combobox";
-import { Heart, Scale, ShoppingCartIcon } from "lucide-react";
+import { LuHeart, LuScale, LuShoppingCart } from "react-icons/lu";
+
 import DiscountSection from "@/app/[locale]/(homepage)/_components/DiscountSection";
 import TopSellingItems from "@/app/[locale]/(homepage)/_components/TopSellingItems";
 import { categoryColor } from "@/lib/utils/helpers";
@@ -128,7 +129,7 @@ export default function CategoriesPage({ category }: { category: PRODUCT[] }) {
                   <div className="my-4 flex items-center gap-3">
                     <button>
                       <div className="rounded-full bg-primary p-2">
-                        <ShoppingCartIcon
+                        <LuShoppingCart
                           className="text-primary-foreground"
                           size={15}
                         />
@@ -136,12 +137,12 @@ export default function CategoriesPage({ category }: { category: PRODUCT[] }) {
                     </button>
                     <button>
                       <div className="rounded-full bg-primary-foreground/20 p-2">
-                        <Heart strokeWidth={1} size={18} />
+                        <LuHeart strokeWidth={1} size={18} />
                       </div>
                     </button>
                     <button>
                       <div className="rounded-full bg-primary-foreground/20 p-2">
-                        <Scale strokeWidth={1} size={18} />
+                        <LuScale strokeWidth={1} size={18} />
                       </div>
                     </button>
                   </div>

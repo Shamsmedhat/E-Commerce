@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { LuStar } from "react-icons/lu";
 
 type Rating = {
   starsNumber?: number;
@@ -13,12 +13,12 @@ export default function RatingStars({
   rate = 5,
   size = 18,
   weight = 0.5,
-  color = "#ffffff0",
+  color = "#ffffff00",
 }: Rating) {
   return (
     <span className="flex">
       {Array.from({ length: starsNumber || 5 }, (_, i) => (
-        <Star
+        <LuStar
           key={i}
           fill={rate > i ? "#FEBF31" : "rgb(60 64 59 / 0.3)"}
           size={size}

@@ -3,7 +3,8 @@ import { categories, products } from "@/_lib/data";
 import { TabsContent } from "@/components/ui/tabs";
 import Image from "next/image";
 import RatingStars from "@/components/common/RatingStars";
-import { Heart, Scale } from "lucide-react";
+import { LuHeart, LuScale } from "react-icons/lu";
+
 import { Link } from "@/navigarion";
 import AddToCart from "@/components/common/AddToCart";
 
@@ -80,12 +81,12 @@ export default function TabNavContent() {
                             <AddToCart />
                             <button>
                               <div className="rounded-full bg-primary-foreground/20 p-2">
-                                <Heart strokeWidth={1} size={18} />
+                                <LuHeart strokeWidth={1} size={18} />
                               </div>
                             </button>
                             <button>
                               <div className="rounded-full bg-primary-foreground/20 p-2">
-                                <Scale strokeWidth={1} size={18} />
+                                <LuScale strokeWidth={1} size={18} />
                               </div>
                             </button>
                           </div>
@@ -96,7 +97,7 @@ export default function TabNavContent() {
                           key={filteredProduct.data.name}
                           className="col-span-2 row-span-1 bg-white p-5 shadow-sm"
                         >
-                          <Link href={category.path}>
+                          <Link href={`/product/${filteredProduct.id}`}>
                             <div>{filteredProduct.data.name}</div>
                             <div>{filteredProduct.data.category}</div>
                           </Link>
@@ -107,7 +108,7 @@ export default function TabNavContent() {
                           key={filteredProduct.data.name}
                           className="col-span-1 row-span-1 bg-white p-5 shadow-sm"
                         >
-                          <Link href={category.path}>
+                          <Link href={`/product/${filteredProduct.id}`}>
                             <div>{filteredProduct.data.name}</div>
                             <div>{filteredProduct.data.category}</div>
                           </Link>

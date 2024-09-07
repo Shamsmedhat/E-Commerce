@@ -1,19 +1,26 @@
-import { Baby, CalendarHeart, Cat, CupSoda, MonitorSmartphone, Utensils } from "lucide-react";
+import {
+  LuBaby,
+  LuCalendarHeart,
+  LuCat,
+  LuCupSoda,
+  LuMonitorSmartphone,
+  LuUtensils,
+} from "react-icons/lu";
 
-export const Electronics = () => <MonitorSmartphone />;
-export const Food = () => <Utensils />;
-export const Beverages = () => <CupSoda />;
-export const HealthAndPersonalCare = () => <CalendarHeart />;
-export const HomeAndPetCare = () => <Cat />;
-export const BabyAndToddler = () => <Baby />;
+export const Electronics = () => <LuMonitorSmartphone />;
+export const Food = () => <LuUtensils />;
+export const Beverages = () => <LuCupSoda />;
+export const HealthAndPersonalCare = () => <LuCalendarHeart />;
+export const HomeAndPetCare = () => <LuCat />;
+export const BabyAndToddler = () => <LuBaby />;
 
 const CategoriesIcons = {
-    Electronics,
-    Food,
-    Beverages,
-    HealthAndPersonalCare,
-    HomeAndPetCare,
-    BabyAndToddler,
+  Electronics,
+  Food,
+  Beverages,
+  HealthAndPersonalCare,
+  HomeAndPetCare,
+  BabyAndToddler,
 };
 
 export default CategoriesIcons;

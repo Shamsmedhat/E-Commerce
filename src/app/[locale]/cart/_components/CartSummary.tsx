@@ -1,6 +1,6 @@
 "use client";
 import MyButton from "@/components/common/MyButton";
-import { Info } from "lucide-react";
+import { LuInfo } from "react-icons/lu";
 import { useTranslations } from "next-intl";
 import React from "react";
 
@@ -46,7 +46,7 @@ export default function CartSummary() {
             {/* shipping info */}
             <div className="flex pb-4 capitalize text-primary-foreground/80">
               <span className="me-2 text-sm">{t("iJr6n_6R_oPs2Fl2S_yoR")}</span>
-              <Info className="text-primary" size={20} />
+              <LuInfo className="text-primary" size={20} />
             </div>
           </div>
         </div>

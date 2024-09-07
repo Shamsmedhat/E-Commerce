@@ -3,7 +3,8 @@ import AddToCart from "@/components/common/AddToCart";
 import QuantityBtn from "@/components/common/QuantityBtn";
 import RatingStars from "@/components/common/RatingStars";
 import { PRODUCT_DATA } from "@/models/products";
-import { Heart, Scale } from "lucide-react";
+import { LuHeart, LuScale } from "react-icons/lu";
+
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -53,24 +54,28 @@ export default function ProductDetails({
           {price} {t("fU01whrYbLGxy6qtBGMEo")}
         </span>
       </span>
-      <div className="flex gap-5">
-        <QuantityBtn
-          className="overflow-hidden rounded-3xl border-0"
-          isWithBorder={false}
-          btnsClassName="!px-4"
-          size={10}
-        />
-        <AddToCart />
-        <button>
-          <div className="rounded-full bg-primary-foreground/20 p-2">
-            <Heart strokeWidth={1} size={18} />
-          </div>
-        </button>
-        <button>
-          <div className="rounded-full bg-primary-foreground/20 p-2">
-            <Scale strokeWidth={1} size={18} />
-          </div>
-        </button>
+      <div className="my-4 flex gap-5 md:flex-col lg:flex-row">
+        <div className="flex gap-4 md:flex-col lg:flex-row">
+          <QuantityBtn
+            className="overflow-hidden rounded-3xl border-0"
+            isWithBorder={false}
+            btnsClassName="!px-4"
+            size={10}
+          />
+          <AddToCart />
+        </div>
+        <div className="flex gap-4">
+          <button>
+            <div className="rounded-full bg-primary-foreground/20 p-2">
+              <LuHeart strokeWidth={1} size={18} />
+            </div>
+          </button>
+          <button>
+            <div className="rounded-full bg-primary-foreground/20 p-2">
+              <LuScale strokeWidth={1} size={18} />
+            </div>
+          </button>
+        </div>
       </div>
     </div>
   );

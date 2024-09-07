@@ -1,4 +1,5 @@
-import { Minus, Plus } from "lucide-react";
+import { LuMinus, LuPlus } from "react-icons/lu";
+
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -47,7 +48,7 @@ export default function QuantityBtn({
           "px-2 hover:bg-green-200 hover:transition-colors hover:duration-200",
         )}
       >
-        <Plus size={size} />
+        <LuPlus size={size} />
       </button>
       <div>
         <Input
@@ -67,7 +68,7 @@ export default function QuantityBtn({
           "px-2 hover:bg-red-200 hover:transition-colors hover:duration-200",
         )}
       >
-        <Minus size={size} />
+        <LuMinus size={size} />
       </button>
     </div>
   );

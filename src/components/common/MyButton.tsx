@@ -7,7 +7,7 @@ type ButtonType = {
   size?: "default" | "sm" | "lg" | "icon" | null | undefined;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   isPending?: boolean | undefined;
-  className: string;
+  className?: string;
   children: any;
 };
 

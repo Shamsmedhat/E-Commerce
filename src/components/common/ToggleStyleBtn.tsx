@@ -2,7 +2,8 @@
 import { toggleToRow, toggleToColumn } from "@/lib/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/reduxHooks";
 import { cn } from "@/lib/utils";
-import { Grip, Menu } from "lucide-react";
+import { LuGrip, LuMenu } from "react-icons/lu";
+
 export default function ToggleStyleBtn() {
   const dispatch = useAppDispatch();
   const { rowStyle, columnStyle } = useAppSelector((state) => state.cart);
@@ -15,7 +16,7 @@ export default function ToggleStyleBtn() {
         )}
       >
         <button onClick={() => dispatch(toggleToRow(true))}>
-          <Menu size={20} />
+          <LuMenu size={20} />
         </button>
       </div>
       <div
@@ -25,7 +26,7 @@ export default function ToggleStyleBtn() {
         )}
       >
         <button onClick={() => dispatch(toggleToColumn(true))}>
-          <Grip size={20} />
+          <LuGrip size={20} />
         </button>
       </div>
     </div>

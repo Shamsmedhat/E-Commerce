@@ -8,6 +8,7 @@ import Header from "@/components/custom/Header";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import StoreProvider from "../StoreProvider";
+import Footer from "@/components/custom/Footer";
 
 const cairo = Cairo({ subsets: ["arabic"] });
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -35,9 +36,10 @@ export default async function RootLayout({
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Header />
-              <main className="flex min-h-screen flex-col items-center bg-zinc-100 pt-3 dark:bg-black/30">
+              <main className="flex min-h-screen flex-col items-center bg-zinc-100 pb-10 pt-3 dark:bg-black/30">
                 {children}
               </main>
+              <Footer />
             </ThemeProvider>
           </NextIntlClientProvider>
         </StoreProvider>

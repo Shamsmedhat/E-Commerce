@@ -3,10 +3,21 @@
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Palette } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { LuPalette } from "react-icons/lu";
+
 import { colors } from "../../lib/constants/colors";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 export function ColorSelector() {
   React.useEffect(() => {
@@ -27,25 +38,21 @@ export function ColorSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-        >
-          <Palette className="text-primary" />
+        <Button variant="outline" size="icon">
+          <LuPalette className="text-primary" />
           <span className="sr-only">Change Color</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="flex items-center justify-center flex-wrap gap-1 min-w-[auto] max-w-32">
+      <DropdownMenuContent className="flex min-w-[auto] max-w-32 flex-wrap items-center justify-center gap-1">
         {colors.map((color) => (
-          <TooltipProvider
-            key={color.name}
-            delayDuration={100}
-          >
+          <TooltipProvider key={color.name} delayDuration={100}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <button
-                  className={`cursor-pointer block w-6 h-6 rounded-full`}
-                  style={{ backgroundColor: `hsl(${color.primary.replaceAll(" ", ", ")})` }}
+                  className={`block h-6 w-6 cursor-pointer rounded-full`}
+                  style={{
+                    backgroundColor: `hsl(${color.primary.replaceAll(" ", ", ")})`,
+                  }}
                   onClick={() => handleClick(color.name)}
                 ></button>
               </TooltipTrigger>
