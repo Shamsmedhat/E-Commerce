@@ -1,5 +1,5 @@
 import { PRODUCT } from "@/models/products";
-import CategoriesIcons from "../../src/app/[locale]/(homepage)/_components/CategoriesIcons";
+import CategoriesIcons from "../app/(client)/[locale]/(homepage)/_components/CategoriesIcons";
 export type Category = {
   name: string;
   icon: () => React.ReactNode | JSX.Element;

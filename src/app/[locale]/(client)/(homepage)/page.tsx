@@ -6,8 +6,6 @@ import DiscountSection from "./_components/DiscountSection";
 import TopCategories from "./_components/TopCategories";
 
 export default async function Page() {
-  console.log("tesssssst from homee");
-
   return (
     <>
       <MainSlider />

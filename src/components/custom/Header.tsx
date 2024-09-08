@@ -21,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ColorSelector } from "./ColorSelector";
-import SignOut from "@/app/[locale]/(homepage)/_components/SignOut";
+import SignOut from "@/app/(client)/[locale]/(homepage)/_components/SignOut";
 import Navbar from "./Navbar";
 import { ModeToggler } from "./ModeToggler";
 import LangBtn from "./LangBtn";

@@ -4,8 +4,8 @@ import { Checkbox } from "../ui/checkbox";
 import { ComboboxDemo } from "../ui/combobox";
 import { LuHeart, LuScale, LuShoppingCart } from "react-icons/lu";
 
-import DiscountSection from "@/app/[locale]/(homepage)/_components/DiscountSection";
-import TopSellingItems from "@/app/[locale]/(homepage)/_components/TopSellingItems";
+import DiscountSection from "@/app/(client)/[locale]/(homepage)/_components/DiscountSection";
+import TopSellingItems from "@/app/(client)/[locale]/(homepage)/_components/TopSellingItems";
 import { categoryColor } from "@/lib/utils/helpers";
 
 export default function CategoriesPage({ category }: { category: PRODUCT[] }) {
