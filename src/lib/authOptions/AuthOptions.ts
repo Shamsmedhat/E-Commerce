@@ -1,8 +1,9 @@
 import { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { signIn } from "../apis/auth/auth";
+import { signIn } from "../apis/auth";
 
+const userImage = "@/../public/assets/user.png";
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -16,20 +17,24 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log("credentials", credentials);
-
-        const data = signIn({
+        const { user, error } = await signIn({
           username: credentials?.username,
           password: credentials?.password,
         });
-        return data;
 
-        // }
+        if (user) {
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            image: user.image,
+          };
+        }
+        throw new Error(error || "Invalid credentials");
       },
     }),
   ],
-  // session: {
-  //   strategy: "jwt", // default
-  //   maxAge: 10 * 24 * 60 * 60, // 10 days
-  // },
+  pages: {
+    signIn: "../../app/[locale]/(client)/login/components/Login.tsx",
+  },
 };

@@ -21,15 +21,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ColorSelector } from "./ColorSelector";
-import SignOut from "@/app/(client)/[locale]/(homepage)/_components/SignOut";
+import SignOut from "@/app/[locale]/(client)/(homepage)/_components/SignOut";
 import Navbar from "./Navbar";
 import { ModeToggler } from "./ModeToggler";
 import LangBtn from "./LangBtn";
 import { getTranslations } from "next-intl/server";
 import Logo from "./Logo";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions/AuthOptions";
 
 export default async function Header() {
   const t = await getTranslations();
+
+  const session = await getServerSession(authOptions);
   return (
     <header>
       {/* Head seaction ============================================================= */}
@@ -153,14 +157,14 @@ export default async function Header() {
               {/* Login section & langues*/}
               <LangBtn />
               {/* //TODO need to implement the Auth here */}
-              {false ? (
+              {!session ? (
                 <li className="flex h-14 flex-col items-center justify-center border-e px-6">
                   <Link href="/login">تسـجيل الدخول</Link>
                 </li>
               ) : (
                 <li className="flex h-14 flex-col items-center justify-center border-e px-6">
                   <span className="text-sm text-muted-foreground">
-                    مرحبًا يا
+                    مرحبًا يا {session.user?.name}
                   </span>
 
                   {/* Account dropmenu */}

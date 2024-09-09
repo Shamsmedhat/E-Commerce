@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import { Cairo, Montserrat } from "next/font/google";
-import "@/app/(client)/[locale]/globals.css";
+import "@/app/[locale]/globals.css";
 import { ThemeProvider } from "@/components/custom/ThemeProvider";
 import Header from "@/components/custom/Header";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import StoreProvider from "../../StoreProvider";
+import StoreProvider from "../StoreProvider";
 import Footer from "@/components/custom/Footer";
 import AuthSessionProvider from "@/lib/providers/authSessionProvider";
 import { getServerSession } from "next-auth";
-import { getAllUsers, signIn } from "@/lib/apis/auth/auth";
+import { getAllUsers, signIn } from "@/lib/apis/auth";
+import { authOptions } from "@/lib/authOptions/AuthOptions";
 
 const cairo = Cairo({ subsets: ["arabic"] });
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -29,10 +30,6 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
-  // const session = await getServerSession();
-
-  // console.log("session from root layout", session);
-  // getAllUsers();
 
   return (
     <html lang={locale} dir="rtl">
@@ -40,13 +37,13 @@ export default async function RootLayout({
         <StoreProvider>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              {/* <AuthSessionProvider session={session}> */}
-              <Header />
-              <main className="flex min-h-screen flex-col items-center bg-zinc-100 pb-10 pt-3 dark:bg-black/30">
-                {children}
-              </main>
-              <Footer />
-              {/* </AuthSessionProvider> */}
+              <AuthSessionProvider>
+                <Header />
+                <main className="flex min-h-screen flex-col items-center bg-zinc-100 pb-10 pt-3 dark:bg-black/30">
+                  {children}
+                </main>
+                <Footer />
+              </AuthSessionProvider>
             </ThemeProvider>
           </NextIntlClientProvider>
         </StoreProvider>
