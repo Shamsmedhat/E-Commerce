@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Link } from "@/navigarion";
+import { Link, usePathname, useRouter } from "@/navigarion";
 import { Search } from "@/components/ui/search";
 
 import {
@@ -29,11 +28,14 @@ import { getTranslations } from "next-intl/server";
 import Logo from "./Logo";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions/AuthOptions";
+import UserDetailsListForSmallScreen from "./UserDetailsListForSmallScreen";
+import UserDetailsListForLargeScreen from "./UserDetailsListForLargeScreen";
 
 export default async function Header() {
   const t = await getTranslations();
 
   const session = await getServerSession(authOptions);
+
   return (
     <header>
       {/* Head seaction ============================================================= */}
@@ -53,179 +55,42 @@ export default async function Header() {
           {/* User section and info ============================================================= */}
 
           <li>
-            {/* display a setting drop menu if the screen is small */}
+            {/* //? display a setting drop menu if the screen is small */}
 
             <ul className="block md:hidden">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="focus mt-1 flex items-center gap-1 px-2">
-                    {t("OP29qgwvwjQThZqFJ8JrS")}{" "}
-                    <LuChevronDown className="w-4" />
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuGroup>
-                    {/* Lang btn in small screen */}
-                    <DropdownMenuItem>
-                      <div>
-                        <li className="flex h-14 items-center justify-center border-e pe-6 font-semibold">
-                          <LangBtn />
-                        </li>
-                      </div>
-                    </DropdownMenuItem>
-                    {/* Account details in small screen */}
-                    <DropdownMenuItem>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <button className="focus mt-1 flex items-center gap-1 px-2">
-                            تفاصيل حسابك <LuChevronDown className="w-4" />
-                          </button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                          <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                              <Link
-                                href="/profile"
-                                className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-                              >
-                                <LuUser className="h-4 w-4" />
-                                <span>الملف الشخصي</span>
-                              </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <Link
-                                href="/profile"
-                                className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-                              >
-                                <LuCreditCard className="h-4 w-4" />
-                                <span>عمليات الدفع</span>
-                              </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <Link
-                                href="/profile"
-                                className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-                              >
-                                <LuSettings className="h-4 w-4" />
-                                <span>الإعدادات</span>
-                              </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <Link
-                                href="/dashboard"
-                                className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-                              >
-                                <LuSettings2 className="h-4 w-4" />
-                                <span>لوحة التحكم</span>
-                              </Link>
-                            </DropdownMenuItem>
-                          </DropdownMenuGroup>
-
-                          <DropdownMenuSeparator />
-
-                          {/* Logout section & langues*/}
-                          <DropdownMenuItem>
-                            <SignOut />
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </DropdownMenuItem>
-                    {/* cart in small screen */}
-                    <DropdownMenuItem>
-                      <Link href="/cart" className="relative">
-                        <span className="absolute right-0 top-1 flex aspect-square min-h-3 min-w-3 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
-                          77
-                        </span>
-                        <LuShoppingCart />
-                      </Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-
-                  <DropdownMenuSeparator />
-
-                  {/* Logout section & langues*/}
-                  <DropdownMenuItem>
-                    <SignOut />
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              {!session ? (
+                <li className="flex h-14 flex-col items-center justify-center border-e px-6">
+                  <Link href="/login">{t("x5CK85cNmYaHmtijJxw1l")}</Link>
+                </li>
+              ) : (
+                <UserDetailsListForSmallScreen />
+              )}
             </ul>
 
-            {/* display default setting in large screen */}
+            {/* //? display default setting in large screen */}
 
             <ul className="hidden md:flex">
               {/* Login section & langues*/}
+
               <LangBtn />
               {/* //TODO need to implement the Auth here */}
               {!session ? (
                 <li className="flex h-14 flex-col items-center justify-center border-e px-6">
-                  <Link href="/login">تسـجيل الدخول</Link>
+                  <Link href="/login">{t("x5CK85cNmYaHmtijJxw1l")}</Link>
                 </li>
               ) : (
                 <li className="flex h-14 flex-col items-center justify-center border-e px-6">
                   <span className="text-sm text-muted-foreground">
-                    مرحبًا يا {session.user?.name}
+                    {t("GA5q4VAGgkQx9JSIoCH64")} {session.user?.name}
                   </span>
 
                   {/* Account dropmenu */}
 
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <button className="focus mt-1 flex items-center gap-1 px-2">
-                        تفاصيل حسابك <LuChevronDown className="w-4" />
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuGroup>
-                        <DropdownMenuItem>
-                          <Link
-                            href="/profile"
-                            className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-                          >
-                            <LuUser className="h-4 w-4" />
-                            <span>الملف الشخصي</span>
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Link
-                            href="/profile"
-                            className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-                          >
-                            <LuCreditCard className="h-4 w-4" />
-                            <span>عمليات الدفع</span>
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Link
-                            href="/profile"
-                            className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-                          >
-                            <LuSettings className="h-4 w-4" />
-                            <span>الإعدادات</span>
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Link
-                            href="/dashboard"
-                            className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-                          >
-                            <LuSettings2 className="h-4 w-4" />
-                            <span>لوحة التحكم</span>
-                          </Link>
-                        </DropdownMenuItem>
-                      </DropdownMenuGroup>
-
-                      <DropdownMenuSeparator />
-
-                      {/* Logout section & langues*/}
-                      <DropdownMenuItem>
-                        <SignOut />
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <UserDetailsListForLargeScreen />
                 </li>
               )}
-              {/* User cart */}
+
+              {/* User cart  ======================================= */}
               <li className="flex h-14 items-center justify-center border-e px-6 font-semibold">
                 <Link href="/cart" className="relative">
                   <span className="absolute right-0 top-1 flex aspect-square min-h-3 min-w-3 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
@@ -234,7 +99,8 @@ export default async function Header() {
                   <LuShoppingCart />
                 </Link>
               </li>
-              {/* color selection */}
+
+              {/* color selection ==================================*/}
               <li className="flex h-14 items-center justify-center gap-2 ps-6 font-semibold">
                 <ColorSelector />
                 <ModeToggler />
@@ -244,7 +110,7 @@ export default async function Header() {
         </ul>
       </div>
 
-      {/* NavBar ============================================================= */}
+      {/* NavBar        ============================================================= */}
 
       <div className="border-b bg-background">
         <Navbar />

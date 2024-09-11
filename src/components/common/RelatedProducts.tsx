@@ -12,7 +12,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import Link from "next/link";
 import Heading from "@/components/common/Heading";
 import { PRODUCT } from "@/models/products";
-import TopSellingItem from "@/app/(client)/[locale]/(homepage)/_components/TopSellingItem";
+import TopSellingItem from "@/app/[locale]/(client)/(homepage)/_components/TopSellingItem";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -27,7 +27,6 @@ export default function RelatedProducts({
     .map((product) => product.data)
     .slice(0, 20);
 
-  console.log(relatedProduct);
   return (
     <>
       <div className="flex justify-between ps-[8rem]">

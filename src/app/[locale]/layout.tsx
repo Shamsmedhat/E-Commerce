@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Cairo, Montserrat } from "next/font/google";
 import "@/app/[locale]/globals.css";
+import "react-toastify/dist/ReactToastify.css";
+
 import { ThemeProvider } from "@/components/custom/ThemeProvider";
 import Header from "@/components/custom/Header";
 import { NextIntlClientProvider } from "next-intl";
@@ -8,9 +10,7 @@ import { getMessages } from "next-intl/server";
 import StoreProvider from "../StoreProvider";
 import Footer from "@/components/custom/Footer";
 import AuthSessionProvider from "@/lib/providers/authSessionProvider";
-import { getServerSession } from "next-auth";
-import { getAllUsers, signIn } from "@/lib/apis/auth";
-import { authOptions } from "@/lib/authOptions/AuthOptions";
+import { ToastContainer } from "react-toastify";
 
 const cairo = Cairo({ subsets: ["arabic"] });
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -39,7 +39,8 @@ export default async function RootLayout({
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <AuthSessionProvider>
                 <Header />
-                <main className="flex min-h-screen flex-col items-center bg-zinc-100 pb-10 pt-3 dark:bg-black/30">
+                <main className="flex flex-col items-center bg-zinc-100 pb-10 pt-3 dark:bg-black/30">
+                  <ToastContainer stacked />
                   {children}
                 </main>
                 <Footer />

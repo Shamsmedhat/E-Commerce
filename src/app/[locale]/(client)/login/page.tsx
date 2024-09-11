@@ -1,24 +1,85 @@
-import { Label } from "@/components/ui/label";
-// import { SignIn } from "../(homepage)/_components/SignIn";
-import { Input } from "@/components/ui/input";
-import Login from "./components/Login";
+import { getServerSession, Session } from "next-auth";
+import LoginForm from "./components/LoginForm";
+import { authOptions } from "@/lib/authOptions/AuthOptions";
+import { getTranslations } from "next-intl/server";
+import SignInProviders from "../(homepage)/_components/SignInProviders";
+import Image, { StaticImageData } from "next/image";
+import userIcone from "@/../public/assets/user.png";
+import LogoutBtn from "./components/LogoutBtn";
+import { GoArrowUpLeft } from "react-icons/go";
+import { getProviders } from "next-auth/react";
 
 export default async function Page() {
+  const session: Session | null = await getServerSession(authOptions);
+  const providers = await getProviders();
+  const altUserImage: string | StaticImageData = providers?.credentials
+    ? userIcone
+    : userIcone;
+  const UserImage: string | StaticImageData = session?.user?.image ?? userIcone;
+
+  const t = await getTranslations();
   return (
     <>
-      <section className="flex w-full flex-col items-center justify-center">
-        <div className="relative rounded-2xl bg-white p-10 shadow-lg">
-          <h2 className="mb-3 text-3xl font-bold text-primary-foreground">
-            تسـجيل الدخول
-          </h2>
-          <p className="mb-4 text-lg text-primary-foreground/70">
-            أدخل بريدك الإلكتروني وكلمة المرور للوصول إلى حسابك.
-          </p>
-          <Login />
-          <div className="my-5 h-[0.01rem] w-full bg-primary-foreground/30 after:absolute after:bottom-[30%] after:right-1/2 after:bg-white after:px-3 after:content-['أو']"></div>
-          {/* <SignIn /> */}
-        </div>
-      </section>
+      {!session ? (
+        <section className="mt-5 flex w-full flex-col items-center justify-center">
+          <div className="relative w-[35%] rounded-2xl bg-white p-10 shadow-lg">
+            <h2 className="mb-3 text-3xl font-bold text-primary-foreground">
+              {t("x5CK85cNmYaHmtijJxw1l")}
+            </h2>
+            <p className="mb-4 text-lg text-primary-foreground/70">
+              {t("IQ0KGx9ZU0j2k7BpbvyBZ")}
+            </p>
+            <LoginForm session={session} />
+            <div className="relative flex items-center justify-center p-3 text-[16px] before:absolute before:h-[1px] before:w-full before:bg-primary-foreground/20 before:content-['']">
+              <span className="z-10 bg-white px-3">أو</span>
+            </div>
+            <SignInProviders />
+          </div>
+        </section>
+      ) : (
+        <section className="mt-5 flex w-full flex-col items-center justify-center">
+          <div className="relative flex w-[40%] flex-col gap-2 rounded-2xl bg-white p-10 shadow-lg">
+            <div className="flex flex-row gap-2">
+              {!providers?.credentials ? (
+                <Image
+                  src={UserImage}
+                  alt={`the ${session.user?.name} image`}
+                  width={70}
+                  height={70}
+                  className="rounded-full"
+                />
+              ) : (
+                <Image
+                  src={altUserImage}
+                  alt={`the ${session.user?.name} image`}
+                  width={70}
+                  height={70}
+                  className="rounded-full"
+                  placeholder="blur"
+                />
+              )}
+              <div>
+                <h2 className="text-2xl font-bold text-primary-foreground">
+                  {t("3bmpktaFAugrjDrLFz0p5")} {session.user?.name} !
+                </h2>
+                <p className="text-primary-foreground/80">
+                  {session.user?.email}
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-lg font-semibold">لديك بالفعل حساب!</p>
+              <p className="flex gap-2">
+                <span>تريد التسجيل بحساب اخر</span>
+                <LogoutBtn className="flex underline">
+                  <span>اضغط هنا</span> <GoArrowUpLeft />
+                </LogoutBtn>
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }

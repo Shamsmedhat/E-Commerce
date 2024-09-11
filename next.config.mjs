@@ -12,8 +12,14 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "media.istockphoto.com",
+        hostname: "**.com",
         port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8800",
         pathname: "/**",
       },
     ],

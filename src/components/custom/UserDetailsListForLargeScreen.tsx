@@ -1,0 +1,84 @@
+"use client";
+import { Link, usePathname, useRouter } from "@/navigarion";
+
+import {
+  LuChevronDown,
+  LuCreditCard,
+  LuSettings,
+  LuSettings2,
+  LuUser,
+} from "react-icons/lu";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import SignOut from "@/app/[locale]/(client)/(homepage)/_components/SignOut";
+
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+
+export default function UserDetailsListForLargeScreen() {
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const t = useTranslations();
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild disabled={isLoggedOut}>
+        <button className="focus mt-1 flex items-center gap-1 px-2">
+          {t("6_d33l3IKBE2Vu7Qw4u9W")} <LuChevronDown className="w-4" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            <Link
+              href="/profile"
+              className="flex w-full items-center gap-2 rtl:flex-row-reverse"
+            >
+              <LuUser className="h-4 w-4" />
+              <span>{t("A2LnQ7Mg56cFySI6-yGyD")}</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link
+              href="/profile"
+              className="flex w-full items-center gap-2 rtl:flex-row-reverse"
+            >
+              <LuCreditCard className="h-4 w-4" />
+              <span>{t("Y30H6LYenliZ-2M0l6pQB")}</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link
+              href="/profile"
+              className="flex w-full items-center gap-2 rtl:flex-row-reverse"
+            >
+              <LuSettings className="h-4 w-4" />
+              <span>{t("LADjF8050Hs5EOK91d2We")}</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link
+              href="/dashboard"
+              className="flex w-full items-center gap-2 rtl:flex-row-reverse"
+            >
+              <LuSettings2 className="h-4 w-4" />
+              <span>{t("_YASznrZi5hx4_-IQJ8T2")}</span>
+            </Link>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
+        {/* Logout section & langues*/}
+        <DropdownMenuItem>
+          <SignOut isLoggedOut={isLoggedOut} setIsLoggedOut={setIsLoggedOut} />
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}

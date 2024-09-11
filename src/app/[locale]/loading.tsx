@@ -1,3 +1,3 @@
 export default function Page() {
-    return <h1>Looding path....</h1>;
+  return <h1>Looding path from root level....</h1>;
 }

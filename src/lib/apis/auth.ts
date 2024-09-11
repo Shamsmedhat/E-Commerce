@@ -1,12 +1,6 @@
 import { BASE_URL } from "@/lib/constants/colors";
 import axios from "axios";
 
-export async function getAllUsers() {
-  const data = axios(`${BASE_URL}/users`);
-
-  console.log(data);
-}
-
 export async function signIn({
   username,
   password,
@@ -25,7 +19,6 @@ export async function signIn({
     });
 
     const { data } = response;
-    console.log("data", data.data);
     return {
       user: {
         id: data.data.user.id,

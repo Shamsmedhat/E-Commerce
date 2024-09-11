@@ -1,5 +1,7 @@
+import LoginSkeleton from "@/components/skeletons/LoginSkeleton";
+
 export async function Page() {
-  return <>Login Loading...</>;
+  return <LoginSkeleton />;
 }
 
 export default Page;
