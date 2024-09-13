@@ -21,10 +21,13 @@ import SignOut from "@/app/[locale]/(client)/(homepage)/_components/SignOut";
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
+import { ROLE } from "@/lib/constants/roles";
 
 export default function UserDetailsListForLargeScreen() {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const t = useTranslations();
+  const session = useSession();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild disabled={isLoggedOut}>
@@ -61,15 +64,18 @@ export default function UserDetailsListForLargeScreen() {
               <span>{t("LADjF8050Hs5EOK91d2We")}</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link
-              href="/dashboard"
-              className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-            >
-              <LuSettings2 className="h-4 w-4" />
-              <span>{t("_YASznrZi5hx4_-IQJ8T2")}</span>
-            </Link>
-          </DropdownMenuItem>
+          {session.data?.user.role === ROLE.ADMIN ||
+          session.data?.user.role === ROLE.OWNER ? (
+            <DropdownMenuItem>
+              <Link
+                href="/dashboard"
+                className="flex w-full items-center gap-2 rtl:flex-row-reverse"
+              >
+                <LuSettings2 className="h-4 w-4" />
+                <span>{t("_YASznrZi5hx4_-IQJ8T2")}</span>
+              </Link>
+            </DropdownMenuItem>
+          ) : null}
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />

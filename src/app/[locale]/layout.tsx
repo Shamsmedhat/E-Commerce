@@ -39,7 +39,7 @@ export default async function RootLayout({
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <AuthSessionProvider>
                 <Header />
-                <main className="flex flex-col items-center bg-zinc-100 pb-10 pt-3 dark:bg-black/30">
+                <main className="relative flex flex-col items-center bg-zinc-100 pb-10 pt-3 dark:bg-black/30">
                   <ToastContainer stacked />
                   {children}
                 </main>

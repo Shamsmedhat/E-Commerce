@@ -3,15 +3,24 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa6";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { handleSignInToaster } from "@/lib/utils/helpers";
 
 export default function SignInProviders() {
   const t = useTranslations();
+
   async function handleGoogleLogin() {
-    await signIn("google");
+    await signIn("google", {
+      redirect: true,
+      callbackUrl: "/",
+    }).then(handleSignInToaster);
   }
   async function handleFacebookLogin() {
-    await signIn("facebook");
+    await signIn("facebook", {
+      redirect: true,
+      callbackUrl: "/",
+    }).then(handleSignInToaster);
   }
+
   return (
     <div className="mt-8 space-y-6">
       <button

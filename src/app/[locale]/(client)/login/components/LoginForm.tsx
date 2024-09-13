@@ -4,19 +4,16 @@ import { Label } from "@/components/ui/label";
 import { Session } from "next-auth";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { toast } from "react-toastify";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { BsInfoCircle } from "react-icons/bs";
 import { ImSpinner3 } from "react-icons/im";
-import { useState } from "react";
-import { useRouter } from "@/navigarion";
+
+import { handleSignInToaster } from "@/lib/utils/helpers";
 
 export default function LoginForm({ session }: { session: Session | null }) {
   const t = useTranslations();
-  const router = useRouter();
-  const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
 
   const userSchema = z
     .object({
@@ -33,47 +30,14 @@ export default function LoginForm({ session }: { session: Session | null }) {
   } = useForm<Inputs>({ resolver: zodResolver(userSchema) });
 
   async function handleSignIn({ username, password }: Inputs) {
-    const result = await signIn("credentials", {
-      redirect: false,
+    await signIn("credentials", {
+      redirect: true,
       callbackUrl: "/",
       username,
       password,
     });
-
-    const loginSuccessfully = () => {
-      toast.success(`Logged In Successfully!`, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      setIsLoginSuccessful(true); // Set login success to true
-    };
-
-    const loginFailed = () =>
-      toast.error(`Error: ${result?.error}`, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-    // Handle errors or success
-    if (result?.error) {
-      loginFailed();
-    } else {
-      loginSuccessfully();
-      router.push("/");
-      router.refresh();
-    }
+    handleSignInToaster();
+    //TODO handling errors
   }
 
   const onSubmit: SubmitHandler<Inputs> = (data) => handleSignIn(data);
@@ -122,7 +86,7 @@ export default function LoginForm({ session }: { session: Session | null }) {
       <button
         type="submit"
         className="w-full rounded-lg bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/80"
-        disabled={isSubmitting || isLoginSuccessful} // Disable button if submitting or login was successful
+        disabled={isSubmitting || isSubmitSuccessful}
       >
         {isSubmitting ? (
           <span className="flex justify-center">

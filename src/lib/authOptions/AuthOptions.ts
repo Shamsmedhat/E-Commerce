@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { signIn } from "../apis/auth";
+import { ROLE } from "../constants/roles";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -27,6 +28,8 @@ export const authOptions: NextAuthOptions = {
             name: user.name,
             email: user.email,
             image: user.image,
+            role: user.role, // Include role information
+            accessToken: user.accessToken,
           };
         }
         throw new Error(error || "Invalid credentials");
@@ -43,20 +46,25 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("user", user);
-      console.log("account", account);
-      console.log("profile", profile);
-      console.log("email", email);
-      console.log("credentials", credentials);
-      // if (isAllowedToSignIn) {
-      return true;
-      // } else {
-      // Return false to display a default error message
-      // return false;
-      // Or you can return a URL to redirect to:
-      // return '/unauthorized'
-      // }
+    async jwt({ token, user, account, profile }) {
+      if (user) {
+        token.role = (user as any).role; // making suure to access role
+        token.accessToken = user.accessToken;
+      }
+      if (account?.provider === "facebook" || account?.provider === "google") {
+        token.role = ROLE.USER;
+      }
+
+      return token;
+    },
+    async session({ session, token, user }) {
+      console.log("session ", session);
+      console.log("user ", user);
+      if (token.role) {
+        session.user.role = token.role; // Pass role to session
+        session.user.accessToken = token.accessToken;
+      }
+      return session;
     },
   },
 

@@ -1,3 +1,25 @@
+import { ROLE } from "../constants/roles";
+
+export const handleSignInToaster = () => {
+  localStorage.setItem("showToast", "signIn");
+};
+
+export const handleSignOutToaster = () => {
+  localStorage.setItem("showToast", "signOut");
+};
+
+export function getRequiredRoles(pathname: string): string[] {
+  const roleRequirements: {
+    [key: string]: string[];
+  } = {
+    dashboard: [ROLE.OWNER, ROLE.ADMIN],
+    cart: [ROLE.OWNER, ROLE.ADMIN, ROLE.USER],
+  };
+  const pathnameSlug = pathname.split("/")[2];
+
+  return roleRequirements[pathnameSlug] || [];
+}
+
 export function categoryColor(categoryName: string): string {
   switch (categoryName) {
     case "إلكترونيات":

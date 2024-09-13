@@ -25,6 +25,8 @@ export async function signIn({
         name: data.data.user.fullName,
         email: data.data.user.email,
         image: data.data.user.photo,
+        role: data.data.user.role,
+        accessToken: data.data.token,
       },
       error: null,
     };

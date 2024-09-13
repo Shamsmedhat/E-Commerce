@@ -4,6 +4,7 @@ import { useAppSelector } from "@/lib/hooks/reduxHooks";
 import { cn } from "@/lib/utils";
 import { categoryBorderColor } from "@/lib/utils/helpers";
 import { PRODUCT_DATA } from "@/models/products";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 export default function CartItem({

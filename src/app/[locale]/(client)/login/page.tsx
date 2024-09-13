@@ -2,20 +2,17 @@ import { getServerSession, Session } from "next-auth";
 import LoginForm from "./components/LoginForm";
 import { authOptions } from "@/lib/authOptions/AuthOptions";
 import { getTranslations } from "next-intl/server";
-import SignInProviders from "../(homepage)/_components/SignInProviders";
+import SignInProviders from "./components/SignInProviders";
 import Image, { StaticImageData } from "next/image";
-import userIcone from "@/../public/assets/user.png";
 import LogoutBtn from "./components/LogoutBtn";
 import { GoArrowUpLeft } from "react-icons/go";
-import { getProviders } from "next-auth/react";
 
 export default async function Page() {
   const session: Session | null = await getServerSession(authOptions);
-  const providers = await getProviders();
-  const altUserImage: string | StaticImageData = providers?.credentials
-    ? userIcone
-    : userIcone;
-  const UserImage: string | StaticImageData = session?.user?.image ?? userIcone;
+
+  // TODO handle image comes from DB
+
+  const UserImage: string | StaticImageData = session?.user?.image;
 
   const t = await getTranslations();
   return (
@@ -40,24 +37,14 @@ export default async function Page() {
         <section className="mt-5 flex w-full flex-col items-center justify-center">
           <div className="relative flex w-[40%] flex-col gap-2 rounded-2xl bg-white p-10 shadow-lg">
             <div className="flex flex-row gap-2">
-              {!providers?.credentials ? (
-                <Image
-                  src={UserImage}
-                  alt={`the ${session.user?.name} image`}
-                  width={70}
-                  height={70}
-                  className="rounded-full"
-                />
-              ) : (
-                <Image
-                  src={altUserImage}
-                  alt={`the ${session.user?.name} image`}
-                  width={70}
-                  height={70}
-                  className="rounded-full"
-                  placeholder="blur"
-                />
-              )}
+              <Image
+                src={UserImage}
+                alt={`the ${session.user?.name} image`}
+                width={70}
+                height={70}
+                className="rounded-full"
+              />
+
               <div>
                 <h2 className="text-2xl font-bold text-primary-foreground">
                   {t("3bmpktaFAugrjDrLFz0p5")} {session.user?.name} !

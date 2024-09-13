@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { useTranslations } from "next-intl";
+import { handleSignOutToaster } from "@/lib/utils/helpers";
 
 export default function SignOut({
   isLoggedOut,
@@ -16,25 +17,11 @@ export default function SignOut({
   const t = useTranslations();
   const router = useRouter();
 
-  const loggedOutSuccessfully = () => {
-    toast.info("Logged out Successfully!", {
-      position: "top-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      onClose: () => {
-        router.refresh(); // Refresh the router after successful logout
-      },
-    });
-  };
-
   async function handleSignOut() {
-    await signOut({ redirect: false });
-    loggedOutSuccessfully();
+    await signOut({ redirect: true, callbackUrl: "/" }).then(
+      handleSignOutToaster,
+    );
+    // loggedOutSuccessfully();
     setIsLoggedOut(true); // Mark as logged out
   }
   return (

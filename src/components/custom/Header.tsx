@@ -30,6 +30,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions/AuthOptions";
 import UserDetailsListForSmallScreen from "./UserDetailsListForSmallScreen";
 import UserDetailsListForLargeScreen from "./UserDetailsListForLargeScreen";
+import LoginHeaderSection from "./LoginHeaderSection";
 
 export default async function Header() {
   const t = await getTranslations();
@@ -74,21 +75,8 @@ export default async function Header() {
 
               <LangBtn />
               {/* //TODO need to implement the Auth here */}
-              {!session ? (
-                <li className="flex h-14 flex-col items-center justify-center border-e px-6">
-                  <Link href="/login">{t("x5CK85cNmYaHmtijJxw1l")}</Link>
-                </li>
-              ) : (
-                <li className="flex h-14 flex-col items-center justify-center border-e px-6">
-                  <span className="text-sm text-muted-foreground">
-                    {t("GA5q4VAGgkQx9JSIoCH64")} {session.user?.name}
-                  </span>
 
-                  {/* Account dropmenu */}
-
-                  <UserDetailsListForLargeScreen />
-                </li>
-              )}
+              <LoginHeaderSection />
 
               {/* User cart  ======================================= */}
               <li className="flex h-14 items-center justify-center border-e px-6 font-semibold">
