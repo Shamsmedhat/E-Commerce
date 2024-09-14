@@ -8,6 +8,13 @@ export const handleSignOutToaster = () => {
   localStorage.setItem("showToast", "signOut");
 };
 
+export function getUserRole(role: string): string | undefined {
+  for (const [key, value] of Object.entries(ROLE)) {
+    if (value === role) {
+      return key;
+    }
+  }
+}
 export function getRequiredRoles(pathname: string): string[] {
   const roleRequirements: {
     [key: string]: string[];

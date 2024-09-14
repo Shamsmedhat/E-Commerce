@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 
 import Logo from "./Logo";
 // images
-import footerImg from "@/../public/assets/footer.svg";
+import footerImg from "@/../public/assets/footer.webp";
 import visa from "@/../public/assets/visa.svg";
 import masterCard from "@/../public/assets/mastercard.png";
 import cib from "@/../public/assets/cib.svg";
@@ -23,7 +23,13 @@ export default async function Footer() {
   return (
     <footer className="shadow-md">
       <div className="relative">
-        <Image src={footerImg} alt="Store Name" className="w-full" />
+        <Image
+          src={footerImg}
+          alt="Store Name"
+          className="w-full"
+          quality={100}
+          placeholder="blur"
+        />
         <div className="container absolute inset-0 mt-8 flex flex-col justify-evenly text-[#969696]">
           <div className="flex gap-24">
             {/* content */}

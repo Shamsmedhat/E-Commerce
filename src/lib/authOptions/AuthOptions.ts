@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { signIn } from "../apis/auth";
 import { ROLE } from "../constants/roles";
+import { cookies } from "next/headers";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -48,8 +49,11 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, account, profile }) {
       if (user) {
-        token.role = (user as any).role; // making suure to access role
-        token.accessToken = user.accessToken;
+        token.role = (user as any).role;
+        // token.accessToken = user.accessToken;
+        cookies().set("user_token", user.accessToken as string, {
+          httpOnly: true,
+        });
       }
       if (account?.provider === "facebook" || account?.provider === "google") {
         token.role = ROLE.USER;
@@ -58,12 +62,8 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token, user }) {
-      console.log("session ", session);
-      console.log("user ", user);
-      if (token.role) {
-        session.user.role = token.role; // Pass role to session
-        session.user.accessToken = token.accessToken;
-      }
+      session.user.role = token.role;
+      // session.user.accessToken = token.accessToken;
       return session;
     },
   },
