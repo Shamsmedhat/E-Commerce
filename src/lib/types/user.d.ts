@@ -23,6 +23,7 @@ export type UsersList = {
 export type UserUiTable = {
   id: string;
   username: string;
+  email: string;
   firstName: string;
   lastName: string;
   role: string | undefined;

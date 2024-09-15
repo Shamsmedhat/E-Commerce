@@ -26,7 +26,7 @@ export default function LogoutBtn({
   return (
     <button
       onClick={handleSignOut}
-      className={cn(className, "text-[#007185]")}
+      className={cn(className, "text-backup")}
       disabled={isLoggingOut}
     >
       {children}

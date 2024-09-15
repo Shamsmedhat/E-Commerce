@@ -113,7 +113,7 @@ export default function ProductTable({ overview, reviews }: PRODUCT_DATA) {
                       max={maxRatingStars}
                     />
                   </div>
-                  <span className="text-[#007185]">
+                  <span className="text-backup">
                     {(countOfUserRatingMaxRating / maxRatingStars) * 100} %
                   </span>
                 </div>
@@ -127,7 +127,7 @@ export default function ProductTable({ overview, reviews }: PRODUCT_DATA) {
                       max={maxRatingStars}
                     />
                   </span>
-                  <span className="text-[#007185]">
+                  <span className="text-backup">
                     {(countOfUserRating4 / maxRatingStars) * 100} %
                   </span>
                 </div>
@@ -141,7 +141,7 @@ export default function ProductTable({ overview, reviews }: PRODUCT_DATA) {
                       max={maxRatingStars}
                     />
                   </span>
-                  <span className="text-[#007185]">
+                  <span className="text-backup">
                     {(countOfUserRating3 / maxRatingStars) * 100} %
                   </span>
                 </div>
@@ -155,7 +155,7 @@ export default function ProductTable({ overview, reviews }: PRODUCT_DATA) {
                       max={maxRatingStars}
                     />
                   </span>
-                  <span className="text-[#007185]">
+                  <span className="text-backup">
                     {(countOfUserRating2 / maxRatingStars) * 100} %
                   </span>
                 </div>
@@ -169,7 +169,7 @@ export default function ProductTable({ overview, reviews }: PRODUCT_DATA) {
                       max={maxRatingStars}
                     />
                   </span>
-                  <span className="text-[#007185]">
+                  <span className="text-backup">
                     {(countOfUserRating1 / maxRatingStars) * 100} %
                   </span>
                 </div>

@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@/components/custom/ThemeProvider";
 import Header from "@/components/custom/Header";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 import StoreProvider from "../StoreProvider";
 import Footer from "@/components/custom/Footer";
 import AuthSessionProvider from "@/lib/providers/authSessionProvider";
@@ -30,16 +30,15 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
-
   return (
     <html lang={locale} dir="rtl">
       <body className={`${cairo.className}`}>
         <StoreProvider>
-          <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider messages={messages} locale={locale}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <AuthSessionProvider>
                 <Header />
-                <main className="relative flex flex-col items-center bg-zinc-100 dark:bg-black/30">
+                <main className="relative flex min-h-[calc(100vh-210px)] flex-col items-center bg-zinc-100 dark:bg-black/30">
                   <ToastContainer stacked />
                   {children}
                 </main>

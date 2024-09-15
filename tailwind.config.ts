@@ -2,7 +2,12 @@ import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -24,6 +29,9 @@ const config = {
           // foreground: "hsl(var(--primary-foreground))",
           DEFAULT: "#FEBF31",
           foreground: "#3C3C3B",
+        },
+        backup: {
+          DEFAULT: "#007185",
         },
         categories: {
           electronics: "#66D1C8",

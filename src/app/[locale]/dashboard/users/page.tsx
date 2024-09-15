@@ -1,132 +1,50 @@
 // import { columns } from "./columns";
-// import { DataTable } from "./data-table";
-
-// import { useEffect, useState } from "react";
-// import { getAllUsersAction } from "@/actions/usersActions";
-// import { UsersList, UserUiTable } from "@/lib/types/user";
-// import { ROLE } from "@/lib/constants/roles";
-// import { getUserRole } from "@/lib/utils/helpers";
-// import { Table, TableBody, TableHeader, TableRow } from "@/components/ui/table";
-// import { Skeleton } from "@/components/ui/skeleton";
-
-// const initialState = {
-//   status: "",
-//   data: {
-//     users: [
-//       {
-//         _id: "",
-//         username: "",
-//         email: "",
-//         firstName: "",
-//         lastName: "",
-//         role: "",
-//         photo: "",
-//         active: true,
-//         blocked: false,
-//         createdAt: "",
-//         updatedAt: "",
-//       },
-//     ],
-//   },
-// };
-// function Page() {
-//   const [usersData, setUsersData] = useState<UsersList>(initialState);
-//   const [loading, setLoading] = useState(true);
-
-//   const usersTable = usersData?.data?.users.map((user) => {
-//     return {
-//       id: user._id,
-//       username: user.username,
-//       firstName: user.firstName,
-//       lastName: user.lastName,
-//       role: getUserRole(user.role),
-//       photo: user.photo,
-//       blocked: user.blocked,
-//       createdAt: "",
-//     };
-//   });
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const data: UsersList = await getAllUsersAction();
-//         setUsersData(data);
-//       } catch (error) {
-//         console.error("Error fetching users data:", error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   if (loading) {
-//     return (
-// <section>
-//   <h2>users</h2>
-//   <div className="container mx-auto py-10">
-//     <Table>
-//       <TableHeader>
-//         <TableRow>
-//           <Skeleton className="h-20 w-full" />
-//         </TableRow>
-//       </TableHeader>
-//       <TableBody>
-//         <TableRow>
-//           <Skeleton className="w-full" />
-//         </TableRow>
-//       </TableBody>
-//     </Table>
-//   </div>
-// </section>
-//     );
-//   } else {
-//     return (
-//       <section>
-//         <h2>users</h2>
-//         <div className="container mx-auto py-10">
-//           <DataTable columns={columns} data={usersTable} />
-//         </div>
-//       </section>
-//     );
-//   }
-// }
-
-// export default Page;
-
-import { columns } from "./columns";
 import { DataTable } from "./data-table";
-
-import { useEffect, useState } from "react";
 import { getAllUsersAction } from "@/actions/usersActions";
-import { UsersList, UserUiTable } from "@/lib/types/user";
-import { ROLE } from "@/lib/constants/roles";
+import { UsersList } from "@/lib/types/user";
 import { getUserRole } from "@/lib/utils/helpers";
-import { Table, TableBody, TableHeader, TableRow } from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
+import { getTranslations } from "next-intl/server";
 
 async function Page() {
+  const t = await getTranslations();
+
+  // get all users data
   const data: UsersList = await getAllUsersAction();
 
+  // return the data that will be displayed in the user table
+  //! after any change needs to be applied in UI, must add it in colums variable in data-table file
   const usersTable = data?.data?.users.map((user) => {
+    const date = new Date(user.createdAt).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
+    const time = new Date(user.createdAt).toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
     return {
       id: user._id,
       username: user.username,
+      email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
       role: getUserRole(user.role),
       photo: user.photo,
       blocked: user.blocked,
-      createdAt: "",
+      createdAt: `${date} - ${time}`,
     };
   });
 
   return (
-    <section>
-      <h2>users</h2>
-      <div className="container mx-auto py-10">
-        <DataTable columns={columns} data={usersTable} />
+    <section className="container">
+      <h2 className="py-2 text-3xl font-bold text-primary-foreground/90">
+        {t("CpQmdnnSTadNa9eAOznLu")}
+      </h2>
+      <div className="mx-auto py-3">
+        <DataTable data={usersTable} />
       </div>
     </section>
   );

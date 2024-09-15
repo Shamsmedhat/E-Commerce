@@ -122,6 +122,7 @@
     var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate)
     var(--tw-sepia) var(--tw-drop-shadow);
 }
+
 @layer base {
   @layer base {
     :root {

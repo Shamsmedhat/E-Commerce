@@ -29,7 +29,7 @@ export default function ProductDetails({
           ? overview?.overview.split(" ").slice(0, 65).join(" ")
           : overview?.overview}{" "}
         <button
-          className="text-[#007185]"
+          className="text-backup"
           onClick={() => setIsShowMore((p) => !p)}
         >
           {!isShowMore

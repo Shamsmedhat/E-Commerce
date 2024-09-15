@@ -1,33 +1,17 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import { Table, TableBody, TableHeader, TableRow } from "@/components/ui/table";
+import UsersListSkeleton from "@/components/skeletons/UsersListSkeleton";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
-export default function loading() {
+export default async function loading() {
+  const t = await getTranslations();
   return (
     <>
-      <section>
-        <h2>users</h2>
-        <div className="container mx-auto py-10">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <div className="mb-3 flex">
-                  <Skeleton className="me-5 h-14 w-[25rem]" />
-                  <Skeleton className="h-14 w-[6rem]" />
-                </div>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <Skeleton className="h-14 w-full rounded-none border-[0.5px] border-primary-foreground/10" />
-                <Skeleton className="h-14 w-full rounded-none border-[0.5px] border-primary-foreground/10" />
-                <Skeleton className="h-14 w-full rounded-none border-[0.5px] border-primary-foreground/10" />
-                <Skeleton className="h-14 w-full rounded-none border-[0.5px] border-primary-foreground/10" />
-                <Skeleton className="h-14 w-full rounded-none border-[0.5px] border-primary-foreground/10" />
-                <Skeleton className="h-14 w-full rounded-none border-[0.5px] border-primary-foreground/10" />
-              </TableRow>
-            </TableBody>
-          </Table>
+      <section className="container">
+        <h2 className="py-2 text-3xl font-bold text-primary-foreground/90">
+          {t("CpQmdnnSTadNa9eAOznLu")}
+        </h2>
+        <div className="mx-auto py-10">
+          <UsersListSkeleton />
         </div>
       </section>
     </>
