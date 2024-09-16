@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { handleCreateUserToaster } from "@/lib/utils/helpers";
 import { Link, useRouter } from "@/navigarion";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -95,6 +96,7 @@ export default function SignUpForm() {
       router.push("/");
     }
   }, [isSubmitSuccessful, router]);
+
   async function onSubmit() {
     const formData = new FormData();
 
@@ -105,9 +107,15 @@ export default function SignUpForm() {
     });
 
     const result = await signupAction(formData);
-
+    console.log("values", values);
     if (result.status === "success") {
       reset();
+      await signIn("credentials", {
+        redirect: false,
+        username: result.data.user.username,
+        password: values.password,
+      });
+
       handleCreateUserToaster();
     }
   }

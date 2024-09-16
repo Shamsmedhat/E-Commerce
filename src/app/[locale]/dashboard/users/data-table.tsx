@@ -43,6 +43,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { LuArrowUpDown, LuMoreHorizontal } from "react-icons/lu";
 import { deleteUserAction } from "@/actions/usersActions";
 import { handleDeleteUserToaster } from "@/lib/utils/helpers";
+import { UpdateUserForm } from "./components/UpdateUserForm";
 
 export function DataTable({
   // columns,
@@ -182,6 +183,16 @@ export function DataTable({
         </div>
       ),
     },
+    // Edit Btn
+    {
+      accessorKey: "edit",
+      header: t("yK3O_Bc80n20t9RhQjOo7"),
+      cell: ({ row }) => (
+        <div className="capitalize text-backup">
+          <UpdateUserForm row={row.original} />
+        </div>
+      ),
+    },
     // menu
     {
       id: "actions",
@@ -210,7 +221,7 @@ export function DataTable({
                 {t("yLEF3hzqko_51K4vr4AOA")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>View customer</DropdownMenuItem>
+              <DropdownMenuItem>test </DropdownMenuItem>
               <DropdownMenuItem>View payment details</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

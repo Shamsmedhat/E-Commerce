@@ -1,8 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../constants/colors";
 import { UserToken } from "../types/user";
-import { handleDeleteUserToaster } from "../utils/helpers";
-import { revalidateTag } from "next/cache";
 
 // get all users list to dashboard
 export async function fetchAllUsers(token: UserToken) {
@@ -52,5 +50,24 @@ export async function deleteUser(id: string, token: String | undefined) {
     });
   } catch (error) {
     throw new Error((error as Error)?.message || "Faild to fetch delete user.");
+  }
+}
+
+// update user using in dashboard
+export async function updateUser(
+  formData: FormData,
+  userId: string,
+  userToken: string | undefined,
+) {
+  try {
+    const res = await axios.patch(`${BASE_URL}/users/${userId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+    return res;
+  } catch (error) {
+    throw new Error(`${error}`);
   }
 }
