@@ -29,7 +29,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BsChevronDown } from "react-icons/bs";
@@ -42,6 +42,7 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LuArrowUpDown, LuMoreHorizontal } from "react-icons/lu";
 import { deleteUserAction } from "@/actions/usersActions";
+import { handleDeleteUserToaster } from "@/lib/utils/helpers";
 
 export function DataTable({
   // columns,
@@ -51,6 +52,7 @@ export function DataTable({
   data: UserUiTable[];
 }) {
   const t = useTranslations();
+
   const arColums = [
     "اسم المستخدم / البريد الالكتروني",
     "الاسم الاول",
@@ -59,6 +61,7 @@ export function DataTable({
     "حالة المستخدم",
     "تاريخ الانشاء",
   ];
+
   //? columns here from siprated file to use transalations feature
   const columns: ColumnDef<UserUiTable>[] = [
     //TODO photo's need implement
@@ -199,8 +202,10 @@ export function DataTable({
             <DropdownMenuContent align="center">
               {/* <DropdownMenuLabel>Actions</DropdownMenuLabel> */}
               <DropdownMenuItem
-                onClick={() => deleteUserAction(userId)}
-                className="justify-center !bg-red-600 text-white hover:!bg-red-600/80 hover:!text-white"
+                onClick={() =>
+                  deleteUserAction(userId).then(handleDeleteUserToaster)
+                }
+                className="cursor-pointer justify-center !bg-red-600 text-white hover:!bg-red-600/80 hover:!text-white"
               >
                 {t("yLEF3hzqko_51K4vr4AOA")}
               </DropdownMenuItem>
@@ -213,7 +218,6 @@ export function DataTable({
       },
     },
   ];
-  //? end of colums ==============================================
 
   //? shadcn setup ===============================================
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -223,7 +227,6 @@ export function DataTable({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-
   const table = useReactTable({
     data,
     columns,

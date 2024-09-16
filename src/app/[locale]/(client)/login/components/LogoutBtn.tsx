@@ -5,7 +5,6 @@ import { handleSignOutToaster } from "@/lib/utils/helpers";
 import { useRouter } from "@/navigarion";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 export default function LogoutBtn({
   children,

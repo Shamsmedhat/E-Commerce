@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import { ROLE } from "../constants/roles";
 
 export const handleSignInToaster = () => {
@@ -6,6 +7,12 @@ export const handleSignInToaster = () => {
 
 export const handleSignOutToaster = () => {
   localStorage.setItem("showToast", "signOut");
+};
+export const handleCreateUserToaster = () => {
+  localStorage.setItem("showToast", "createUser");
+};
+export const handleDeleteUserToaster = () => {
+  localStorage.setItem("showToast", "deleteUser");
 };
 
 export function getUserRole(role: string): string | undefined {

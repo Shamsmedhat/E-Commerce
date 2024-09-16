@@ -12,7 +12,6 @@ export default function LoginHeaderSection() {
   const { data, status } = useSession();
   const t = useTranslations();
   useAuthToast();
-  console.log(status);
   if (status === "unauthenticated") {
     return (
       <li className="flex h-14 flex-col items-center justify-center gap-2 border-e px-6">

@@ -1,10 +1,8 @@
 "use server";
 
 import { deleteUser, fetchAllUsers, signup } from "@/lib/apis/user";
-import { BASE_URL } from "@/lib/constants/colors";
 import { SigninSchema } from "@/lib/schemes/user.scheme";
-import axios from "axios";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 //? get all users action
@@ -41,5 +39,5 @@ export async function deleteUserAction(id: string) {
   const userToken = cookies().get("user_token")?.value;
 
   await deleteUser(id, userToken);
-  revalidatePath("/dashboard/users");
+  revalidateTag("/dashboard/users");
 }

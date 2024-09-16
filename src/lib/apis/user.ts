@@ -1,6 +1,8 @@
 import axios from "axios";
 import { BASE_URL } from "../constants/colors";
 import { UserToken } from "../types/user";
+import { handleDeleteUserToaster } from "../utils/helpers";
+import { revalidateTag } from "next/cache";
 
 // get all users list to dashboard
 export async function fetchAllUsers(token: UserToken) {
@@ -28,7 +30,15 @@ export async function signup(formData: FormData) {
     const data = res.data;
     return data;
   } catch (error) {
-    throw new Error((error as Error)?.message || "Faild to signup.");
+    // Check if the error is an Axios error
+    if (axios.isAxiosError(error)) {
+      // Access the error message from Axios
+      const errorMessage = error.response?.data?.message || error.message;
+      return { message: errorMessage };
+    } else {
+      // Handle unexpected errors
+      return { message: "An unexpected error occurred." };
+    }
   }
 }
 

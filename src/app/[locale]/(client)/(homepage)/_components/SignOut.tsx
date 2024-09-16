@@ -8,10 +8,8 @@ import { useTranslations } from "next-intl";
 import { handleSignOutToaster } from "@/lib/utils/helpers";
 
 export default function SignOut({
-  isLoggedOut,
   setIsLoggedOut,
 }: {
-  isLoggedOut: boolean;
   setIsLoggedOut: Dispatch<SetStateAction<boolean>>;
 }) {
   const t = useTranslations();

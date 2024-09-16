@@ -4,7 +4,7 @@ export const SigninSchema = z
   .object({
     username: z
       .string({ required_error: "Username is required!" })
-      .min(6, {
+      .min(3, {
         message:
           "Username must be 6 characters at least and 30 characters max!",
       })
@@ -15,7 +15,7 @@ export const SigninSchema = z
     email: z
       .string({ required_error: "Email is required!" })
       .email()
-      .min(10, { message: "Email must be 10 characters at least!" }),
+      .min(6, { message: "Email must be 10 characters at least!" }),
     password: z
       .string({ required_error: "Password is required!" })
       .min(6, { message: "Password must be 6 characters at least!" }),
@@ -26,13 +26,13 @@ export const SigninSchema = z
         message:
           "First name must be 3 characters at least and 15 characters max!",
       })
-      .max(15, {
+      .max(30, {
         message:
           "Username must be 3 characters at least and 15 characters max!",
       }),
     lastName: z
       .string({ required_error: "Username is required!" })
-      .min(6, {
+      .min(3, {
         message:
           "Username must be 6 characters at least and 30 characters max!",
       })
@@ -42,6 +42,7 @@ export const SigninSchema = z
       }),
     //TODO photo
   })
+  .required()
   .refine((data) => data.password === data.passwordConfirm, {
     path: ["passwordConfirm"],
     message: "Passwords don't match!",
