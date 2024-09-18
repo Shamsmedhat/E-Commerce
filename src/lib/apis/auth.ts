@@ -1,5 +1,6 @@
 import { BASE_URL } from "@/lib/constants/colors";
 import axios from "axios";
+import { LoginResponse } from "../types/user";
 
 export async function signIn({
   username,
@@ -29,19 +30,16 @@ export async function signIn({
         accessToken: data.data.token,
       },
       error: null,
-    };
+    } as LoginResponse;
   } catch (error) {
-    // Handle axios errors with specific messages
-    let errorMessage = "An error occurred during sign-in";
-    if (axios.isAxiosError(error)) {
-      errorMessage = error.response?.data?.message || error.message;
+    if (axios.isAxiosError(error) && error.response) {
+      // Handle known Axios error
+      console.log("step 1 error response", error.response.data);
+      throw new Error(error.response.data.message || "An error occurred.");
+    } else {
+      // Handle unknown error
+      console.log("step 1 Unknown error", error);
+      throw new Error("Unknown error occurred.");
     }
-
-    console.error("Error during signIn:", errorMessage);
-
-    return {
-      user: null,
-      error: errorMessage,
-    };
   }
 }

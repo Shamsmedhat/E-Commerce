@@ -5,6 +5,8 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { signIn } from "../apis/auth";
 import { ROLE } from "../constants/roles";
 import { cookies } from "next/headers";
+import { SignInResponse } from "../types/user";
+import { User } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -19,21 +21,26 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const { user, error } = await signIn({
-          username: credentials?.username,
-          password: credentials?.password,
-        });
-        if (user) {
-          return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            image: user.image,
-            role: user.role, // Include role information
-            accessToken: user.accessToken,
-          };
+        try {
+          const { user, error } = await signIn({
+            username: credentials?.username,
+            password: credentials?.password,
+          });
+          if (user) {
+            return {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              image: user.image,
+              role: user.role,
+              accessToken: user.accessToken,
+            } as User;
+          } else {
+            throw new Error(error || "Login failed.");
+          }
+        } catch (err) {
+          throw new Error(String(err));
         }
-        throw new Error(error || "Invalid credentials");
       },
     }),
     GoogleProvider({
@@ -66,10 +73,19 @@ export const authOptions: NextAuthOptions = {
       // session.user.accessToken = token.accessToken;
       return session;
     },
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   console.log("user", user);
+    //   console.log("account", account);
+    //   console.log("profile", profile);
+    //   console.log("email", email);
+    //   console.log("credentials", credentials);
+    //   return "/login";
+    // },
   },
 
   pages: {
-    signIn: "../../app/[locale]/(client)/login/page.tsx",
+    signIn: "/login",
+    error: "/login",
     signOut: "../../app/[locale]/(client)/(homepage)/_components/SignOut.tsx",
   },
 };

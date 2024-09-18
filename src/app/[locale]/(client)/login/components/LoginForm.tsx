@@ -11,10 +11,15 @@ import { BsInfoCircle } from "react-icons/bs";
 import { ImSpinner3 } from "react-icons/im";
 
 import { handleSignInToaster } from "@/lib/utils/helpers";
+import { useRouter } from "@/navigarion";
+import { useState } from "react";
 
 export default function LoginForm({ session }: { session: Session | null }) {
   const t = useTranslations();
-
+  const router = useRouter();
+  const [credentialsIncorrect, setCredentialsIncorrect] = useState<
+    string | null | undefined
+  >(null);
   const userSchema = z
     .object({
       username: z.string().min(6, t("-sPVtQitY0Jhzx6ENcLR7")).max(20),
@@ -30,13 +35,26 @@ export default function LoginForm({ session }: { session: Session | null }) {
   } = useForm<Inputs>({ resolver: zodResolver(userSchema) });
 
   async function handleSignIn({ username, password }: Inputs) {
-    await signIn("credentials", {
-      redirect: true,
-      callbackUrl: "/",
-      username,
-      password,
-    });
-    handleSignInToaster();
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        callbackUrl: "/",
+        username,
+        password,
+      });
+
+      if (res?.ok) {
+        router.push("/");
+        handleSignInToaster();
+      } else {
+        console.log("step 3 res", res);
+        setCredentialsIncorrect(res?.error);
+      }
+    } catch (error) {
+      console.log("step 3", error);
+      throw new Error("Sign-in failed.");
+    }
+
     //TODO handling errors
   }
 
@@ -44,6 +62,11 @@ export default function LoginForm({ session }: { session: Session | null }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-4">
+      {credentialsIncorrect && (
+        <div className="flex justify-center">
+          <p className="text-lg text-red-500">{t("1_Rj400Z4SXDwCJt3kFzN")}</p>
+        </div>
+      )}
       <div className="flex flex-col gap-3">
         <Label
           htmlFor="username"
@@ -86,7 +109,7 @@ export default function LoginForm({ session }: { session: Session | null }) {
       <button
         type="submit"
         className="w-full rounded-lg bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/80"
-        disabled={isSubmitting || isSubmitSuccessful}
+        disabled={isSubmitting}
       >
         {isSubmitting ? (
           <span className="flex justify-center">

@@ -15,6 +15,7 @@ export default async function Page() {
   const UserImage: string | StaticImageData = session?.user?.image;
 
   const t = await getTranslations();
+
   return (
     <>
       {!session ? (

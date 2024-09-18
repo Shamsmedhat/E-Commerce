@@ -109,7 +109,7 @@ export function DataTable({
         );
       },
       cell: ({ row }) => (
-        <div className="font-semibold lowercase focus-visible:ring-primary">
+        <div className="font-semibold focus-visible:ring-primary">
           <p>{row.getValue("username")}</p>
           <div className="text-sm text-muted-foreground/70">
             {row.original.email}

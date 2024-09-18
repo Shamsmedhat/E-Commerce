@@ -31,3 +31,17 @@ export type UserUiTable = {
   blocked: boolean;
   createdAt: string;
 };
+
+export interface SignInResponse {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  role?: string;
+  accessToken: string;
+}
+
+export interface LoginResponse {
+  user: SignInResponse;
+  error: string | null;
+}
