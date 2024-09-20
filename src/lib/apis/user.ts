@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { BASE_URL } from "../constants/colors";
 import { UserToken } from "../types/user";
 
@@ -49,7 +49,10 @@ export async function deleteUser(id: string, token: String | undefined) {
       },
     });
   } catch (error) {
-    throw new Error((error as Error)?.message || "Faild to fetch delete user.");
+    if (isAxiosError(error)) {
+      throw new Error(error.response?.data.message);
+    }
+    throw new Error("Faild to delete user.");
   }
 }
 
@@ -66,8 +69,11 @@ export async function updateUser(
         Authorization: `Bearer ${userToken}`,
       },
     });
+    console.log("step 1: res", res.data);
     return res;
   } catch (error) {
+    console.log("step 1:", error);
+
     throw new Error(`${error}`);
   }
 }

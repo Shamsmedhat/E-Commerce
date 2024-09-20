@@ -22,17 +22,6 @@ export function getUserRole(role: string): string | undefined {
     }
   }
 }
-export function getRequiredRoles(pathname: string): string[] {
-  const roleRequirements: {
-    [key: string]: string[];
-  } = {
-    dashboard: [ROLE.OWNER, ROLE.ADMIN],
-    cart: [ROLE.OWNER, ROLE.ADMIN, ROLE.USER],
-  };
-  const pathnameSlug = pathname.split("/")[2];
-
-  return roleRequirements[pathnameSlug] || [];
-}
 
 export function categoryColor(categoryName: string): string {
   switch (categoryName) {

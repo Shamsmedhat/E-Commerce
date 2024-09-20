@@ -1,26 +1,19 @@
 "use client";
 import { LuLogOut } from "react-icons/lu";
 import { signOut } from "next-auth/react";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
+
 import { useTranslations } from "next-intl";
 import { handleSignOutToaster } from "@/lib/utils/helpers";
 
-export default function SignOut({
-  setIsLoggedOut,
-}: {
-  setIsLoggedOut: Dispatch<SetStateAction<boolean>>;
-}) {
+export default function SignOut() {
   const t = useTranslations();
-  const router = useRouter();
 
   async function handleSignOut() {
     await signOut({ redirect: true, callbackUrl: "/" }).then(
       handleSignOutToaster,
     );
     // loggedOutSuccessfully();
-    setIsLoggedOut(true); // Mark as logged out
+    // setIsLoggedOut(true); // Mark as logged out
   }
   return (
     <form

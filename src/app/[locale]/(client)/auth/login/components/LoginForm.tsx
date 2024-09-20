@@ -47,11 +47,9 @@ export default function LoginForm({ session }: { session: Session | null }) {
         router.push("/");
         handleSignInToaster();
       } else {
-        console.log("step 3 res", res);
         setCredentialsIncorrect(res?.error);
       }
     } catch (error) {
-      console.log("step 3", error);
       throw new Error("Sign-in failed.");
     }
 

@@ -1,9 +1,7 @@
 "use server";
 
 import { deleteUser, fetchAllUsers, signup, updateUser } from "@/lib/apis/user";
-import { BASE_URL } from "@/lib/constants/colors";
 import { SigninSchema } from "@/lib/schemes/user.scheme";
-import axios from "axios";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -39,8 +37,13 @@ export async function deleteUserAction(id: string) {
   // get user token from cookies throught server only by using httponly
   const userToken = cookies().get("user_token")?.value;
 
-  await deleteUser(id, userToken);
-  revalidateTag("/dashboard/users");
+  try {
+    await deleteUser(id, userToken);
+    revalidateTag("/dashboard/users");
+  } catch (err) {
+    console.log(err, "actionnnnnnnn");
+    throw new Error(err as string);
+  }
 }
 
 //? update user in dashboard
@@ -49,9 +52,17 @@ export async function updateUserAction(
   userId: string,
 ) {
   const userToken = cookies().get("user_token")?.value;
-  console.log("formUpdatedData", formUpdatedData);
-  console.log("userId", userId);
-  console.log("userToken", userToken);
-  const data = await updateUser(formUpdatedData, userId, userToken);
-  return data;
+  // console.log("formUpdatedData", formUpdatedData);
+  // console.log("userId", userId);
+  // console.log("userToken", userToken);
+  try {
+    const data = await updateUser(formUpdatedData, userId, userToken);
+    console.log("step 2: res", data.data);
+
+    return data;
+  } catch (error) {
+    console.log("step 2:", error);
+
+    throw new Error(`${error}`);
+  }
 }

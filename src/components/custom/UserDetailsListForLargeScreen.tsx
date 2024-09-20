@@ -25,12 +25,11 @@ import { useSession } from "next-auth/react";
 import { ROLE } from "@/lib/constants/roles";
 
 export default function UserDetailsListForLargeScreen() {
-  const [isLoggedOut, setIsLoggedOut] = useState(false);
   const t = useTranslations();
   const session = useSession();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild disabled={isLoggedOut}>
+      <DropdownMenuTrigger asChild>
         <button className="focus mt-1 flex items-center gap-1 px-2">
           {t("6_d33l3IKBE2Vu7Qw4u9W")} <LuChevronDown className="w-4" />
         </button>
@@ -66,15 +65,13 @@ export default function UserDetailsListForLargeScreen() {
           </DropdownMenuItem>
           {session.data?.user.role === ROLE.ADMIN ||
           session.data?.user.role === ROLE.OWNER ? (
-            <DropdownMenuItem>
-              <Link
-                href="/dashboard"
-                className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-              >
+            //TODO make all links above the items to prevent the menu not auto close
+            <Link href="/dashboard">
+              <DropdownMenuItem className="flex w-full items-center gap-2 rtl:flex-row-reverse">
                 <LuSettings2 className="h-4 w-4" />
                 <span>{t("_YASznrZi5hx4_-IQJ8T2")}</span>
-              </Link>
-            </DropdownMenuItem>
+              </DropdownMenuItem>
+            </Link>
           ) : null}
         </DropdownMenuGroup>
 
@@ -82,7 +79,7 @@ export default function UserDetailsListForLargeScreen() {
 
         {/* Logout section & langues*/}
         <DropdownMenuItem>
-          <SignOut isLoggedOut={isLoggedOut} setIsLoggedOut={setIsLoggedOut} />
+          <SignOut />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

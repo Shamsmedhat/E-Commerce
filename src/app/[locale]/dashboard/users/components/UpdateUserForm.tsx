@@ -28,28 +28,39 @@ export function UpdateUserForm({ row }: { row: UserUiTable }) {
     },
   });
 
-  async function onSubmit() {
+  async function onUpdateSubmit(values) {
     const formUpdatedData = new FormData();
-
-    const values = getValues();
-
     Object.entries(values).forEach(([key, value]) => {
-      if (key === "role") {
-        value = ROLE[value];
+      if (value !== undefined) {
+        if (key === "role" && value in ROLE) {
+          value = ROLE[value as keyof typeof ROLE];
+        }
+        formUpdatedData.append(key, String(value));
+      } else {
+        console.warn(
+          `Value for key "${key}" is undefined and will be skipped.`,
+        );
       }
-
-      formUpdatedData.append(key, value as string);
     });
+    // debugger;
+    console.log("FormData:", formUpdatedData);
 
-    console.log("formUpdatedData", formUpdatedData);
-    const updatedUser = await updateUserAction(formUpdatedData, id);
-    return updatedUser;
+    // Using .then and .catch instead of try-catch
+    updateUserAction(formUpdatedData, id)
+      .then((updatedUser) => {
+        console.log("Updated User:", updatedUser);
+        return updatedUser;
+      })
+      .catch((error) => {
+        console.error("Error updating user:", error);
+      });
   }
+
   return (
     <Dialog>
-      <DialogTrigger asChild className="rounded-full">
-        <Button variant="outline">
-          <LiaUserEditSolid size={20} />
+      <DialogTrigger asChild>
+        <Button variant="outline" className="rounded-full !p-3">
+          <LiaUserEditSolid size={15} />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -59,7 +70,10 @@ export function UpdateUserForm({ row }: { row: UserUiTable }) {
             Make changes to your profile here. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <form className="grid gap-4 py-4" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="grid gap-4 py-4"
+          onSubmit={handleSubmit(onUpdateSubmit)}
+        >
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Username
