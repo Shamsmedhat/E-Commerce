@@ -1,8 +1,7 @@
 "use client";
-import { signupAction } from "@/actions/usersActions";
+import { signupAction } from "@/lib/actions/usersActions";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import useAuthToast from "@/lib/hooks/useAuthToast";
 import { cn } from "@/lib/utils";
 import { handleCreateUserToaster } from "@/lib/utils/helpers";
 import { Link, useRouter } from "@/navigarion";
@@ -15,6 +14,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { GoArrowUpLeft } from "react-icons/go";
 import { ImSpinner3 } from "react-icons/im";
 import { z } from "zod";
+import useAuthToast from "@/hooks/useAuthToast";
 
 type FormInputs = {
   username: string;

@@ -57,3 +57,8 @@ export function categoryBorderColor(category: string): string {
               ? "border-categories-babyAndToddler"
               : "";
 }
+
+export function removeDuplecatedCategory(arr: String[] | []) {
+  let uniqeCat = Array.from(new Set(arr));
+  return uniqeCat;
+}

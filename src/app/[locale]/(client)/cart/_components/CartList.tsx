@@ -2,8 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import CartItem from "./CartItem";
-import { useAppSelector } from "@/lib/hooks/reduxHooks";
 import { PRODUCT } from "@/models/products";
+import { useAppSelector } from "@/hooks/reduxHooks";
 
 export default function CartList({ data }: { data: PRODUCT[] }) {
   const { columnStyle } = useAppSelector((item) => item.cart);

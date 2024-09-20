@@ -27,7 +27,7 @@ import LangBtn from "./LangBtn";
 import { getTranslations } from "next-intl/server";
 import Logo from "./Logo";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions/AuthOptions";
+import { authOptions } from "@/lib/config/auth-options";
 import UserDetailsListForSmallScreen from "./UserDetailsListForSmallScreen";
 import UserDetailsListForLargeScreen from "./UserDetailsListForLargeScreen";
 import LoginHeaderSection from "./LoginHeaderSection";

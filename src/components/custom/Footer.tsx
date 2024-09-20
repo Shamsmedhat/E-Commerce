@@ -8,7 +8,7 @@ import footerImg from "@/../public/assets/footer.webp";
 import visa from "@/../public/assets/visa.svg";
 import masterCard from "@/../public/assets/mastercard.png";
 import cib from "@/../public/assets/cib.svg";
-import { products } from "@/_lib/data";
+import { products } from "@/lib/utils/data";
 import { Link } from "@/navigarion";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram, FaYoutube } from "react-icons/fa6";

@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
 } from "../ui/navigation-menu";
 import { Link } from "@/navigarion";
-import { categories } from "@/_lib/data";
+import { categories } from "@/lib/utils/data";
 import { usePathname } from "@/navigarion";
 import { useLocale } from "next-intl";
 

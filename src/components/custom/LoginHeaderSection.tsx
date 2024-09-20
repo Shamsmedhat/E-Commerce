@@ -5,8 +5,8 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import UserDetailsListForLargeScreen from "./UserDetailsListForLargeScreen";
 
-import useAuthToast from "@/lib/hooks/useAuthToast";
 import { Skeleton } from "../ui/skeleton";
+import useAuthToast from "@/hooks/useAuthToast";
 
 export default function LoginHeaderSection() {
   const { data, status } = useSession();
@@ -15,10 +15,16 @@ export default function LoginHeaderSection() {
   if (status === "unauthenticated") {
     return (
       <li className="flex h-14 flex-col items-center justify-center gap-2 border-e px-6">
-        <Link href="/login" className="transition-colors hover:text-primary">
+        <Link
+          href="/auth/login"
+          className="transition-colors hover:text-primary"
+        >
           {t("x5CK85cNmYaHmtijJxw1l")}
         </Link>
-        <Link href="/signup" className="transition-colors hover:text-primary">
+        <Link
+          href="/auth/signup"
+          className="transition-colors hover:text-primary"
+        >
           {t("vaXK79U6F-qTNzxkZPiJv")}
         </Link>
       </li>

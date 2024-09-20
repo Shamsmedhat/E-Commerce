@@ -38,6 +38,7 @@
     "next-auth": "^4.24.7",
     "next-intl": "^3.17.6",
     "next-themes": "^0.3.0",
+    "path-to-regexp": "^8.1.0",
     "protobufjs": "^7.2.6",
     "react": "^18",
     "react-dom": "^18",

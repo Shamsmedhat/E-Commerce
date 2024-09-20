@@ -1,6 +1,6 @@
 "use client";
 import QuantityBtn from "@/components/common/QuantityBtn";
-import { useAppSelector } from "@/lib/hooks/reduxHooks";
+import { useAppSelector } from "@/hooks/reduxHooks";
 import { cn } from "@/lib/utils";
 import { categoryBorderColor } from "@/lib/utils/helpers";
 import { PRODUCT_DATA } from "@/models/products";

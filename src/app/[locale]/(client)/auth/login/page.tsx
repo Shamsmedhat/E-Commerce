@@ -1,6 +1,6 @@
 import { getServerSession, Session } from "next-auth";
 import LoginForm from "./components/LoginForm";
-import { authOptions } from "@/lib/authOptions/AuthOptions";
+import { authOptions } from "@/lib/config/auth-options";
 import { getTranslations } from "next-intl/server";
 import SignInProviders from "./components/SignInProviders";
 import Image, { StaticImageData } from "next/image";

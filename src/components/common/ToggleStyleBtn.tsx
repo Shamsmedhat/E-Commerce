@@ -1,6 +1,6 @@
 "use client";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { toggleToRow, toggleToColumn } from "@/lib/features/cart/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/reduxHooks";
 import { cn } from "@/lib/utils";
 import { LuGrip, LuMenu } from "react-icons/lu";
 

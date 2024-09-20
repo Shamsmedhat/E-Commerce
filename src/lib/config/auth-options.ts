@@ -84,8 +84,8 @@ export const authOptions: NextAuthOptions = {
   },
 
   pages: {
-    signIn: "/login",
-    error: "/login",
+    signIn: "/auth/login",
+    error: "/auth/login",
     signOut: "../../app/[locale]/(client)/(homepage)/_components/SignOut.tsx",
   },
 };

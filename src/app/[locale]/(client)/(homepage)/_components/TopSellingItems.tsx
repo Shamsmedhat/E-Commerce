@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay, Navigation } from "swiper/modules";
 import Link from "next/link";
-import { products } from "@/_lib/data";
+import { products } from "@/lib/utils/data";
 import TopSellingItem from "./TopSellingItem";
 import Heading from "@/components/common/Heading";
 

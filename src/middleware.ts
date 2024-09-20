@@ -1,3 +1,4 @@
+import { match } from "path-to-regexp";
 import { withAuth } from "next-auth/middleware";
 import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
@@ -38,45 +39,51 @@ const authMiddleware = withAuth(
       },
     },
     pages: {
-      signIn: "/login",
+      signIn: "/auth/login",
     },
   },
 );
 
 export default async function middleware(req: NextRequest) {
-  // get user token if exist to customize protected routes
+  // Get user token if it exists to customize protected routes
   const token = await getToken({ req });
 
-  // checking publice pages with locale
-  const publicPathnameRegex = RegExp(
-    `^(/(${locales.join("|")}))?(${publicPages
-      .flatMap((p) => (p === "/" ? ["", "/"] : p))
-      .join("|")})/?$`,
-    "i",
-  );
+  // Helper function for page regex creation
+  const createPageRegex = (pages: string[]) => {
+    return RegExp(
+      `^(/(${locales.join("|")}))?(${pages
+        .flatMap((p) => (p === "/" ? ["", "/"] : p))
+        .join("|")})/?$`,
+      "i",
+    );
+  };
+
+  // creating regex pages for public & admin & user to check on
+  const publicPathnameRegex = createPageRegex(publicPages);
+  const adminPathnameRegex = createPageRegex(adminPages);
+  const userPathnameRegex = createPageRegex(userPages);
+
+  // Check public pages
   const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname);
 
-  // checking admin pages with locale
-  const adminPathnameRegex = RegExp(
-    `^(/(${locales.join("|")}))?(${adminPages
-      .flatMap((p) => (p === "/" ? ["", "/"] : p))
-      .join("|")})/?$`,
-    "i",
-  );
+  // Check admin pages
   const isAdminPage = adminPathnameRegex.test(req.nextUrl.pathname);
 
-  // checking users pages with locale
-  const userPathnameRegex = RegExp(
-    `^(/(${locales.join("|")}))?(${userPages
-      .flatMap((p) => (p === "/" ? ["", "/"] : p))
-      .join("|")})/?$`,
-    "i",
-  );
+  // Check user pages
   const isUserPage = userPathnameRegex.test(req.nextUrl.pathname);
 
-  // if navigating to the admin page only the admin or owner can path visit it
+  // helper function take the roles and see if this includes the user role (token role)
+  const isAuthorized = (allowedRoles: string[]) =>
+    allowedRoles.includes(token?.role as string);
+
+  // Handle public pages first for early exit
+  if (isPublicPage) {
+    return handleI18nRouting(req);
+  }
+
+  // Handle admin pages
   if (isAdminPage) {
-    if (token?.role === ROLE.ADMIN || token?.role === ROLE.OWNER) {
+    if (isAuthorized([ROLE.ADMIN, ROLE.OWNER])) {
       return (authMiddleware as any)(req);
     } else if (token?.role === ROLE.USER) {
       return NextResponse.redirect(new URL("/", req.url));
@@ -85,25 +92,17 @@ export default async function middleware(req: NextRequest) {
     }
   }
 
-  // if navigating to the users page only the admin or owner or user can path visit it
+  // Handle user pages
   if (isUserPage) {
-    if (
-      token?.role === ROLE.ADMIN ||
-      token?.role === ROLE.OWNER ||
-      token?.role === ROLE.USER
-    ) {
+    if (isAuthorized([ROLE.ADMIN, ROLE.OWNER, ROLE.USER])) {
       return (authMiddleware as any)(req);
     } else {
       return NextResponse.redirect(new URL("/auth/login", req.url));
     }
   }
 
-  // if navigating to any public page any one can visit it
-  if (isPublicPage) {
-    return handleI18nRouting(req);
-  } else {
-    return (authMiddleware as any)(req);
-  }
+  // Default to authMiddleware for other cases like wrong paths
+  return handleI18nRouting(req);
 }
 
 export const config = {

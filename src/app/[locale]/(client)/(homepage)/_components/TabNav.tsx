@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
-import { categories, products } from "@/_lib/data";
+import { categories, products } from "@/lib/utils/data";
 import TabNavContent from "./TabNavContent";
 import { useLocale } from "next-intl";
 
