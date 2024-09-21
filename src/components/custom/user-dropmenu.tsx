@@ -14,7 +14,7 @@ import {
   LuUser,
 } from "react-icons/lu";
 import { Link } from "@/navigarion";
-import SignOut from "@/app/[locale]/(client)/(homepage)/_components/SignOut";
+import SignOut from "@/app/[locale]/(public)/(homepage)/_components/SignOut";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 
