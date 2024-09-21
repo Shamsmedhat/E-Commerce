@@ -1,5 +1,14 @@
-import { revalidateTag } from "next/cache";
 import { ROLE } from "../constants/roles";
+
+/**
+ * Determines the text alignment direction based on the provided locale.
+ *
+ * @param {string} locale - The current locale, e.g., 'en' for English.
+ * @returns {string} - Returns "text-end" if the locale is 'en', otherwise "text-start".
+ */
+export const handleEnText = (locale: string): string => {
+  return locale === "en" ? "text-end" : "text-start";
+};
 
 export const handleSignInToaster = () => {
   localStorage.setItem("showToast", "signIn");

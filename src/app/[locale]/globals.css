@@ -68,8 +68,10 @@
 } */
 
 /* ====================================================== */
-.clip-top {
-  clip-path: inset(4rem 0 0 0);
+@media (min-width: 640px) {
+  .clip-top {
+    clip-path: inset(4rem 0 0 0);
+  }
 }
 
 .swiper {
@@ -123,6 +125,10 @@
     var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+/* footer */
+.footer-img {
+  background-image: url("../../../public/assets/footer.png");
+}
 @layer base {
   @layer base {
     :root {

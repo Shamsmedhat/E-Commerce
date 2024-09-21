@@ -1,4 +1,3 @@
-import { BASE_URL } from "@/lib/constants/colors";
 import axios from "axios";
 import { LoginResponse } from "../types/user";
 
@@ -12,7 +11,7 @@ export async function signIn({
   try {
     const response = await axios({
       method: "POST",
-      url: `${BASE_URL}/auth/login`,
+      url: `${process.env.BASE_URL}/auth/login`,
       data: {
         username,
         password,

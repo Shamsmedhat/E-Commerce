@@ -1,4 +1,6 @@
 import { Cairo } from "next/font/google";
+import "react-toastify/dist/ReactToastify.css";
+
 import "@/app/[locale]/globals.css";
 
 const cairo = Cairo({ subsets: ["arabic"] });

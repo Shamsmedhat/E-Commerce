@@ -1,9 +1,9 @@
 import MainSlider from "./_components/MainSlider";
 import DealsOfTheDay from "./_components/DealsOfTheDay";
-import TopSellingItems from "./_components/TopSellingItems";
-import TopRatedItems from "./_components/TopRatedItems";
+import TopSellingItems from "./_components/top-selling-items";
+import TopRatedItems from "./_components/top-rated-items";
 import DiscountSection from "./_components/DiscountSection";
-import TopCategories from "./_components/TopCategories";
+import TopCategories from "./_components/top-categories";
 
 export default async function Page() {
   return (

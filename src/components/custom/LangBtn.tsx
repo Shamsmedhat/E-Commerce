@@ -1,8 +1,10 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { usePathname } from "../../navigarion";
 import { useRouter } from "../../navigarion";
 import { useLocale } from "next-intl";
+import { Button } from "../ui/button";
 type Locale = "ar" | "en";
 
 export default function LangBtn({
@@ -16,8 +18,12 @@ export default function LangBtn({
   const pathname = usePathname();
   const locale = useLocale() as Locale;
   return (
-    <button
-      className="flex items-center text-xl font-semibold rtl:text-base"
+    <Button
+      variant="outline"
+      className={cn(
+        locale === "en" && "self-baseline",
+        "flex items-center px-3 text-xl font-semibold rtl:text-base",
+      )}
       onClick={() =>
         router.replace(pathname, {
           locale: locale === "ar" ? "en" : "ar",
@@ -25,6 +31,6 @@ export default function LangBtn({
       }
     >
       {locale === "en" ? ar : en}
-    </button>
+    </Button>
   );
 }

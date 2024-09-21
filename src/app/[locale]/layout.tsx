@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Cairo, Montserrat } from "next/font/google";
 import "@/app/[locale]/globals.css";
-// import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import Header from "@/components/custom/Header";
-import Footer from "@/components/custom/Footer";
 import { ToastContainer } from "react-toastify";
 import Providers from "@/components/providers";
+import { CgSpinner, CgSpinnerAlt, CgSpinnerTwo } from "react-icons/cg";
+import Footer from "@/components/custom/Footer";
 
 // const cairo = Cairo({ subsets: ["arabic"] });
 // const montserrat = Montserrat({ subsets: ["latin"] });
@@ -24,10 +24,8 @@ export default async function LocalLayout({
   params: { locale: string };
 }>) {
   return (
+    // all providers the app needed
     <Providers>
-      {/* <html lang={locale} dir="rtl">
-    <body className={`${cairo.className}`}> */}
-      {/* all providers the app needed */}
       {/* header */}
       <Header />
 
@@ -40,8 +38,6 @@ export default async function LocalLayout({
       </main>
       {/* footer */}
       <Footer />
-      {/* </body>
-    </html> */}
     </Providers>
   );
 }

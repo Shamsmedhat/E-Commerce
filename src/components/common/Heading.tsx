@@ -1,10 +1,23 @@
+"use client";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { useMediaQuery } from "react-responsive";
 
 type Heading = {
   className?: string;
   children: string;
 };
 export default function Heading({ className, children }: Heading) {
-  return <h2 className={cn("font-extrabold text-primary-foreground text-3xl my-4", className)}>{children}</h2>;
+  const isPhoneScreen = useMediaQuery({ query: "(min-width: 450px)" });
+  return (
+    <h2
+      className={cn(
+        isPhoneScreen ? "text-2xl" : "text-lg",
+        className,
+        "my-4 font-extrabold text-primary-foreground sm:text-3xl",
+      )}
+    >
+      {children}
+    </h2>
+  );
 }

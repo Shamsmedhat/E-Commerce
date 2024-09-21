@@ -1,11 +1,10 @@
 import axios, { isAxiosError } from "axios";
-import { BASE_URL } from "../constants/colors";
 import { UserToken } from "../types/user";
 
 // get all users list to dashboard
 export async function fetchAllUsers(token: UserToken) {
   try {
-    const res = await axios(`${BASE_URL}/users`, {
+    const res = await axios(`${process.env.BASE_URL}/users`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -20,11 +19,15 @@ export async function fetchAllUsers(token: UserToken) {
 // signup new user in client
 export async function signup(formData: FormData) {
   try {
-    const res = await axios.post(`${BASE_URL}/auth/signup`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+    const res = await axios.post(
+      `${process.env.BASE_URL}/auth/signup`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       },
-    });
+    );
     const data = res.data;
     return data;
   } catch (error) {
@@ -43,7 +46,7 @@ export async function signup(formData: FormData) {
 // delete user using in dashboard
 export async function deleteUser(id: string, token: String | undefined) {
   try {
-    await axios.delete(`${BASE_URL}/users/${id}`, {
+    await axios.delete(`${process.env.BASE_URL}/users/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -63,12 +66,16 @@ export async function updateUser(
   userToken: string | undefined,
 ) {
   try {
-    const res = await axios.patch(`${BASE_URL}/users/${userId}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${userToken}`,
+    const res = await axios.patch(
+      `${process.env.BASE_URL}/users/${userId}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userToken}`,
+        },
       },
-    });
+    );
     console.log("step 1: res", res.data);
     return res;
   } catch (error) {

@@ -3,10 +3,11 @@
 import { Link } from "@/navigarion";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import UserDetailsListForLargeScreen from "./UserDetailsListForLargeScreen";
 
 import { Skeleton } from "../ui/skeleton";
 import useAuthToast from "@/hooks/useAuthToast";
+import { FiUser } from "react-icons/fi";
+import UserDropmenu from "./user-dropmenu";
 
 export default function LoginHeaderSection() {
   const { data, status } = useSession();
@@ -14,16 +15,17 @@ export default function LoginHeaderSection() {
   useAuthToast();
   if (status === "unauthenticated") {
     return (
-      <li className="flex h-14 flex-col items-center justify-center gap-2 border-e px-6">
+      <li className="xmd:flex-col mr-4 flex h-14 items-center justify-center gap-3 border-e px-6">
         <Link
           href="/auth/login"
-          className="transition-colors hover:text-primary"
+          className="flex items-center gap-1 text-[14px] font-semibold transition-colors hover:text-primary"
         >
           {t("x5CK85cNmYaHmtijJxw1l")}
+          <FiUser size={20} strokeWidth={1} />
         </Link>
         <Link
           href="/auth/signup"
-          className="transition-colors hover:text-primary"
+          className="rounded-full bg-primary px-4 py-2 text-[14px] font-semibold text-white transition-colors hover:bg-primary/70"
         >
           {t("vaXK79U6F-qTNzxkZPiJv")}
         </Link>
@@ -44,8 +46,7 @@ export default function LoginHeaderSection() {
         </span>
 
         {/* Account dropmenu */}
-
-        <UserDetailsListForLargeScreen />
+        <UserDropmenu />
       </li>
     );
   }
