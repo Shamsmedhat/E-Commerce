@@ -1,5 +1,5 @@
 import React from "react";
-import { categories, products } from "@/lib/utils/data";
+import { categories, products } from "@/lib/utils/data-v1";
 import { TabsContent } from "@/components/ui/tabs";
 import Image from "next/image";
 import RatingStars from "@/components/common/RatingStars";

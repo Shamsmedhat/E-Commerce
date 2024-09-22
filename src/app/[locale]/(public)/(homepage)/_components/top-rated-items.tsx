@@ -25,7 +25,7 @@ import TopSellingItem from "./TopSellingItem";
 import Heading from "@/components/common/Heading";
 
 //TODO data
-import { products } from "@/lib/utils/data";
+import { products } from "@/lib/utils/data-v1";
 
 export default function TopRatedItems() {
   const t = useTranslations();

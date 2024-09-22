@@ -1,4 +1,4 @@
-import { products } from "@/lib/utils/data";
+import { products } from "@/lib/utils/data-v1";
 import ProductGallary from "./components/ProductGallary";
 import ProductDetails from "./components/ProductDetails";
 import ProductTable from "./components/ProductTable";

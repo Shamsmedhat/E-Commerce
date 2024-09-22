@@ -1,5 +1,5 @@
 "use client";
-import { deleteUserAction } from "@/lib/actions/usersActions";
+import { deleteUserAction } from "@/lib/actions/users-actions";
 import { handleDeleteUserToaster } from "@/lib/utils/helpers";
 import { useTranslations } from "next-intl";
 import React from "react";

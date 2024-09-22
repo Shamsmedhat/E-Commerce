@@ -5,7 +5,7 @@ export default function page({
 }: {
   params: { locale: string; categoryId: string[] };
 }) {
-  console.log(params);
+  // console.log(params);
   return <div>category {params.categoryId[0]}</div>;
 }
 

@@ -1,31 +1,40 @@
 import { Link } from "@/navigarion";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/config/auth-options";
+
+// translations
+import { getTranslations } from "next-intl/server";
+
+// ui
 import { Search } from "@/components/ui/search";
-
 import { LuShoppingCart } from "react-icons/lu";
-
 import Navbar from "./Navbar";
 import { ModeToggler } from "./ModeToggler";
 import LangBtn from "./LangBtn";
-import { getTranslations } from "next-intl/server";
 import Logo from "./Logo";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/config/auth-options";
-import UserDropmenu from "./user-dropmenu";
 import LoginHeaderSection from "./LoginHeaderSection";
-import { useMediaQuery } from "react-responsive";
+
+// data
+import { getCategoriesData } from "@/lib/utils/data";
 
 export default async function Header() {
+  // translation
   const t = await getTranslations();
+
+  // user session
   const session = await getServerSession(authOptions);
+
+  // data (categories)
+  const { categories, pagination } = await getCategoriesData();
 
   return (
     <header>
       {/* Head seaction ============================================================= */}
       <div className="border-b bg-background">
         {/* xmd: new custom breakpoint min 850px  */}
-        <ul className="xmd:flex-row xmd:gap-4 xmd:py-8 container flex flex-col items-center justify-between gap-0 py-2">
+        <ul className="container flex flex-col items-center justify-between gap-0 py-2 xmd:flex-row xmd:gap-4 xmd:py-8">
           {/* Logo & Search ============================================================= */}
-          <li className="xmd:w-fit flex w-full flex-grow items-center justify-start">
+          <li className="flex w-full flex-grow items-center justify-start xmd:w-fit">
             <Logo />
             <div className="ms-[5rem]">
               <Search placeholder={t("0ComiVhfwjBnZHsJ_RUxH")} />
@@ -67,7 +76,7 @@ export default async function Header() {
       {/* NavBar ============================================================= */}
 
       <div className="border-b bg-background">
-        <Navbar />
+        <Navbar categories={categories} pagination={pagination} />
       </div>
     </header>
   );

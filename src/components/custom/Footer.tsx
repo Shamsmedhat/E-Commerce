@@ -8,7 +8,7 @@ import { getTranslations } from "next-intl/server";
 import Logo from "./Logo";
 
 //TODO data
-import { products } from "@/lib/utils/data";
+import { products } from "@/lib/utils/data-v1";
 
 // payment methods
 import cib from "@/../public/assets/cib.png";

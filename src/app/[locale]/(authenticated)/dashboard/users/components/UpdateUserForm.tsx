@@ -1,4 +1,4 @@
-import { updateUserAction } from "@/lib/actions/usersActions";
+import { updateUserAction } from "@/lib/actions/users-actions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

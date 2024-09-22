@@ -1,5 +1,5 @@
 import Heading from "@/components/common/Heading";
-import { products } from "@/lib/utils/data";
+import { products } from "@/lib/utils/data-v1";
 import { getTranslations } from "next-intl/server";
 import ToggleStyleBtn from "@/components/common/ToggleStyleBtn";
 import CartList from "./_components/CartList";

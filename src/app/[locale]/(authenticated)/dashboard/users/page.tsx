@@ -1,6 +1,6 @@
 // import { columns } from "./columns";
 import { DataTable } from "./data-table";
-import { getAllUsersAction } from "@/lib/actions/usersActions";
+import { getAllUsersAction } from "@/lib/actions/users-actions";
 import { UsersList } from "@/lib/types/user";
 import { getUserRole } from "@/lib/utils/helpers";
 import { getTranslations } from "next-intl/server";
