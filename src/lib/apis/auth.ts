@@ -33,11 +33,9 @@ export async function signIn({
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       // Handle known Axios error
-      console.log("step 1 error response", error.response.data);
       throw new Error(error.response.data.message || "An error occurred.");
     } else {
       // Handle unknown error
-      console.log("step 1 Unknown error", error);
       throw new Error("Unknown error occurred.");
     }
   }

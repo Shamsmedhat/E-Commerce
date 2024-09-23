@@ -1,4 +1,4 @@
-import { PRODUCT } from "@/models/products";
+// import { PRODUCT } from "@/models/products";
 import CategoriesIcons from "../../app/[locale]/(public)/(homepage)/_components/CategoriesIcons";
 export type Category = {
   name: string;
@@ -31,7 +31,7 @@ export const categories: Category[] = [
   },
 ];
 // https://media.istockphoto.com/id/157292245/photo/camera-slr.webp?s=2048x2048&w=is&k=20&c=at1-YD0Etz8Ddj9efHj90nVhJZSF42za9ggdmivKfKI=
-export const products: PRODUCT[] = [
+export const products = [
   // first home & pet care
   {
     id: "z6kdm55p02",

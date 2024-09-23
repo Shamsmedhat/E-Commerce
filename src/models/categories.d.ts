@@ -1,20 +1,10 @@
 declare global {
-  // Translation for both categories and subcategories
-  interface Translation {
-    language: string;
-    data: {
-      name: string;
-      slug: string;
-    };
-    _id: string;
-  }
-
   // SubCategory model
   interface SubCategory {
     _id: string;
     category: string;
     image: string;
-    translations: Translation[];
+    translations: Translation;
     createdAt: string;
     updatedAt: string;
   }
@@ -23,7 +13,7 @@ declare global {
   interface Category {
     _id: string;
     image: string;
-    translations: Translation[];
+    translations: Translation;
     createdAt: string;
     updatedAt: string;
     subCategories: SubCategory[]; // SubCategory array
@@ -46,7 +36,7 @@ declare global {
   }
 
   // Categories response model
-  interface Categories {
+  interface CategoriesAPIResponse {
     status: string;
     data: CategoriesData;
   }

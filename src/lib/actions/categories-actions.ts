@@ -1,10 +1,23 @@
 "use server";
 
 import axios from "axios";
+import { getLocale } from "next-intl/server";
 
-export async function getCategoriesAction(): Promise<Categories> {
+// get all catefories
+export async function getCategoriesAction(): Promise<CategoriesAPIResponse> {
+  const locale = await getLocale();
+
   try {
-    const res = await axios<Categories>(`${process.env.BASE_URL}/categories`);
+    const res = await axios<CategoriesAPIResponse>(
+      `${process.env.BASE_URL}/categories`,
+      {
+        headers: {
+          "Accept-Language": locale,
+        },
+      },
+    );
+
+    // return data
     return res.data;
   } catch (error) {
     // Axios error object handling

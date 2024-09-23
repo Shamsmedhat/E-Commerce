@@ -8,14 +8,14 @@ import { getTranslations } from "next-intl/server";
 // ui
 import { Search } from "@/components/ui/search";
 import { LuShoppingCart } from "react-icons/lu";
-import Navbar from "./Navbar";
 import { ModeToggler } from "./ModeToggler";
 import LangBtn from "./LangBtn";
 import Logo from "./Logo";
 import LoginHeaderSection from "./LoginHeaderSection";
 
 // data
-import { getCategoriesData } from "@/lib/utils/data";
+import { getCategoriesData } from "@/lib/utils/categories-data";
+import Navbar from "./nav-bar";
 
 export default async function Header() {
   // translation

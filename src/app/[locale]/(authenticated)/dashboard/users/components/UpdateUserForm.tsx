@@ -43,12 +43,10 @@ export function UpdateUserForm({ row }: { row: UserUiTable }) {
       }
     });
     // debugger;
-    console.log("FormData:", formUpdatedData);
 
     // Using .then and .catch instead of try-catch
     updateUserAction(formUpdatedData, id)
       .then((updatedUser) => {
-        console.log("Updated User:", updatedUser);
         return updatedUser;
       })
       .catch((error) => {

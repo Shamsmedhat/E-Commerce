@@ -1,44 +1,65 @@
-import React from "react";
-import { categories, products } from "@/lib/utils/data-v1";
-import { TabsContent } from "@/components/ui/tabs";
+"use client";
 import Image from "next/image";
-import RatingStars from "@/components/common/RatingStars";
+import { products } from "@/lib/utils/data-v1";
+
+// navigation
+import { Link } from "@/navigarion";
+
+// icones
 import { LuHeart, LuScale } from "react-icons/lu";
 
-import { Link } from "@/navigarion";
+// ui
+import { TabsContent } from "@/components/ui/tabs";
+import RatingStars from "@/components/common/RatingStars";
 import AddToCart from "@/components/common/AddToCart";
 
-export default function TabNavContent() {
+// props type
+type CategoriesAndProductsListProp = {
+  categories: Category[];
+  products: Product[] | undefined;
+  isEn: boolean;
+};
+
+export default function TabNavContent({
+  categories,
+  products,
+  isEn,
+}: CategoriesAndProductsListProp) {
   // data will be change after API arrive
-  const allCategories = categories;
-  const allProducts = products;
-  const data = allProducts.map((ele) => ele);
+
+  // const allProducts = products;
+  // const data = allProducts.map((ele) => ele);
+  console.log("products", products);
+
   return (
     <>
-      {allCategories.map((category) => (
-        <TabsContent key={category.name} value={category.name} className="py-4">
+      {categories.map((category) => (
+        <TabsContent
+          key={category._id}
+          value={category.translations.data.name}
+          className="py-4"
+        >
           {/* Filter products based on the current category */}
           <div>
             <ul className="grid auto-rows-auto grid-cols-4 gap-4">
-              {data
-                .filter((product) => product.data.category === category.name)
-                .map((filteredProduct, i) => (
+              {products
+                ?.map((p, i) => (
                   <>
                     {
                       //is first product to be rendered differently
                       i === 0 ? (
                         <li
-                          key={filteredProduct.data.name}
+                          key={p._id}
                           className="col-span-2 row-span-2 flex h-fit flex-col items-center justify-between bg-white p-5 shadow-sm"
                         >
                           {/* product full info */}
-                          <Link href={`/product/${filteredProduct.id}`}>
+                          <Link href={`/product/${p._id}`}>
                             <div className="flex h-[20rem] flex-row-reverse gap-[1.5rem]">
                               {/* product image */}
                               <div className="relative h-[20rem] w-[75%]">
                                 <Image
-                                  src={filteredProduct.data.images[0]}
-                                  alt={filteredProduct.data.name}
+                                  src={p.cover}
+                                  alt={p.translations.data.name}
                                   fill
                                   className="object-cover"
                                 />
@@ -47,16 +68,16 @@ export default function TabNavContent() {
                               <div className="space-y-7">
                                 {/* sub category */}
                                 <span className="font-bold text-primary-foreground/70">
-                                  {filteredProduct.data.subCategory}
+                                  {p.subCategory.translations.data.name}
                                 </span>
                                 {/* Product title */}
                                 <h3 className="text-2xl font-bold text-primary-foreground">
-                                  {filteredProduct.data.name}
+                                  {p.translations.data.name}
                                 </h3>
                                 {/* Product description */}
                                 <p className="text-primary-foreground/70">
-                                  {filteredProduct.data.overview.overview
-                                    .split(" ")
+                                  {p.translations.data.overview
+                                    ?.split(" ")
                                     .slice(0, 15)
                                     .join(" ")}{" "}
                                   ...
@@ -69,7 +90,7 @@ export default function TabNavContent() {
                                     10000 جنية
                                   </span>
                                   <span className="text-xl font-extrabold text-primary-foreground">
-                                    {filteredProduct.data.price} جنية
+                                    {p.price} جنية
                                   </span>
                                 </span>
                               </div>
@@ -94,23 +115,23 @@ export default function TabNavContent() {
                       ) : //is Sec & 3rd product to be rendered differently
                       i === 1 || i === 2 ? (
                         <li
-                          key={filteredProduct.data.name}
+                          key={p._id}
                           className="col-span-2 row-span-1 bg-white p-5 shadow-sm"
                         >
-                          <Link href={`/product/${filteredProduct.id}`}>
-                            <div>{filteredProduct.data.name}</div>
-                            <div>{filteredProduct.data.category}</div>
+                          <Link href={`/product/${p._id}`}>
+                            <div>{p.translations.data.name}</div>
+                            <div>{p.category.translations.data.name}</div>
                           </Link>
                         </li>
                       ) : (
                         //Rest of products
                         <li
-                          key={filteredProduct.data.name}
+                          key={p._id}
                           className="col-span-1 row-span-1 bg-white p-5 shadow-sm"
                         >
-                          <Link href={`/product/${filteredProduct.id}`}>
-                            <div>{filteredProduct.data.name}</div>
-                            <div>{filteredProduct.data.category}</div>
+                          <Link href={`/product/${p._id}`}>
+                            <div>{p.translations.data.name}</div>
+                            <div>{p.category.translations.data.name}</div>
                           </Link>
                         </li>
                       )

@@ -20,7 +20,6 @@ export default function DeleteBtn({
     try {
       await deleteUserAction(userId).then(handleDeleteUserToaster);
     } catch (error) {
-      console.log(error, "herrrrrrrrr");
       setDeleteErr(error as ErrorType);
     }
   }

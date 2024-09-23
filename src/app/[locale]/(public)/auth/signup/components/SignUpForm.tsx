@@ -107,7 +107,6 @@ export default function SignUpForm() {
     });
 
     const result = await signupAction(formData);
-    console.log("values", values);
     if (result.status === "success") {
       reset();
       await signIn("credentials", {

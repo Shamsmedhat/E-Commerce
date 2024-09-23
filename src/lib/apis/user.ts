@@ -76,11 +76,8 @@ export async function updateUser(
         },
       },
     );
-    console.log("step 1: res", res.data);
     return res;
   } catch (error) {
-    console.log("step 1:", error);
-
     throw new Error(`${error}`);
   }
 }
