@@ -36,19 +36,37 @@ declare global {
 
   // Define the interface for individual product details
   interface Product {
-    _id: string;
-    category: Category;
-    subCategory: SubCategory;
-    brand: Brand;
-    cover: string;
-    gallery: GalleryImage[];
-    price: number;
-    stock: number;
-    sales: number;
-    translations: Translation;
-    createdAt: string;
-    updatedAt: string;
-    ratings: Ratings;
+    _id?: string;
+    category?: Category;
+    subCategory?: SubCategory;
+    brand?: Brand;
+    cover?: string;
+    gallery?: GalleryImage[];
+    price?: number;
+    stock?: number;
+    sales?: number;
+    translations?: Translation;
+    createdAt?: string;
+    updatedAt?: string;
+    ratings?: Ratings;
+  }
+  // Define the interface for individual product details
+  interface SingleProduct {
+    product: {
+      _id: string;
+      category: Category;
+      subCategory: SubCategory;
+      brand: Brand;
+      cover: string;
+      gallery: GalleryImage[];
+      price: number;
+      stock: number;
+      sales: number;
+      translations: Translation;
+      createdAt: string;
+      updatedAt: string;
+      ratings: Ratings;
+    };
   }
 
   // Define the interface for individual product
@@ -61,6 +79,12 @@ declare global {
   interface ProductsAPIResponse {
     status: string;
     data: ProductData;
+  }
+
+  // Define product the interface for the API response
+  interface ProductAPIResponse {
+    status: string;
+    data: Product;
   }
 }
 

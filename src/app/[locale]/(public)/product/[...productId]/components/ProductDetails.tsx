@@ -2,11 +2,21 @@
 import AddToCart from "@/components/common/AddToCart";
 import QuantityBtn from "@/components/common/QuantityBtn";
 import RatingStars from "@/components/common/RatingStars";
-import { PRODUCT_DATA } from "@/models/products";
+// import { PRODUCT_DATA } from "@/models/products";
 import { LuHeart, LuScale } from "react-icons/lu";
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+
+type ProductDetailsProps = {
+  category: string;
+  name: string;
+  overview: string | undefined;
+  rating: number;
+  price: number;
+  ratings: number;
+  stock: number;
+};
 
 export default function ProductDetails({
   category,
@@ -15,7 +25,8 @@ export default function ProductDetails({
   rating = 0,
   price,
   ratings,
-}: PRODUCT_DATA) {
+  stock,
+}: ProductDetailsProps) {
   const [isShowMore, setIsShowMore] = useState(false);
   const t = useTranslations();
   return (
@@ -25,9 +36,7 @@ export default function ProductDetails({
       </span>
       <h1 className="pb-3 text-3xl font-bold">{name}</h1>
       <p className="text-md text-primary-foreground/80">
-        {!isShowMore
-          ? overview?.overview.split(" ").slice(0, 65).join(" ")
-          : overview?.overview}{" "}
+        {!isShowMore ? overview?.split(" ").slice(0, 65).join(" ") : overview}{" "}
         <button
           className="text-backup"
           onClick={() => setIsShowMore((p) => !p)}
@@ -42,7 +51,7 @@ export default function ProductDetails({
           <span className="me-4">
             <RatingStars rate={rating} size={25} />
           </span>
-          <span className="mx-2"> {ratings?.length}</span>
+          <span className="mx-2"> {ratings}</span>
           <span>{t("flKadk1uiQBgrD9BptCEt")}</span>
         </div>
       </div>

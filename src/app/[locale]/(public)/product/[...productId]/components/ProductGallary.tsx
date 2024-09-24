@@ -4,27 +4,34 @@ import { cn } from "@/lib/utils";
 import { LuChevronDown, LuChevronUp, LuZoomIn } from "react-icons/lu";
 
 import { useRef, useState } from "react";
-import styles from "../productStyle.module.css";
+import styles from "../product-style.module.css";
 
-const images = [
-  "https://m.media-amazon.com/images/I/71hDhuRKjqL._AC_SL1500_.jpg",
-  "https://m.media-amazon.com/images/I/613y-nNxiwL._AC_SL1080_.jpg",
-  "https://m.media-amazon.com/images/I/5123opPZhgL._AC_SL1500_.jpg",
-  "https://m.media-amazon.com/images/I/81bhWT9lUnL._AC_SL1500_.jpg",
-  "https://m.media-amazon.com/images/I/71vPp895rGL._AC_SL1500_.jpg",
-  "https://m.media-amazon.com/images/I/41iP1+gdguL._AC_SL1000_.jpg",
-  "https://m.media-amazon.com/images/I/519dqKS1EhL._AC_SL1000_.jpg",
-  "https://m.media-amazon.com/images/I/71jX5n3nuCL._AC_SL1500_.jpg",
-  "https://m.media-amazon.com/images/I/71XMpoSj+-L._AC_SL1500_.jpg",
-  "https://m.media-amazon.com/images/I/61qQCRAQ3sL._AC_SL1500_.jpg",
-];
+// const images = [
+//   "https://m.media-amazon.com/images/I/71hDhuRKjqL._AC_SL1500_.jpg",
+//   "https://m.media-amazon.com/images/I/613y-nNxiwL._AC_SL1080_.jpg",
+//   "https://m.media-amazon.com/images/I/5123opPZhgL._AC_SL1500_.jpg",
+//   "https://m.media-amazon.com/images/I/81bhWT9lUnL._AC_SL1500_.jpg",
+//   "https://m.media-amazon.com/images/I/71vPp895rGL._AC_SL1500_.jpg",
+//   "https://m.media-amazon.com/images/I/41iP1+gdguL._AC_SL1000_.jpg",
+//   "https://m.media-amazon.com/images/I/519dqKS1EhL._AC_SL1000_.jpg",
+//   "https://m.media-amazon.com/images/I/71jX5n3nuCL._AC_SL1500_.jpg",
+//   "https://m.media-amazon.com/images/I/71XMpoSj+-L._AC_SL1500_.jpg",
+//   "https://m.media-amazon.com/images/I/61qQCRAQ3sL._AC_SL1500_.jpg",
+// ];
 
-export default function ProductGallery() {
+export default function ProductGallery({
+  gallery,
+}: {
+  gallery: GalleryImage[];
+}) {
+  const images = gallery.map((product) => product.image);
+  // const images = imageLinksArray;
   const [currentImg, setCurrentImg] = useState(images[0]);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const imageZoomRef = useRef<HTMLDivElement>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [isZoomVisible, setIsZoomVisible] = useState(false);
+  console.log("currentImg", currentImg);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { offsetWidth, offsetHeight } = e.currentTarget;

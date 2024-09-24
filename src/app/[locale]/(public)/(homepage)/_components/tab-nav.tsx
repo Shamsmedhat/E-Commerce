@@ -22,15 +22,13 @@ export default function TabNav({
 }: CategoriesAndProductsListProp) {
   // data (categories data)
   const categoriesData = categories?.map((category) => category.translations);
-  console.log("categories", categories);
-  console.log("categoriesData", categoriesData);
 
   const locale = useLocale();
   const defaultValue = categoriesData?.[0].data.name;
   const [category, setCategory] = useState(defaultValue);
 
   const { productsByCategory, isFetching, isError, isPending } =
-    useProductsByCategory(category || "", locale);
+    useProductsByCategory(category || "");
 
   async function onCategoryClick(categoryName: string) {
     setCategory(categoryName);

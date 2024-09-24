@@ -32,7 +32,6 @@ export default function TabNavContent({
 
   // const allProducts = products;
   // const data = allProducts.map((ele) => ele);
-  console.log("products", products);
 
   return (
     <>
