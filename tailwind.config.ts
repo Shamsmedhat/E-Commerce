@@ -87,6 +87,7 @@ const config = {
       },
       screens: {
         xmd: "850px",
+        xsm: "540px",
       },
     },
   },

@@ -64,7 +64,7 @@ export default function TabNav({
             {/* render category image with name based on locale*/}
             <span className="flex gap-2">
               <Image src={category.image} height={25} width={25} alt="" />
-              <span className="hidden lg:block">
+              <span className="hidden xl:block">
                 {category.translations.data.name}
               </span>
             </span>

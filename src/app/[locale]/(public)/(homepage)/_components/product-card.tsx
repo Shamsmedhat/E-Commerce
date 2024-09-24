@@ -1,0 +1,177 @@
+"use client";
+import Image from "next/image";
+
+// navigation
+import { Link } from "@/navigarion";
+
+// translation
+import { useTranslations } from "next-intl";
+
+// ui
+import RatingStars from "@/components/common/RatingStars";
+import AddToCart from "@/components/common/AddToCart";
+import { cn } from "@/lib/utils";
+
+// icons
+import { LuHeart, LuScale } from "react-icons/lu";
+
+// prop type
+type ProductProps = {
+  p: Product;
+  i: number;
+  key: string;
+  isEn: boolean;
+};
+
+// product card component take the product info and the index of this product to change the UI layout basedon it , isEn  boolean (true) when the locale is English
+export default function ProductCard({ p, i, key, isEn }: ProductProps) {
+  const t = useTranslations();
+
+  // is first product to render it differentially
+  const isFirstProduct = i === 0;
+
+  // is sec and third product to render it differentially
+  const isSecAndThirdProduct = i === 1 || i === 2;
+
+  //TODO finish ui mobile
+  return (
+    <li
+      key={key}
+      className={cn(
+        // style in only first product
+        isFirstProduct
+          ? "xsm:col-span-2 col-span-1 row-span-2 flex h-full flex-col items-center justify-between bg-white p-5 shadow-sm md:row-span-1 xl:row-span-2"
+          : // style in only sec and third product
+            isSecAndThirdProduct
+            ? "col-span-2 row-span-2 bg-white p-5 shadow-sm md:row-span-1"
+            : // style in rest of the product
+              "col-span-1 row-span-1 bg-white p-5 shadow-sm",
+        "self-stretch",
+      )}
+    >
+      {/* container for image div and product details div */}
+      <div
+        className={cn(
+          // isEn to display it when the locale is eng
+          !isEn && "flex-row-reverse",
+          // isFirstProduct && "gap-[1.5rem]",
+          "flex h-full w-full flex-col gap-[1.5rem] md:flex-row",
+        )}
+      >
+        {/* product image div*/}
+        <div
+          className={cn(
+            // style in only first product
+            isFirstProduct && "md:w-[25%] xl:w-[50%]",
+            // style in only sec and third product
+            isSecAndThirdProduct && "md:w-[25%]",
+            // basic style
+            "relative h-full",
+          )}
+        >
+          <Link href={`/product/${p._id}`}>
+            <Image
+              src={p.cover}
+              alt={p.translations.data.name}
+              fill
+              className="object-scale-down"
+            />
+          </Link>
+        </div>
+
+        {/* product details */}
+        <div
+          className={cn(
+            // style in only first product
+            isFirstProduct && "xl:w-[50%]",
+            // style in only sec and third product
+            isSecAndThirdProduct && "flex flex-col justify-around",
+            // basic style
+            "flex flex-1 flex-col justify-evenly",
+          )}
+        >
+          {/* sub category */}
+          <span className="font-bold text-primary-foreground/70">
+            {p.subCategory.translations.data.name}
+          </span>
+
+          {/* Product title */}
+          <h3
+            className={cn(
+              // style in only first product
+              isFirstProduct && "xsm:text-base text-xl md:text-xl xl:text-2xl",
+              // style in only sec and third product
+              isSecAndThirdProduct && "xsm:text-base text-xl md:text-xl",
+              // basic style
+              "font-bold text-primary-foreground",
+            )}
+          >
+            <Link
+              href={`/product/${p._id}`}
+              className="transition-all hover:text-primary"
+            >
+              {p.translations.data.name}
+            </Link>
+          </h3>
+
+          {/* display the Product description only in first product*/}
+          {isFirstProduct && (
+            <p className="hidden text-primary-foreground/70 xl:block">
+              {p.translations.data.overview?.split(" ").slice(0, 20).join(" ")}{" "}
+              ...
+            </p>
+          )}
+
+          {/* display the stars component only when there is rating */}
+          {p.ratings.count !== 0 && <RatingStars rate={p.ratings.count} />}
+
+          {/* Priceing & Buttons Section */}
+          <div
+            className={cn(
+              // style in only first product
+              isFirstProduct && "flex-col gap-4",
+              // style in only sec and third product
+              isSecAndThirdProduct && "flex-col gap-4 xl:flex-row xl:gap-0",
+              // basic style
+              "mt-3 flex items-center justify-start xl:mt-0",
+            )}
+          >
+            {/* Priceing */}
+            <span className="flex w-full gap-2 xl:text-xl">
+              {/* //TODO discound  */}
+              <span className="text-primary-foreground/40 line-through">
+                1000 {t("fU01whrYbLGxy6qtBGMEo")}
+              </span>
+              {/* product price */}
+              <span className="font-extrabold text-primary-foreground">
+                {p.price} {t("fU01whrYbLGxy6qtBGMEo")}
+              </span>
+            </span>
+
+            {/* Buttons Section */}
+            <div className="xsm:flex-col-reverse flex w-full items-start justify-start gap-3 sm:flex-row sm:items-center">
+              {/* cart btn */}
+              <AddToCart />
+
+              <div className="flex gap-2">
+                {/* wishlist btn */}
+                <button>
+                  <div className="rounded-full bg-primary-foreground/20 p-2">
+                    <LuHeart strokeWidth={1} />
+                  </div>
+                </button>
+
+                {/* compair btn */}
+                <button>
+                  <div className="rounded-full bg-primary-foreground/20 p-2">
+                    <LuScale strokeWidth={1} />
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+}

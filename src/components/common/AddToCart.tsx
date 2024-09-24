@@ -6,8 +6,8 @@ export default function AddToCart() {
   const t = useTranslations();
 
   return (
-    <div className="w-[9.5rem]">
-      <button className="flex items-center justify-start gap-3 rounded-full bg-primary py-1 pe-4 ps-1 align-middle text-sm text-white transition-colors hover:bg-primary/80">
+    <div className="flex w-auto justify-center">
+      <button className="flex items-center justify-start gap-3 rounded-full bg-primary py-1 pe-4 ps-1 align-middle text-xs text-white transition-colors hover:bg-primary/80 lg:text-sm">
         <span className="rounded-full bg-white p-2">
           <LuShoppingCart className="text-primary-foreground" size={15} />
         </span>

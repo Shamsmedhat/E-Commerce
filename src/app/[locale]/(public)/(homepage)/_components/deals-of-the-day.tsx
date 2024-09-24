@@ -20,7 +20,7 @@ export default async function DealsOfTheDay() {
   ] = await Promise.all([getCategoriesData(), getProductsData()]);
 
   return (
-    <section className="container mb-7">
+    <section className="container my-9">
       {/* h2 heading */}
       <Heading className={handleEnText(locale)}>
         {t("EMm4-Oay1VcXIpDa1EQ_Y")}
