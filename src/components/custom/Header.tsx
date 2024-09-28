@@ -24,7 +24,7 @@ export default async function Header() {
   // user session
   const session = await getServerSession(authOptions);
 
-  // data (categories)
+  //TODO make sure the data came before distructure data (categories)
   const { categories, pagination } = await getCategoriesData();
 
   return (

@@ -4,26 +4,24 @@ import Image from "next/image";
 // ui
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import TabNavContent from "./tab-nav-content";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useProductsByCategory } from "@/lib/utils/products-data";
-import { useQuery } from "@tanstack/react-query";
-import { useLocale } from "next-intl";
 
 // props type
 type CategoriesAndProductsListProp = {
   categories: Category[] | undefined;
-  products: Product[];
+  pagination: Pagination | {};
   isEn: boolean;
 };
 
 export default function TabNav({
   categories,
+  pagination,
   isEn,
 }: CategoriesAndProductsListProp) {
   // data (categories data)
   const categoriesData = categories?.map((category) => category.translations);
 
-  const locale = useLocale();
   const defaultValue = categoriesData?.[0].data.name;
   const [category, setCategory] = useState(defaultValue);
 

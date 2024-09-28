@@ -27,6 +27,10 @@ export const authOptions: NextAuthOptions = {
             password: credentials?.password,
           });
           if (user) {
+            cookies().set("user_token", JSON.stringify(user.accessToken), {
+              httpOnly: true,
+            });
+
             return {
               id: user.id,
               name: user.name,
@@ -55,32 +59,34 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user, account, profile }) {
+      // Add the user data to be saved in the `next-auth.session-token` cookie
       if (user) {
-        token.role = (user as any).role;
-        // token.accessToken = user.accessToken;
-        cookies().set("user_token", user.accessToken as string, {
-          httpOnly: true,
-        });
+        token.id = user.id;
+        token.name = user.name;
+        token.image = user.image;
+        token.email = user.email;
+        token.role = user.role;
+        token.accessToken = user.accessToken;
       }
+
       if (account?.provider === "facebook" || account?.provider === "google") {
         token.role = ROLE.USER;
       }
 
       return token;
     },
+
     async session({ session, token, user }) {
-      session.user.role = token.role;
-      // session.user.accessToken = token.accessToken;
+      if (token) {
+        token.id = token.id;
+        token.name = token.name;
+        token.image = token.image;
+        token.email = token.email;
+        token.role = token.role;
+      }
+
       return session;
     },
-    // async signIn({ user, account, profile, email, credentials }) {
-    //   console.log("user", user);
-    //   console.log("account", account);
-    //   console.log("profile", profile);
-    //   console.log("email", email);
-    //   console.log("credentials", credentials);
-    //   return "/login";
-    // },
   },
 
   pages: {

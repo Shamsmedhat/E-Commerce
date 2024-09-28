@@ -1,6 +1,7 @@
 import { Link } from "@/navigarion";
 import { LuShoppingCart } from "react-icons/lu";
 import { useTranslations } from "next-intl";
+import { addToCartAction } from "@/lib/actions/cart-actions";
 
 export default function AddToCart() {
   const t = useTranslations();

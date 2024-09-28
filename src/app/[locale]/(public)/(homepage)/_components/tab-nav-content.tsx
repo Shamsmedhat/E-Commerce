@@ -28,10 +28,6 @@ export default function TabNavContent({
   isEn,
 }: CategoriesAndProductsListProp) {
   const t = useTranslations();
-  // data will be change after API arrive
-
-  // const allProducts = products;
-  // const data = allProducts.map((ele) => ele);
 
   return (
     <>

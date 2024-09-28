@@ -30,7 +30,7 @@ export default function ProductDetails({
   const [isShowMore, setIsShowMore] = useState(false);
   const t = useTranslations();
   return (
-    <div className="flex flex-shrink flex-grow flex-col justify-between">
+    <div className="mt-4 flex flex-shrink flex-grow flex-col justify-evenly md:mt-0">
       <span className="text-md font-bold text-primary-foreground/50">
         {category}
       </span>
@@ -56,15 +56,17 @@ export default function ProductDetails({
         </div>
       </div>
       <span className="flex items-center gap-2">
-        <span className="text-xl text-primary-foreground/40 line-through">
+        <span className="text-base text-primary-foreground/40 line-through">
           10000 {t("fU01whrYbLGxy6qtBGMEo")}
         </span>
         <span className="text-3xl font-bold text-primary-foreground">
           {price} {t("fU01whrYbLGxy6qtBGMEo")}
         </span>
       </span>
-      <div className="my-4 flex gap-5 md:flex-col lg:flex-row">
-        <div className="flex gap-4 md:flex-col lg:flex-row">
+
+      {/* bottoms section */}
+      <div className="my-4 flex gap-5 md:flex-col-reverse lg:flex-row">
+        <div className="flex flex-row gap-4">
           <QuantityBtn
             className="overflow-hidden rounded-3xl border-0"
             isWithBorder={false}

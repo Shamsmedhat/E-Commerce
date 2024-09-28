@@ -13,19 +13,38 @@ export default async function DealsOfTheDay() {
   const locale = await getLocale();
   const isEn = locale === "en";
 
-  // data ( categories , products ) use Promise.all to get one promise and in parallel
-  const [
-    { categories, pagination: categoriesPagination },
-    { products, pagination: productsPagination },
-  ] = await Promise.all([getCategoriesData(), getProductsData()]);
+  // Declare categories & pagination variables to assign the data
+  let categories: Category[] = [];
+  let pagination = {};
 
+  const data = await getCategoriesData();
+
+  // if no data is received we show no data available
+  if (!data.categories) {
+    return (
+      <section className="container my-9">
+        {/* h2 heading */}
+        <Heading className={handleEnText(locale)}>
+          {t("EMm4-Oay1VcXIpDa1EQ_Y")}
+        </Heading>
+
+        <p>No data available</p>
+      </section>
+    );
+
+    // if the data received we assign the data to variable to show it in UI
+  } else {
+    categories = data.categories;
+    pagination = data.pagination;
+  }
   return (
     <section className="container my-9">
       {/* h2 heading */}
       <Heading className={handleEnText(locale)}>
         {t("EMm4-Oay1VcXIpDa1EQ_Y")}
       </Heading>
-      <TabNav categories={categories} isEn={isEn} products={products} />
+
+      <TabNav categories={categories} pagination={pagination} isEn={isEn} />
     </section>
   );
 }

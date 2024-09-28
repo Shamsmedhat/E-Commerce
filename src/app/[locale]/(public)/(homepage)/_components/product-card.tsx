@@ -13,18 +13,19 @@ import AddToCart from "@/components/common/AddToCart";
 import { cn } from "@/lib/utils";
 
 // icons
-import { LuHeart, LuScale } from "react-icons/lu";
+import { LuHeart, LuScale, LuStar } from "react-icons/lu";
+import { addToCartAction } from "@/lib/actions/cart-actions";
 
 // prop type
 type ProductProps = {
   p: Product;
   i: number;
-  key: string;
+  productKey: string | undefined;
   isEn: boolean;
 };
 
 // product card component take the product info and the index of this product to change the UI layout basedon it , isEn  boolean (true) when the locale is English
-export default function ProductCard({ p, i, key, isEn }: ProductProps) {
+export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
   const t = useTranslations();
 
   // is first product to render it differentially
@@ -33,22 +34,35 @@ export default function ProductCard({ p, i, key, isEn }: ProductProps) {
   // is sec and third product to render it differentially
   const isSecAndThirdProduct = i === 1 || i === 2;
 
+  async function handle() {
+    try {
+      const response = await addToCartAction({
+        product: "66f1530581a5d8952e79b3f5",
+        quantity: 10,
+      });
+      console.log("Added to cart:", response);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  }
+
   //TODO finish ui mobile
   return (
     <li
-      key={key}
+      key={productKey || i}
       className={cn(
         // style in only first product
         isFirstProduct
-          ? "xsm:col-span-2 col-span-1 row-span-2 flex h-full flex-col items-center justify-between bg-white p-5 shadow-sm md:row-span-1 xl:row-span-2"
+          ? "col-span-1 row-span-2 flex h-full flex-col items-center justify-between bg-white p-5 shadow-sm xsm:col-span-2 md:row-span-1 xl:row-span-2"
           : // style in only sec and third product
             isSecAndThirdProduct
             ? "col-span-2 row-span-2 bg-white p-5 shadow-sm md:row-span-1"
             : // style in rest of the product
               "col-span-1 row-span-1 bg-white p-5 shadow-sm",
-        "self-stretch",
+        "rounded-lg",
       )}
     >
+      <button onClick={() => handle()}>TESSSSSSSST</button>
       {/* container for image div and product details div */}
       <div
         className={cn(
@@ -71,8 +85,8 @@ export default function ProductCard({ p, i, key, isEn }: ProductProps) {
         >
           <Link href={`/product/${p._id}`}>
             <Image
-              src={p.cover}
-              alt={p.translations.data.name}
+              src={p.cover!}
+              alt={p.translations?.data.name!}
               fill
               className="object-scale-down"
             />
@@ -92,16 +106,16 @@ export default function ProductCard({ p, i, key, isEn }: ProductProps) {
         >
           {/* sub category */}
           <span className="font-bold text-primary-foreground/70">
-            {p.subCategory.translations.data.name}
+            {p.subCategory?.translations.data.name}
           </span>
 
           {/* Product title */}
           <h3
             className={cn(
               // style in only first product
-              isFirstProduct && "xsm:text-base text-xl md:text-xl xl:text-2xl",
+              isFirstProduct && "text-xl xsm:text-base md:text-xl xl:text-2xl",
               // style in only sec and third product
-              isSecAndThirdProduct && "xsm:text-base text-xl md:text-xl",
+              isSecAndThirdProduct && "text-xl xsm:text-base md:text-xl",
               // basic style
               "font-bold text-primary-foreground",
             )}
@@ -110,20 +124,27 @@ export default function ProductCard({ p, i, key, isEn }: ProductProps) {
               href={`/product/${p._id}`}
               className="transition-all hover:text-primary"
             >
-              {p.translations.data.name}
+              {p.translations?.data.name}
             </Link>
           </h3>
 
           {/* display the Product description only in first product*/}
           {isFirstProduct && (
             <p className="hidden text-primary-foreground/70 xl:block">
-              {p.translations.data.overview?.split(" ").slice(0, 20).join(" ")}{" "}
+              {p.translations?.data.overview?.split(" ").slice(0, 20).join(" ")}{" "}
               ...
             </p>
           )}
 
           {/* display the stars component only when there is rating */}
-          {p.ratings.count !== 0 && <RatingStars rate={p.ratings.count} />}
+          {p.ratings?.average !== 0 && (
+            <div className="flex items-center gap-2">
+              <RatingStars rate={p.ratings?.average} />
+              <span className="text-sm text-primary-foreground">
+                {t("flKadk1uiQBgrD9BptCEt")} {p.ratings?.count}
+              </span>
+            </div>
+          )}
 
           {/* Priceing & Buttons Section */}
           <div
@@ -139,7 +160,7 @@ export default function ProductCard({ p, i, key, isEn }: ProductProps) {
             {/* Priceing */}
             <span className="flex w-full gap-2 xl:text-xl">
               {/* //TODO discound  */}
-              <span className="text-primary-foreground/40 line-through">
+              <span className="text-sm text-primary-foreground/40 line-through">
                 1000 {t("fU01whrYbLGxy6qtBGMEo")}
               </span>
               {/* product price */}
@@ -149,7 +170,7 @@ export default function ProductCard({ p, i, key, isEn }: ProductProps) {
             </span>
 
             {/* Buttons Section */}
-            <div className="xsm:flex-col-reverse flex w-full items-start justify-start gap-3 sm:flex-row sm:items-center">
+            <div className="flex w-full items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-center">
               {/* cart btn */}
               <AddToCart />
 

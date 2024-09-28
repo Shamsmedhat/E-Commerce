@@ -11,10 +11,31 @@ export default function ProductGallery({
 }: {
   gallery: GalleryImage[];
 }) {
-  const images = gallery.map((product) => product.image.replaceAll(" ", "%20"));
+  const imageLinksArray = gallery.map((product) =>
+    product.image.replaceAll(" ", "%20"),
+  );
+  const images = imageLinksArray;
+  console.log("images", images);
 
   const [currentImg, setCurrentImg] = useState(images[0]);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
+  const imageZoomRef = useRef<HTMLDivElement>(null);
+  const [pointer, setPointer] = useState({ x: 0, y: 0 });
+  const [isZoomVisible, setIsZoomVisible] = useState(false);
+  console.log("currentImg", currentImg);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const { offsetWidth, offsetHeight } = e.currentTarget;
+    const x = (e.nativeEvent.offsetX * 100) / offsetWidth;
+    const y = (e.nativeEvent.offsetY * 100) / offsetHeight;
+
+    setPointer({ x, y });
+    setIsZoomVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsZoomVisible(false);
+  };
 
   function onClickDown() {
     if (currentImgIndex < images.length - 1) {
@@ -34,13 +55,32 @@ export default function ProductGallery({
     <div className="flex w-full flex-shrink flex-row-reverse justify-between px-8 md:pe-8">
       {/* Main Image Display */}
       <div
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+        ref={imageZoomRef}
         className={`${styles.imageZoom} relative flex w-full items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-4`}
+        style={
+          {
+            "--url": `url(${currentImg})`,
+            "--zoom-x": `${pointer.x}%`,
+            "--zoom-y": `${pointer.y}%`,
+            "--display": isZoomVisible ? "block" : "none",
+            "--opacity": 0,
+          } as React.CSSProperties
+        }
       >
         <img
           src={currentImg}
           className="relative z-50 h-full w-full object-contain transition-all duration-500 ease-in-out"
           alt="Current Product"
         />
+
+        <span className="absolute bottom-[10%] z-50 flex gap-x-2 rounded-xl bg-primary-foreground/70 p-3 text-slate-100">
+          <span> Hover to zoom</span>
+          <span>
+            <LuZoomIn />
+          </span>
+        </span>
       </div>
 
       {/* Thumbnail and Controls Section */}

@@ -1,25 +1,44 @@
 "use client";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { handleSignInToaster } from "@/lib/utils/helpers";
+
+// auth
 import { Session } from "next-auth";
 import { signIn } from "next-auth/react";
-import { useTranslations } from "next-intl";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+// zod validation
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// ui
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+// icons
 import { BsInfoCircle } from "react-icons/bs";
 import { ImSpinner3 } from "react-icons/im";
 
-import { handleSignInToaster } from "@/lib/utils/helpers";
+// translations
+import { useTranslations } from "next-intl";
+
+// navigation
 import { useRouter } from "@/navigarion";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginForm({ session }: { session: Session | null }) {
   const t = useTranslations();
+
+  // navigation
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // state if the credentials is incorrect
   const [credentialsIncorrect, setCredentialsIncorrect] = useState<
     string | null | undefined
   >(null);
+
+  // user schema
   const userSchema = z
     .object({
       username: z.string().min(6, t("-sPVtQitY0Jhzx6ENcLR7")).max(20),
@@ -27,26 +46,38 @@ export default function LoginForm({ session }: { session: Session | null }) {
     })
     .required();
 
+  // inputs type
   type Inputs = z.infer<typeof userSchema>;
+
+  // useForm setup
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<Inputs>({ resolver: zodResolver(userSchema) });
 
+  // handle signin function with params username and password
   async function handleSignIn({ username, password }: Inputs) {
     try {
+      // wait the signin response
       const res = await signIn("credentials", {
         redirect: false,
-        callbackUrl: "/",
         username,
         password,
       });
 
+      // if the res is oky
       if (res?.ok) {
-        router.push("/");
+        // navigate to home
+        router.replace(searchParams.get("callbackUrl") || "/");
+
+        // then show the toaster
         handleSignInToaster();
+
+        // refresh to show the cart - rerender and check if there is a session
+        router.refresh();
       } else {
+        // if the credentials is incorrect
         setCredentialsIncorrect(res?.error);
       }
     } catch (error) {
@@ -56,15 +87,19 @@ export default function LoginForm({ session }: { session: Session | null }) {
     //TODO handling errors
   }
 
+  // on submit to pass the form data to the signin function
   const onSubmit: SubmitHandler<Inputs> = (data) => handleSignIn(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-4">
+      {/* if the credentials is incorrect show error */}
       {credentialsIncorrect && (
         <div className="flex justify-center">
           <p className="text-lg text-red-500">{t("1_Rj400Z4SXDwCJt3kFzN")}</p>
         </div>
       )}
+
+      {/* //TODO setup new form setup from chadcn */}
       <div className="flex flex-col gap-3">
         <Label
           htmlFor="username"

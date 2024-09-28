@@ -21,7 +21,7 @@ export async function signIn({
     const { data } = response;
     return {
       user: {
-        id: data.data.user.id,
+        id: data.data.user._id,
         name: data.data.user.fullName,
         email: data.data.user.email,
         image: data.data.user.photo,

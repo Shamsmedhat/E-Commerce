@@ -6,10 +6,23 @@ import CartList from "./_components/CartList";
 import CartSummary from "./_components/CartSummary";
 import MyButton from "@/components/common/MyButton";
 import SubmitBtn from "./_components/SubmitBtn";
+import { getCartData } from "@/lib/utils/cart-data";
+import { signOut } from "next-auth/react";
+import { redirect } from "@/navigarion";
+import catchAsync, { AppError } from "@/lib/utils/catchAsync";
+import { getCartAction } from "@/lib/actions/cart-actions";
+import { cookies } from "next/headers";
+import ValidateResponse from "@/components/custom/validate-response";
 
 export default async function Cart() {
-  const data = products;
   const t = await getTranslations();
+
+  const cart = await getCartAction();
+  console.log("cart", cart);
+  if (cart && "statusCode" in cart) {
+    return <ValidateResponse message={cart.message} callbackUrl="/cart" />;
+  }
+
   return (
     <section className="container mt-7 flex flex-col md:flex-row">
       {/* Cart content */}
@@ -21,7 +34,7 @@ export default async function Cart() {
         </div>
         {/* List of Cart items */}
         <div>
-          <CartList data={data} />
+          <CartList cart={cart} />
         </div>
         {/* checkout submit btn */}
         <div className="">
