@@ -8,12 +8,16 @@ type CartListProps = {
 };
 
 export default function CartList({ cart }: CartListProps) {
-  console.log("cart", cart);
-
   return (
-    <ul>
+    <ul className="flex">
       {/* Render cart items when cart is available */}
-      {cart?.items.map((item) => <CartItem key={item.product._id} {...item} />)}
+      {cart?.items.map((item) => (
+        <CartItem
+          total-price={cart.totalPrice}
+          key={item.product._id}
+          item={item}
+        />
+      ))}
     </ul>
   );
 }

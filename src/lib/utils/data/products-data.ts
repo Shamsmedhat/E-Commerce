@@ -3,7 +3,7 @@ import {
   getProductByIdAction,
   getProductsAction,
   getProductsByCategoryAction,
-} from "../actions/products-actions";
+} from "../../actions/products-actions";
 
 export async function getProductsData() {
   try {

@@ -1,30 +1,41 @@
-import Heading from "@/components/common/Heading";
-import { products } from "@/lib/utils/data-v1";
-import { getTranslations } from "next-intl/server";
+// Translations
+import { getLocale, getTranslations } from "next-intl/server";
+
+// Using client component to access token and delete it after server end the streaming and login again with new token
+import ValidateResponse from "@/components/custom/validate-response";
+
+// Cart action for geting the cart data
+import { getCartAction } from "@/lib/actions/cart-actions";
+
+// UI
 import ToggleStyleBtn from "@/components/common/ToggleStyleBtn";
 import CartList from "./_components/CartList";
 import CartSummary from "./_components/CartSummary";
-import MyButton from "@/components/common/MyButton";
+import Heading from "@/components/common/Heading";
 import SubmitBtn from "./_components/SubmitBtn";
-import { getCartData } from "@/lib/utils/cart-data";
-import { signOut } from "next-auth/react";
-import { redirect } from "@/navigarion";
-import catchAsync, { AppError } from "@/lib/utils/catchAsync";
-import { getCartAction } from "@/lib/actions/cart-actions";
-import { cookies } from "next/headers";
-import ValidateResponse from "@/components/custom/validate-response";
 
 export default async function Cart() {
+  // Translation
   const t = await getTranslations();
 
+  // get current locale to render the dir based on it
+  const locale = await getLocale();
+  const isEn = locale === "en";
+
+  // Get cart data
   const cart = await getCartAction();
-  console.log("cart", cart);
+
+  // If received cart and there is a status code in the cart that's signed for an error we check if this error is 401 in validate-session
   if (cart && "statusCode" in cart) {
     return <ValidateResponse message={cart.message} callbackUrl="/cart" />;
   }
 
+  // if there is no status code we just return the cart data in the UI
   return (
-    <section className="container mt-7 flex flex-col md:flex-row">
+    <section
+      className="container mt-7 flex flex-col md:flex-row"
+      dir={isEn ? "ltr" : "rtl"}
+    >
       {/* Cart content */}
       <div className="flex-grow-[1]">
         {/* Heading */}

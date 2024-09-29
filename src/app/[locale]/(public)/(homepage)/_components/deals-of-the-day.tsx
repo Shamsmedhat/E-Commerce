@@ -1,10 +1,8 @@
 import Heading from "@/components/common/Heading";
-import TabNav from "./tab-nav";
-import { useLocale, useTranslations } from "next-intl";
+import { getCategoriesData } from "@/lib/utils/data/categories-data";
 import { handleEnText } from "@/lib/utils/helpers";
 import { getLocale, getTranslations } from "next-intl/server";
-import { getCategoriesData } from "@/lib/utils/categories-data";
-import { getProductsData } from "@/lib/utils/products-data";
+import TabNav from "./tab-nav";
 
 export default async function DealsOfTheDay() {
   const t = await getTranslations();

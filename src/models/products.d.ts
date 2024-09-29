@@ -1,6 +1,6 @@
 declare global {
   // Define the interface for translations
-  interface Translation {
+  interface ProductTranslation {
     language: string;
     data: {
       name: string;
@@ -17,7 +17,7 @@ declare global {
   interface Brand {
     _id: string;
     logo: string;
-    translations: Translation;
+    translations: ProductTranslation;
     createdAt: string;
     updatedAt: string;
   }
@@ -45,7 +45,7 @@ declare global {
     price?: number;
     stock?: number;
     sales?: number;
-    translations?: Translation;
+    translations?: ProductTranslation;
     createdAt?: string;
     updatedAt?: string;
     ratings?: Ratings;
@@ -62,7 +62,7 @@ declare global {
       price: number;
       stock: number;
       sales: number;
-      translations: Translation;
+      translations: ProductTranslation;
       createdAt: string;
       updatedAt: string;
       ratings: Ratings;

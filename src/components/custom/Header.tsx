@@ -14,7 +14,7 @@ import Logo from "./Logo";
 import LoginHeaderSection from "./LoginHeaderSection";
 
 // data
-import { getCategoriesData } from "@/lib/utils/categories-data";
+import { getCategoriesData } from "@/lib/utils/data/categories-data";
 import Navbar from "./nav-bar";
 
 export default async function Header() {

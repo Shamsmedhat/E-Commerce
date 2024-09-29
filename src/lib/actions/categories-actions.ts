@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { getLocale } from "next-intl/server";
+import catchAsync, { AppError } from "../utils/catchAsync";
 
 // get all catefories
 export async function getCategoriesAction(): Promise<CategoriesAPIResponse> {
@@ -44,3 +45,24 @@ export async function getCategoriesAction(): Promise<CategoriesAPIResponse> {
     }
   }
 }
+
+// get category by id
+export const getCategoryAction = catchAsync(async (categoryId: string) => {
+  const locale = await getLocale();
+
+  const res = await fetch(`${process.env.BASE_URL}/categories/${categoryId}`, {
+    headers: {
+      "Accept-Language": locale,
+    },
+  });
+  const data: APIResponse<Category> = await res.json();
+
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+
+  // return data
+  return data.data;
+});

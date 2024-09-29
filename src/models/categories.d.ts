@@ -1,10 +1,20 @@
 declare global {
+  // Define the interface for translations
+  interface CategoriesTranslation {
+    data: {
+      name: string;
+      slug: string;
+    };
+    language: string;
+    _id: string;
+  }
+
   // SubCategory model
   interface SubCategory {
     _id: string;
     category: string;
     image: string;
-    translations: Translation;
+    translations: CategoriesTranslation;
     createdAt: string;
     updatedAt: string;
   }
@@ -13,7 +23,7 @@ declare global {
   interface Category {
     _id: string;
     image: string;
-    translations: Translation;
+    translations: CategoriesTranslation;
     createdAt: string;
     updatedAt: string;
     subCategories: SubCategory[]; // SubCategory array

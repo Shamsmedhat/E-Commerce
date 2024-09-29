@@ -12,6 +12,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Heading from "@/components/common/Heading";
 import { useTranslations } from "next-intl";
+import { generateColors } from "@/lib/utils/generateCategoryColors";
 
 export default function MainSlider() {
   const t = useTranslations();
@@ -35,11 +36,21 @@ export default function MainSlider() {
 }
 
 export function MainSectionForMediumScreen() {
+  const electronics = generateColors("Electronics");
+  const babies = generateColors("Babies");
+  const HomeAndPetCare = generateColors("Home and Pet Care");
+  const beverages = generateColors("Beverages");
+  const HealthAndPersonalCare = generateColors("Health and Personal Care");
+  const food = generateColors("Food");
+
   return (
     <ul className="mt-8 grid grid-cols-6 grid-rows-1 gap-3">
       {/* Drinks ------------------------------------------------------------- */}
 
-      <li className="flex flex-col items-start overflow-hidden rounded-lg bg-categories-beverages p-3">
+      <li
+        className="flex flex-col items-start overflow-hidden rounded-lg p-3"
+        style={{ borderColor: beverages.backgroundColor }}
+      >
         <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-bold text-zinc-800">
           مشروبات
         </span>

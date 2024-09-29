@@ -14,14 +14,11 @@ export const getCartAction = catchAsync(async () => {
 
   const data: APIResponse<CartData> = await res.json();
 
-  console.log("data", data);
   if (data.status !== "success") {
     throw new AppError(data.message, 500);
   } else if (!data.data) {
     throw new AppError("Something went wrong!", 500);
   }
-
-  console.log("data.data:", data.data);
 
   // Return cart data
   return data.data.cart;

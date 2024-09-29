@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import TabNavContent from "./tab-nav-content";
 import { useState } from "react";
-import { useProductsByCategory } from "@/lib/utils/products-data";
+import { useProductsByCategory } from "@/lib/utils/data/products-data";
 
 // props type
 type CategoriesAndProductsListProp = {

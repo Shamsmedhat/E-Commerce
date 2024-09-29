@@ -3,7 +3,7 @@ import ProductGallary from "./components/ProductGallary";
 import ProductDetails from "./components/ProductDetails";
 import ProductTable from "./components/ProductTable";
 import RelatedProducts from "@/components/common/RelatedProducts";
-import { getProductByIdData } from "@/lib/utils/products-data";
+import { getProductByIdData } from "@/lib/utils/data/products-data";
 import { useLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
 
