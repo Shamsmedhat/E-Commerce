@@ -44,13 +44,13 @@ export default function QuantityBtn({
   return (
     <div className={cn(className, "flex h-fit w-fit flex-row border-[1px]")}>
       <button
-        onClick={() => setQty((qty) => qty + 1)}
+        onClick={() => setQty((qty) => Math.max(0, qty - 1))}
         className={cn(
           btnsClassName,
-          "px-2 hover:bg-green-200 hover:transition-colors hover:duration-200",
+          "px-2 hover:bg-red-200 hover:transition-colors hover:duration-200",
         )}
       >
-        <LuPlus size={size} />
+        <LuMinus size={size} />
       </button>
       <div>
         <Input
@@ -63,14 +63,15 @@ export default function QuantityBtn({
           onChange={handleChange}
         />
       </div>
+
       <button
-        onClick={() => setQty((qty) => Math.max(0, qty - 1))}
+        onClick={() => setQty((qty) => qty + 1)}
         className={cn(
           btnsClassName,
-          "px-2 hover:bg-red-200 hover:transition-colors hover:duration-200",
+          "px-2 hover:bg-green-200 hover:transition-colors hover:duration-200",
         )}
       >
-        <LuMinus size={size} />
+        <LuPlus size={size} />
       </button>
     </div>
   );

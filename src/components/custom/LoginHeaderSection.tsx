@@ -8,14 +8,28 @@ import { Skeleton } from "../ui/skeleton";
 import useAuthToast from "@/hooks/useAuthToast";
 import { FiUser } from "react-icons/fi";
 import UserDropmenu from "./user-dropmenu";
+import { useEffect, useState } from "react";
 
 export default function LoginHeaderSection() {
-  const { data, status } = useSession();
   const t = useTranslations();
+  const { data, status } = useSession();
+  const [userName, setUserName] = useState();
+
   useAuthToast();
-  if (status === "unauthenticated") {
+  useEffect(() => {
+    setUserName(data?.user.name);
+  }, [data]);
+
+  if (status === "loading") {
     return (
-      <li className="xmd:flex-col mr-4 flex h-14 items-center justify-center gap-3 border-e px-6">
+      <div className="mx-3">
+        <Skeleton className="mb-2 h-7 w-[9rem] px-6" />
+        <Skeleton className="h-7 w-[9rem] px-6" />
+      </div>
+    );
+  } else if (status === "unauthenticated" || !data) {
+    return (
+      <li className="mr-4 flex h-14 items-center justify-center gap-3 border-e px-6 xmd:flex-col">
         <Link
           href="/auth/login"
           className="flex items-center gap-1 text-[14px] font-semibold transition-colors hover:text-primary"
@@ -31,18 +45,11 @@ export default function LoginHeaderSection() {
         </Link>
       </li>
     );
-  } else if (status === "loading") {
-    return (
-      <div className="mx-3">
-        <Skeleton className="mb-2 h-7 w-[9rem] px-6" />
-        <Skeleton className="h-7 w-[9rem] px-6" />
-      </div>
-    );
   } else if (status === "authenticated" || data) {
     return (
       <li className="flex h-14 flex-col items-center justify-center border-e px-6">
         <span className="text-sm text-muted-foreground">
-          {t("GA5q4VAGgkQx9JSIoCH64")} {data?.user.name}
+          {t("GA5q4VAGgkQx9JSIoCH64")} {userName}
         </span>
 
         {/* Account dropmenu */}

@@ -39,7 +39,7 @@ export default function TabNavContent({
         >
           {/* Filter products based on the current category */}
           <div>
-            <ul className="grid auto-rows-[minmax(200px,200px)] grid-cols-1 gap-4 xsm:grid-cols-4">
+            <ul className="grid auto-rows-[minmax(200px,auto)] grid-cols-1 gap-4 xsm:grid-cols-4">
               {products
                 ?.map((p, i) => (
                   <ProductCard

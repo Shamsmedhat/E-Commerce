@@ -1,4 +1,4 @@
-import LoginSkeleton from "@/components/skeletons/LoginSkeleton";
+import LoginSkeleton from "@/components/skeletons/login-skeleton";
 
 export async function Page() {
   return <LoginSkeleton />;

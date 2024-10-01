@@ -4,7 +4,7 @@ import { Checkbox } from "../ui/checkbox";
 import { ComboboxDemo } from "../ui/combobox";
 import { LuHeart, LuScale, LuShoppingCart } from "react-icons/lu";
 
-import DiscountSection from "@/app/[locale]/(public)/(homepage)/_components/DiscountSection";
+import DiscountSection from "@/app/[locale]/(public)/(homepage)/_components/discount-section";
 import TopSellingItems from "@/app/[locale]/(public)/(homepage)/_components/top-selling-items";
 import { categoryColor } from "@/lib/utils/helpers";
 

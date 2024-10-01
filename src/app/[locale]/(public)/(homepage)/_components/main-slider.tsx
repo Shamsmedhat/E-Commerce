@@ -11,31 +11,50 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Heading from "@/components/common/Heading";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { generateColors } from "@/lib/utils/generateCategoryColors";
+import { cn } from "@/lib/utils";
+import { handleEnText } from "@/lib/utils/helpers";
 
-export default function MainSlider() {
+interface MainSliderProps {
+  categoriesData: CategoriesData;
+}
+
+interface SectionProps {
+  categoriesData: CategoriesData;
+  locale?: string;
+  t?: any;
+}
+export default function MainSlider({ categoriesData }: MainSliderProps) {
   const t = useTranslations();
-
+  const locale = useLocale();
   return (
     <section className="container mb-[1rem] hidden md:block">
       {/* h2 heading */}
-      <Heading>{t("eexZ2Z9kcPg_aoRy2DZ8N")}</Heading>
+      <Heading className={cn(handleEnText(locale))}>
+        {t("eexZ2Z9kcPg_aoRy2DZ8N")}
+      </Heading>
 
       {/* This will show only on medium screens */}
       <div className="md:block lg:hidden">
-        <MainSectionForMediumScreen />
+        <MainSectionForMediumScreen categoriesData={categoriesData} />
       </div>
 
       {/* This will show only on large screens */}
       <div className="hidden lg:block">
-        <MainSectionForLargeScreen />
+        <MainSectionForLargeScreen
+          categoriesData={categoriesData}
+          locale={locale}
+          t={t}
+        />
       </div>
     </section>
   );
 }
 
-export function MainSectionForMediumScreen() {
+export async function MainSectionForMediumScreen({
+  categoriesData,
+}: SectionProps) {
   const electronics = generateColors("Electronics");
   const babies = generateColors("Babies");
   const HomeAndPetCare = generateColors("HomeandPetCare");
@@ -43,119 +62,107 @@ export function MainSectionForMediumScreen() {
   const healthAndPersonalCare = generateColors("HealthandPersonalCare");
   const food = generateColors("Food");
 
-  console.log("beverages", beverages);
-  console.log("healthAndPersonalCare", healthAndPersonalCare);
-  console.log("food", food);
   return (
     <ul className="mt-8 grid grid-cols-6 grid-rows-1 gap-3">
       {/* Drinks ------------------------------------------------------------- */}
+      {categoriesData.categories?.map((c) => (
+        <li
+          key={c._id} // Always add a unique key for each item in the map
+          className="flex flex-col items-start overflow-hidden rounded-lg"
+          style={{
+            backgroundColor: generateColors(c.translations.data.name)
+              .backgroundColor,
+            color: generateColors(c.translations.data.name).color,
+          }}
+        >
+          <span className="m-3 rounded-sm bg-white/20 px-3 py-1 text-sm font-semibold">
+            {c.translations.data.name}
+          </span>
 
-      <li
-        className="flex flex-col items-start overflow-hidden rounded-lg p-3"
-        style={{
-          backgroundColor: beverages.backgroundColor,
-          color: beverages.color,
-        }}
-      >
-        <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-semibold">
-          مشروبات
-        </span>
-        <p className="mt-3 w-full max-w-[70%] text-lg font-bold">
-          مشروبات باردة وغازية
-        </p>
-      </li>
-
-      {/* Babies ------------------------------------------------------------- */}
-
-      <li
-        className="flex flex-col items-start rounded-lg p-3"
-        style={{
-          backgroundColor: babies.backgroundColor,
-          color: babies.color,
-        }}
-      >
-        <span className="relative z-[1] rounded-sm bg-white/50 px-3 py-1 text-xs font-semibold">
-          أطفال ورضّع
-        </span>
-        <p className="relative z-[1] mt-3 max-w-[70%] text-lg font-bold">
-          منتجات ومستلزمات الأطفال
-        </p>
-      </li>
-
-      {/* Personal Care ------------------------------------------------------ */}
-
-      <li
-        className="flex flex-col items-start rounded-lg p-3"
-        style={{
-          backgroundColor: healthAndPersonalCare.backgroundColor,
-          color: healthAndPersonalCare.color,
-        }}
-      >
-        <span className="rounded-sm bg-black/30 px-3 py-1 text-xs font-semibold">
-          عناية الشخصية
-        </span>
-        <p className="text-lل relative z-[1] mt-3 max-w-[200px] text-lg font-bold drop-shadow">
-          منتجات العناية الشخصية
-        </p>
-      </li>
-
-      {/* Electronics ------------------------------------------------------------- */}
-
-      <li
-        className="flex flex-col items-start rounded-lg p-3"
-        style={{
-          backgroundColor: electronics.backgroundColor,
-          color: electronics.color,
-        }}
-      >
-        <span className="self-start rounded-sm bg-white/20 px-3 py-1 text-xs font-semibold uppercase">
-          الكترونيات
-        </span>
-        <p className="mt-3 max-w-[200px] text-right text-lg font-bold uppercase">
-          لابتوب وموبايل وكمبيوتر
-        </p>
-      </li>
-
-      {/* Home & Pet ------------------------------------------------------------- */}
-
-      <li
-        className="flex flex-col items-start rounded-lg p-3"
-        style={{
-          backgroundColor: HomeAndPetCare.backgroundColor,
-          color: HomeAndPetCare.color,
-        }}
-      >
-        <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-semibold uppercase">
-          منزل وحيوانات أليفة
-        </span>
-        <p className="text-md mt-3 max-w-[200px] font-bold uppercase">
-          طعام ومستلزمات الحيوانات الأليفة
-        </p>
-      </li>
-
-      {/* Food ------------------------------------------------------------- */}
-
-      <li
-        className="flex flex-col items-start rounded-lg p-3"
-        style={{
-          backgroundColor: food.backgroundColor,
-          color: food.color,
-        }}
-      >
-        <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-semibold uppercase">
-          طعـام
-        </span>
-        <p className="text-md mt-3 max-w-[200px] font-bold uppercase">
-          رقائق البطاطس والوجبات الخفيفة والمكسرات
-        </p>
-      </li>
+          {/* Conditionally render the Image if the category is Electronics */}
+          {(c.translations.data.name === "Electronics" ||
+            c.translations.data.name === "الالكترونيات") && (
+            <div className="relative h-[10rem] w-full flex-grow">
+              <Image
+                src="/assets/electronics.png"
+                alt={c.translations.data.name}
+                className="absolute inset-0 object-cover drop-shadow-2xl"
+                fill
+              />
+            </div>
+          )}
+          {(c.translations.data.name === "Babies" ||
+            c.translations.data.name === "الاطفال") && (
+            <div className="relative h-[10rem] w-full flex-grow">
+              <Image
+                src="/assets/baby.png"
+                alt={c.translations.data.name}
+                className="absolute inset-0 object-cover drop-shadow-2xl"
+                fill
+              />
+            </div>
+          )}
+          {(c.translations.data.name === "Home and Pet Care" ||
+            c.translations.data.name ===
+              "العناية بالمنزل والحيوانات الأليفة") && (
+            <div className="relative h-[10rem] w-full flex-grow">
+              <Image
+                src="/assets/pet.png" // Ensure the correct image path
+                alt={c.translations.data.name}
+                className="absolute inset-0 object-cover drop-shadow-2xl"
+                fill
+              />
+            </div>
+          )}
+          {(c.translations.data.name === "Beverages" ||
+            c.translations.data.name === "المشروبات") && (
+            <div className="relative h-[10rem] w-full flex-grow">
+              <Image
+                src="/assets/beverages.png " // Ensure the correct image path
+                alt={c.translations.data.name}
+                className="absolute inset-0 object-cover drop-shadow-2xl"
+                fill
+              />
+            </div>
+          )}
+          {(c.translations.data.name === "Health and Personal Care" ||
+            c.translations.data.name === "الصحة والعناية الشخصية") && (
+            <div className="relative h-[10rem] w-full flex-grow">
+              <Image
+                src="/assets/personal-care-bg.png" // Ensure the correct image path
+                alt={c.translations.data.name}
+                className="absolute inset-0 object-cover object-left drop-shadow-2xl"
+                fill
+              />
+            </div>
+          )}
+          {(c.translations.data.name === "Food" ||
+            c.translations.data.name === "طعام") && (
+            <div className="relative h-[10rem] w-full flex-grow">
+              <Image
+                src="/assets/food.png" // Ensure the correct image path
+                alt={c.translations.data.name}
+                className="absolute inset-0 object-cover drop-shadow-2xl"
+                fill
+              />
+            </div>
+          )}
+        </li>
+      ))}
     </ul>
   );
 }
 
-export function MainSectionForLargeScreen() {
+export function MainSectionForLargeScreen({
+  categoriesData,
+  locale,
+  t,
+}: SectionProps) {
   return (
-    <ul className="grid h-[80vh] grid-cols-6 grid-rows-3 gap-3">
+    <ul
+      className="grid h-[80vh] grid-cols-6 grid-rows-3 gap-3"
+      dir={locale === "en" ? "ltr" : "rtl"}
+    >
       {/* Slider ------------------------------------------------------------- */}
 
       <li className="col-span-4 row-span-2 overflow-hidden rounded-lg">
@@ -208,14 +215,14 @@ export function MainSectionForLargeScreen() {
 
       <li className="relative flex flex-col items-start overflow-hidden rounded-lg bg-categories-beverages p-6">
         <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-bold text-zinc-800">
-          مشروبات
+          {t("eFqAbc2btxOYiag5xvK0l")}
         </span>
         <p className="z-[1] mt-3 max-w-[70%] text-2xl font-bold text-zinc-800">
-          مشروبات باردة وغازية
+          {t("WmE5jcPnkChTNkIEIDyJw")}
         </p>
         <Image
           src="/assets/beverages.png"
-          alt="مشروبات باردة وغازية"
+          alt={t("WmE5jcPnkChTNkIEIDyJw")}
           width={145}
           height={300}
           priority
@@ -227,14 +234,14 @@ export function MainSectionForLargeScreen() {
 
       <li className="before relative flex flex-col items-start p-6 before:absolute before:inset-0 before:rounded-lg before:bg-categories-babyAndToddler">
         <span className="relative z-[1] rounded-sm bg-white/50 px-3 py-1 text-xs font-bold text-zinc-800">
-          أطفال رضّع
+          {t("tixmUuYDazffNOLtxblYK")}
         </span>
         <p className="relative z-[1] mt-3 max-w-[70%] text-2xl font-bold text-zinc-800">
-          منتجات ومستلزمات الأطفال
+          {t("VQF0thv8t1XezD2RfzKDF")}
         </p>
         <Image
           src="/assets/baby.png"
-          alt="الأطفال والرضع"
+          alt={t("VQF0thv8t1XezD2RfzKDF")}
           width={180}
           height={200}
           priority

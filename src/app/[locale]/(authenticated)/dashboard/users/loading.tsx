@@ -1,4 +1,4 @@
-import UsersListSkeleton from "@/components/skeletons/UsersListSkeleton";
+import UsersListSkeleton from "@/components/skeletons/users-list-skeleton";
 import { getTranslations } from "next-intl/server";
 import React from "react";
 

@@ -111,11 +111,11 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
           {/* Product title */}
           <h3
             className={cn(
-              // style in only first product
+              // Style for the first product
               isFirstProduct && "text-xl xsm:text-base md:text-xl xl:text-2xl",
-              // style in only sec and third product
+              // Style for the second and third products
               isSecAndThirdProduct && "text-xl xsm:text-base md:text-xl",
-              // basic style
+              // Basic style
               "font-bold text-primary-foreground",
             )}
           >
@@ -123,7 +123,9 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
               href={`/product/${p._id}`}
               className="transition-all hover:text-primary"
             >
-              {p.translations?.data.name}
+              {p.translations?.data.name.length! > 40
+                ? `${p.translations?.data.name.slice(0, 40)}...`
+                : p.translations?.data.name}
             </Link>
           </h3>
 

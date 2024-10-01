@@ -1,19 +1,23 @@
-import MainSlider from "./_components/MainSlider";
+import MainSlider from "./_components/main-slider";
 import DealsOfTheDay from "./_components/deals-of-the-day";
 import TopSellingItems from "./_components/top-selling-items";
 import TopRatedItems from "./_components/top-rated-items";
-import DiscountSection from "./_components/DiscountSection";
+import DiscountSection from "./_components/discount-section";
 import TopCategories from "./_components/top-categories";
+import { getCategoriesData } from "@/lib/utils/data/categories-data";
+import React from "react";
 
 export default async function Page() {
+  const categoriesData = await getCategoriesData();
+
   return (
-    <>
-      <MainSlider />
+    <React.Fragment>
+      <MainSlider categoriesData={categoriesData} />
       <DealsOfTheDay />
       <DiscountSection />
       <TopSellingItems />
       <TopRatedItems />
       <TopCategories />
-    </>
+    </React.Fragment>
   );
 }

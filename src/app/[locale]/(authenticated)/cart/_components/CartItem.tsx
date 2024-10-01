@@ -12,7 +12,6 @@ import { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
