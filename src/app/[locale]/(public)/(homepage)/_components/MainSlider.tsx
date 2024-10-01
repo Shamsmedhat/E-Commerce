@@ -38,78 +38,114 @@ export default function MainSlider() {
 export function MainSectionForMediumScreen() {
   const electronics = generateColors("Electronics");
   const babies = generateColors("Babies");
-  const HomeAndPetCare = generateColors("Home and Pet Care");
+  const HomeAndPetCare = generateColors("HomeandPetCare");
   const beverages = generateColors("Beverages");
-  const HealthAndPersonalCare = generateColors("Health and Personal Care");
+  const healthAndPersonalCare = generateColors("HealthandPersonalCare");
   const food = generateColors("Food");
 
+  console.log("beverages", beverages);
+  console.log("healthAndPersonalCare", healthAndPersonalCare);
+  console.log("food", food);
   return (
     <ul className="mt-8 grid grid-cols-6 grid-rows-1 gap-3">
       {/* Drinks ------------------------------------------------------------- */}
 
       <li
         className="flex flex-col items-start overflow-hidden rounded-lg p-3"
-        style={{ borderColor: beverages.backgroundColor }}
+        style={{
+          backgroundColor: beverages.backgroundColor,
+          color: beverages.color,
+        }}
       >
-        <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-bold text-zinc-800">
+        <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-semibold">
           مشروبات
         </span>
-        <p className="mt-3 w-full max-w-[70%] text-lg font-bold text-zinc-800">
+        <p className="mt-3 w-full max-w-[70%] text-lg font-bold">
           مشروبات باردة وغازية
         </p>
       </li>
 
       {/* Babies ------------------------------------------------------------- */}
 
-      <li className="before relative flex flex-col items-start p-3 before:absolute before:inset-0 before:rounded-lg before:bg-categories-babyAndToddler">
-        <span className="relative z-[1] rounded-sm bg-white/50 px-3 py-1 text-xs font-bold text-zinc-800">
+      <li
+        className="flex flex-col items-start rounded-lg p-3"
+        style={{
+          backgroundColor: babies.backgroundColor,
+          color: babies.color,
+        }}
+      >
+        <span className="relative z-[1] rounded-sm bg-white/50 px-3 py-1 text-xs font-semibold">
           أطفال ورضّع
         </span>
-        <p className="relative z-[1] mt-3 max-w-[70%] text-lg font-semibold text-zinc-800">
+        <p className="relative z-[1] mt-3 max-w-[70%] text-lg font-bold">
           منتجات ومستلزمات الأطفال
         </p>
       </li>
 
       {/* Personal Care ------------------------------------------------------ */}
 
-      <li className="before relative flex flex-col items-start p-3 before:absolute before:inset-0 before:rounded-lg before:bg-categories-healthAndPersonalCare">
-        <span className="relative z-[1] rounded-sm bg-black/30 px-3 py-1 text-xs text-white lg:font-bold">
+      <li
+        className="flex flex-col items-start rounded-lg p-3"
+        style={{
+          backgroundColor: healthAndPersonalCare.backgroundColor,
+          color: healthAndPersonalCare.color,
+        }}
+      >
+        <span className="rounded-sm bg-black/30 px-3 py-1 text-xs font-semibold">
           عناية الشخصية
         </span>
-        <p className="text-lل relative z-[1] mt-3 max-w-[200px] text-lg font-semibold text-white drop-shadow">
+        <p className="text-lل relative z-[1] mt-3 max-w-[200px] text-lg font-bold drop-shadow">
           منتجات العناية الشخصية
         </p>
       </li>
 
       {/* Electronics ------------------------------------------------------------- */}
 
-      <li className="before relative flex flex-col items-start p-3 before:absolute before:inset-0 before:rounded-lg before:bg-categories-electronics">
-        <span className="relative z-[1] self-start rounded-sm bg-white/20 px-3 py-1 text-xs font-bold uppercase text-zinc-800">
+      <li
+        className="flex flex-col items-start rounded-lg p-3"
+        style={{
+          backgroundColor: electronics.backgroundColor,
+          color: electronics.color,
+        }}
+      >
+        <span className="self-start rounded-sm bg-white/20 px-3 py-1 text-xs font-semibold uppercase">
           الكترونيات
         </span>
-        <p className="relative z-[1] mt-3 max-w-[200px] text-right text-lg font-semibold uppercase text-zinc-800">
+        <p className="mt-3 max-w-[200px] text-right text-lg font-bold uppercase">
           لابتوب وموبايل وكمبيوتر
         </p>
       </li>
 
       {/* Home & Pet ------------------------------------------------------------- */}
 
-      <li className="before relative flex flex-col items-start p-3 before:absolute before:inset-0 before:rounded-lg before:bg-categories-homeAndPetCare">
-        <span className="relative z-[1] rounded-sm bg-white/20 px-3 py-1 text-xs font-normal uppercase text-white">
+      <li
+        className="flex flex-col items-start rounded-lg p-3"
+        style={{
+          backgroundColor: HomeAndPetCare.backgroundColor,
+          color: HomeAndPetCare.color,
+        }}
+      >
+        <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-semibold uppercase">
           منزل وحيوانات أليفة
         </span>
-        <p className="text-md relative z-[1] mt-3 max-w-[200px] font-semibold uppercase text-white">
+        <p className="text-md mt-3 max-w-[200px] font-bold uppercase">
           طعام ومستلزمات الحيوانات الأليفة
         </p>
       </li>
 
       {/* Food ------------------------------------------------------------- */}
 
-      <li className="before relative flex flex-col items-start p-3 before:absolute before:inset-0 before:rounded-lg before:bg-categories-food">
-        <span className="relative z-[1] rounded-sm bg-white/20 px-3 py-1 text-xs font-bold uppercase text-white">
+      <li
+        className="flex flex-col items-start rounded-lg p-3"
+        style={{
+          backgroundColor: food.backgroundColor,
+          color: food.color,
+        }}
+      >
+        <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-semibold uppercase">
           طعـام
         </span>
-        <p className="text-md relative z-[1] mt-3 max-w-[200px] font-semibold uppercase text-white">
+        <p className="text-md mt-3 max-w-[200px] font-bold uppercase">
           رقائق البطاطس والوجبات الخفيفة والمكسرات
         </p>
       </li>

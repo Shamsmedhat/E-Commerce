@@ -1,9 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getProductByIdAction,
   getProductsAction,
   getProductsByCategoryAction,
 } from "../../actions/products-actions";
+import { addToCartAction } from "@/lib/actions/cart-actions";
+import { toast } from "react-toastify";
 
 export async function getProductsData() {
   try {

@@ -20,13 +20,15 @@ export default function QuantityBtn({
   isWithBorder = true,
   btnsClassName,
   size = 15,
+  currentQty = 1,
 }: {
   className?: string;
   isWithBorder?: boolean;
   btnsClassName?: string;
   size?: number;
+  currentQty?: number;
 }) {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(currentQty);
 
   /**
    * Handles the change event for the input, ensuring the quantity remains non-negative.

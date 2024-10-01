@@ -32,7 +32,6 @@ export default function useAuthToast() {
           render: "Logged In Successfully!",
           type: "success",
           isLoading: false,
-          autoClose: 2000,
         });
       }, 500);
     } else if (shouldShowToast === "signOut") {
@@ -41,7 +40,6 @@ export default function useAuthToast() {
           render: "Signed out successfully!",
           type: "info",
           isLoading: false,
-          autoClose: 2000,
         });
       }, 500);
     } else if (shouldShowToast === "deleteUser") {
@@ -49,7 +47,6 @@ export default function useAuthToast() {
         render: "User Deleted Successfully!",
         type: "success",
         isLoading: false,
-        autoClose: 2000,
       });
     } else if (shouldShowToast === "createUser") {
       setTimeout(() => {
@@ -57,7 +54,6 @@ export default function useAuthToast() {
           render: "User created successfully!",
           type: "info",
           isLoading: false,
-          autoClose: 2000,
         });
       }, 500);
     }

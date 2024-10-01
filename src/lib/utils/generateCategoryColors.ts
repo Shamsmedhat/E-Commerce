@@ -1,29 +1,29 @@
 /** List of default colors */
-// const defaultColors = [
-//   "#A0522D", // Sienna
-//   "#6B8E23", // Olive Drab
-//   "#556B2F", // Dark Olive Green
-//   "#D2B48C", // Tan
-//   "#8FBC8F", // Dark Sea Green
-//   "#CD853F", // Peru
-//   "#BC8F8F", // Rosy Brown
-//   "#F4A460", // Sandy Brown
-//   "#2E8B57", // Sea Green
-//   "#BDB76B", // Dark Khaki
-//   "#4682B4", // Steel Blue
-//   "#C0C0C0", // Silver
-//   "#DAA520", // Goldenrod
-//   "#808000", // Olive
-// ];
-
 const defaultColors = [
-  "#66D1C8",
-  "#FEBF31",
-  "#F03351",
-  "#9ACE3B",
-  "#3C3C3B",
-  "#E7E4E3",
+  "#A0522D", // Sienna
+  "#6B8E23", // Olive Drab
+  "#556B2F", // Dark Olive Green
+  "#D2B48C", // Tan
+  "#8FBC8F", // Dark Sea Green
+  "#CD853F", // Peru
+  "#BC8F8F", // Rosy Brown
+  "#F4A460", // Sandy Brown
+  "#2E8B57", // Sea Green
+  "#BDB76B", // Dark Khaki
+  "#4682B4", // Steel Blue
+  "#C0C0C0", // Silver
+  "#DAA520", // Goldenrod
+  "#808000", // Olive
 ];
+
+// const defaultColors = [
+//   "#66D1C8",
+//   "#FEBF31",
+//   "#F03351",
+//   "#9ACE3B",
+//   "#3C3C3B",
+//   "#E7E4E3",
+// ];
 /** Function to generate hash code from a string */
 const generateHashcode = (str: string): number => {
   return str.split("").reduce((hash, char) => {

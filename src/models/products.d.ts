@@ -84,7 +84,7 @@ declare global {
   // Define product the interface for the API response
   interface ProductAPIResponse {
     status: string;
-    data: Product;
+    data: SingleProduct;
   }
 }
 

@@ -3,8 +3,10 @@ import MyButton from "@/components/common/MyButton";
 import { LuInfo } from "react-icons/lu";
 import { useTranslations } from "next-intl";
 import React from "react";
-
-export default function CartSummary() {
+type CartListProps = {
+  cart: CartData;
+};
+export default function CartSummary(cart: CartListProps) {
   const t = useTranslations();
   return (
     <>
@@ -19,8 +21,12 @@ export default function CartSummary() {
           <div className="flex justify-between border-b-2 border-primary-foreground/10 py-5 capitalize">
             {/* total amount & total price */}
             <div className="flex flex-col space-y-2 text-start">
-              <span>7 {t("sIM23trGHtwnWeOwsUstH")}</span>
-              <span>36,560 {t("fU01whrYbLGxy6qtBGMEo")}</span>
+              <span>
+                {cart.cart.items.length} {t("sIM23trGHtwnWeOwsUstH")}
+              </span>
+              <span>
+                {cart.cart.totalPrice} {t("fU01whrYbLGxy6qtBGMEo")}
+              </span>
             </div>
             {/* total & subtotal */}
             <div className="flex flex-col space-y-2 text-end">
@@ -38,7 +44,9 @@ export default function CartSummary() {
           <div className="flex flex-col items-center justify-between">
             {/* total */}
             <div className="flex w-full justify-between py-3 capitalize">
-              <span>36,560 {t("fU01whrYbLGxy6qtBGMEo")}</span>
+              <span>
+                {cart.cart.totalPrice} {t("fU01whrYbLGxy6qtBGMEo")}
+              </span>
               <span className="text-primary-foreground/80">
                 {t("qFZLbWLkdt6bLleI_7dJb")}
               </span>

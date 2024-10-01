@@ -8,13 +8,13 @@ import { Link } from "@/navigarion";
 import { useTranslations } from "next-intl";
 
 // ui
-import RatingStars from "@/components/common/RatingStars";
 import AddToCart from "@/components/common/AddToCart";
+import RatingStars from "@/components/common/RatingStars";
 import { cn } from "@/lib/utils";
 
 // icons
-import { LuHeart, LuScale, LuStar } from "react-icons/lu";
-import { addToCartAction } from "@/lib/actions/cart-actions";
+import { useAddToCart } from "@/lib/utils/data/cart-data";
+import { LuHeart, LuScale } from "react-icons/lu";
 
 // prop type
 type ProductProps = {
@@ -34,16 +34,16 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
   // is sec and third product to render it differentially
   const isSecAndThirdProduct = i === 1 || i === 2;
 
-  async function handle() {
-    try {
-      const response = await addToCartAction({
-        product: "66f1530581a5d8952e79b3f5",
-        quantity: 10,
-      });
-      console.log("Added to cart:", response);
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-    }
+  //
+  const { addToCart, isAddingToCart } = useAddToCart();
+
+  function handleAddingToCart(productId: string) {
+    const productData = {
+      product: productId,
+      quantity: 1,
+    }; // Simple object
+
+    addToCart(productData);
   }
 
   //TODO finish ui mobile
@@ -62,7 +62,6 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
         "rounded-lg",
       )}
     >
-      <button onClick={() => handle()}>TESSSSSSSST</button>
       {/* container for image div and product details div */}
       <div
         className={cn(
@@ -172,7 +171,9 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             {/* Buttons Section */}
             <div className="flex w-full items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-center">
               {/* cart btn */}
-              <AddToCart />
+              <button onClick={() => handleAddingToCart(p._id!)}>
+                <AddToCart />
+              </button>
 
               <div className="flex gap-2">
                 {/* wishlist btn */}

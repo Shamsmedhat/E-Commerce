@@ -1,19 +1,24 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import catchAsync, { AppError } from "../utils/catchAsync";
 import getAuthorizationHeader from "./get-authorization-header";
 
+// Get cart data action
 export const getCartAction = catchAsync(async () => {
   const res = await fetch(`${process.env.BASE_URL}/carts`, {
     method: "GET",
     headers: {
+      // Function to return the token
       ...(await getAuthorizationHeader()),
     },
     credentials: "include",
   });
 
+  // Parse data into a object
   const data: APIResponse<CartData> = await res.json();
 
+  // If the data is not success we pass the error as an AppError object
   if (data.status !== "success") {
     throw new AppError(data.message, 500);
   } else if (!data.data) {
@@ -24,27 +29,48 @@ export const getCartAction = catchAsync(async () => {
   return data.data.cart;
 });
 
-export const addToCartAction = catchAsync(async (pData: Object) => {
-  const res = await fetch(`${process.env.BASE_URL}/carts/product`, {
-    method: "PATCH",
-    headers: {
-      ...(await getAuthorizationHeader()),
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(pData),
-  });
+// Add new product to the cart by recive the product id and product quantity defult is 1
+export const addToCartAction = catchAsync(
+  async (productData: { product: string; quantity: number }) => {
+    const res = await fetch(`${process.env.BASE_URL}/carts/product`, {
+      method: "PATCH",
+      headers: {
+        ...(await getAuthorizationHeader()),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    });
 
-  const data = await res.json();
+    // Parse data into a object
+    const data = await res.json();
 
-  if (!res.ok) {
-    throw new Error(
-      JSON.stringify({
-        message: data.message || "Failed to add to cart",
-        statusCode: res.status,
-      }),
-    );
-  }
+    // If the data is not success we pass the error as an AppError object
+    if (!res.ok) {
+      throw new AppError(
+        data.message || "Failed to add to cart",
+        res.status || 500,
+      );
+    }
 
-  // Ensure the response is a plain object
-  return JSON.parse(JSON.stringify(data)); // Ensuring only plain data is returned
-});
+    // Revalidate cart page to refresh the cache
+    revalidatePath("/cart");
+
+    // Return the data if it oky
+    return data;
+  },
+);
+
+// Delete product from the cart by recive the product id
+export const deleteProductFromCartAction = catchAsync(
+  async (productId: string) => {
+    await fetch(`${process.env.BASE_URL}/carts/product/${productId}`, {
+      method: "DELETE",
+      headers: {
+        ...(await getAuthorizationHeader()),
+      },
+    });
+
+    // Revalidate cart page to refresh the cache
+    revalidatePath("/cart");
+  },
+);

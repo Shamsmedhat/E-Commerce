@@ -30,7 +30,7 @@ export default function TabNavContent({
   const t = useTranslations();
 
   return (
-    <>
+    <div>
       {categories.map((category) => (
         <TabsContent
           key={category._id}
@@ -39,10 +39,16 @@ export default function TabNavContent({
         >
           {/* Filter products based on the current category */}
           <div>
-            <ul className="xsm:grid-cols-4 grid auto-rows-[minmax(200px,200px)] grid-cols-1 gap-4">
+            <ul className="grid auto-rows-[minmax(200px,200px)] grid-cols-1 gap-4 xsm:grid-cols-4">
               {products
                 ?.map((p, i) => (
-                  <ProductCard p={p} i={i} key={p._id} isEn={isEn} />
+                  <ProductCard
+                    key={p._id}
+                    p={p}
+                    i={i}
+                    productKey={p._id}
+                    isEn={isEn}
+                  />
                 ))
 
                 // Only display 15 product for the UI by maxmum
@@ -60,6 +66,6 @@ export default function TabNavContent({
           </div>
         </TabsContent>
       ))}
-    </>
+    </div>
   );
 }

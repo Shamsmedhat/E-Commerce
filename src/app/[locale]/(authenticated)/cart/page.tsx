@@ -54,7 +54,7 @@ export default async function Cart() {
       </div>
       {/* Cart summary */}
       <div className="ms-[3rem] flex h-fit min-w-[20%] flex-col items-center rounded-lg bg-white pt-4 shadow-sm">
-        <CartSummary />
+        <CartSummary cart={cart} />
       </div>
     </section>
   );
