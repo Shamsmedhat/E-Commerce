@@ -1,16 +1,15 @@
-import { products } from "@/lib/utils/data-v1";
-import ProductGallary from "./components/ProductGallary";
-import ProductDetails from "./components/ProductDetails";
-import ProductTable from "./components/ProductTable";
-import RelatedProducts from "@/components/common/RelatedProducts";
 import { getProductByIdData } from "@/lib/utils/data/products-data";
-import { useLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
+import React from "react";
+import ProductDetails from "./components/ProductDetails";
+import ProductGallary from "./components/ProductGallary";
+import ProductTable from "./components/ProductTable";
 
 type Params = {
   locale: string;
   productId: string[];
 };
+
 export default async function ProductPage({ params }: { params: Params }) {
   const locale = await getLocale();
   const isEn = locale === "en";
@@ -33,10 +32,8 @@ export default async function ProductPage({ params }: { params: Params }) {
     translations,
   } = data.product;
 
-  console.log("data", data);
-
   return (
-    <>
+    <React.Fragment>
       <section className="container mx-auto mt-10">
         <div
           className="flex flex-col rounded-md bg-white px-[2rem] py-6 shadow-sm md:flex-row md:pe-[4rem] lg:min-h-[60vh]"
@@ -71,6 +68,6 @@ export default async function ProductPage({ params }: { params: Params }) {
       <section className="w-full pb-20">
         {/* <RelatedProducts relatedProduct={relatedProduct} /> */}
       </section>
-    </>
+    </React.Fragment>
   );
 }

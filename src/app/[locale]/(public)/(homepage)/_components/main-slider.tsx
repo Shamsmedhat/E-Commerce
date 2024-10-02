@@ -8,13 +8,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 // import required modules
-import { Autoplay, Pagination } from "swiper/modules";
-import Image from "next/image";
 import Heading from "@/components/common/Heading";
-import { useLocale, useTranslations } from "next-intl";
-import { generateColors } from "@/lib/utils/generateCategoryColors";
 import { cn } from "@/lib/utils";
+import { generateColors } from "@/lib/utils/generateCategoryColors";
 import { handleEnText } from "@/lib/utils/helpers";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import { Autoplay, Pagination } from "swiper/modules";
 
 interface MainSliderProps {
   categoriesData: CategoriesData;
@@ -25,9 +25,11 @@ interface SectionProps {
   locale?: string;
   t?: any;
 }
+
 export default function MainSlider({ categoriesData }: MainSliderProps) {
   const t = useTranslations();
   const locale = useLocale();
+
   return (
     <section className="container mb-[1rem] hidden md:block">
       {/* h2 heading */}
@@ -158,10 +160,11 @@ export function MainSectionForLargeScreen({
   locale,
   t,
 }: SectionProps) {
+  const isEn = locale === "en";
   return (
     <ul
       className="grid h-[80vh] grid-cols-6 grid-rows-3 gap-3"
-      dir={locale === "en" ? "ltr" : "rtl"}
+      dir={isEn ? "ltr" : "rtl"}
     >
       {/* Slider ------------------------------------------------------------- */}
 
@@ -211,7 +214,7 @@ export function MainSectionForLargeScreen({
         </Swiper>
       </li>
 
-      {/* Drinks ------------------------------------------------------------- */}
+      {/* Beverages ------------------------------------------------------------- */}
 
       <li className="relative flex flex-col items-start overflow-hidden rounded-lg bg-categories-beverages p-6">
         <span className="rounded-sm bg-white/20 px-3 py-1 text-xs font-bold text-zinc-800">
@@ -226,7 +229,10 @@ export function MainSectionForLargeScreen({
           width={145}
           height={300}
           priority
-          className="translate-y-22 absolute right-[5.9rem] top-[3.4rem] translate-x-7"
+          className={cn(
+            isEn ? "right-[0.9rem]" : "right-[5.9rem]",
+            "translate-y-22 absolute top-[3.4rem] translate-x-7",
+          )}
         />
       </li>
 
@@ -245,7 +251,12 @@ export function MainSectionForLargeScreen({
           width={180}
           height={200}
           priority
-          className="absolute md:left-0 md:top-8 md:w-[8rem] md:-translate-x-5 2xl:left-0 2xl:top-0 2xl:w-[10rem] 2xl:-translate-x-20 2xl:-translate-y-5"
+          className={cn(
+            isEn
+              ? "md:translate-x-5 2xl:translate-x-20"
+              : "md:-translate-x-5 2xl:-translate-x-20",
+            "absolute md:left-0 md:top-8 md:w-[8rem] 2xl:left-0 2xl:top-0 2xl:w-[10rem] 2xl:-translate-y-5",
+          )}
         />
       </li>
 
@@ -253,36 +264,47 @@ export function MainSectionForLargeScreen({
 
       <li className="relative col-span-2 flex flex-col items-start overflow-hidden rounded-lg p-6">
         <span className="relative z-[1] rounded-sm bg-white/20 px-3 py-1 text-xs font-bold text-white">
-          عناية الشخصية
+          {t("JM5A8Gye2wneaO3srCNVj")}
         </span>
         <p className="relative z-[1] mt-3 max-w-[200px] text-2xl font-bold text-white drop-shadow">
-          منتجات العناية الشخصية
+          {t("GX5N9yvTQKnDWIeiQj_TK")}
         </p>
         <Image
           src="/assets/personal-care.jpg"
-          alt="عناية الشخصية"
+          alt={t("GX5N9yvTQKnDWIeiQj_TK")}
           fill
           priority
-          className="absolute bottom-0 right-0 object-cover"
+          className={cn(
+            isEn ? "rotate-180" : "rotate-0",
+            "absolute bottom-0 right-0 object-cover",
+          )}
         />
       </li>
 
       {/* Electronics ------------------------------------------------------------- */}
 
-      <li className="before relative col-span-2 flex flex-col items-start p-6 before:absolute before:inset-0 before:rounded-lg before:bg-categories-electronics">
-        <span className="relative z-[1] self-end rounded-sm bg-white/20 px-3 py-1 text-xs font-bold uppercase text-zinc-800">
-          الكترونيات
+      <li
+        className={cn(
+          isEn ? "" : "flex flex-col",
+          "before relative col-span-2 items-start p-6 before:absolute before:inset-0 before:rounded-lg before:bg-categories-electronics",
+        )}
+      >
+        <span className="relative z-[1] self-end rounded-sm bg-white/20 px-3 py-1 text-xs font-bold uppercase text-white">
+          {t("h7zZgeSqnQAYiS8z7r4Gb")}
         </span>
-        <p className="relative z-[1] mt-3 max-w-[200px] self-end text-left text-2xl font-bold uppercase text-zinc-800">
-          لابتوب وموبايل وكمبيوتر
+        <p className="relative z-[1] mt-3 max-w-[200px] self-end text-left text-2xl font-bold uppercase text-white">
+          {t("_2LSqwzmnCu_goqHBbFev")}
         </p>
         <Image
           src="/assets/electronics.png"
-          alt="لابتوب وموبايل وكمبيوتر"
+          alt={t("_2LSqwzmnCu_goqHBbFev")}
           width={180}
           height={300}
           priority
-          className="translate-y-22 absolute bottom-0 right-0 w-[20rem] translate-x-7"
+          className={cn(
+            isEn ? "right-7" : "right-0",
+            "translate-y-22 absolute bottom-0 w-[20rem] translate-x-7",
+          )}
         />
       </li>
 
@@ -290,18 +312,21 @@ export function MainSectionForLargeScreen({
 
       <li className="before relative col-span-2 flex flex-col items-start overflow-hidden p-6 before:absolute before:inset-0 before:rounded-lg before:bg-categories-homeAndPetCare">
         <span className="relative z-[1] rounded-sm bg-white/20 px-3 py-1 text-xs font-bold uppercase text-white">
-          رعـاية الحيوانات أليفة
+          {t("pncleFA5O1Wog0H03XCaQ")}
         </span>
         <p className="relative z-[1] mt-3 max-w-[200px] text-2xl font-bold uppercase text-white">
-          طعام ومستلزمات الحيوانات الأليفة
+          {t("o8rXhfoukMsb5o7UsPdgh")}
         </p>
         <Image
           src="/assets/pet.png"
-          alt="رعـاية الحيوانات أليفة"
+          alt={t("o8rXhfoukMsb5o7UsPdgh")}
           width={180}
           height={200}
           priority
-          className="absolute left-10 top-0 w-[11rem] -translate-x-5 -translate-y-8"
+          className={cn(
+            isEn ? "right-0" : "left-10",
+            "absolute top-0 w-[11rem] -translate-x-5 -translate-y-6",
+          )}
         />
       </li>
 
@@ -309,18 +334,21 @@ export function MainSectionForLargeScreen({
 
       <li className="before relative col-span-2 flex flex-col items-start p-6 before:absolute before:inset-0 before:rounded-lg before:bg-categories-food">
         <span className="relative z-[1] rounded-sm bg-primary-foreground/20 px-3 py-1 text-xs font-bold uppercase text-white">
-          طعـام
+          {t("cNlasXhCqRpxvH12DMjxm")}
         </span>
         <p className="relative z-[1] mt-3 max-w-[200px] text-2xl font-bold uppercase text-white">
-          رقائق البطاطس والوجبات الخفيفة والمكسرات
+          {t("MecmolA46g7Y3QGUkCNn7")}
         </p>
         <Image
           src="/assets/food.png"
-          alt="منظفات"
+          alt={t("MecmolA46g7Y3QGUkCNn7")}
           width={200}
           height={200}
           priority
-          className="absolute left-0 top-0 w-[15rem] -translate-x-5 translate-y-10"
+          className={cn(
+            isEn ? "right-0" : "left-0",
+            "absolute top-0 w-[15rem] -translate-x-5 translate-y-10",
+          )}
         />
       </li>
     </ul>
