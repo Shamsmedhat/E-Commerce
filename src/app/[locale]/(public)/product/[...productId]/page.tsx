@@ -33,7 +33,7 @@ export default async function ProductPage({ params }: { params: Params }) {
   } = data.product;
 
   return (
-    <React.Fragment>
+    <>
       <section className="container mx-auto mt-10">
         <div
           className="flex flex-col rounded-md bg-white px-[2rem] py-6 shadow-sm md:flex-row md:pe-[4rem] lg:min-h-[60vh]"
@@ -68,6 +68,6 @@ export default async function ProductPage({ params }: { params: Params }) {
       <section className="w-full pb-20">
         {/* <RelatedProducts relatedProduct={relatedProduct} /> */}
       </section>
-    </React.Fragment>
+    </>
   );
 }
