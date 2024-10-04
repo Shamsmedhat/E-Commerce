@@ -21,15 +21,17 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // ui
-import TopSellingItem from "./TopSellingItem";
+import TopSellingItem from "./top-selling-item";
 import Heading from "@/components/common/Heading";
 
-//TODO data
-import { products } from "@/lib/utils/data-v1";
+import { useTopSellingProducts } from "@/lib/utils/data/products-data";
+import { useEffect, useState } from "react";
 
 export default function TopSellingItems() {
   const t = useTranslations();
 
+  const [topSellingDisplayedProducts, setTopSellingDisplayedProducts] =
+    useState<Product[]>();
   // get locale for text dir
   const locale = useLocale();
 
@@ -39,11 +41,16 @@ export default function TopSellingItems() {
   const isSmallScreen = useMediaQuery({ query: "(min-width: 590px)" });
   const isExtraSmallScreen = useMediaQuery({ query: "(min-width: 400px)" });
 
+  const { topSellingProducts } = useTopSellingProducts();
+
   // Fetching only 20 of products that rated by 5 stars only
-  const allProducts = products
-    .map((product) => product.data)
-    .filter((product) => (product.rating = 5))
-    .slice(0, 20);
+  useEffect(() => {
+    setTopSellingDisplayedProducts(topSellingProducts?.products);
+  }, [topSellingProducts?.products]);
+
+  if (!topSellingDisplayedProducts) {
+    return <p>no products to show</p>;
+  }
 
   return (
     <section className="mt-16 w-full">
@@ -96,9 +103,10 @@ export default function TopSellingItems() {
         >
           <ul>
             {/* top selling products data */}
-            {allProducts.map((product, i) => (
-              <SwiperSlide key={i}>
-                <TopSellingItem product={product} key={i} />
+
+            {topSellingDisplayedProducts.map((p) => (
+              <SwiperSlide key={p._id}>
+                <TopSellingItem product={p} locale={locale} />
               </SwiperSlide>
             ))}
           </ul>

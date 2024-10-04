@@ -11,15 +11,14 @@ import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
 import Link from "next/link";
 import Heading from "@/components/common/Heading";
-import { PRODUCT } from "@/models/products";
-import TopSellingItem from "@/app/[locale]/(public)/(homepage)/_components/TopSellingItem";
+import TopSellingItem from "@/app/[locale]/(public)/(homepage)/_components/top-selling-item";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 export default function RelatedProducts({
   relatedProduct,
 }: {
-  relatedProduct: PRODUCT[];
+  relatedProduct: any;
 }) {
   const t = useTranslations();
   // Fetching only 20 of products that rated by 5 stars only
@@ -58,11 +57,11 @@ export default function RelatedProducts({
           }}
         >
           <ul>
-            {allProducts.map((product, i) => (
-              <SwiperSlide key={i}>
-                <TopSellingItem product={product} key={i} />
-              </SwiperSlide>
-            ))}
+            {/* {allProducts.map((product, i) => ( */}
+            {/* <SwiperSlide key={i}> */}
+            {/* <TopSellingItem product={product} key={i} /> */}
+            {/* </SwiperSlide> */}
+            {/* ))} */}
           </ul>
           <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent"></div>
           <div className="swiper-button-next"></div>

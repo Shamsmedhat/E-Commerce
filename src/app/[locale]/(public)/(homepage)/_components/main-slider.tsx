@@ -54,16 +54,7 @@ export default function MainSlider({ categoriesData }: MainSliderProps) {
   );
 }
 
-export async function MainSectionForMediumScreen({
-  categoriesData,
-}: SectionProps) {
-  const electronics = generateColors("Electronics");
-  const babies = generateColors("Babies");
-  const HomeAndPetCare = generateColors("HomeandPetCare");
-  const beverages = generateColors("Beverages");
-  const healthAndPersonalCare = generateColors("HealthandPersonalCare");
-  const food = generateColors("Food");
-
+export function MainSectionForMediumScreen({ categoriesData }: SectionProps) {
   return (
     <ul className="mt-8 grid grid-cols-6 grid-rows-1 gap-3">
       {/* Drinks ------------------------------------------------------------- */}

@@ -1,8 +1,15 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import {
   getProductByIdAction,
   getProductsAction,
   getProductsByCategoryAction,
+  getTopRatingProductsAction,
+  getTopSellingProductsAction,
 } from "../../actions/products-actions";
 import { addToCartAction } from "@/lib/actions/cart-actions";
 import { toast } from "react-toastify";
@@ -60,4 +67,29 @@ export function useProductsByCategory(categoryName: string) {
     enabled: !!categoryName, // only run the query if categoryName is truthy
   });
   return { productsByCategory, isFetching, isError, isPending };
+}
+
+export function useTopSellingProducts() {
+  const {
+    data: topSellingProducts,
+    isFetching,
+    isError,
+    isPending,
+  }: UseQueryResult<ProductData> = useQuery({
+    queryKey: ["top-selling-products"],
+    queryFn: () => getTopSellingProductsAction(),
+  });
+  return { topSellingProducts, isFetching, isError, isPending };
+}
+export function useTopRatingProducts() {
+  const {
+    data: topRatingProducts,
+    isFetching,
+    isError,
+    isPending,
+  }: UseQueryResult<ProductData> = useQuery({
+    queryKey: ["top-selling-products"],
+    queryFn: () => getTopRatingProductsAction(),
+  });
+  return { topRatingProducts, isFetching, isError, isPending };
 }

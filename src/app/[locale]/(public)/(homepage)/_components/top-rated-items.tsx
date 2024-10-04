@@ -21,7 +21,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // ui
-import TopSellingItem from "./TopSellingItem";
+// import TopSellingItem from "./top-selling-item";
 import Heading from "@/components/common/Heading";
 
 //TODO data
@@ -98,7 +98,7 @@ export default function TopRatedItems() {
             {/* top rated products data */}
             {allProducts.map((product, i) => (
               <SwiperSlide key={i}>
-                <TopSellingItem product={product} key={i} />
+                {/* <TopSellingItem product={product} key={i} /> */}
               </SwiperSlide>
             ))}
           </ul>

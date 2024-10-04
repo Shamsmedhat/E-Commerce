@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { getLocale } from "next-intl/server";
+import { AppError } from "../utils/catchAsync";
 
 export async function getProductsAction(): Promise<ProductsAPIResponse> {
   try {
@@ -167,4 +168,46 @@ export async function getBestSellingProductsAction(
       throw new Error("An unexpected error occurred.");
     }
   }
+}
+
+// get most selling products
+export async function getTopSellingProductsAction() {
+  const locale = await getLocale();
+  const res = await fetch(`${process.env.BASE_URL}/products?sort=-sales`, {
+    headers: {
+      "Accept-Language": locale,
+    },
+  });
+  const data: APIResponse<ProductData> = await res.json();
+
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+
+  // return data
+  return data.data;
+}
+// get top rating products
+export async function getTopRatingProductsAction() {
+  const locale = await getLocale();
+  const res = await fetch(
+    `${process.env.BASE_URL}/products?sort=-ratings>average`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
+    },
+  );
+  const data: APIResponse<ProductData> = await res.json();
+
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+
+  // return data
+  return data.data;
 }

@@ -34,18 +34,6 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
   // is sec and third product to render it differentially
   const isSecAndThirdProduct = i === 1 || i === 2;
 
-  //
-  const { addToCart, isAddingToCart } = useAddToCart();
-
-  function handleAddingToCart(productId: string) {
-    const productData = {
-      product: productId,
-      quantity: 1,
-    }; // Simple object
-
-    addToCart(productData);
-  }
-
   //TODO finish ui mobile
   return (
     <li
@@ -173,9 +161,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             {/* Buttons Section */}
             <div className="flex w-full items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-center">
               {/* cart btn */}
-              <button onClick={() => handleAddingToCart(p._id!)}>
-                <AddToCart />
-              </button>
+              <AddToCart productId={p._id!} />
 
               <div className="flex gap-2">
                 {/* wishlist btn */}

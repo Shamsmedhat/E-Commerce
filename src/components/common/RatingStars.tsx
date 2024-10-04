@@ -16,7 +16,7 @@ export default function RatingStars({
   color = "#ffffff00",
 }: Rating) {
   return (
-    <span className="flex">
+    <span className="flex" dir="ltr">
       {Array.from({ length: starsNumber || 5 }, (_, i) => {
         const isHalfStar = rate > i && rate < i + 1;
         const fillColor = rate >= i + 1 ? "#FEBF31" : "rgb(60 64 59 / 0.3)";
