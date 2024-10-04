@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import CartItem from "./CartItem";
+import CartItem from "./cart-item";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { cn } from "@/lib/utils";
 

@@ -5,6 +5,7 @@ import { LuChevronDown, LuChevronUp, LuZoomIn } from "react-icons/lu";
 
 import { useRef, useState } from "react";
 import styles from "../product-style.module.css";
+import Image from "next/image";
 
 export default function ProductGallery({
   gallery,
@@ -36,9 +37,11 @@ export default function ProductGallery({
       <div
         className={`${styles.imageZoom} relative flex w-full items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-4`}
       >
-        <img
+        <Image
           src={currentImg}
-          className="relative z-50 h-full w-full object-contain transition-all duration-500 ease-in-out"
+          width={250}
+          height={400}
+          className="z-50 h-[400px] w-full object-contain transition-all duration-500 ease-in-out"
           alt="Current Product"
         />
       </div>

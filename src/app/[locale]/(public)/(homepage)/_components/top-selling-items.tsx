@@ -32,6 +32,7 @@ export default function TopSellingItems() {
 
   const [topSellingDisplayedProducts, setTopSellingDisplayedProducts] =
     useState<Product[]>();
+
   // get locale for text dir
   const locale = useLocale();
 
@@ -43,7 +44,7 @@ export default function TopSellingItems() {
 
   const { topSellingProducts } = useTopSellingProducts();
 
-  // Fetching only 20 of products that rated by 5 stars only
+  // Fetching products that got most sales
   useEffect(() => {
     setTopSellingDisplayedProducts(topSellingProducts?.products);
   }, [topSellingProducts?.products]);

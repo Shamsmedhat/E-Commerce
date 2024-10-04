@@ -75,7 +75,7 @@ export default function CartItem({ item }: { item: ProductItem }) {
           src={item.product.cover}
           alt={item.product.translations[0].data.name}
           // make sure all images is the same width to avoid UI issue
-          className="min-h-[75px] min-w-[75px]"
+          className="min-h-[75px] min-w-[75px] object-scale-down"
           width={75}
           height={75}
         />

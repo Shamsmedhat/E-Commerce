@@ -11,8 +11,6 @@ import {
   getTopRatingProductsAction,
   getTopSellingProductsAction,
 } from "../../actions/products-actions";
-import { addToCartAction } from "@/lib/actions/cart-actions";
-import { toast } from "react-toastify";
 
 export async function getProductsData() {
   try {
@@ -69,6 +67,7 @@ export function useProductsByCategory(categoryName: string) {
   return { productsByCategory, isFetching, isError, isPending };
 }
 
+// using useQuery get top selling products based on the most sales
 export function useTopSellingProducts() {
   const {
     data: topSellingProducts,
@@ -81,6 +80,8 @@ export function useTopSellingProducts() {
   });
   return { topSellingProducts, isFetching, isError, isPending };
 }
+
+// using useQuery get top rating products based on the most average number in ratings
 export function useTopRatingProducts() {
   const {
     data: topRatingProducts,
@@ -88,7 +89,7 @@ export function useTopRatingProducts() {
     isError,
     isPending,
   }: UseQueryResult<ProductData> = useQuery({
-    queryKey: ["top-selling-products"],
+    queryKey: ["top-rating-products"],
     queryFn: () => getTopRatingProductsAction(),
   });
   return { topRatingProducts, isFetching, isError, isPending };

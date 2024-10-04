@@ -12,7 +12,7 @@ import imageFallback from "@/../public/assets/fallbackImage.jpeg";
 import RatingStars from "@/components/common/RatingStars";
 import AddToCart from "@/components/common/AddToCart";
 
-export default function TopSellingItem({
+export default function TopRatingItem({
   product,
   locale,
 }: {
@@ -22,33 +22,31 @@ export default function TopSellingItem({
   const t = useTranslations();
 
   const imageUrl = product.cover ?? imageFallback;
+  console.log("product", product);
 
   return (
-    // <HoverCard>
     // product card
     <div
       className={cn(
         locale === "en" ? "items-end" : "items-start",
-        "flex h-[360px] cursor-pointer flex-col justify-between gap-2 p-4 align-middle",
+        "flex h-[360px] cursor-pointer flex-col justify-between p-4 align-middle",
       )}
     >
-      {/* <HoverCardTrigger> */}
-
       {/* product image */}
       <div className="relative flex h-[160px] w-full items-center justify-center">
         <Image
           src={imageUrl}
-          width={100}
-          height={100}
-          alt=""
-          className="h-full max-h-[160px] w-auto object-contain"
+          width={300} // Increased the width for higher flexibility
+          height={200} // This helps control the proportion of the image
+          alt="Product image"
+          className="h-full max-h-[160px] w-auto object-contain" // Adjusted for flexible sizing
         />
       </div>
 
       {/* product info section */}
       <div
         className={cn(
-          locale === "en" ? "items-end" : "items-start text-right",
+          locale === "en" ? "items-end text-left" : "items-start text-right",
           "flex flex-col",
         )}
       >
@@ -63,7 +61,7 @@ export default function TopSellingItem({
         )}
 
         {/* product name */}
-        <h4 className="mb-2 items-start text-lg font-bold text-primary-foreground">
+        <h4 className="mb-2 text-lg font-bold text-primary-foreground">
           {product.translations?.data.name.length! > 30
             ? `...${product.translations?.data.name.slice(0, 30)}`
             : product.translations?.data.name}
@@ -84,14 +82,6 @@ export default function TopSellingItem({
           </div>
         </div>
       </div>
-
-      {/* </HoverCardTrigger> */}
     </div>
   );
-  {
-    /* <HoverCardContent>Test</HoverCardContent> */
-  }
-  {
-    /* </HoverCard> */
-  }
 }

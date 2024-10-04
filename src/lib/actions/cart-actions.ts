@@ -13,6 +13,7 @@ export const getCartAction = catchAsync(async () => {
       ...(await getAuthorizationHeader()),
     },
     credentials: "include",
+    next: { tags: ["cart-tag"] },
   });
 
   // Parse data into a object

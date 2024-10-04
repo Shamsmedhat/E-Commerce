@@ -16,11 +16,20 @@ import LoginHeaderSection from "./LoginHeaderSection";
 // data
 import { getCategoriesData } from "@/lib/utils/data/categories-data";
 import Navbar from "./nav-bar";
+import { getCartAction } from "@/lib/actions/cart-actions";
+import { AppError } from "@/lib/utils/catchAsync";
 
 export default async function Header() {
   // translation
   const t = await getTranslations();
 
+  const cart: CartData | AppError = await getCartAction();
+
+  if ((typeof AppError) in cart) {
+    console.log("error in header from cart fetch");
+  }
+
+  const numbersOfitemsInCart = cart.console.log("header cart", cart);
   // user session
   const session = await getServerSession(authOptions);
 

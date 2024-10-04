@@ -26,6 +26,9 @@ import Heading from "@/components/common/Heading";
 
 //TODO data
 import { products } from "@/lib/utils/data-v1";
+import TopRatingItem from "./top-rated-item";
+import { useTopRatingProducts } from "@/lib/utils/data/products-data";
+import { useEffect, useState } from "react";
 
 export default function TopRatedItems() {
   const t = useTranslations();
@@ -39,12 +42,23 @@ export default function TopRatedItems() {
   const isSmallScreen = useMediaQuery({ query: "(min-width: 590px)" });
   const isExtraSmallScreen = useMediaQuery({ query: "(min-width: 400px)" });
 
-  // Fetching only 20 of products that rated by 5 stars only
-  const allProducts = products
-    .map((product) => product.data)
-    .filter((product) => (product.rating = 5))
-    .slice(0, 20);
+  const [topRatingDisplayedProducts, setTopRatingDisplayedProducts] =
+    useState<Product[]>();
 
+  const { topRatingProducts } = useTopRatingProducts();
+
+  // Fetching products sorted by most rating stars
+  useEffect(() => {
+    // Get only top products raing from 3.5 star or above
+    const filteredTopRatedProducts = topRatingProducts?.products.filter(
+      (p) => p.ratings?.average! >= 3.5, // number of stars will be displayed
+    );
+    setTopRatingDisplayedProducts(filteredTopRatedProducts);
+  }, [topRatingProducts?.products]);
+
+  if (!topRatingDisplayedProducts) {
+    return <p>no products to show</p>;
+  }
   return (
     <section className="container my-16 w-full">
       {/* title h2 heading */}
@@ -96,9 +110,9 @@ export default function TopRatedItems() {
         >
           <ul>
             {/* top rated products data */}
-            {allProducts.map((product, i) => (
+            {topRatingDisplayedProducts.map((product, i) => (
               <SwiperSlide key={i}>
-                {/* <TopSellingItem product={product} key={i} /> */}
+                <TopRatingItem product={product} key={i} locale={locale} />
               </SwiperSlide>
             ))}
           </ul>

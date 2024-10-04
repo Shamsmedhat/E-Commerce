@@ -55,19 +55,22 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
         className={cn(
           // isEn to display it when the locale is eng
           !isEn && "flex-row-reverse",
-          // isFirstProduct && "gap-[1.5rem]",
-          "flex h-full w-full flex-col gap-[1.5rem] md:flex-row",
+          isFirstProduct && isSecAndThirdProduct && "md:flex-row",
+          !isFirstProduct && !isSecAndThirdProduct && "flex flex-col gap-2",
+          "flex h-full w-full gap-[1.5rem]",
         )}
       >
         {/* product image div*/}
         <div
           className={cn(
             // style in only first product
-            isFirstProduct && "md:w-[25%] xl:w-[50%]",
+            isFirstProduct && "md:w-1/4 xl:w-1/2",
             // style in only sec and third product
-            isSecAndThirdProduct && "md:w-[25%]",
+            isSecAndThirdProduct && "md:w-1/4",
+            !isFirstProduct && !isSecAndThirdProduct && "h-[180px] w-full",
+
             // basic style
-            "relative h-full",
+            "relative",
           )}
         >
           <Link href={`/product/${p._id}`}>
@@ -87,6 +90,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             isFirstProduct && "xl:w-[50%]",
             // style in only sec and third product
             isSecAndThirdProduct && "flex flex-col justify-around",
+            !isFirstProduct && !isSecAndThirdProduct && "gap-2",
             // basic style
             "flex flex-1 flex-col justify-evenly",
           )}
@@ -142,6 +146,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
               isFirstProduct && "flex-col gap-4",
               // style in only sec and third product
               isSecAndThirdProduct && "flex-col gap-4 xl:flex-row xl:gap-0",
+              !isFirstProduct && !isSecAndThirdProduct && "flex-col gap-1",
               // basic style
               "mt-3 flex items-center justify-start xl:mt-0",
             )}
