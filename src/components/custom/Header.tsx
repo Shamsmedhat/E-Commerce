@@ -23,13 +23,14 @@ export default async function Header() {
   // translation
   const t = await getTranslations();
 
-  const cart: CartData | AppError = await getCartAction();
+  // const cart: CartData | AppError = await getCartAction();
 
-  if ((typeof AppError) in cart) {
-    console.log("error in header from cart fetch");
-  }
+  // if ((typeof AppError) in cart) {
+  //   console.log("error in header from cart fetch");
+  // }
 
-  const numbersOfitemsInCart = cart.console.log("header cart", cart);
+  // const numbersOfitemsInCart = cart.
+  // console.log("header cart", cart);
   // user session
   const session = await getServerSession(authOptions);
 
