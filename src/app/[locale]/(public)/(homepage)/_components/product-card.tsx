@@ -167,6 +167,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             <div className="flex w-full items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-center">
               {/* cart btn */}
               <AddToCart productId={p._id!} />
+              {/* <AddToCartServer productId={p._id!} /> */}
 
               <div className="flex gap-2">
                 {/* wishlist btn */}

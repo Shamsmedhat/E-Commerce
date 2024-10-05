@@ -1,3 +1,4 @@
+import React from "react";
 import MainSlider from "./_components/main-slider";
 import DealsOfTheDay from "./_components/deals-of-the-day";
 import TopSellingItems from "./_components/top-selling-items";

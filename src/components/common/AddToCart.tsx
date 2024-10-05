@@ -1,7 +1,9 @@
 "use client";
 
-import { useAddToCart } from "@/lib/utils/data/cart-data";
+import { getCartAction } from "@/lib/actions/cart-actions";
+import { useAddToCart, useCart } from "@/lib/utils/data/cart-data";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { LuShoppingCart } from "react-icons/lu";
 
 export default function AddToCart({
@@ -13,15 +15,23 @@ export default function AddToCart({
 }) {
   const t = useTranslations();
   const { addToCart, isAddingToCart } = useAddToCart();
+  const { cart } = useCart();
+  const [isProductAddedToCard, serIsProductAddedToCard] = useState(false);
+  const allProductsCartId = cart?.items.map((i) => i.product._id);
 
-  function handleAddingToCart(productId: string) {
+  useEffect(() => {
+    serIsProductAddedToCard(allProductsCartId?.includes(productId));
+  }, [allProductsCartId, productId]);
+
+  // Function to handle adding the product to the cart
+  const handleAddingToCart = (productId: string) => {
     const productData = {
       product: productId,
       quantity: 1,
-    }; // Simple object
-
-    addToCart(productData);
-  }
+    };
+    addToCart(productData); // Trigger adding product to the cart
+    serIsProductAddedToCard((prv) => !prv);
+  };
 
   if (isSmall) {
     return (
@@ -36,6 +46,9 @@ export default function AddToCart({
     );
   }
 
+  if (isProductAddedToCard) {
+    return <button>Already exist</button>;
+  }
   return (
     <div className="flex w-auto cursor-pointer justify-center">
       <button
@@ -45,6 +58,7 @@ export default function AddToCart({
         <span className="rounded-full bg-white p-2">
           <LuShoppingCart className="text-primary-foreground" size={15} />
         </span>
+
         <span>{t("-k0yk9GUHIDLWvq7B4mRs")}</span>
       </button>
     </div>

@@ -1,8 +1,9 @@
 import {
   addToCartAction,
   deleteProductFromCartAction,
+  getCartAction,
 } from "@/lib/actions/cart-actions";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 // using useQuery get the products based on the category selected function recive category name and locale
@@ -40,4 +41,18 @@ export function useDeleteProductFromCart() {
   });
 
   return { deleteProductFromCart, isDeleteingProductFromCart };
+}
+
+export function useCart() {
+  const {
+    data: cart,
+    isFetching,
+    isError,
+    isPending,
+  }: UseQueryResult<CartData> = useQuery({
+    queryKey: ["cart"],
+    queryFn: () => getCartAction(),
+  });
+
+  return { cart, isFetching, isError, isPending };
 }

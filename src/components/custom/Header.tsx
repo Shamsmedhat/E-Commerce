@@ -17,20 +17,26 @@ import LoginHeaderSection from "./LoginHeaderSection";
 import { getCategoriesData } from "@/lib/utils/data/categories-data";
 import Navbar from "./nav-bar";
 import { getCartAction } from "@/lib/actions/cart-actions";
-import { AppError } from "@/lib/utils/catchAsync";
 
 export default async function Header() {
   // translation
   const t = await getTranslations();
 
-  // const cart: CartData | AppError = await getCartAction();
+  let cart;
+  let numbersOfitemsInCart = 0;
 
-  // if ((typeof AppError) in cart) {
-  //   console.log("error in header from cart fetch");
-  // }
+  try {
+    cart = await getCartAction();
 
-  // const numbersOfitemsInCart = cart.
-  // console.log("header cart", cart);
+    // If cart is not an error and contains items, use the data
+    if (cart && !("statusCode" in cart)) {
+      numbersOfitemsInCart = cart.items.length;
+    }
+  } catch (error) {
+    console.log("Error fetching cart:", error);
+    // Continue rendering, but with cart fallback
+  }
+
   // user session
   const session = await getServerSession(authOptions);
 
@@ -61,10 +67,17 @@ export default async function Header() {
             {session && (
               <li className="flex h-14 items-center justify-center border-e px-6 font-semibold">
                 <Link href="/cart" className="relative">
-                  <span className="absolute right-0 top-1 flex aspect-square min-h-3 min-w-3 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
-                    77
-                  </span>
-                  <LuShoppingCart size={25} strokeWidth={1.5} />
+                  {numbersOfitemsInCart === 0 ? null : (
+                    <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
+                      {numbersOfitemsInCart}
+                    </span>
+                  )}
+
+                  <LuShoppingCart
+                    size={25}
+                    strokeWidth={1.5}
+                    className="transition-colors hover:text-primary"
+                  />
                 </Link>
               </li>
             )}

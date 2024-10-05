@@ -1,3 +1,4 @@
+import { getCartAction } from "../actions/cart-actions";
 import { ROLE } from "../constants/roles";
 
 /**
@@ -10,20 +11,7 @@ export const handleEnText = (locale: string): string => {
   return locale === "en" ? "text-end" : "text-start";
 };
 
-export const handleSignInToaster = () => {
-  localStorage.setItem("showToast", "signIn");
-};
-
-export const handleSignOutToaster = () => {
-  localStorage.setItem("showToast", "signOut");
-};
-export const handleCreateUserToaster = () => {
-  localStorage.setItem("showToast", "createUser");
-};
-export const handleDeleteUserToaster = () => {
-  localStorage.setItem("showToast", "deleteUser");
-};
-
+// Get user role
 export function getUserRole(role: string): string | undefined {
   for (const [key, value] of Object.entries(ROLE)) {
     if (value === role) {
@@ -32,6 +20,7 @@ export function getUserRole(role: string): string | undefined {
   }
 }
 
+// Category color
 export function categoryColor(categoryName: string): string {
   switch (categoryName) {
     case "إلكترونيات":
@@ -67,7 +56,18 @@ export function categoryBorderColor(category: string): string {
               : "";
 }
 
-export function removeDuplecatedCategory(arr: String[] | []) {
-  let uniqeCat = Array.from(new Set(arr));
-  return uniqeCat;
-}
+//  Handle show toaster [signin / signout / create user / delete user]
+export const handleSignInToaster = () => {
+  localStorage.setItem("showToast", "signIn");
+};
+
+export const handleSignOutToaster = () => {
+  localStorage.setItem("showToast", "signOut");
+};
+
+export const handleCreateUserToaster = () => {
+  localStorage.setItem("showToast", "createUser");
+};
+export const handleDeleteUserToaster = () => {
+  localStorage.setItem("showToast", "deleteUser");
+};

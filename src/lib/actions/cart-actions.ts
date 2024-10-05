@@ -13,12 +13,13 @@ export const getCartAction = catchAsync(async () => {
       ...(await getAuthorizationHeader()),
     },
     credentials: "include",
-    next: { tags: ["cart-tag"] },
+    // next: { tags: ["cart-tag"] },
   });
 
   // Parse data into a object
   const data: APIResponse<CartData> = await res.json();
 
+  console.log(1);
   // If the data is not success we pass the error as an AppError object
   if (data.status !== "success") {
     throw new AppError(data.message, 500);
@@ -75,3 +76,13 @@ export const deleteProductFromCartAction = catchAsync(
     revalidatePath("/cart");
   },
 );
+
+// Check if the product is in the cart or not
+// export async function checkIfTheItemInCart(
+//   productId: string,
+//   cartItems: ProductItem[],
+// ) {
+//   const x = await getCartAction();
+//   console.log("XXXXXXXXXXXXXXX", x);
+//   // return cartItems.some((item) => item.product._id === productId);
+// }

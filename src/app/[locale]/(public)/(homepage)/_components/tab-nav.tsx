@@ -7,6 +7,7 @@ import TabNavContent from "./tab-nav-content";
 import { useState } from "react";
 import { useProductsByCategory } from "@/lib/utils/data/products-data";
 import DealsOfTheDaySkeleton from "@/components/skeletons/deals-of-the-day-skeleton";
+import { useCart } from "@/lib/utils/data/cart-data";
 
 // props type
 type CategoriesAndProductsListProp = {
