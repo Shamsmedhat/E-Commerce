@@ -19,7 +19,6 @@ export const getCartAction = catchAsync(async () => {
   // Parse data into a object
   const data: APIResponse<CartData> = await res.json();
 
-  console.log(1);
   // If the data is not success we pass the error as an AppError object
   if (data.status !== "success") {
     throw new AppError(data.message, 500);
@@ -54,8 +53,9 @@ export const addToCartAction = catchAsync(
       );
     }
 
-    // Revalidate cart page to refresh the cache
+    // Revalidate cart & home page to refresh the cache
     revalidatePath("/cart");
+    revalidatePath("/");
 
     // Return the data if it oky
     return data;
@@ -72,8 +72,9 @@ export const deleteProductFromCartAction = catchAsync(
       },
     });
 
-    // Revalidate cart page to refresh the cache
+    // Revalidate cart & home page to refresh the cache
     revalidatePath("/cart");
+    revalidatePath("/");
   },
 );
 

@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 // Import Swiper styles
 import "swiper/css";
@@ -6,15 +6,12 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Skeleton } from "../ui/skeleton";
-import { useParams } from "next/navigation";
 
-export default function MainSliderSkeleton() {
-  const params = useParams();
-
+export default function MainSliderSkeleton({ locale }: { locale: string }) {
   return (
     <section className="container mb-[1rem] mt-[3rem] hidden md:block">
       {/* h2 heading */}
-      <h2 dir={params.locale === "en" ? "ltr" : "rtl"} className="mb-5">
+      <h2 dir={locale === "en" ? "ltr" : "rtl"} className="mb-5">
         <Skeleton className="h-[2.5rem] w-[15rem] bg-primary-foreground/30" />
       </h2>
 
@@ -25,7 +22,7 @@ export default function MainSliderSkeleton() {
 
       {/* This will show only on large screens */}
       <div className="hidden lg:block">
-        <MainSectionForLargeScreenSkeleton locale={params.locale} />
+        <MainSectionForLargeScreenSkeleton locale={locale} />
       </div>
     </section>
   );

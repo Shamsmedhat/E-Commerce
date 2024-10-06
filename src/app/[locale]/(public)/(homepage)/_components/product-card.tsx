@@ -143,16 +143,19 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
           <div
             className={cn(
               // style in only first product
-              isFirstProduct && "flex-col gap-4",
+              isFirstProduct && "flex-col justify-start gap-4",
               // style in only sec and third product
-              isSecAndThirdProduct && "flex-col gap-4 xl:flex-row xl:gap-0",
-              !isFirstProduct && !isSecAndThirdProduct && "flex-col gap-1",
+              isSecAndThirdProduct &&
+                "flex-col justify-between gap-4 xl:flex-row xl:gap-0",
+              !isFirstProduct &&
+                !isSecAndThirdProduct &&
+                "flex-col justify-start gap-1",
               // basic style
-              "mt-3 flex items-center justify-start xl:mt-0",
+              "mt-3 flex items-center xl:mt-0",
             )}
           >
             {/* Priceing */}
-            <span className="flex w-full gap-2 xl:text-xl">
+            <span className="flex w-auto gap-2 xl:text-xl">
               {/* //TODO discound  */}
               <span className="text-sm text-primary-foreground/40 line-through">
                 1000 {t("fU01whrYbLGxy6qtBGMEo")}
@@ -164,7 +167,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             </span>
 
             {/* Buttons Section */}
-            <div className="flex w-full items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-center">
+            <div className="flex w-auto items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-center">
               {/* cart btn */}
               <AddToCart productId={p._id!} />
               {/* <AddToCartServer productId={p._id!} /> */}
