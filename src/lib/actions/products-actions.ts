@@ -54,6 +54,7 @@ export async function getProductsByCategoryAction(
         },
       },
     );
+
     // return data
     return res.data;
   } catch (error) {
@@ -201,6 +202,32 @@ export async function getTopRatingProductsAction() {
     },
   );
   const data: APIResponse<ProductData> = await res.json();
+
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+
+  // return data
+  return data.data;
+}
+
+// get products based on the required category
+export async function getProductsByCategoryIdAction(categoryId: string) {
+  // get web locae
+  const locale = await getLocale();
+  const res = await fetch(
+    `${process.env.BASE_URL}/products?category>_id=${categoryId}`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
+    },
+  );
+  const data: APIResponse<any> = await res.json();
+
+  console.log("data", data);
 
   if (data.status !== "success") {
     throw new AppError(data.message, 500);

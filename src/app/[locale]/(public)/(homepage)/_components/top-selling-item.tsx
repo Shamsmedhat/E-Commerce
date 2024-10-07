@@ -70,7 +70,7 @@ export default function TopSellingItem({
         </h4>
 
         {/* product price */}
-        <div className="flex w-full flex-row-reverse items-center gap-[4rem]">
+        <div className="flex w-full flex-row-reverse items-center">
           <div className="flex flex-col">
             <span className="text-end text-sm text-primary-foreground/70 line-through">
               1000 {t("fU01whrYbLGxy6qtBGMEo")}

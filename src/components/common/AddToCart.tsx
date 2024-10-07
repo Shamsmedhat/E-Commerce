@@ -1,22 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 // Translations
 import { useTranslations } from "next-intl";
 
 // Icones
 import { LuShoppingCart } from "react-icons/lu";
-import { TfiShoppingCartFull } from "react-icons/tfi";
 import { FcApproval } from "react-icons/fc";
+import { CgSpinnerAlt } from "react-icons/cg";
+import { TfiShoppingCartFull } from "react-icons/tfi";
 
 // Data hooks
-import {
-  useAddToCart,
-  useCart,
-  useDeleteProductFromCart,
-} from "@/lib/utils/data/cart-data";
-import { cn } from "@/lib/utils";
+import { useAddToCart, useCart } from "@/lib/utils/data/cart-data";
 
 type AddToCartProps = {
   productId: string;
@@ -32,49 +29,56 @@ export default function AddToCart({
 
   // States
   const { addToCart, isAddingToCart } = useAddToCart();
-  const [isProductAddedToCard, setIsProductAddedToCard] = useState(false);
-  const { deleteProductFromCart, isDeleteingProductFromCart } =
-    useDeleteProductFromCart();
+  const [isProductAddedToCart, setIsProductAddedToCart] = useState(false);
 
   // React query
   const { cart, isFetching, isError: isCartError } = useCart();
+
   // Get all product's ids that exist in the cart
   const allProductsCartId = cart?.items.map((i) => i.product._id);
 
-  // Is the current btn is exist in the product already in the cart ?
-  const isProductInCard = allProductsCartId?.includes(productId);
+  // Is the current btn exist in the product already in the cart?
+  const isProductInCart = allProductsCartId?.includes(productId);
 
-  // Effect [change btn ui if the product is already in the cart]
+  // Effect [change btn UI if the product is already in the cart]
   useEffect(() => {
-    // No cart recived
     if (isCartError) {
-      setIsProductAddedToCard(false);
+      setIsProductAddedToCart(false);
     } else {
-      // Cart data exist
-      setIsProductAddedToCard(isProductInCard ?? false);
+      setIsProductAddedToCart(isProductInCart ?? false);
     }
-  }, [isProductInCard, isCartError]);
+  }, [isProductInCart, isCartError]);
 
   // Function to handle adding the product to the cart
   function handleAddingToCart(productId: string) {
-    // Product data object and make the quantity is one by default
+    const currentProduct = cart?.items.find((p) => p.product._id === productId);
+
+    let quantity = 1;
+    if (currentProduct) {
+      // Only increment the quantity if it's a new action
+      quantity = currentProduct.quantity + 1;
+    }
+
+    // Product data object with updated quantity
     const productData = {
       product: productId,
-      quantity: 1,
+      quantity: quantity, // Ensure we set 1 or increment by 1
     };
-    setIsProductAddedToCard(true);
+
+    setIsProductAddedToCart(true);
     addToCart(productData);
   }
 
-  // Function to handle remove the product to the cart
-
   return (
     <div className="flex w-auto cursor-pointer flex-col justify-center">
-      {isProductAddedToCard && (
+      {isProductAddedToCart && (
         <div
-          className={cn("my-2 flex w-full items-center justify-center text-sm")}
+          className={cn(
+            "flex-row-reverse",
+            "my-2 flex w-full flex-row-reverse items-center justify-center gap-2 text-sm",
+          )}
         >
-          <span className="font-bold text-green-500">
+          <span className="font-bold text-green-600">
             {t("sBwmG4Xwcsv2mcubWVteU")}
           </span>
           <FcApproval />
@@ -82,15 +86,32 @@ export default function AddToCart({
       )}
       <button
         className={cn(
-          isSmall ? "p-[0.7rem]" : "py-1 pe-4 ps-1",
-          "flex items-center justify-start gap-3 rounded-full bg-primary align-middle text-xs text-white shadow-md transition-colors hover:bg-primary/80 lg:text-sm",
+          isAddingToCart && "cursor-not-allowed",
+          isSmall ? "mx-3 p-1" : "py-1 pe-4 ps-1",
+          "flex max-w-fit items-center justify-start gap-3 rounded-full bg-primary align-middle text-xs text-white shadow-md transition-colors hover:bg-primary/80 lg:text-sm",
         )}
+        disabled={isAddingToCart}
         onClick={() => handleAddingToCart(productId)}
       >
-        <span className="rounded-full bg-white p-2">
-          <LuShoppingCart className="text-primary-foreground" size={15} />
+        <span
+          className={cn(
+            isProductAddedToCart ? "bg-green-600/40" : "bg-white",
+            "rounded-full p-2",
+          )}
+        >
+          {isProductAddedToCart ? (
+            <TfiShoppingCartFull className="text-white" size={15} />
+          ) : (
+            <LuShoppingCart className="text-primary-foreground" size={15} />
+          )}
         </span>
-        {isSmall ? null : <span>{t("-k0yk9GUHIDLWvq7B4mRs")}</span>}
+        {isAddingToCart ? (
+          <span>
+            <CgSpinnerAlt className="animate-spin" size={30} color="#fff" />
+          </span>
+        ) : isSmall ? null : (
+          <span>{t("-k0yk9GUHIDLWvq7B4mRs")}</span>
+        )}
       </button>
     </div>
   );

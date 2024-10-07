@@ -1,4 +1,4 @@
-import { PRODUCT } from "@/models/products";
+import React from "react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "../ui/checkbox";
 import { ComboboxDemo } from "../ui/combobox";
@@ -7,16 +7,29 @@ import { LuHeart, LuScale, LuShoppingCart } from "react-icons/lu";
 import DiscountSection from "@/app/[locale]/(public)/(homepage)/_components/discount-section";
 import TopSellingItems from "@/app/[locale]/(public)/(homepage)/_components/top-selling-items";
 import { categoryColor } from "@/lib/utils/helpers";
+import Image from "next/image";
+import { Link } from "@/navigarion";
 
-export default function CategoriesPage({ category }: { category: PRODUCT[] }) {
-  const categoryName = category[0].data.category;
+type CategoryPageProps = {
+  products: Product[];
+  categoryName: string;
+};
+
+export default function CategoryPage({
+  products,
+  // categoryName,
+}: CategoryPageProps) {
+  console.log("categoryName");
+  // console.log("categoryName", categoryName);
+
+  if (!products) return <p> no data</p>;
 
   return (
     <>
       <header className="mx-auto mb-[2rem] flex w-[95%] justify-between">
-        <h1 className="text-3xl font-bold">{categoryName}</h1>
+        {/* <h1 className="text-3xl font-bold">{categoryName}</h1> */}
         <span className="text-lg font-semibold text-primary-foreground">
-          {category.length} نتـيجة
+          {products.length} نتـيجة
         </span>
       </header>
       <div className="flex justify-around pb-[4rem]">
@@ -24,7 +37,8 @@ export default function CategoriesPage({ category }: { category: PRODUCT[] }) {
         <aside className="w-[15%]">
           {/* Category Section */}
           <div
-            className={`bg-${categoryColor(categoryName)} mb-[2rem] rounded-md p-5 text-white`}
+            // className={`bg-${categoryColor(categoryName)} mb-[2rem] rounded-md p-5 text-white`}
+            className={`mb-[2rem] rounded-md p-5 text-white`}
           >
             <h3 className="mb-3 text-xl font-bold">الفئـة</h3>
             <div className="flex flex-col items-start space-x-2 text-lg font-bold">
@@ -111,20 +125,44 @@ export default function CategoriesPage({ category }: { category: PRODUCT[] }) {
           </div>
 
           <div className="grid-row-4 mt-[2rem] grid grid-cols-4 gap-4">
-            {category
-              .map((category, i) => (
+            {products
+              .map((p, i) => (
                 <div key={i} className="rounded-md bg-white p-3">
+                  {/* Product Image */}
+                  <div className="relative mx-auto h-[180px] w-[70%]">
+                    <Link href={`/product/${p._id}`}>
+                      <Image
+                        src={p.cover!}
+                        alt={p.translations?.data.name!}
+                        sizes="100%"
+                        fill
+                        className="object-scale-down"
+                      />
+                    </Link>
+                  </div>
+
+                  {/* Sub category name */}
                   <span className="text-sm font-bold text-primary-foreground/70">
-                    {category.data.subCategory}
+                    {p.subCategory?.translations.data.name}
                   </span>
-                  <h3 className="mb-2 text-xl font-bold text-primary-foreground">
-                    {category.data.name}
+
+                  {/* Product name */}
+                  <h3 className="text-xl font-bold text-primary-foreground">
+                    <Link
+                      href={`/product/${p._id}`}
+                      className="transition-all hover:text-primary"
+                    >
+                      {p.translations?.data.name.length! > 40
+                        ? `${p.translations?.data.name.slice(0, 40)}...`
+                        : p.translations?.data.name}
+                    </Link>
                   </h3>
+                  {/* Price & discound */}
                   <span className="text-primary-foreground/50 line-through">
                     20000 جنيـة
                   </span>
                   <p className="text-lg font-bold text-primary-foreground">
-                    {category.data.price} جنيـة
+                    {p.price} جنيـة
                   </p>
                   <div className="my-4 flex items-center gap-3">
                     <button>

@@ -41,7 +41,7 @@ export default async function Header() {
   const session = await getServerSession(authOptions);
 
   //TODO make sure the data came before distructure data (categories)
-  const { categories, pagination } = await getCategoriesData();
+  const data = await getCategoriesData();
 
   return (
     <header>
@@ -99,7 +99,7 @@ export default async function Header() {
       {/* NavBar ============================================================= */}
 
       <div className="border-b bg-background">
-        <Navbar categories={categories} pagination={pagination} />
+        <Navbar categories={data.categories} pagination={data.pagination} />
       </div>
     </header>
   );

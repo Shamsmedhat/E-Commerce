@@ -77,6 +77,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             <Image
               src={p.cover!}
               alt={p.translations?.data.name!}
+              sizes="100%"
               fill
               className="object-scale-down"
             />
@@ -167,7 +168,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             </span>
 
             {/* Buttons Section */}
-            <div className="flex w-auto items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-center">
+            <div className="flex w-auto items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-end">
               {/* cart btn */}
               <AddToCart productId={p._id!} />
               {/* <AddToCartServer productId={p._id!} /> */}
@@ -175,14 +176,14 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
               <div className="flex gap-2">
                 {/* wishlist btn */}
                 <button>
-                  <div className="rounded-full bg-primary-foreground/20 p-2">
+                  <div className="rounded-full bg-primary-foreground/20 p-[10px]">
                     <LuHeart strokeWidth={1} />
                   </div>
                 </button>
 
                 {/* compair btn */}
                 <button>
-                  <div className="rounded-full bg-primary-foreground/20 p-2">
+                  <div className="rounded-full bg-primary-foreground/20 p-[10px]">
                     <LuScale strokeWidth={1} />
                   </div>
                 </button>

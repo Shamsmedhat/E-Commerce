@@ -80,6 +80,7 @@ export function MainSectionForMediumScreen({ categoriesData }: SectionProps) {
                 src="/assets/electronics.png"
                 alt={c.translations.data.name}
                 className="absolute inset-0 object-cover drop-shadow-2xl"
+                sizes="100%"
                 fill
               />
             </div>
@@ -91,6 +92,7 @@ export function MainSectionForMediumScreen({ categoriesData }: SectionProps) {
                 src="/assets/baby.png"
                 alt={c.translations.data.name}
                 className="absolute inset-0 object-cover drop-shadow-2xl"
+                sizes="100%"
                 fill
               />
             </div>
@@ -103,6 +105,7 @@ export function MainSectionForMediumScreen({ categoriesData }: SectionProps) {
                 src="/assets/pet.png" // Ensure the correct image path
                 alt={c.translations.data.name}
                 className="absolute inset-0 object-cover drop-shadow-2xl"
+                sizes="100%"
                 fill
               />
             </div>
@@ -114,6 +117,7 @@ export function MainSectionForMediumScreen({ categoriesData }: SectionProps) {
                 src="/assets/beverages.png " // Ensure the correct image path
                 alt={c.translations.data.name}
                 className="absolute inset-0 object-cover drop-shadow-2xl"
+                sizes="100%"
                 fill
               />
             </div>
@@ -125,6 +129,7 @@ export function MainSectionForMediumScreen({ categoriesData }: SectionProps) {
                 src="/assets/personal-care-bg.png" // Ensure the correct image path
                 alt={c.translations.data.name}
                 className="absolute inset-0 object-cover object-left drop-shadow-2xl"
+                sizes="100%"
                 fill
               />
             </div>
@@ -136,6 +141,7 @@ export function MainSectionForMediumScreen({ categoriesData }: SectionProps) {
                 src="/assets/food.png" // Ensure the correct image path
                 alt={c.translations.data.name}
                 className="absolute inset-0 object-cover drop-shadow-2xl"
+                sizes="100%"
                 fill
               />
             </div>
@@ -214,6 +220,7 @@ export function MainSectionForLargeScreen({
         <p className="z-[1] mt-3 max-w-[70%] text-2xl font-bold text-zinc-800">
           {t("WmE5jcPnkChTNkIEIDyJw")}
         </p>
+
         <Image
           src="/assets/beverages.png"
           alt={t("WmE5jcPnkChTNkIEIDyJw")}
@@ -222,7 +229,7 @@ export function MainSectionForLargeScreen({
           priority
           className={cn(
             isEn ? "right-[0.9rem]" : "right-[5.9rem]",
-            "translate-y-22 absolute top-[3.4rem] translate-x-7",
+            "translate-y-22 absolute top-[3.4rem] h-[12rem] w-auto translate-x-7",
           )}
         />
       </li>
@@ -264,10 +271,11 @@ export function MainSectionForLargeScreen({
           src="/assets/personal-care.jpg"
           alt={t("GX5N9yvTQKnDWIeiQj_TK")}
           fill
+          sizes="100%"
           priority
           className={cn(
             isEn ? "rotate-180" : "rotate-0",
-            "absolute bottom-0 right-0 object-cover",
+            "absolute bottom-0 right-0 h-full w-full object-cover",
           )}
         />
       </li>
