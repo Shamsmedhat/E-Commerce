@@ -1,8 +1,6 @@
 declare interface SuccessfulResponse<T> {
   status: "success";
-  data: {
-    [key: string]: T;
-  };
+  data: T;
 }
 
 declare interface ErrorResponse {

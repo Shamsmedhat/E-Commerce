@@ -1,15 +1,6 @@
 import React from "react";
 
-// export default function page({
-//   params,
-// }: {
-//   params: { locale: string; categoryId: string[] };
-// }) {
-//   // console.log(params);
-//   return <div>category {params.categoryId[0]}</div>;
-// }
-
-import CategoriesPage from "@/components/custom/CategoryPage";
+import CategoriesPage from "@/app/[locale]/(public)/categories/[...categoryId]/components/category-page";
 import { useProductsByCategory } from "@/lib/utils/data/products-data";
 import {
   getProductsByCategoryAction,
@@ -18,17 +9,22 @@ import {
 
 export default async function Page({
   params,
+  searchParams,
 }: {
-  params: { locale: string; categoryName: string };
+  params: { locale: string; categoryId: string };
+  searchParams: { subCategory: string[] };
 }) {
-  const data = await getProductsByCategoryIdAction(params.categoryName[0]);
+  const data: ProductData = await getProductsByCategoryIdAction(
+    params.categoryId[0],
+  );
   const productsBySelectedCategory = data.products;
 
+  console.log("searchParams", searchParams);
   return (
     <section className="w-full">
       <CategoriesPage
         products={productsBySelectedCategory}
-        // categoryName={params.categoryName[0]}
+        searchParams={searchParams}
       />
     </section>
   );

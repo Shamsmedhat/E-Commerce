@@ -21,19 +21,26 @@ export function getUserRole(role: string): string | undefined {
 }
 
 // Category color
+// Category color
 export function categoryColor(categoryName: string): string {
   switch (categoryName) {
-    case "إلكترونيات":
+    case "الالكترونيات":
+    case "Electronics":
       return "categories-electronics";
     case "طعام":
+    case "Food":
       return "categories-food";
-    case "رعاية المنزل والحيوانات الأليفة":
+    case "العناية بالمنزل والحيوانات الأليفة":
+    case "Home and Pet Care":
       return "categories-homeAndPetCare";
     case "المشروبات":
+    case "Beverages":
       return "categories-beverages";
     case "الصحة والعناية الشخصية":
+    case "Health and Personal Care":
       return "categories-healthAndPersonalCare";
-    case "الطفل":
+    case "الاطفال":
+    case "Babies":
       return "categories-babyAndToddler";
     default:
       return "";

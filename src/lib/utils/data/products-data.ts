@@ -8,6 +8,7 @@ import {
   getProductByIdAction,
   getProductsAction,
   getProductsByCategoryAction,
+  getProductsByCategoryIdAction,
   getTopRatingProductsAction,
   getTopSellingProductsAction,
 } from "../../actions/products-actions";
@@ -52,6 +53,7 @@ export async function getProductByIdData(
   }
 }
 
+//todo
 // using useQuery get the products based on the category selected function recive category name and locale
 export function useProductsByCategory(categoryName: string) {
   const {
@@ -93,4 +95,20 @@ export function useTopRatingProducts() {
     queryFn: () => getTopRatingProductsAction(),
   });
   return { topRatingProducts, isFetching, isError, isPending };
+}
+
+//todo
+// using useQuery get the products based on the category selected function recive category name and locale
+export function useProductsByCategoryId(categoryId: string) {
+  const {
+    data: productsByCategoryId,
+    isFetching,
+    isError,
+    isPending,
+  } = useQuery({
+    queryKey: ["product-by-category1", categoryId], // identify the data based on the categoryName
+    queryFn: () => getProductsByCategoryIdAction(categoryId),
+    enabled: !!categoryId, // only run the query if categoryName is truthy
+  });
+  return { productsByCategoryId, isFetching, isError, isPending };
 }

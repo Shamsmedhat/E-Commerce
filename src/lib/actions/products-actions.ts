@@ -214,7 +214,9 @@ export async function getTopRatingProductsAction() {
 }
 
 // get products based on the required category
-export async function getProductsByCategoryIdAction(categoryId: string) {
+export async function getProductsByCategoryIdAction(
+  categoryId: string,
+): Promise<ProductData> {
   // get web locae
   const locale = await getLocale();
   const res = await fetch(
@@ -225,16 +227,13 @@ export async function getProductsByCategoryIdAction(categoryId: string) {
       },
     },
   );
-  const data: APIResponse<any> = await res.json();
-
-  console.log("data", data);
+  const data: APIResponse<ProductData> = await res.json();
 
   if (data.status !== "success") {
     throw new AppError(data.message, 500);
   } else if (!data.data) {
     throw new AppError("Something went wrong!", 500);
   }
-
   // return data
   return data.data;
 }
