@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import SubCategorySort from "./sub-category-sort";
+import SubCategorySort from "../sub-category-sort/sub-category-sort";
 import { useSearchParams } from "next/navigation";
 import BrandsSort from "./brands-sort";
 

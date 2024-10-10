@@ -19,6 +19,7 @@ export default function ToggleStyleBtn() {
           <LuMenu size={20} />
         </button>
       </div>
+
       <div
         className={cn(
           columnStyle && `bg-primary text-white`,

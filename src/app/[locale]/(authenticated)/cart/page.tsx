@@ -8,12 +8,8 @@ import ValidateResponse from "@/components/custom/validate-response";
 import { getCartAction } from "@/lib/actions/cart-actions";
 
 // UI
-import ToggleStyleBtn from "@/components/common/ToggleStyleBtn";
-import CartList from "./_components/cart-list";
-import CartSummary from "./_components/cart-summary";
-import Heading from "@/components/common/Heading";
-import SubmitBtn from "./_components/submit-btn";
 import EmptyCart from "./_components/empty-cart";
+import CartContent from "./_components/cart-content";
 
 export default async function Cart() {
   // Translation
@@ -43,26 +39,7 @@ export default async function Cart() {
       className="container mt-7 flex flex-col md:flex-row"
       dir={isEn ? "ltr" : "rtl"}
     >
-      {/* Cart content */}
-      <div className="flex-grow">
-        {/* Heading */}
-        <div className="flex items-center justify-between">
-          <Heading>{t("_Kg79lEkLCt2SxOaeQJZ2")}</Heading>
-          <ToggleStyleBtn />
-        </div>
-        {/* List of Cart items */}
-        <div>
-          <CartList cart={cart} />
-        </div>
-        {/* checkout submit btn */}
-        <div className="">
-          <SubmitBtn />
-        </div>
-      </div>
-      {/* Cart summary */}
-      <div className="ms-[3rem] flex h-fit min-w-[20%] flex-col items-center rounded-lg bg-white pt-4 shadow-sm">
-        <CartSummary cart={cart} />
-      </div>
+      <CartContent cart={cart} />
     </section>
   );
 }

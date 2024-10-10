@@ -3,6 +3,7 @@ import MyButton from "@/components/common/MyButton";
 import { LuInfo } from "react-icons/lu";
 import { useTranslations } from "next-intl";
 import React from "react";
+import { Link } from "@/navigarion";
 type CartListProps = {
   cart: CartData;
 };
@@ -59,12 +60,13 @@ export default function CartSummary(cart: CartListProps) {
           </div>
         </div>
       </div>
-      <MyButton
+      <Link
+        href="/checkout"
         onClick={(e) => console.log(e)}
-        className="w-full rounded-t-none text-lg font-bold uppercase text-white"
+        className="w-full rounded-b-lg bg-primary py-2 text-center text-lg font-bold uppercase text-white"
       >
         {t("uGXddxwBlKfC6WsNEeTG4")}
-      </MyButton>
+      </Link>
     </>
   );
 }

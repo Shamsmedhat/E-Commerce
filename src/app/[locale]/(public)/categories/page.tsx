@@ -1,37 +1,44 @@
 import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { handleEnText } from "@/lib/utils/helpers";
 
+// Navigation
 import { Link } from "@/navigarion";
 
+// Ui
+import Heading from "@/components/common/Heading";
 import { Badge } from "@/components/ui/badge";
 
+// Translation
 import { getLocale, getTranslations } from "next-intl/server";
 
+// Icons
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { getCategoriesData } from "@/lib/utils/data/categories-data";
 
-// Electronices brands
+// Electronices brands logo
 import ElectronicesLogo from "@/../public/assets/apple-logo.png";
 import ElectronicesLogo2 from "@/../public/assets/lg-logo.png";
 import ElectronicesLogo3 from "@/../public/assets/samsung-logo.jpg";
 import ElectronicesLogo4 from "@/../public/assets/Sony-Logo.png";
 
-// Food brands
+// Food brands logo
 import FoodLogo1 from "@/../public/assets/abd-logo.png";
 import FoodLogo2 from "@/../public/assets/fern-logo.png";
 
-// HealthAndPersonalCare brands
+// HealthAndPersonalCare brands logo
 import HealthAndPersonalCareLogo1 from "@/../public/assets/nivea-logo.png";
 import HealthAndPersonalCareLogo2 from "@/../public/assets/braun-logo.png";
 
-// Beverages brands
+// Beverages brands logo
 import BeveragesLogo1 from "@/../public/assets/Beverages-logo.png";
 import BeveragesLogo2 from "@/../public/assets/Beverages2-logo.png";
 
-// Babies brands
+// Babies brands logo
 import BabiesLogo1 from "@/../public/assets/Babieslogo1.png";
 import BabiesLogo2 from "@/../public/assets/Babieslogo2.png";
 
-// HomeAndPetCare brands
+// HomeAndPetCare brands logo
 import HomeAndPetCareLogo1 from "@/../public/assets/HomeAndPetCare-logo.png";
 import HomeAndPetCareLogo2 from "@/../public/assets/HomeAndPetCarelogo2.png";
 
@@ -60,15 +67,18 @@ import babyAndToddler2 from "@/../public/assets/babyAndToddler2.png";
 import HomeAndPetCare1 from "@/../public/assets/HomeAndPetCare1.png";
 import HomeAndPetCare2 from "@/../public/assets/HomeAndPetCare2.png";
 import HomeAndPetCare3 from "@/../public/assets/HomeAndPetCare3.png";
-import Heading from "@/components/common/Heading";
-import { handleEnText } from "@/lib/utils/helpers";
-import { cn } from "@/lib/utils";
 
 export default async function Page() {
+  // Translations
   const t = await getTranslations();
+
+  // Categories data
   const data: CategoriesData = await getCategoriesData();
+
+  // Locale
   const locale = await getLocale();
 
+  // If no data //TODO ui
   if (!data) {
     return (
       <section className="container mb-10">
@@ -78,36 +88,42 @@ export default async function Page() {
     );
   }
 
+  // Electronics category data
   const Electronics = data.categories?.filter(
     (c) =>
       c.translations.data.name === "Electronics" ||
       c.translations.data.name === "الالكترونيات",
   )[0];
 
+  // Babies category data
   const Babies = data.categories?.filter(
     (c) =>
       c.translations.data.name === "Babies" ||
       c.translations.data.name === "الاطفال",
   )[0];
 
+  // HomeAndPetCare category data
   const HomeAndPetCare = data.categories?.filter(
     (c) =>
       c.translations.data.name === "Home and Pet Care" ||
       c.translations.data.name === "العناية بالمنزل والحيوانات الأليفة",
   )[0];
 
+  // Beverages category data
   const Beverages = data.categories?.filter(
     (c) =>
       c.translations.data.name === "Beverages" ||
       c.translations.data.name === "المشروبات",
   )[0];
 
+  // HealthAndPersonalCare category data
   const HealthAndPersonalCare = data.categories?.filter(
     (c) =>
       c.translations.data.name === "Health and Personal Care" ||
       c.translations.data.name === "الصحة والعناية الشخصية",
   )[0];
 
+  // Food category data
   const Food = data.categories?.filter(
     (c) =>
       c.translations.data.name === "Food" ||
@@ -116,9 +132,11 @@ export default async function Page() {
 
   return (
     <section className="container mb-10">
+      {/* Page title */}
       <Heading className={cn(handleEnText(locale))}>
         {t("1jlVZjp6n-h8arU7z4VEx")}
       </Heading>
+
       <div className="my-10 grid w-full grid-cols-1 grid-rows-2 gap-12 lg:grid-cols-2 xl:grid-cols-3">
         {/* electronics card */}
         <div className="relative col-span-1 row-span-1 h-[20rem] bg-categories-electronics shadow-lg md:mx-28 lg:mx-0">
@@ -128,6 +146,7 @@ export default async function Page() {
             <p className="text-3xl text-white">
               {Electronics?.translations.data.name}
             </p>
+
             {/* sub category name */}
             <div className="mb-6 mr-auto mt-3 flex w-[70%] flex-wrap gap-2">
               {Electronics?.subCategories.map((c) => {
@@ -142,6 +161,7 @@ export default async function Page() {
                 );
               })}
             </div>
+
             {/* best brands */}
             <div dir="ltr" className="w-[70%] text-white 2xl:text-2xl">
               <p>{t("RM4g-vYv6Fv9HBlvdJq4a")}</p>
@@ -176,6 +196,7 @@ export default async function Page() {
                 />
               </div>
             </div>
+
             {/* category button */}
             <div className="mt-6">
               <Link href={`/categories/${Electronics?._id}`}>

@@ -6,6 +6,7 @@ type Rating = {
   size?: number;
   weight?: number;
   color?: string;
+  className?: string;
 };
 
 export default function RatingStars({
@@ -14,6 +15,7 @@ export default function RatingStars({
   size = 18,
   weight = 0.5,
   color = "#ffffff00",
+  className = "",
 }: Rating) {
   return (
     <span className="flex" dir="ltr">
@@ -22,7 +24,7 @@ export default function RatingStars({
         const fillColor = rate >= i + 1 ? "#FEBF31" : "rgb(60 64 59 / 0.3)";
 
         return (
-          <span key={i} className="relative">
+          <span key={i} className={`relative ${className}`}>
             <LuStar
               fill={fillColor}
               size={size}

@@ -8,7 +8,7 @@ import { getSubCategoriesData } from "@/lib/utils/data/sub-category-data";
 import { generateColors } from "@/lib/utils/generateCategoryColors";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {
   Dialog,
@@ -20,9 +20,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useQueryClient } from "@tanstack/react-query";
 
-export default function CartItem({ item }: { item: ProductItem }) {
+type CartItemProps = {
+  item: ProductItem;
+};
+
+export default function CartItem({ item }: CartItemProps) {
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -93,13 +96,11 @@ export default function CartItem({ item }: { item: ProductItem }) {
           {category?.translations.data.name} -{" "}
           {subCategory?.translations.data.name}
         </span>
-
         <h2>
           {isEn
             ? item.product.translations[0].data.name
             : item.product.translations[1].data.name}
         </h2>
-
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogContent>
             <DialogHeader>
@@ -124,10 +125,10 @@ export default function CartItem({ item }: { item: ProductItem }) {
           <DialogTrigger>
             {/* delete btn */}
             <div className="mt-3">
-              <button className="flex items-center gap-2 rounded-md border-[0.5px] border-primary-foreground/60 px-2 py-1 text-sm text-primary-foreground/60 transition-colors hover:border-red-600/70 hover:text-red-600/70">
+              <div className="flex items-center gap-2 rounded-md border-[0.5px] border-primary-foreground/60 px-2 py-1 text-sm text-primary-foreground/60 transition-colors hover:border-red-600/70 hover:text-red-600/70">
                 <RiDeleteBin6Line />
                 <span>{t("aI_K7fOdvddq4B_2iocmy")}</span>
-              </button>
+              </div>
             </div>
           </DialogTrigger>
         </Dialog>
