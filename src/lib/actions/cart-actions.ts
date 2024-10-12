@@ -30,7 +30,7 @@ export const getCartAction = catchAsync(async () => {
   return data.data.cart;
 });
 
-// Add new product to the cart by recive the product id and product quantity defult is 1
+// Add new product or update to the cart by recive the product id and product quantity defult is 1
 export const addToCartAction = catchAsync(
   async (productData: { product: string; quantity: number }) => {
     const res = await fetch(`${process.env.BASE_URL}/carts/product`, {
@@ -77,13 +77,3 @@ export const deleteProductFromCartAction = catchAsync(
     revalidatePath("/");
   },
 );
-
-// Check if the product is in the cart or not
-// export async function checkIfTheItemInCart(
-//   productId: string,
-//   cartItems: ProductItem[],
-// ) {
-//   const x = await getCartAction();
-//   console.log("XXXXXXXXXXXXXXX", x);
-//   // return cartItems.some((item) => item.product._id === productId);
-// }

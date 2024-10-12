@@ -2,24 +2,15 @@
 import QuantityBtn from "@/components/common/QuantityBtn";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { cn } from "@/lib/utils";
-import { useDeleteProductFromCart } from "@/lib/utils/data/cart-data";
 import { getCategoryData } from "@/lib/utils/data/categories-data";
 import { getSubCategoriesData } from "@/lib/utils/data/sub-category-data";
 import { generateColors } from "@/lib/utils/generateCategoryColors";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { BsInfoCircle } from "react-icons/bs";
+
+import DeleteProductFromCart from "./delete-product-from-cart";
 
 type CartItemProps = {
   item: ProductItem;
@@ -27,13 +18,14 @@ type CartItemProps = {
 
 export default function CartItem({ item }: CartItemProps) {
   const t = useTranslations();
-  const [isOpen, setIsOpen] = useState(false);
 
   const { rowStyle, columnStyle } = useAppSelector((state) => state.cart);
   const [subCategory, setSubCategory] = useState<SubCategory | null>(null);
   const [category, setCategory] = useState<Category | null>(null);
   const locale = useLocale();
   const isEn = locale === "en";
+
+  const [productPrice, setProductPrice] = useState(item.price);
 
   useEffect(() => {
     try {
@@ -48,16 +40,6 @@ export default function CartItem({ item }: CartItemProps) {
       })();
     } catch (error) {}
   }, [item.product.subCategory, item.product.category]);
-
-  const { deleteProductFromCart, isDeleteingProductFromCart } =
-    useDeleteProductFromCart();
-
-  function handleDeleteFromCart(productId: string) {
-    // Close the dialog immediately
-    setIsOpen(false);
-
-    deleteProductFromCart(productId);
-  }
 
   const uniqCategoryColor = generateColors(
     category?.translations.data.name || "",
@@ -101,37 +83,12 @@ export default function CartItem({ item }: CartItemProps) {
             ? item.product.translations[0].data.name
             : item.product.translations[1].data.name}
         </h2>
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>{t("U3paCex62htmYg5U0ZrLP")}</DialogTitle>
-              <DialogDescription>
-                {t("SBOouAPG2Oyvyg38ZITbW")}{" "}
-                {isEn
-                  ? item.product.translations[0].data.name
-                  : item.product.translations[1].data.name}
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <Button
-                type="submit"
-                className="bg-red-600 text-white hover:bg-red-600/70"
-                onClick={() => handleDeleteFromCart(item.product._id)}
-              >
-                {t("cH44jtWKXtfVfaS0B6a85")}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-          <DialogTrigger>
-            {/* delete btn */}
-            <div className="mt-3">
-              <div className="flex items-center gap-2 rounded-md border-[0.5px] border-primary-foreground/60 px-2 py-1 text-sm text-primary-foreground/60 transition-colors hover:border-red-600/70 hover:text-red-600/70">
-                <RiDeleteBin6Line />
-                <span>{t("aI_K7fOdvddq4B_2iocmy")}</span>
-              </div>
-            </div>
-          </DialogTrigger>
-        </Dialog>
+        <div className="flex w-fit flex-row-reverse items-center gap-1 text-start text-sm text-red-600">
+          <BsInfoCircle />
+          <span>{item.product.stock}</span>
+          <span>قطعة في المخزن</span>
+        </div>
+        <DeleteProductFromCart isEn={isEn} item={item} />
       </div>
 
       <div
@@ -144,11 +101,15 @@ export default function CartItem({ item }: CartItemProps) {
         <QuantityBtn
           className={rowStyle && "mr-12"}
           currentQty={item.quantity}
+          productPrice={productPrice}
+          setProductPrice={setProductPrice}
+          productId={item.product._id}
+          stock={item.product.stock}
         />
         {/* product price */}
         <div className={rowStyle && "mr-12"}>
           <span className="font-bold">
-            {item.price} {t("fU01whrYbLGxy6qtBGMEo")}
+            {productPrice.toFixed(3)} {t("fU01whrYbLGxy6qtBGMEo")}
           </span>
         </div>
       </div>
