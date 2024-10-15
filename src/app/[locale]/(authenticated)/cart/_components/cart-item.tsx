@@ -83,11 +83,19 @@ export default function CartItem({ item }: CartItemProps) {
             ? item.product.translations[0].data.name
             : item.product.translations[1].data.name}
         </h2>
-        <div className="flex w-fit flex-row-reverse items-center gap-1 text-start text-sm text-red-600">
-          <BsInfoCircle />
-          <span>{item.product.stock}</span>
-          <span>قطعة في المخزن</span>
-        </div>
+        {(item.product.stock <= 3 || item.quantity === item.product.stock) && (
+          <div
+            className={cn(
+              isEn ? "flex-row" : "flex-row-reverse",
+              "flex w-fit items-center gap-1 text-start text-sm text-red-600",
+            )}
+          >
+            <BsInfoCircle />
+            <span>{item.product.stock}</span>
+            <span>{t("ulEKKGYVTG1jhVjuPy2B0")}</span>
+          </div>
+        )}
+
         <DeleteProductFromCart isEn={isEn} item={item} />
       </div>
 

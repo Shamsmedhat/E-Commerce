@@ -1,5 +1,3 @@
-import { number, string } from "zod";
-
 declare global {
   // product translations data
   interface ProductTranslations {
@@ -22,7 +20,7 @@ declare global {
       cover: string;
       price: number;
       stock: number;
-      translations: ProductTranslations[];
+      translations: ProductTranslations;
       createdAt: string;
       updatedAt: string;
     };
@@ -32,12 +30,14 @@ declare global {
 
   // Cart data model
   interface CartData {
-    _id: string;
-    user: string;
-    totalPrice: number;
-    items: ProductItem[];
-    createdAt: string;
-    updatedAt: string;
+    cart: {
+      _id: string;
+      user: string;
+      totalPrice: number;
+      items: ProductItem[];
+      createdAt: string;
+      updatedAt: string;
+    };
   }
 
   // Cart response model

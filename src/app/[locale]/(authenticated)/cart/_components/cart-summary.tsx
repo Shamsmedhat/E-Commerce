@@ -4,14 +4,16 @@ import { LuInfo } from "react-icons/lu";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { Link } from "@/navigarion";
+import { cn } from "@/lib/utils";
 type CartListProps = {
   cart: CartData;
+  className: string;
 };
 export default function CartSummary(cart: CartListProps) {
   const t = useTranslations();
   return (
     <>
-      <div className="px-4">
+      <div className={cn(cart.className, "px-4")}>
         {/* title */}
         <h3 className="border-b-2 border-primary-foreground/10 py-3 text-xl font-semibold uppercase">
           {t("ubNic2h-DPEijW_LliPJA")}

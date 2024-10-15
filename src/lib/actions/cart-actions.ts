@@ -3,12 +3,15 @@
 import { revalidatePath } from "next/cache";
 import catchAsync, { AppError } from "../utils/catchAsync";
 import getAuthorizationHeader from "./get-authorization-header";
+import { getLocale } from "next-intl/server";
 
 // Get cart data action
 export const getCartAction = catchAsync(async () => {
+  const locale = await getLocale();
   const res = await fetch(`${process.env.BASE_URL}/carts`, {
     method: "GET",
     headers: {
+      "Accept-Language": locale,
       // Function to return the token
       ...(await getAuthorizationHeader()),
     },

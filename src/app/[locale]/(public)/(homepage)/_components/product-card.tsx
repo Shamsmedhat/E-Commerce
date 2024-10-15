@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 // icons
 import { useAddToCart } from "@/lib/utils/data/cart-data";
 import { LuHeart, LuScale } from "react-icons/lu";
+import { BsInfoCircle } from "react-icons/bs";
 
 // prop type
 type ProductProps = {
@@ -166,6 +167,19 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
                 {p.price} {t("fU01whrYbLGxy6qtBGMEo")}
               </span>
             </span>
+
+            {p.stock! <= 3 && (
+              <div
+                className={cn(
+                  isEn ? "flex-row" : "flex-row-reverse",
+                  "flex w-fit items-center gap-1 text-start text-sm text-red-600",
+                )}
+              >
+                <BsInfoCircle />
+                <span>{p.stock}</span>
+                <span>{t("ulEKKGYVTG1jhVjuPy2B0")}</span>
+              </div>
+            )}
 
             {/* Buttons Section */}
             <div className="flex w-auto items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-end">
