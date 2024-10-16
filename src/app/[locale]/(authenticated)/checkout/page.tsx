@@ -22,5 +22,5 @@ export default async function Page() {
     }
     return <ValidateResponse message={cart.message} callbackUrl="/cart" />;
   }
-  return <TotalPaymentProcess cart={cart} />;
+  return <TotalPaymentProcess cart={cart.cart} />;
 }

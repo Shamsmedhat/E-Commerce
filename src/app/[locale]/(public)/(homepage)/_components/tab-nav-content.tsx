@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { products } from "@/lib/utils/data-v1";
 
 // navigation
 import { Link } from "@/navigarion";

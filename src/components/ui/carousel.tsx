@@ -6,7 +6,7 @@ import useEmblaCarousel, {
 } from "embla-carousel-react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useTranslations } from "next-intl";
 
@@ -227,33 +227,57 @@ const CarouselPrevious = React.forwardRef<
 });
 CarouselPrevious.displayName = "CarouselPrevious";
 
-const CarouselNext = React.forwardRef<
-  HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const t = useTranslations();
-  const { orientation, scrollNext, canScrollNext } = useCarousel();
+interface CarouselNextProps extends ButtonProps {
+  placeOrder: (data: PlaceOrder) => void; // Define the type of placeOrder as needed
+  orderData: PlaceOrder; // Define the type of orderData as needed
+}
 
-  return (
-    <Button
-      ref={ref}
-      variant={variant}
-      size={size}
-      className={cn(
-        "w-fit bg-primary",
-        // orientation === "horizontal"
-        //   ? "-right-12 top-1/2 -translate-y-1/2"
-        //   : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
-        className,
-      )}
-      disabled={!canScrollNext}
-      onClick={scrollNext}
-      {...props}
-    >
-      <span className="uppercase">{t("loUw4i8Jb9RuNCI9wl1zD")}</span>
-    </Button>
-  );
-});
+const CarouselNext = React.forwardRef<HTMLButtonElement, CarouselNextProps>(
+  (
+    {
+      className,
+      variant = "outline",
+      size = "icon",
+      placeOrder,
+      orderData,
+      ...props
+    },
+    ref,
+  ) => {
+    const t = useTranslations();
+    const { orientation, scrollNext, canScrollNext } = useCarousel();
+
+    // if (!canScrollNext) {
+    //   return null;
+    // }
+
+    function handleSubmit() {
+      if (orderData.paymentType) {
+        placeOrder(orderData);
+      }
+      scrollNext();
+    }
+    return (
+      <Button
+        ref={ref}
+        variant={variant}
+        size={size}
+        className={cn(
+          "w-fit bg-primary",
+          // orientation === "horizontal"
+          //   ? "-right-12 top-1/2 -translate-y-1/2"
+          //   : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+          className,
+        )}
+        // disabled={!canScrollNext}
+        onClick={handleSubmit}
+        {...props}
+      >
+        <span className="uppercase">{t("loUw4i8Jb9RuNCI9wl1zD")}</span>
+      </Button>
+    );
+  },
+);
 CarouselNext.displayName = "CarouselNext";
 
 export {

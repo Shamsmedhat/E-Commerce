@@ -30,7 +30,7 @@ export default async function Header() {
 
     // If cart is not an error and contains items, use the data
     if (cart && !("statusCode" in cart)) {
-      numbersOfitemsInCart = cart.items.length;
+      numbersOfitemsInCart = cart.cart.items.length;
     }
   } catch (error) {
     console.log("Error fetching cart:", error);

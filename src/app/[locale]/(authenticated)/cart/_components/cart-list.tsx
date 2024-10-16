@@ -15,9 +15,9 @@ export default function CartList({ cart }: CartListProps) {
   return (
     <ul className={cn(columnStyle && "grid grid-cols-3 gap-8")}>
       {/* Render cart items when cart is available */}
-      {cart?.items.map((item) => (
+      {cart?.cart.items.map((item) => (
         <CartItem
-          total-price={cart.totalPrice}
+          total-price={cart.cart.totalPrice}
           key={item.product._id}
           item={item}
         />

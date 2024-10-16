@@ -8,7 +8,6 @@ import { getTranslations } from "next-intl/server";
 import Logo from "./Logo";
 
 //TODO data
-import { products } from "@/lib/utils/data-v1";
 
 // payment methods
 import cib from "@/../public/assets/cib.png";
@@ -25,8 +24,8 @@ import youtube from "@/../public/assets/youtube.png";
 export default async function Footer() {
   const t = await getTranslations();
   //TODO data
-  const data = products.map((p) => p.data.category);
-  const categoreis = Array.from(new Set(data));
+  // const data = products.map((p) => p.data.category);
+  // const categoreis = Array.from(new Set(data));
 
   return (
     <footer className="shadow-md">
@@ -49,12 +48,12 @@ export default async function Footer() {
                 {t("xe7r7PEc2CpQZsK2CYHxZ")}
               </h5>
               <ul className="space-y-2">
-                {categoreis.map((c) => (
-                  <li key={c}>
-                    {/* //TODO put categories ID */}
-                    <Link href={`/${c}`}>{c}</Link>
+                {/* {categoreis.map((c) => (
+                  <li key={c}> */}
+                {/* //TODO put categories ID */}
+                {/* <Link href={`/${c}`}>{c}</Link>
                   </li>
-                ))}
+                ))} */}
               </ul>
             </div>
 

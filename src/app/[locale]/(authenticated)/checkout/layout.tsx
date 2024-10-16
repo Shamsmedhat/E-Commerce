@@ -30,6 +30,7 @@ export default async function CheckoutLayout({
     }
     return <ValidateResponse message={cart.message} callbackUrl="/cart" />;
   }
+
   return (
     <section className="w-full">
       <header className="border-b bg-white">
@@ -62,10 +63,10 @@ export default async function CheckoutLayout({
         <div className="col-span-1">
           <CheckoutCartSummary
             cart={cart}
-            className="mx-8 bg-white shadow-lg"
+            className="mx-8 bg-white shadow-sm"
           />
         </div>
-        <div className="col-span-2 rounded-lg bg-white p-10 pt-7 shadow-lg">
+        <div className="col-span-2 rounded-lg bg-white p-10 pt-7 shadow-sm">
           {children}
         </div>
       </main>

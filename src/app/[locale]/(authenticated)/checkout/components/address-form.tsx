@@ -156,14 +156,13 @@ export function AddressForm({
     }
     setIsFormValid(false);
   }
-
   return (
     <div className="mb-6 flex flex-row-reverse gap-6 text-right">
       {/* Editable form to write the delivery address */}
       <div
         className={cn(
           handleEnText(locale),
-          "w-1/2 border border-primary-foreground/20 p-6 shadow-lg",
+          "w-1/2 border border-primary-foreground/20 p-6 shadow-md",
         )}
       >
         {/* Form */}
@@ -317,7 +316,7 @@ export function AddressForm({
         className={cn(
           handleEnText(locale),
           isSubmitSuccessful ? "border-green-500" : "border-primary",
-          "w-1/2 space-y-4 border p-6 shadow-lg",
+          "w-1/2 space-y-4 border p-6 shadow-md",
         )}
       >
         {/* Name */}
@@ -392,12 +391,12 @@ export function AddressForm({
           </label>
           <div className="flex w-full flex-col">
             {" "}
-            {Products.map((x) => (
+            {Products.map((p) => (
               <input
                 disabled
-                key={x._id}
+                key={p._id}
                 className="w-full bg-white text-left font-semibold text-primary-foreground/50"
-                value={x.data.name.split(" ").slice(0, 4).join(" ")}
+                value={p.data.name.split(" ").slice(0, 4).join(" ")}
                 readOnly // To make it non-editable without using pointer-events
               />
             ))}

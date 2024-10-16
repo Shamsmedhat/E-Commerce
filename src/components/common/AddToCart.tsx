@@ -35,7 +35,7 @@ export default function AddToCart({
   const { cart, isFetching, isError: isCartError } = useCart();
 
   // Get all product's ids that exist in the cart
-  const allProductsCartId = cart?.items.map((i) => i.product._id);
+  const allProductsCartId = cart?.cart.items.map((i) => i.product._id);
 
   // Is the current btn exist in the product already in the cart?
   const isProductInCart = allProductsCartId?.includes(productId);
@@ -51,7 +51,9 @@ export default function AddToCart({
 
   // Function to handle adding the product to the cart
   function handleAddingToCart(productId: string) {
-    const currentProduct = cart?.items.find((p) => p.product._id === productId);
+    const currentProduct = cart?.cart.items.find(
+      (p) => p.product._id === productId,
+    );
 
     let quantity = 1;
     if (currentProduct) {

@@ -17,7 +17,7 @@ export const placeOrderAction = catchAsync(async (orderData: PlaceOrder) => {
   });
 
   // Parse data into a object
-  const data: APIResponse<Order> = await res.json();
+  const data: APIResponse<OrderCash | OrderCard> = await res.json();
 
   // If the data is not success we pass the error as an AppError object
   if (data.status !== "success") {

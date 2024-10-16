@@ -59,7 +59,7 @@ export default function CartItem({ item }: CartItemProps) {
       <div className="mx-4">
         <Image
           src={item.product.cover}
-          alt={item.product.translations[0].data.name}
+          alt={item.product.translations.data.name}
           // make sure all images is the same width to avoid UI issue
           className="min-h-[75px] min-w-[75px] object-scale-down"
           width={75}
@@ -78,11 +78,7 @@ export default function CartItem({ item }: CartItemProps) {
           {category?.translations.data.name} -{" "}
           {subCategory?.translations.data.name}
         </span>
-        <h2>
-          {isEn
-            ? item.product.translations[0].data.name
-            : item.product.translations[1].data.name}
-        </h2>
+        <h2>{item.product.translations.data.name}</h2>
         {(item.product.stock <= 3 || item.quantity === item.product.stock) && (
           <div
             className={cn(

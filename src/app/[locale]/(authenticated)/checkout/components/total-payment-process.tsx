@@ -1,5 +1,11 @@
 "use client";
 import React, { useState } from "react";
+import { cn } from "@/lib/utils";
+
+// Translation
+import { useTranslations } from "next-intl";
+
+// Ui
 import {
   Carousel,
   CarouselContent,
@@ -10,12 +16,16 @@ import {
 import Heading from "@/components/common/Heading";
 import { AddressForm } from "./address-form";
 import { PaymentSelect } from "./payment-select";
-import { useTranslations } from "next-intl";
-import { cn } from "@/lib/utils";
+import { usePlaceOrder } from "@/lib/utils/data/orders-data";
+import useEmblaCarousel from "embla-carousel-react";
 
 export default function TotalPaymentProcess(cart: CartData) {
+  // Translation
   const t = useTranslations();
+  // State [isForm  valid to display the next btn if its not valid]
   const [isFormValid, setIsFormValid] = useState(true);
+
+  // Collect order data in the parent
   const [orderData, setOrderData] = useState({
     paymentType: "",
     shippingAddress: {
@@ -27,10 +37,13 @@ export default function TotalPaymentProcess(cart: CartData) {
     coupon: "NEW_PERCENTAGE",
   });
 
-  console.log("orderData", orderData);
+  const { isPlacingOrder, placeOrder } = usePlaceOrder();
+
   return (
     <Carousel className="w-full" opts={{ watchDrag: false }}>
+      {/* Carousel content 3 pages [placing order process] */}
       <CarouselContent>
+        {/* Address section first step */}
         <CarouselItem>
           <Heading className="text-left !text-2xl">
             {t("X73uyJtHXlL_VOZZYWFyl")}
@@ -41,22 +54,32 @@ export default function TotalPaymentProcess(cart: CartData) {
             setIsFormValid={setIsFormValid}
           />
         </CarouselItem>
+
+        {/* Payment section second step */}
         <CarouselItem>
           <Heading className="text-left !text-2xl">
             {t("-aN40eBi4jXBqrH8rJM27")}
           </Heading>
           <PaymentSelect setOrderData={setOrderData} orderData={orderData} />
         </CarouselItem>
-        {/* Ensure all items are not draggable */}
-        <CarouselItem>3</CarouselItem>
+
+        {/* Message section last step */}
+        {orderData.paymentType === "cash" && <CarouselItem>3</CarouselItem>}
       </CarouselContent>
+
+      {/* Next and previous btns */}
       <div className="flex items-center justify-between gap-4">
+        {/* Next btn */}
         <CarouselNext
           className={cn(
             "px-6 text-lg font-semibold text-white hover:bg-primary/80 hover:text-white",
           )}
           // disabled={isFormValid}
+          placeOrder={placeOrder}
+          orderData={orderData}
         />
+
+        {/* Previous btn */}
         <CarouselPrevious className={cn("px-6 text-lg font-semibold")} />
       </div>
     </Carousel>

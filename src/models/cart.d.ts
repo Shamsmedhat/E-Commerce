@@ -39,12 +39,6 @@ declare global {
       updatedAt: string;
     };
   }
-
-  // Cart response model
-  interface CartAPIResponse {
-    status: string;
-    data: CartData;
-  }
 }
 
 export {};

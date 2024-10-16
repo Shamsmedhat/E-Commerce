@@ -1,6 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.parent {
+  @apply flex; /* This sets the parent to use flexbox */
+}
+
+.child-1 {
+  @apply h-auto; /* Allow height to be based on content */
+}
+
+.child-2 {
+  @apply hidden; /* Initially hide this child */
+}
 
 /* Overwrite style in product gallary */
 /* .image-gallery-slide .image-gallery-image {

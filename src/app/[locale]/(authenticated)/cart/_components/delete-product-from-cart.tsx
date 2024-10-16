@@ -42,10 +42,7 @@ export default function DeleteProductFromCart({
         <DialogHeader>
           <DialogTitle>{t("U3paCex62htmYg5U0ZrLP")}</DialogTitle>
           <DialogDescription>
-            {t("SBOouAPG2Oyvyg38ZITbW")}{" "}
-            {isEn
-              ? item.product.translations[0].data.name
-              : item.product.translations[1].data.name}
+            {t("SBOouAPG2Oyvyg38ZITbW")} {item.product.translations.data.name}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

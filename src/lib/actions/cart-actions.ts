@@ -30,7 +30,7 @@ export const getCartAction = catchAsync(async () => {
   }
 
   // Return cart data
-  return data.data.cart;
+  return data.data;
 });
 
 // Add new product or update to the cart by recive the product id and product quantity defult is 1

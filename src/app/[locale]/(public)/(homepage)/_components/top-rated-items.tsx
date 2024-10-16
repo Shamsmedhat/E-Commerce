@@ -25,7 +25,6 @@ import "swiper/css/navigation";
 import Heading from "@/components/common/Heading";
 
 //TODO data
-import { products } from "@/lib/utils/data-v1";
 import TopRatingItem from "./top-rated-item";
 import { useTopRatingProducts } from "@/lib/utils/data/products-data";
 import { useEffect, useState } from "react";
