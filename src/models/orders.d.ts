@@ -35,6 +35,95 @@ declare global {
     statusCode: number;
     data: CardOrederData;
   }
+  interface Translation {
+    language: string;
+    data: {
+      name: string;
+      slug: string;
+      overview: string;
+    };
+    _id: string;
+  }
+
+  // Product information in an order item
+  interface Product {
+    _id: string;
+    category: string;
+    subCategory: string;
+    brand: string;
+    cover: string;
+    price: number;
+    stock: number;
+    translations: Translation[];
+    createdAt: string;
+    updatedAt: string;
+  }
+
+  // Individual order item
+  interface OrderItem {
+    product: Product;
+    quantity: number;
+    price: number;
+  }
+
+  // User who placed the order
+  interface User {
+    _id: string;
+    username: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    photo: string;
+    active: boolean;
+    blocked: boolean;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+  }
+
+  // Order progress status
+  interface Progress {
+    status: string;
+    date: string;
+    _id: string;
+  }
+
+  // Main order structure
+  interface Order {
+    _id: number;
+    user: User;
+    totalPrice: number;
+    paymentType: string;
+    paid: boolean;
+    atDoor: boolean;
+    coupon: string;
+    progress: Progress[];
+    createdAt: string;
+    updatedAt: string;
+    items: OrderItem[];
+  }
+
+  // Pagination details
+  interface Pagination {
+    total: number;
+    count: number;
+    pages: number;
+    limit: number;
+    page: number;
+  }
+
+  // Orders data
+  interface OrdersData {
+    orders: Order[];
+    pagination: Pagination;
+  }
+  // Main response structure
+  interface OrderResponse {
+    status: string;
+    statusCode: number;
+    data: OrdersData;
+  }
 
   interface OrderCash {
     status: "success" | "fail" | "error";

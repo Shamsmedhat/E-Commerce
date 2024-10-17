@@ -1,7 +1,26 @@
-import { placeOrderAction } from "@/lib/actions/order-actions";
+import { getOrdersAction, placeOrderAction } from "@/lib/actions/order-actions";
 import { useRouter } from "@/navigarion";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import { toast } from "react-toastify";
+
+export function useOrders() {
+  const {
+    data: orders,
+    isFetching,
+    isError,
+    isPending,
+  }: UseQueryResult<OrdersData> = useQuery({
+    queryKey: ["orders"],
+    queryFn: () => getOrdersAction(),
+  });
+
+  return { orders, isFetching, isError, isPending };
+}
 
 export function usePlaceOrder() {
   const queryClient = useQueryClient();
