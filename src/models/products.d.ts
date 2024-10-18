@@ -51,23 +51,23 @@ declare global {
     ratings?: Ratings;
   }
   // Define the interface for individual product details
-  interface SingleProduct {
-    product: {
-      _id: string;
-      category: Category;
-      subCategory: SubCategory;
-      brand: Brand;
-      cover: string;
-      gallery: GalleryImage[];
-      price: number;
-      stock: number;
-      sales: number;
-      translations: ProductTranslation;
-      createdAt: string;
-      updatedAt: string;
-      ratings: Ratings;
-    };
-  }
+  // interface SingleProduct {
+  //   product: {
+  //     _id: string;
+  //     category: Category;
+  //     subCategory: SubCategory;
+  //     brand: Brand;
+  //     cover: string;
+  //     gallery: GalleryImage[];
+  //     price: number;
+  //     stock: number;
+  //     sales: number;
+  //     translations: ProductTranslation;
+  //     createdAt: string;
+  //     updatedAt: string;
+  //     ratings: Ratings;
+  //   };
+  // }
 
   // Define the interface for individual product
   interface ProductData {

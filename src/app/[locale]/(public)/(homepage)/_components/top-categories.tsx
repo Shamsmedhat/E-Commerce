@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -16,18 +17,40 @@ import Heading from "@/components/common/Heading";
 import petFood from "@/../public/assets/pet-food.png";
 import snacks from "@/../public/assets/snacks.png";
 import phone from "@/../public/assets/iphone.png";
+import { useLocale, useTranslations } from "next-intl";
 
-export default async function TopCategories() {
-  const t = await getTranslations();
+export default function TopCategories({
+  categoriesData,
+}: {
+  categoriesData: CategoriesData;
+}) {
+  const t = useTranslations();
   // get locale for text dir
-  const locale = await getLocale();
+  const locale = useLocale();
+
+  const homeAndPetCarecategory = categoriesData.categories?.filter(
+    (c) => c.translations.data.name === "Home and Pet Care",
+  )[0];
+  const foodCategory = categoriesData.categories?.filter(
+    (c) => c.translations.data.name === "Food",
+  )[0];
 
   return (
     <section className="container mb-10 flex flex-col gap-8 px-5">
-      {/* title h2 heading */}
-      <Heading className={handleEnText(locale)}>
-        {t("4iTgMO7i9qAUoe4dCjRtT")}
-      </Heading>
+      <div className="flex flex-row-reverse items-center justify-between">
+        {/* title h2 heading */}
+        <Heading className={handleEnText(locale)}>
+          {t("4iTgMO7i9qAUoe4dCjRtT")}
+        </Heading>
+        <div>
+          <Link
+            href="/categories"
+            className="my-5 w-auto rounded-md bg-white px-6 py-2 text-center text-sm font-bold uppercase text-primary-foreground sm:text-lg"
+          >
+            {t("5v5B8O5ENR2qoShuRPbjg")}
+          </Link>
+        </div>
+      </div>
 
       {/* content  */}
       <div className="flex flex-col gap-6 sm:flex-row">
@@ -75,7 +98,7 @@ export default async function TopCategories() {
           {/* title */}
           <div className="mt-[2rem]">
             <Link
-              href=""
+              href={`categories/${homeAndPetCarecategory?._id}`}
               className={`${badgeVariants({ variant: "outline" })} rounded-none border-none bg-white/20 !text-base !text-white`}
             >
               {t("F8hMVdXN9r53Pzxc5iMlN")}
@@ -103,7 +126,7 @@ export default async function TopCategories() {
           {/* title */}
           <div className="mt-[2rem] flex-col justify-start">
             <Link
-              href=""
+              href={`categories/${foodCategory?._id}`}
               className={`${badgeVariants({ variant: "outline" })} rounded-none border-none bg-white/20 !text-base !text-white`}
             >
               {t("cNlasXhCqRpxvH12DMjxm")}

@@ -1,18 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.parent {
-  @apply flex; /* This sets the parent to use flexbox */
+.tab-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, rgba(196, 157, 84, 0.19), transparent);
+  background-size: 100% 50%;
+  background-position: bottom;
+  filter: blur(4px); /* Adjust the blur value */
 }
-
-.child-1 {
-  @apply h-auto; /* Allow height to be based on content */
-}
-
-.child-2 {
-  @apply hidden; /* Initially hide this child */
-}
-
 /* Overwrite style in product gallary */
 /* .image-gallery-slide .image-gallery-image {
   width: 100%; 

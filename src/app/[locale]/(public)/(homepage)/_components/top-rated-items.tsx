@@ -71,12 +71,6 @@ export default function TopRatedItems() {
         <Heading className="flex items-center">
           {t("CrU60-woqGv72goIWJC_l")}
         </Heading>
-        <Link
-          href=""
-          className="my-5 w-auto rounded-md bg-white px-6 py-2 text-center text-sm font-bold uppercase text-primary-foreground sm:text-lg"
-        >
-          {t("K0t7CX8uPwXiTE8oJilMt")}
-        </Link>
       </div>
       {/* top rated products slider */}
       <div className="bg-white shadow-lg">

@@ -89,7 +89,8 @@ export default function TabNav({
             key={category._id}
             value={category.translations.data.name}
             onClick={() => onCategoryClick(category.translations.data.name)}
-            className="cursor-pointer border-transparent px-4 py-2 text-base font-medium text-primary-foreground/70 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary"
+            // className="cursor-pointer border-transparent px-4 py-2 text-base font-medium text-primary-foreground/70 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary"
+            className="cursor-pointer border-transparent px-4 py-2 text-base font-medium text-primary-foreground/70 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-gradient-to-t data-[state=active]:from-[rgba(219,173,86,0.19)] data-[state=active]:to-transparent data-[state=active]:backdrop-blur-lg"
           >
             {/* render category image with name based on locale*/}
             <span className="flex gap-2">

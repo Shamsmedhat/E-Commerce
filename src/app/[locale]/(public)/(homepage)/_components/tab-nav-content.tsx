@@ -57,7 +57,7 @@ export default function TabNavContent({
 
           <div className="flex w-full justify-center">
             <Link
-              href=""
+              href={`/categories/${category._id}`}
               className="my-5 w-auto rounded-md bg-white px-6 py-2 text-center font-bold uppercase text-primary-foreground"
             >
               {t("K0t7CX8uPwXiTE8oJilMt")}

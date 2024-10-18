@@ -13,6 +13,8 @@ import {
   LuShoppingCart,
   LuUser,
 } from "react-icons/lu";
+import { RiShoppingBag3Fill } from "react-icons/ri";
+
 import { Link } from "@/navigarion";
 import SignOut from "@/app/[locale]/(public)/(homepage)/_components/SignOut";
 import { useTranslations } from "next-intl";
@@ -45,11 +47,12 @@ export default function UserDropmenu() {
 
         {/* cart */}
         <DropdownMenuItem>
-          <Link href="/cart" className="relative">
-            <span className="absolute right-0 top-1 flex aspect-square min-h-3 min-w-3 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
-              77
-            </span>
-            <LuShoppingCart />
+          <Link
+            href="/orders"
+            className="flex w-full items-center gap-2 rtl:flex-row-reverse"
+          >
+            <RiShoppingBag3Fill />
+            <span>{t("y79ohefeVDnKx9ZMEZ9ac")}</span>
           </Link>
         </DropdownMenuItem>
 

@@ -18,6 +18,7 @@ import { AddressForm } from "./address-form";
 import { PaymentSelect } from "./payment-select";
 import { usePlaceOrder } from "@/lib/utils/data/orders-data";
 import useEmblaCarousel from "embla-carousel-react";
+import SuccefullyOrder from "./succefully-order";
 
 export default function TotalPaymentProcess(cart: CartData) {
   // Translation
@@ -64,7 +65,12 @@ export default function TotalPaymentProcess(cart: CartData) {
         </CarouselItem>
 
         {/* Message section last step */}
-        {orderData.paymentType === "cash" && <CarouselItem>3</CarouselItem>}
+        {orderData.paymentType === "cash" ||
+          (orderData.paymentType === "card" && (
+            <CarouselItem>
+              <SuccefullyOrder />
+            </CarouselItem>
+          ))}
       </CarouselContent>
 
       {/* Next and previous btns */}
@@ -74,7 +80,7 @@ export default function TotalPaymentProcess(cart: CartData) {
           className={cn(
             "px-6 text-lg font-semibold text-white hover:bg-primary/80 hover:text-white",
           )}
-          // disabled={isFormValid}
+          disabled={isFormValid}
           placeOrder={placeOrder}
           orderData={orderData}
         />

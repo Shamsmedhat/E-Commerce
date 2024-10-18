@@ -1,4 +1,8 @@
-import { getOrdersAction, placeOrderAction } from "@/lib/actions/order-actions";
+import {
+  getOrdersAction,
+  getSortedOrdersByOldestAction,
+  placeOrderAction,
+} from "@/lib/actions/order-actions";
 import { useRouter } from "@/navigarion";
 import {
   useMutation,
@@ -21,6 +25,19 @@ export function useOrders() {
 
   return { orders, isFetching, isError, isPending };
 }
+export function useSortedOrdersByOldest() {
+  const {
+    data: sortedOrders,
+    isFetching,
+    isError,
+    isPending,
+  }: UseQueryResult<OrdersData> = useQuery({
+    queryKey: ["sorted-orders"],
+    queryFn: () => getSortedOrdersByOldestAction(),
+  });
+
+  return { sortedOrders, isFetching, isError, isPending };
+}
 
 export function usePlaceOrder() {
   const queryClient = useQueryClient();
@@ -38,8 +55,7 @@ export function usePlaceOrder() {
         toast.success("Cash order placed successfully."); // Adjust the success message accordingly
       }
       toast.success("Order is placed successfully.");
-      //todo after i create the get orders
-      // queryClient.invalidateQueries({ queryKey: ["orders"] });
+      queryClient.invalidateQueries({ queryKey: ["cart", "orders"] });
     },
     onError: (err) => {
       toast.error(err.message);

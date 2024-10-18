@@ -17,7 +17,7 @@ export default async function Page() {
       <DiscountSection />
       <TopSellingItems />
       <TopRatedItems />
-      <TopCategories />
+      <TopCategories categoriesData={categoriesData} />
     </>
   );
 }

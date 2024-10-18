@@ -25,7 +25,7 @@ export default async function DiscountSection() {
           {t("55U9Vfm5jUosimK6mB2gl")}
         </p>
         <Link
-          href=""
+          href="/categories"
           className="border border-white px-6 text-xs font-bold text-white transition-colors hover:bg-white hover:text-primary-foreground md:text-sm"
         >
           {t("hxORlugaycADhGY3aysLj")}

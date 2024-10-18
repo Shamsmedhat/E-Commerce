@@ -41,44 +41,8 @@ export default function Navbar({ categories, pagination }: CategoriesData) {
     );
   }
 
-  //   return (
-  //     <NavigationMenu className="justify-center !py-0 text-center">
-  //       <NavigationMenuList>
-  //         {/* map over categories for display its info */}
-  //         {categories?.map((c) => (
-  //           <NavigationMenuItem key={c._id} className="!mx-0">
-  //             <Link href={`/categories/${c._id}`} legacyBehavior passHref>
-  //               <NavigationMenuLink
-  //                 // make the text primary color when the user in the category page that has beign selected
-  //                 className={cn(
-  //                   categoryPageId === c._id && "bg-primary/60",
-  //                   isEn && "flex-row-reverse",
-  //                   "flex items-center justify-center gap-2 px-6 py-3 text-primary-foreground/80 transition-all ease-out hover:bg-primary/60",
-  //                 )}
-  //               >
-  //                 {/* render the category name in en or ar based on the data and the current locale */}
-  //                 <span className="hidden lg:block lg:text-[1rem]">
-  //                   {c.translations.data.name}
-  //                 </span>
-
-  //                 {/* category image */}
-  //                 <Image
-  //                   src={c.image}
-  //                   alt={c.translations.data.name}
-  //                   width={25}
-  //                   height={25}
-  //                 />
-  //               </NavigationMenuLink>
-  //             </Link>
-  //           </NavigationMenuItem>
-  //         ))}
-  //       </NavigationMenuList>
-  //     </NavigationMenu>
-  //   );
-  // }
-
   return (
-    <ul className="flex justify-center !py-0 text-center">
+    <ul className="flex flex-row-reverse justify-center !py-0 text-center">
       {/* map over categories for display its info */}
       {categories?.map((c) => (
         <li key={c._id} className="!mx-0">
@@ -91,11 +55,6 @@ export default function Navbar({ categories, pagination }: CategoriesData) {
                 "flex items-center justify-center gap-2 px-6 py-3 text-primary-foreground/80 transition-all ease-out hover:bg-primary/60",
               )}
             >
-              {/* render the category name in en or ar based on the data and the current locale */}
-              <span className="hidden lg:block lg:text-[1rem]">
-                {c.translations.data.name}
-              </span>
-
               {/* category image */}
               <Image
                 src={c.image}
@@ -103,6 +62,10 @@ export default function Navbar({ categories, pagination }: CategoriesData) {
                 width={25}
                 height={25}
               />
+              {/* render the category name in en or ar based on the data and the current locale */}
+              <span className="hidden lg:block lg:text-[1rem]">
+                {c.translations.data.name}
+              </span>
             </div>
           </Link>
         </li>

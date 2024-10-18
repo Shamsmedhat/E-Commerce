@@ -80,7 +80,11 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
   });
 
   // Use watch to track form values
-  const { getValues, watch } = form;
+  const {
+    getValues,
+    watch,
+    formState: { isSubmitSuccessful, isSubmitting },
+  } = form;
 
   // Watch for changes in the type field
   const paymentType = watch("type");
@@ -99,10 +103,9 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
     values.delivery === "paid-delivery"
       ? dispatch(addShippingFees(500))
       : dispatch(addShippingFees(0));
-    console.log("orderData", orderData);
-    console.log("values", values);
+
     toast.success(
-      `You payments is saved successfully: method ${values.type} and your delivery fees is ${values.delivery === "paid-delivery" ? "500" : "Free"}.`,
+      `You payments is saved successfully: method ${values.type} and your delivery fees is ${values.delivery === "paid-delivery" ? "500" : "Free"} please click continue.`,
     );
   }
 

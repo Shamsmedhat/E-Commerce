@@ -247,9 +247,9 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, CarouselNextProps>(
     const t = useTranslations();
     const { orientation, scrollNext, canScrollNext } = useCarousel();
 
-    // if (!canScrollNext) {
-    //   return null;
-    // }
+    if (!canScrollNext) {
+      return null;
+    }
 
     function handleSubmit() {
       if (orderData.paymentType) {
