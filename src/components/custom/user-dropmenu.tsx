@@ -27,7 +27,7 @@ export default function UserDropmenu() {
     <DropdownMenu>
       {/* dropmenu trigger setting */}
       <DropdownMenuTrigger asChild>
-        <button className="focus mt-1 flex items-center gap-1 px-2">
+        <button className="focus mt-1 flex items-center gap-1 px-2 text-xs sm:text-sm">
           {t("OP29qgwvwjQThZqFJ8JrS")} <LuChevronDown className="w-4" />
         </button>
       </DropdownMenuTrigger>

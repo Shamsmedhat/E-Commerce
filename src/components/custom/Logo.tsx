@@ -5,7 +5,7 @@ export default function Logo({ width = 80, height = 80 }) {
   return (
     <Link
       href="/"
-      className="flex items-center gap-1 text-lg font-bold uppercase"
+      className="flex min-h-[80px] min-w-[80px] items-center gap-1 text-lg font-bold uppercase"
     >
       <Image
         src="/assets/Zeronet_logo.png"

@@ -82,7 +82,7 @@ export default function TabNav({
       className="mt-[2rem] w-full"
       dir={isEn ? "ltr" : "rtl"}
     >
-      <TabsList className="flex justify-center gap-5 rounded-md bg-white px-4 pt-2 shadow-sm lg:justify-start">
+      <TabsList className="flex justify-center gap-0 rounded-md bg-white px-4 pt-2 shadow-sm md:gap-5 lg:justify-start">
         {/* Tabnav categories list */}
         {categories?.map((category, i) => (
           <TabsTrigger
@@ -90,10 +90,10 @@ export default function TabNav({
             value={category.translations.data.name}
             onClick={() => onCategoryClick(category.translations.data.name)}
             // className="cursor-pointer border-transparent px-4 py-2 text-base font-medium text-primary-foreground/70 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary"
-            className="cursor-pointer border-transparent px-4 py-2 text-base font-medium text-primary-foreground/70 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-gradient-to-t data-[state=active]:from-[rgba(219,173,86,0.19)] data-[state=active]:to-transparent data-[state=active]:backdrop-blur-lg"
+            className="flex-grow cursor-pointer border-transparent py-2 text-base font-medium text-primary-foreground/70 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:bg-gradient-to-t data-[state=active]:from-[rgba(219,173,86,0.19)] data-[state=active]:to-transparent data-[state=active]:backdrop-blur-lg md:flex-grow-0 md:px-4"
           >
             {/* render category image with name based on locale*/}
-            <span className="flex gap-2">
+            <span className="flex justify-center xl:gap-2">
               <Image src={category.image} height={25} width={25} alt="" />
               <span className="hidden xl:block">
                 {category.translations.data.name}

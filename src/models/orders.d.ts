@@ -54,7 +54,7 @@ declare global {
     cover: string;
     price: number;
     stock: number;
-    translations: Translation[];
+    translations: Translation;
     createdAt: string;
     updatedAt: string;
   }

@@ -47,8 +47,8 @@ export default function LoginHeaderSection() {
     );
   } else if (status === "authenticated" || data) {
     return (
-      <li className="flex h-14 flex-col items-center justify-center border-e px-6">
-        <span className="text-sm text-muted-foreground">
+      <li className="flex h-7 flex-col items-center justify-center border-e px-1 sm:h-14 sm:px-6">
+        <span className="text-xs text-muted-foreground sm:text-sm">
           {t("GA5q4VAGgkQx9JSIoCH64")} {userName}
         </span>
 

@@ -3,6 +3,7 @@ import { getCategoriesData } from "@/lib/utils/data/categories-data";
 import { handleEnText } from "@/lib/utils/helpers";
 import { getLocale, getTranslations } from "next-intl/server";
 import TabNav from "./tab-nav";
+import { cn } from "@/lib/utils";
 
 export default async function DealsOfTheDay() {
   const t = await getTranslations();
@@ -36,9 +37,9 @@ export default async function DealsOfTheDay() {
     pagination = data.pagination;
   }
   return (
-    <section className="container my-9">
+    <section className="container md:my-9">
       {/* h2 heading */}
-      <Heading className={handleEnText(locale)}>
+      <Heading className={cn(handleEnText(locale))}>
         {t("EMm4-Oay1VcXIpDa1EQ_Y")}
       </Heading>
 

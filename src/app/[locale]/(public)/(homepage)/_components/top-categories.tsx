@@ -31,8 +31,13 @@ export default function TopCategories({
   const homeAndPetCarecategory = categoriesData.categories?.filter(
     (c) => c.translations.data.name === "Home and Pet Care",
   )[0];
+
   const foodCategory = categoriesData.categories?.filter(
     (c) => c.translations.data.name === "Food",
+  )[0];
+
+  const electronicsCategory = categoriesData.categories?.filter(
+    (c) => c.translations.data.name === "Electronics",
   )[0];
 
   return (
@@ -70,7 +75,7 @@ export default function TopCategories({
           {/* title */}
           <div className="mt-[2rem]">
             <Link
-              href="/electronics"
+              href={`/categories/${electronicsCategory?._id}`}
               className={`${badgeVariants({ variant: "outline" })} rounded-none border-none bg-white/20 !text-base !text-white`}
             >
               {t("61E446UcW_k3JTaJe9C4A")}

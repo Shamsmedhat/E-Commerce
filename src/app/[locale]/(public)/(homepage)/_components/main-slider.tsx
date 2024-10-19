@@ -38,10 +38,8 @@ export default function MainSlider({ categoriesData }: MainSliderProps) {
       </Heading>
 
       {/* This will show only on medium screens */}
-      {/* <div className="md:block lg:hidden">
-        <MainSectionForMediumScreen categoriesData={categoriesData} />
-      </div> */}
-      <div className="">
+      <div className="md:block lg:hidden">
+        {/* <MainSectionForMediumScreen categoriesData={categoriesData} /> */}
         <MainSectionForSmallScreen
           categoriesData={categoriesData}
           t={t}
@@ -50,13 +48,13 @@ export default function MainSlider({ categoriesData }: MainSliderProps) {
       </div>
 
       {/* This will show only on large screens */}
-      {/* <div className="hidden lg:block">
+      <div className="hidden lg:block">
         <MainSectionForLargeScreen
           categoriesData={categoriesData}
           locale={locale}
           t={t}
         />
-      </div> */}
+      </div>
     </section>
   );
 }
@@ -433,7 +431,7 @@ export function MainSectionForSmallScreen({
         <Image
           src="/assets/beverages.png"
           alt={t("WmE5jcPnkChTNkIEIDyJw")}
-          width={45}
+          width={145}
           height={100}
           priority
           className={cn(

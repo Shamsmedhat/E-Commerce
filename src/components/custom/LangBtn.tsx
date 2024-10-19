@@ -22,7 +22,7 @@ export default function LangBtn({
       variant="outline"
       className={cn(
         locale === "en" && "self-baseline",
-        "flex items-center px-3 text-xl font-semibold rtl:text-base",
+        "flex h-7 w-7 items-center px-3 text-xl font-semibold sm:h-10 sm:w-10 rtl:text-base",
       )}
       onClick={() =>
         router.replace(pathname, {

@@ -42,12 +42,12 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
       className={cn(
         // style in only first product
         isFirstProduct
-          ? "col-span-1 row-span-2 flex h-full flex-col items-center justify-between bg-white p-5 shadow-sm xsm:col-span-2 md:row-span-1 xl:row-span-2"
+          ? "col-span-2 row-span-2 flex h-full flex-col items-center justify-between bg-white p-5 shadow-sm xsm:col-span-2 md:col-span-2 md:row-span-1 xl:row-span-2"
           : // style in only sec and third product
             isSecAndThirdProduct
-            ? "col-span-2 row-span-2 bg-white p-5 shadow-sm md:row-span-1"
+            ? "col-span-2 row-span-2 bg-white p-5 shadow-sm md:col-span-2 md:row-span-1"
             : // style in rest of the product
-              "col-span-1 row-span-1 bg-white p-5 shadow-sm",
+              "col-span-2 row-span-2 bg-white p-5 shadow-sm md:col-span-2 md:row-span-1 xl:col-span-1 xl:row-span-1",
         "rounded-lg",
       )}
     >
@@ -56,9 +56,12 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
         className={cn(
           // isEn to display it when the locale is eng
           !isEn && "flex-row-reverse",
-          isFirstProduct && isSecAndThirdProduct && "md:flex-row",
-          !isFirstProduct && !isSecAndThirdProduct && "flex flex-col gap-2",
-          "flex h-full w-full gap-[1.5rem]",
+          isFirstProduct && "flex flex-col md:flex-row",
+          isSecAndThirdProduct && "flex flex-col md:flex-row",
+          !isFirstProduct &&
+            !isSecAndThirdProduct &&
+            "flex flex-col gap-2 md:flex-row xl:flex-col",
+          "flex h-full w-full justify-center gap-[1.5rem]",
         )}
       >
         {/* product image div*/}
@@ -68,13 +71,18 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             isFirstProduct && "md:w-1/4 xl:w-1/2",
             // style in only sec and third product
             isSecAndThirdProduct && "md:w-1/4",
-            !isFirstProduct && !isSecAndThirdProduct && "h-[180px] w-full",
+            !isFirstProduct &&
+              !isSecAndThirdProduct &&
+              "w-1/3 md:w-1/4 xl:h-[10rem] xl:w-full",
 
             // basic style
-            "relative",
+            "relative h-full w-full",
           )}
         >
-          <Link href={`/product/${p._id}`}>
+          <Link
+            href={`/product/${p._id}`}
+            className="inline-block h-full w-full"
+          >
             <Image
               src={p.cover!}
               alt={p.translations?.data.name!}
@@ -153,7 +161,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
                 !isSecAndThirdProduct &&
                 "flex-col justify-start gap-1",
               // basic style
-              "mt-3 flex items-center xl:mt-0",
+              "mt-3 flex items-start xl:mt-0",
             )}
           >
             {/* Priceing */}
@@ -192,13 +200,6 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
                 <button>
                   <div className="rounded-full bg-primary-foreground/20 p-[10px]">
                     <LuHeart strokeWidth={1} />
-                  </div>
-                </button>
-
-                {/* compair btn */}
-                <button>
-                  <div className="rounded-full bg-primary-foreground/20 p-[10px]">
-                    <LuScale strokeWidth={1} />
                   </div>
                 </button>
               </div>

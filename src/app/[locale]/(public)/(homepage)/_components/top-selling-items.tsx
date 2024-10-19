@@ -54,7 +54,7 @@ export default function TopSellingItems() {
   }
 
   return (
-    <section className="mt-16 w-full">
+    <section className="md:2 w-full md:mt-16">
       {/* title h2 heading */}
       <div
         className={cn(

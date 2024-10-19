@@ -42,7 +42,7 @@ export default function Navbar({ categories, pagination }: CategoriesData) {
   }
 
   return (
-    <ul className="flex flex-row-reverse justify-center !py-0 text-center">
+    <ul className="flex flex-row-reverse justify-evenly !py-0 text-center md:justify-center">
       {/* map over categories for display its info */}
       {categories?.map((c) => (
         <li key={c._id} className="!mx-0">
@@ -52,7 +52,7 @@ export default function Navbar({ categories, pagination }: CategoriesData) {
               className={cn(
                 categoryPageId === c._id && "bg-primary/60",
                 isEn && "flex-row-reverse",
-                "flex items-center justify-center gap-2 px-6 py-3 text-primary-foreground/80 transition-all ease-out hover:bg-primary/60",
+                "flex items-center justify-center gap-2 px-2 py-3 text-primary-foreground/80 transition-all ease-out hover:bg-primary/60 md:px-6",
               )}
             >
               {/* category image */}

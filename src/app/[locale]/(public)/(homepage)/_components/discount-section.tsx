@@ -10,7 +10,7 @@ export default async function DiscountSection() {
   const t = await getTranslations();
 
   return (
-    <div className="relative mb-5 mt-24 flex h-[8.5rem] w-full items-center justify-center bg-categories-electronics drop-shadow-sm">
+    <div className="relative mb-5 mt-3 flex h-[8.5rem] w-full items-center justify-center bg-categories-electronics drop-shadow-sm md:mt-24">
       <Image
         //clip top custom css in the globals css not from tailwind
         src={iphoneImg}
