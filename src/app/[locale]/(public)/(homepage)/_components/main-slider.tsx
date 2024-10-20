@@ -59,103 +59,103 @@ export default function MainSlider({ categoriesData }: MainSliderProps) {
   );
 }
 
-export function MainSectionForMediumScreen({ categoriesData }: SectionProps) {
-  return (
-    <ul className="mt-8 grid grid-cols-6 grid-rows-1 gap-3">
-      {/* Drinks ------------------------------------------------------------- */}
-      {categoriesData.categories?.map((c) => (
-        <li
-          key={c._id} // Always add a unique key for each item in the map
-          className="flex flex-col items-start overflow-hidden rounded-lg"
-          style={{
-            backgroundColor: generateColors(c.translations.data.name)
-              .backgroundColor,
-            color: generateColors(c.translations.data.name).color,
-          }}
-        >
-          <span className="m-3 rounded-sm bg-white/20 px-3 py-1 text-sm font-semibold">
-            {c.translations.data.name}
-          </span>
+// export function MainSectionForMediumScreen({ categoriesData }: SectionProps) {
+//   return (
+//     <ul className="mt-8 grid grid-cols-6 grid-rows-1 gap-3">
+//       {/* Drinks ------------------------------------------------------------- */}
+//       {categoriesData.categories?.map((c) => (
+//         <li
+//           key={c._id} // Always add a unique key for each item in the map
+//           className="flex flex-col items-start overflow-hidden rounded-lg"
+//           style={{
+//             backgroundColor: generateColors(c.translations.data.name)
+//               .backgroundColor,
+//             color: generateColors(c.translations.data.name).color,
+//           }}
+//         >
+//           <span className="m-3 rounded-sm bg-white/20 px-3 py-1 text-sm font-semibold">
+//             {c.translations.data.name}
+//           </span>
 
-          {/* Conditionally render the Image if the category is Electronics */}
-          {(c.translations.data.name === "Electronics" ||
-            c.translations.data.name === "الالكترونيات") && (
-            <div className="relative h-[10rem] w-full flex-grow">
-              <Image
-                src="/assets/electronics.png"
-                alt={c.translations.data.name}
-                className="absolute inset-0 object-cover drop-shadow-2xl"
-                sizes="100%"
-                fill
-              />
-            </div>
-          )}
-          {(c.translations.data.name === "Babies" ||
-            c.translations.data.name === "الاطفال") && (
-            <div className="relative h-[10rem] w-full flex-grow">
-              <Image
-                src="/assets/baby.png"
-                alt={c.translations.data.name}
-                className="absolute inset-0 object-cover drop-shadow-2xl"
-                sizes="100%"
-                fill
-              />
-            </div>
-          )}
-          {(c.translations.data.name === "Home and Pet Care" ||
-            c.translations.data.name ===
-              "العناية بالمنزل والحيوانات الأليفة") && (
-            <div className="relative h-[10rem] w-full flex-grow">
-              <Image
-                src="/assets/pet.png" // Ensure the correct image path
-                alt={c.translations.data.name}
-                className="absolute inset-0 object-cover drop-shadow-2xl"
-                sizes="100%"
-                fill
-              />
-            </div>
-          )}
-          {(c.translations.data.name === "Beverages" ||
-            c.translations.data.name === "المشروبات") && (
-            <div className="relative h-[10rem] w-full flex-grow">
-              <Image
-                src="/assets/beverages.png " // Ensure the correct image path
-                alt={c.translations.data.name}
-                className="absolute inset-0 object-cover drop-shadow-2xl"
-                sizes="100%"
-                fill
-              />
-            </div>
-          )}
-          {(c.translations.data.name === "Health and Personal Care" ||
-            c.translations.data.name === "الصحة والعناية الشخصية") && (
-            <div className="relative h-[10rem] w-full flex-grow">
-              <Image
-                src="/assets/personal-care-bg.png" // Ensure the correct image path
-                alt={c.translations.data.name}
-                className="absolute inset-0 object-cover object-left drop-shadow-2xl"
-                sizes="100%"
-                fill
-              />
-            </div>
-          )}
-          {(c.translations.data.name === "Food" ||
-            c.translations.data.name === "طعام") && (
-            <div className="relative h-[10rem] w-full flex-grow">
-              <Image
-                src="/assets/food.png" // Ensure the correct image path
-                alt={c.translations.data.name}
-                className="absolute inset-0 object-cover drop-shadow-2xl"
-                sizes="100%"
-                fill
-              />
-            </div>
-          )}
-        </li>
-      ))}
-    </ul>
-  );
-}
+//           {/* Conditionally render the Image if the category is Electronics */}
+//           {(c.translations.data.name === "Electronics" ||
+//             c.translations.data.name === "الالكترونيات") && (
+//             <div className="relative h-[10rem] w-full flex-grow">
+//               <Image
+//                 src="/assets/electronics.png"
+//                 alt={c.translations.data.name}
+//                 className="absolute inset-0 object-cover drop-shadow-2xl"
+//                 sizes="100%"
+//                 fill
+//               />
+//             </div>
+//           )}
+//           {(c.translations.data.name === "Babies" ||
+//             c.translations.data.name === "الاطفال") && (
+//             <div className="relative h-[10rem] w-full flex-grow">
+//               <Image
+//                 src="/assets/baby.png"
+//                 alt={c.translations.data.name}
+//                 className="absolute inset-0 object-cover drop-shadow-2xl"
+//                 sizes="100%"
+//                 fill
+//               />
+//             </div>
+//           )}
+//           {(c.translations.data.name === "Home and Pet Care" ||
+//             c.translations.data.name ===
+//               "العناية بالمنزل والحيوانات الأليفة") && (
+//             <div className="relative h-[10rem] w-full flex-grow">
+//               <Image
+//                 src="/assets/pet.png" // Ensure the correct image path
+//                 alt={c.translations.data.name}
+//                 className="absolute inset-0 object-cover drop-shadow-2xl"
+//                 sizes="100%"
+//                 fill
+//               />
+//             </div>
+//           )}
+//           {(c.translations.data.name === "Beverages" ||
+//             c.translations.data.name === "المشروبات") && (
+//             <div className="relative h-[10rem] w-full flex-grow">
+//               <Image
+//                 src="/assets/beverages.png " // Ensure the correct image path
+//                 alt={c.translations.data.name}
+//                 className="absolute inset-0 object-cover drop-shadow-2xl"
+//                 sizes="100%"
+//                 fill
+//               />
+//             </div>
+//           )}
+//           {(c.translations.data.name === "Health and Personal Care" ||
+//             c.translations.data.name === "الصحة والعناية الشخصية") && (
+//             <div className="relative h-[10rem] w-full flex-grow">
+//               <Image
+//                 src="/assets/personal-care-bg.png" // Ensure the correct image path
+//                 alt={c.translations.data.name}
+//                 className="absolute inset-0 object-cover object-left drop-shadow-2xl"
+//                 sizes="100%"
+//                 fill
+//               />
+//             </div>
+//           )}
+//           {(c.translations.data.name === "Food" ||
+//             c.translations.data.name === "طعام") && (
+//             <div className="relative h-[10rem] w-full flex-grow">
+//               <Image
+//                 src="/assets/food.png" // Ensure the correct image path
+//                 alt={c.translations.data.name}
+//                 className="absolute inset-0 object-cover drop-shadow-2xl"
+//                 sizes="100%"
+//                 fill
+//               />
+//             </div>
+//           )}
+//         </li>
+//       ))}
+//     </ul>
+//   );
+// }
 
 export function MainSectionForLargeScreen({
   categoriesData,
@@ -367,7 +367,7 @@ export function MainSectionForSmallScreen({
   const isEn = locale === "en";
   return (
     <ul
-      className="grid h-[80vh] grid-cols-6 grid-rows-5 gap-3"
+      className="grid h-[80vh] grid-cols-6 grid-rows-5 gap-3 xsm:grid-rows-4"
       dir={isEn ? "ltr" : "rtl"}
     >
       {/* Slider ------------------------------------------------------------- */}
@@ -420,7 +420,7 @@ export function MainSectionForSmallScreen({
 
       {/* Beverages ------------------------------------------------------------- */}
 
-      <li className="relative col-span-3 row-span-1 flex flex-col items-start overflow-hidden rounded-lg bg-categories-beverages p-2">
+      <li className="relative col-span-3 row-span-1 flex flex-col items-start overflow-hidden rounded-lg bg-categories-beverages p-2 xsm:col-span-2 xsm:row-span-1">
         <span className="rounded-sm bg-white/20 p-[2px] text-xs text-zinc-800">
           {t("eFqAbc2btxOYiag5xvK0l")}
         </span>
@@ -443,7 +443,7 @@ export function MainSectionForSmallScreen({
 
       {/* Babies ------------------------------------------------------------- */}
 
-      <li className="before relative col-span-3 row-span-1 flex flex-col items-start p-2 before:absolute before:inset-0 before:rounded-lg before:bg-categories-babyAndToddler">
+      <li className="before relative col-span-3 row-span-1 flex flex-col items-start p-2 before:absolute before:inset-0 before:rounded-lg before:bg-categories-babyAndToddler xsm:col-span-2 xsm:row-span-1">
         <span className="relative z-[1] rounded-sm bg-white/50 p-[2px] text-xs font-bold text-zinc-800">
           {t("tixmUuYDazffNOLtxblYK")}
         </span>
@@ -460,14 +460,14 @@ export function MainSectionForSmallScreen({
             isEn
               ? "md:translate-x-5 2xl:translate-x-20"
               : "md:-translate-x-5 2xl:-translate-x-20",
-            "absolute -translate-y-4 translate-x-16 md:left-0 md:top-8 md:w-[8rem] 2xl:left-0 2xl:top-0 2xl:w-[10rem] 2xl:-translate-y-5",
+            "absolute -translate-y-4 translate-x-16 xsm:start-6 md:start-24",
           )}
         />
       </li>
 
       {/* Personal Care ------------------------------------------------------ */}
 
-      <li className="relative col-span-3 row-span-1 flex flex-col items-start overflow-hidden rounded-lg p-2">
+      <li className="relative col-span-3 row-span-1 flex flex-col items-start overflow-hidden rounded-lg p-2 xsm:col-span-2 xsm:row-span-1">
         <span className="relative z-[1] rounded-sm bg-white/20 p-1 text-[8px] text-white">
           {t("JM5A8Gye2wneaO3srCNVj")}
         </span>
@@ -492,7 +492,7 @@ export function MainSectionForSmallScreen({
       <li
         className={cn(
           isEn ? "" : "flex flex-col",
-          "before relative col-span-3 row-span-1 items-start p-2 before:absolute before:inset-0 before:rounded-lg before:bg-categories-electronics",
+          "before relative col-span-3 row-span-1 items-start p-2 before:absolute before:inset-0 before:rounded-lg before:bg-categories-electronics xsm:col-span-2 xsm:row-span-1",
         )}
       >
         <span className="relative z-[1] self-end rounded-sm bg-white/60 p-1 text-xs uppercase text-white">
@@ -516,7 +516,7 @@ export function MainSectionForSmallScreen({
 
       {/* Home & Pet ------------------------------------------------------------- */}
 
-      <li className="before relative col-span-3 row-span-1 flex flex-col items-start overflow-hidden p-2 before:absolute before:inset-0 before:rounded-lg before:bg-categories-homeAndPetCare">
+      <li className="before relative col-span-3 row-span-1 flex flex-col items-start overflow-hidden p-2 before:absolute before:inset-0 before:rounded-lg before:bg-categories-homeAndPetCare xsm:col-span-2 xsm:row-span-1">
         <span className="relative z-[1] rounded-sm bg-white/20 p-1 text-xs uppercase text-white">
           {t("pncleFA5O1Wog0H03XCaQ")}
         </span>
@@ -538,7 +538,7 @@ export function MainSectionForSmallScreen({
 
       {/* Food ------------------------------------------------------------- */}
 
-      <li className="before relative col-span-3 row-span-1 flex flex-col items-start p-2 before:absolute before:inset-0 before:rounded-lg before:bg-categories-food">
+      <li className="before relative col-span-3 row-span-1 flex flex-col items-start p-2 before:absolute before:inset-0 before:rounded-lg before:bg-categories-food xsm:col-span-2 xsm:row-span-1">
         <span className="relative z-[1] rounded-sm bg-primary-foreground/20 p-1 text-xs uppercase text-white">
           {t("cNlasXhCqRpxvH12DMjxm")}
         </span>

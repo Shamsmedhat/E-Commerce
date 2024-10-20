@@ -6,10 +6,11 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Skeleton } from "../ui/skeleton";
+import { cn } from "@/lib/utils";
 
 export default function MainSliderSkeleton({ locale }: { locale: string }) {
   return (
-    <section className="container mb-[1rem] mt-[3rem] hidden md:block">
+    <section className="container mb-[1rem] mt-[3rem] block">
       {/* h2 heading */}
       <h2 dir={locale === "en" ? "ltr" : "rtl"} className="mb-5">
         <Skeleton className="h-[2.5rem] w-[15rem] bg-primary-foreground/30" />
@@ -17,7 +18,7 @@ export default function MainSliderSkeleton({ locale }: { locale: string }) {
 
       {/* This will show only on medium screens */}
       <div className="md:block lg:hidden">
-        <MainSectionForMediumScreenSkeleton />
+        <MainSectionForSmallScreenSkeleton locale={locale} />
       </div>
 
       {/* This will show only on large screens */}
@@ -28,25 +29,61 @@ export default function MainSliderSkeleton({ locale }: { locale: string }) {
   );
 }
 
-export async function MainSectionForMediumScreenSkeleton() {
+export function MainSectionForSmallScreenSkeleton({
+  locale,
+}: {
+  locale: string;
+}) {
+  const isEn = locale === "en";
   return (
-    <ul className="mt-8 grid grid-cols-6 grid-rows-1 gap-3">
-      <li className="flex h-[9rem] flex-col items-end overflow-hidden rounded-lg">
+    <ul
+      className="grid h-[80vh] grid-cols-6 grid-rows-5 gap-3 xsm:grid-rows-4"
+      dir={isEn ? "ltr" : "rtl"}
+    >
+      {/* Slider ------------------------------------------------------------- */}
+
+      <li className="col-span-6 row-span-2 overflow-hidden rounded-lg">
         <Skeleton className="h-full w-full bg-primary-foreground/30" />
       </li>
-      <li className="flex flex-col items-end overflow-hidden rounded-lg">
+
+      {/* Beverages ------------------------------------------------------------- */}
+
+      <li className="relative col-span-3 row-span-1 flex flex-col items-start overflow-hidden rounded-lg p-2 xsm:col-span-2 xsm:row-span-1">
         <Skeleton className="h-full w-full bg-primary-foreground/30" />
       </li>
-      <li className="flex flex-col items-end overflow-hidden rounded-lg">
+
+      {/* Babies ------------------------------------------------------------- */}
+
+      <li className="relative col-span-3 row-span-1 flex flex-col items-start p-2 xsm:col-span-2 xsm:row-span-1">
         <Skeleton className="h-full w-full bg-primary-foreground/30" />
       </li>
-      <li className="flex flex-col items-end overflow-hidden rounded-lg">
+
+      {/* Personal Care ------------------------------------------------------ */}
+
+      <li className="relative col-span-3 row-span-1 flex flex-col items-start overflow-hidden rounded-lg p-2 xsm:col-span-2 xsm:row-span-1">
         <Skeleton className="h-full w-full bg-primary-foreground/30" />
       </li>
-      <li className="flex flex-col items-end overflow-hidden rounded-lg">
+
+      {/* Electronics ------------------------------------------------------------- */}
+
+      <li
+        className={cn(
+          isEn ? "" : "flex flex-col",
+          "relative col-span-3 row-span-1 items-start p-2 xsm:col-span-2 xsm:row-span-1",
+        )}
+      >
         <Skeleton className="h-full w-full bg-primary-foreground/30" />
       </li>
-      <li className="flex flex-col items-end overflow-hidden rounded-lg">
+
+      {/* Home & Pet ------------------------------------------------------------- */}
+
+      <li className="relative col-span-3 row-span-1 flex flex-col items-start overflow-hidden p-2 xsm:col-span-2 xsm:row-span-1">
+        <Skeleton className="h-full w-full bg-primary-foreground/30" />
+      </li>
+
+      {/* Food ------------------------------------------------------------- */}
+
+      <li className="relative col-span-3 row-span-1 flex flex-col items-start p-2 xsm:col-span-2 xsm:row-span-1">
         <Skeleton className="h-full w-full bg-primary-foreground/30" />
       </li>
     </ul>

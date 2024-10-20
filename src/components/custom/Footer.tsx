@@ -20,12 +20,16 @@ import facebook from "@/../public/assets/facebook.png";
 import instgram from "@/../public/assets/instagram.png";
 import twitter from "@/../public/assets/twitter.png";
 import youtube from "@/../public/assets/youtube.png";
+import { getCategoriesAction } from "@/lib/actions/categories-actions";
 
 export default async function Footer() {
   const t = await getTranslations();
   //TODO data
-  // const data = products.map((p) => p.data.category);
-  // const categoreis = Array.from(new Set(data));
+
+  const data = await getCategoriesAction();
+
+  const categories = data.data.categories;
+  console.log("data", data);
 
   return (
     <footer className="shadow-md">
@@ -44,16 +48,17 @@ export default async function Footer() {
 
             {/*  Categories*/}
             <div>
-              <h5 className="text-3xl text-white">
+              <h5 className="mb-3 text-3xl text-white">
                 {t("xe7r7PEc2CpQZsK2CYHxZ")}
               </h5>
               <ul className="space-y-2">
-                {/* {categoreis.map((c) => (
-                  <li key={c}> */}
-                {/* //TODO put categories ID */}
-                {/* <Link href={`/${c}`}>{c}</Link>
+                {categories?.map((c) => (
+                  <li key={c._id}>
+                    <Link href={`/categories/${c._id}`}>
+                      {c.translations.data.name}
+                    </Link>
                   </li>
-                ))} */}
+                ))}
               </ul>
             </div>
 

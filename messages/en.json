@@ -36,7 +36,7 @@
   "yfG8_RyKe6qOpiJMQeWQt": "First and last name",
   "-sPVtQitY0Jhzx6ENcLR7": "Username must be at least 6 characters and by max 20 characters.",
   "x5CK85cNmYaHmtijJxw1l": "Login",
-  "IQ0KGx9ZU0j2k7BpbvyBZ": "Enter your name and password to access your account.",
+  "IQ0KGx9ZU0j2k7BpbvyBZ": ".Enter your name and password to access your account",
   "A2LnQ7Mg56cFySI6-yGyD": "Profile",
   "Y30H6LYenliZ-2M0l6pQB": "Payments",
   "LADjF8050Hs5EOK91d2We": "Settings",
@@ -44,7 +44,7 @@
   "dXsyMrHp8XrWC15uBDTV3": "Log out",
   "6y11Nt0JHr5IblKxDZseB": "Login with Google",
   "ynC-q9AhGvwzIflOBBytm": "Login with Facebook",
-  "noEUTjMtwAO4g4FyCobhx": "First name and second name...",
+  "noEUTjMtwAO4g4FyCobhx": "...First name and second name",
   "B_JuNT9lU4oZyI2Unt0IY": "Password must be at least 6 characters.",
   "3bmpktaFAugrjDrLFz0p5": "Hello",
   "GA5q4VAGgkQx9JSIoCH64": "Welcome",
@@ -175,5 +175,8 @@
   "CNlBca7DecJE6gcQ1LArC": "!Your order has been successfully placed",
   "PcAR76KKf_-RPWgxbdrOr": "Thank you for choosing us",
   "5v5B8O5ENR2qoShuRPbjg": "View all categories",
-  "vQbZFiSiqsnjBS6MRmAIK": "Switch appearance"
+  "vQbZFiSiqsnjBS6MRmAIK": "Switch appearance",
+  "fTQEh8Jh8hhwigDEDKcNv": "Type your username",
+  "5uErCs3hMDB3Z9SdvvEHM": "Type your first name",
+  "5Q9hLXwwI_1HI_06yLNMR": "Type your last name"
 }

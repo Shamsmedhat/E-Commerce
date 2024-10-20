@@ -1,14 +1,17 @@
 import { getServerSession, Session } from "next-auth";
 import LoginForm from "./components/LoginForm";
 import { authOptions } from "@/lib/config/auth-options";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import SignInProviders from "./components/SignInProviders";
 import Image, { StaticImageData } from "next/image";
 import LogoutBtn from "./components/LogoutBtn";
 import { GoArrowUpLeft } from "react-icons/go";
+import { cn } from "@/lib/utils";
 
 export default async function Page() {
   const session: Session | null = await getServerSession(authOptions);
+  const locale = await getLocale();
+  const isEn = locale === "en";
 
   // TODO handle image comes from DB
 
@@ -19,8 +22,17 @@ export default async function Page() {
   return (
     <>
       {!session ? (
-        <section className="mt-5 flex w-full flex-col items-center justify-center">
-          <div className="relative w-[35%] rounded-2xl bg-white p-10 shadow-lg">
+        <section
+          className={cn(
+            "mb-5 mt-5 flex w-full flex-col items-center justify-center",
+          )}
+        >
+          <div
+            className={cn(
+              isEn ? "text-end" : "text-start",
+              "relative rounded-2xl bg-white p-10 shadow-lg",
+            )}
+          >
             <h2 className="mb-3 text-3xl font-bold text-primary-foreground">
               {t("x5CK85cNmYaHmtijJxw1l")}
             </h2>

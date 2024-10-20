@@ -24,7 +24,6 @@ export default function TopSellingItem({
   const imageUrl = product.cover ?? imageFallback;
 
   return (
-    // <HoverCard>
     // product card
     <div
       className={cn(
@@ -84,14 +83,6 @@ export default function TopSellingItem({
           </div>
         </div>
       </div>
-
-      {/* </HoverCardTrigger> */}
     </div>
   );
-  {
-    /* <HoverCardContent>Test</HoverCardContent> */
-  }
-  {
-    /* </HoverCard> */
-  }
 }

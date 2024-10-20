@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 // function to return conditionaly text die based on locale
@@ -12,27 +11,21 @@ import { useLocale, useTranslations } from "next-intl";
 import { useMediaQuery } from "react-responsive";
 
 // Import Swiper
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 // ui
-import TopSellingItem from "./top-selling-item";
 import Heading from "@/components/common/Heading";
+import TopSellingItemSkeleton from "./top-selling-item-skeleton";
 
-import { useTopSellingProducts } from "@/lib/utils/data/products-data";
-import { useEffect, useState } from "react";
-import TopSellingItemsSkeleton from "@/components/skeletons/top-selling-items-skeleton";
-
-export default function TopSellingItems() {
+export default function TopSellingItemsSkeleton() {
   const t = useTranslations();
-
-  const [topSellingDisplayedProducts, setTopSellingDisplayedProducts] =
-    useState<Product[]>();
+  const skeletonArray = Array.from({ length: 7 }, (_, i) => i);
 
   // get locale for text dir
   const locale = useLocale();
@@ -42,17 +35,6 @@ export default function TopSellingItems() {
   const isMediumScreen = useMediaQuery({ query: "(min-width: 930px)" });
   const isSmallScreen = useMediaQuery({ query: "(min-width: 590px)" });
   const isExtraSmallScreen = useMediaQuery({ query: "(min-width: 400px)" });
-
-  const { topSellingProducts } = useTopSellingProducts();
-
-  // Fetching products that got most sales
-  useEffect(() => {
-    setTopSellingDisplayedProducts(topSellingProducts?.products);
-  }, [topSellingProducts?.products]);
-
-  if (!topSellingDisplayedProducts) {
-    return <TopSellingItemsSkeleton />;
-  }
 
   return (
     <section className="md:2 w-full md:mt-16">
@@ -92,17 +74,17 @@ export default function TopSellingItems() {
           }}
           modules={[Navigation, Autoplay]}
           className="mySwiper"
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-          }}
+          // autoplay={{
+          //   delay: 4000,
+          //   disableOnInteraction: false,
+          // }}
         >
           <ul>
             {/* top selling products data */}
 
-            {topSellingDisplayedProducts.map((p) => (
-              <SwiperSlide key={p._id}>
-                <TopSellingItem product={p} locale={locale} />
+            {skeletonArray.map((p, i) => (
+              <SwiperSlide key={i}>
+                <TopSellingItemSkeleton locale={locale} />
               </SwiperSlide>
             ))}
           </ul>

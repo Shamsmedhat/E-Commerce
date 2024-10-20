@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function LoginSkeleton() {
   return (
     <section className="flex w-full flex-col items-center justify-center">
-      <div className="relative w-[40%] rounded-2xl bg-white p-10 shadow-lg">
+      <div className="relative rounded-2xl bg-white p-10 shadow-lg">
         <h2 className="mb-3 text-3xl font-bold text-primary-foreground">
           <Skeleton className="h-12 w-[15rem] rounded-full bg-primary-foreground/20" />
         </h2>

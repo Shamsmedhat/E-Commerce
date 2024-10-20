@@ -6,6 +6,7 @@ import TopRatedItems from "./_components/top-rated-items";
 import DiscountSection from "./_components/discount-section";
 import TopCategories from "./_components/top-categories";
 import { getCategoriesData } from "@/lib/utils/data/categories-data";
+import MainSliderSkeleton from "@/components/skeletons/main-slider-skeleton";
 
 export default async function Page() {
   const categoriesData = await getCategoriesData();

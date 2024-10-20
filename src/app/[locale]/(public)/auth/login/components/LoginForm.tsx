@@ -20,15 +20,17 @@ import { BsInfoCircle } from "react-icons/bs";
 import { ImSpinner3 } from "react-icons/im";
 
 // translations
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 // navigation
 import { useRouter } from "@/navigarion";
 import { useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export default function LoginForm({ session }: { session: Session | null }) {
   const t = useTranslations();
-
+  const locale = useLocale();
+  const isEn = locale === "en";
   // navigation
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -103,7 +105,9 @@ export default function LoginForm({ session }: { session: Session | null }) {
       <div className="flex flex-col gap-3">
         <Label
           htmlFor="username"
-          className="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"
+          className={cn(
+            "block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']",
+          )}
         >
           {t("WWMnAVYyfUEaHuf4cn2sj")}
         </Label>
@@ -111,7 +115,10 @@ export default function LoginForm({ session }: { session: Session | null }) {
           type="text"
           id="username"
           placeholder={t("noEUTjMtwAO4g4FyCobhx")}
-          className="placeholder:text-primary-foreground/40 focus:!outline-primary"
+          className={cn(
+            isEn ? "text-end" : "text-start",
+            "placeholder:text-primary-foreground/40 focus:!outline-primary",
+          )}
           defaultValue="exampleusername"
           {...register("username")}
         />
@@ -128,7 +135,10 @@ export default function LoginForm({ session }: { session: Session | null }) {
           type="password"
           id="password"
           placeholder="••••••••"
-          className="placeholder:text-primary-foreground/20 focus:!outline-primary"
+          className={cn(
+            isEn ? "text-end" : "text-start",
+            "placeholder:text-primary-foreground/20 focus:!outline-primary",
+          )}
           {...register("password")}
           defaultValue="Pass50091"
         />
@@ -142,9 +152,9 @@ export default function LoginForm({ session }: { session: Session | null }) {
       <button
         type="submit"
         className="w-full rounded-lg bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/80"
-        disabled={isSubmitting}
+        disabled={isSubmitting || isSubmitSuccessful}
       >
-        {isSubmitting ? (
+        {isSubmitting || isSubmitSuccessful ? (
           <span className="flex justify-center">
             <ImSpinner3 className="animate-spin" size={25} />
           </span>

@@ -29,17 +29,17 @@ export default function LoginHeaderSection() {
     );
   } else if (status === "unauthenticated" || !data) {
     return (
-      <li className="mr-4 flex h-14 items-center justify-center gap-3 border-e px-6 xmd:flex-col">
+      <li className="flex h-14 flex-col items-center justify-center gap-3 border-e px-2 xsm:mr-4 xsm:px-6">
         <Link
           href="/auth/login"
-          className="flex items-center gap-1 text-[14px] font-semibold transition-colors hover:text-primary"
+          className="flex items-center gap-1 text-[12px] font-normal transition-colors hover:text-primary xsm:text-[14px] xsm:font-semibold"
         >
           {t("x5CK85cNmYaHmtijJxw1l")}
-          <FiUser size={20} strokeWidth={1} />
+          <FiUser size={20} strokeWidth={1} className="h-15 xsm:h-[20px]" />
         </Link>
         <Link
           href="/auth/signup"
-          className="rounded-full bg-primary px-4 py-2 text-[14px] font-semibold text-white transition-colors hover:bg-primary/70"
+          className="rounded-full bg-primary px-2 py-2 text-[12px] font-normal text-white transition-colors hover:bg-primary/70 xsm:px-4 xsm:text-[14px] xsm:font-semibold"
         >
           {t("vaXK79U6F-qTNzxkZPiJv")}
         </Link>

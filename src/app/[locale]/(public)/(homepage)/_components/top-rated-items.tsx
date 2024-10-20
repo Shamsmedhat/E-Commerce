@@ -28,6 +28,7 @@ import Heading from "@/components/common/Heading";
 import TopRatingItem from "./top-rated-item";
 import { useTopRatingProducts } from "@/lib/utils/data/products-data";
 import { useEffect, useState } from "react";
+import TopSellingItemsSkeleton from "@/components/skeletons/top-selling-items-skeleton";
 
 export default function TopRatedItems() {
   const t = useTranslations();
@@ -56,7 +57,11 @@ export default function TopRatedItems() {
   }, [topRatingProducts?.products]);
 
   if (!topRatingDisplayedProducts) {
-    return <p>no products to show</p>;
+    return (
+      <section className="container my-16 w-full">
+        <TopSellingItemsSkeleton />
+      </section>
+    );
   }
   return (
     <section className="container my-16 w-full">

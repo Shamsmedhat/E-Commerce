@@ -143,7 +143,7 @@ export default async function Page() {
           {/* category name and all sub categories */}
           <div className="p-6 font-bold" dir="ltr">
             {/* category name */}
-            <p className="text-3xl text-white">
+            <p className="text-2xl text-white">
               {Electronics?.translations.data.name}
             </p>
 
@@ -163,7 +163,7 @@ export default async function Page() {
             </div>
 
             {/* best brands */}
-            <div dir="ltr" className="w-[70%] text-white 2xl:text-2xl">
+            <div dir="ltr" className="w-[70%] text-white 2xl:text-base">
               <p>{t("RM4g-vYv6Fv9HBlvdJq4a")}</p>
               <div className="flex flex-wrap gap-4 py-3">
                 <Image
@@ -171,34 +171,34 @@ export default async function Page() {
                   height={25}
                   width={25}
                   alt=""
-                  className="pointer-events-none select-none drop-shadow-md"
+                  className="pointer-events-none h-4 w-4 select-none drop-shadow-md xsm:h-12 xsm:w-12"
                 />
                 <Image
                   src={ElectronicesLogo2}
                   height={10}
                   width={50}
                   alt=""
-                  className="pointer-events-none select-none drop-shadow-md"
+                  className="pointer-events-none h-5 w-7 select-none drop-shadow-md xsm:h-12 xsm:w-12"
                 />
                 <Image
                   src={ElectronicesLogo4}
                   height={25}
                   width={50}
                   alt=""
-                  className="pointer-events-none select-none drop-shadow-md"
+                  className="pointer-events-none h-5 w-7 select-none drop-shadow-md xsm:h-12 xsm:w-12"
                 />
                 <Image
                   src={ElectronicesLogo3}
                   height={25}
                   width={50}
-                  className="pointer-events-none select-none rounded-lg drop-shadow-md"
+                  className="pointer-events-none h-5 w-7 select-none rounded-lg drop-shadow-md xsm:h-12 xsm:w-12"
                   alt=""
                 />
               </div>
             </div>
 
             {/* category button */}
-            <div className="mt-6">
+            <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
               <Link href={`/categories/${Electronics?._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-electronics">
                   <span className="relative z-10 flex items-center gap-1">
@@ -215,21 +215,21 @@ export default async function Page() {
             src={iphone}
             height={250}
             width={150}
-            className="pointer-events-none absolute -top-9 rotate-12 animate-bounce-rotate drop-shadow-lg"
+            className="pointer-events-none absolute -top-2 h-32 w-28 rotate-12 animate-bounce-rotate drop-shadow-lg xsm:-top-9 xsm:h-[180px] xsm:w-[150px]"
             alt=""
           />
           <Image
             src={labtop}
             height={320}
             width={220}
-            className="pointer-events-none absolute -bottom-2 rotate-12 animate-bounce-rotate drop-shadow-lg"
+            className="pointer-events-none absolute -bottom-2 h-24 w-28 rotate-12 animate-bounce-rotate drop-shadow-lg xsm:h-[110px] xsm:w-[150px]"
             alt=""
           />
           <Image
             src={headphone}
             height={150}
             width={100}
-            className="pointer-events-none absolute -right-6 top-12 rotate-12 animate-bounce-rotate drop-shadow-lg"
+            className="pointer-events-none absolute -right-0 top-28 h-28 w-20 rotate-12 animate-bounce-rotate drop-shadow-lg xsm:h-[120px] xsm:w-[85px]"
             alt=""
           />
         </div>
@@ -239,7 +239,7 @@ export default async function Page() {
           {/* category name and all sub categories */}
           <div className="p-6 font-bold" dir="ltr">
             {/* category name */}
-            <p className="text-3xl text-white">
+            <p className="text-2xl text-white">
               {Food?.translations.data.name}
             </p>
             {/* sub category name */}
@@ -257,7 +257,7 @@ export default async function Page() {
               })}
             </div>
             {/* best brands */}
-            <div dir="ltr" className="w-[70%] text-white 2xl:text-2xl">
+            <div dir="ltr" className="w-[70%] text-white 2xl:text-base">
               <p>{t("RM4g-vYv6Fv9HBlvdJq4a")}</p>
               <div className="flex flex-wrap gap-4 py-3">
                 <Image
@@ -265,19 +265,19 @@ export default async function Page() {
                   height={50}
                   width={50}
                   alt=""
-                  className="pointer-events-none select-none drop-shadow-md grayscale"
+                  className="pointer-events-none h-7 w-7 select-none drop-shadow-md grayscale xsm:h-12 xsm:w-12"
                 />
                 <Image
                   src={FoodLogo2}
                   height={25}
                   width={50}
                   alt=""
-                  className="pointer-events-none select-none drop-shadow-md grayscale"
+                  className="pointer-events-none h-7 w-7 select-none drop-shadow-md grayscale xsm:h-12 xsm:w-12"
                 />
               </div>
             </div>
             {/* category button */}
-            <div className="mt-6">
+            <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
               <Link href={`/categories/${Food?._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-food">
                   <span className="relative z-10 flex items-center gap-1">
@@ -294,14 +294,14 @@ export default async function Page() {
             src={alabd}
             height={300}
             width={200}
-            className="pointer-events-none absolute -top-9 rotate-12 animate-bounce-rotate drop-shadow-lg"
+            className="pointer-events-none absolute top-0 h-28 w-28 rotate-12 animate-bounce-rotate drop-shadow-lg xsm:-top-9 xsm:h-40 xsm:w-40"
             alt=""
           />
           <Image
             src={aldoha}
             height={300}
             width={200}
-            className="pointer-events-none absolute bottom-4 rotate-12 animate-bounce-stand drop-shadow-lg"
+            className="pointer-events-none absolute bottom-14 h-28 w-32 rotate-12 animate-bounce-stand drop-shadow-lg xsm:bottom-4 xsm:h-32 xsm:w-40"
             alt=""
           />
         </div>
@@ -309,9 +309,9 @@ export default async function Page() {
         {/*  healthAndPersonalCare card*/}
         <div className="relative col-span-1 row-span-1 h-[20rem] bg-categories-healthAndPersonalCare shadow-lg md:mx-28 lg:mx-0">
           {/* category name and all sub categories */}
-          <div className="mr-auto w-[70%] p-6 font-bold" dir="ltr">
+          <div className="mr-auto w-[70%] p-3 font-bold xsm:p-6" dir="ltr">
             {/* category name */}
-            <p className="text-3xl text-white">
+            <p className="text-xl text-white">
               {HealthAndPersonalCare?.translations.data.name}
             </p>
             {/* sub category name */}
@@ -329,7 +329,7 @@ export default async function Page() {
               })}
             </div>
             {/* best brands */}
-            <div dir="ltr" className="w-[70%] text-white 2xl:text-2xl">
+            <div dir="ltr" className="w-[70%] text-sm text-white">
               <p>{t("RM4g-vYv6Fv9HBlvdJq4a")}</p>
               <div className="flex flex-wrap gap-4 py-3">
                 <Image
@@ -337,19 +337,19 @@ export default async function Page() {
                   height={50}
                   width={50}
                   alt=""
-                  className="pointer-events-none select-none drop-shadow-md"
+                  className="pointer-events-none h-7 w-9 select-none drop-shadow-md xsm:h-12 xsm:w-12"
                 />
                 <Image
                   src={HealthAndPersonalCareLogo2}
                   height={25}
                   width={50}
                   alt=""
-                  className="pointer-events-none select-none drop-shadow-md"
+                  className="pointer-events-none h-7 w-8 select-none drop-shadow-md xsm:h-12 xsm:w-12"
                 />
               </div>
             </div>
             {/* category button */}
-            <div className="mt-6">
+            <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
               <Link href={`/categories/${HealthAndPersonalCare?._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-healthAndPersonalCare">
                   <span className="relative z-10 flex items-center gap-1">
@@ -366,14 +366,14 @@ export default async function Page() {
             src={personalCare}
             height={250}
             width={150}
-            className="pointer-events-none absolute -top-9 rotate-12 animate-bounce-stand drop-shadow-lg"
+            className="pointer-events-none absolute top-0 h-32 w-36 rotate-12 animate-bounce-stand drop-shadow-lg xsm:-top-9 xsm:h-48 xsm:w-36"
             alt=""
           />
           <Image
             src={personalCare2}
             height={240}
             width={140}
-            className="pointer-events-none absolute -bottom-2 rotate-12 animate-bounce-rotate drop-shadow-lg"
+            className="pointer-events-none absolute bottom-10 h-32 w-28 rotate-12 animate-bounce-rotate drop-shadow-lg xsm:-bottom-2 xsm:h-48 xsm:w-36"
             alt=""
           />
         </div>
@@ -383,7 +383,7 @@ export default async function Page() {
           {/* category name and all sub categories */}
           <div className="p-6 font-bold" dir="ltr">
             {/* category name */}
-            <p className="text-3xl text-white">
+            <p className="text-2xl text-white">
               {Beverages?.translations.data.name}
             </p>
             {/* sub category name */}
@@ -401,7 +401,7 @@ export default async function Page() {
               })}
             </div>
             {/* best brands */}
-            <div dir="ltr" className="w-[70%] text-white 2xl:text-2xl">
+            <div dir="ltr" className="w-[70%] text-white 2xl:text-base">
               <p>{t("RM4g-vYv6Fv9HBlvdJq4a")}</p>
               <div className="flex flex-wrap gap-4 py-3">
                 <Image
@@ -421,7 +421,7 @@ export default async function Page() {
               </div>
             </div>
             {/* category button */}
-            <div className="mt-6">
+            <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
               <Link href={`/categories/${Beverages?._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-beverages">
                   <span className="relative z-10 flex items-center gap-1">
@@ -455,7 +455,7 @@ export default async function Page() {
           {/* category name and all sub categories */}
           <div className="p-6 font-bold" dir="ltr">
             {/* category name */}
-            <p className="text-3xl text-primary-foreground">
+            <p className="text-2xl text-primary-foreground">
               {Babies?.translations.data.name}
             </p>
             {/* sub category name */}
@@ -475,7 +475,7 @@ export default async function Page() {
             {/* best brands */}
             <div
               dir="ltr"
-              className="w-[70%] text-primary-foreground 2xl:text-2xl"
+              className="w-[70%] text-primary-foreground 2xl:text-base"
             >
               <p>{t("RM4g-vYv6Fv9HBlvdJq4a")}</p>
               <div className="flex flex-wrap gap-4 py-3">
@@ -496,7 +496,7 @@ export default async function Page() {
               </div>
             </div>
             {/* category button */}
-            <div className="mt-6">
+            <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
               <Link href={`/categories/${Babies?._id}`}>
                 <button className="text-prborder-primary-foreground group relative items-center gap-1 overflow-hidden border border-primary-foreground p-1 px-[6px] shadow-md transition-all hover:text-categories-babyAndToddler">
                   <span className="relative z-10 flex items-center gap-1">
@@ -548,7 +548,7 @@ export default async function Page() {
               })}
             </div>
             {/* best brands */}
-            <div dir="ltr" className="w-[70%] text-white 2xl:text-2xl">
+            <div dir="ltr" className="w-[70%] text-white 2xl:text-base">
               <p>{t("RM4g-vYv6Fv9HBlvdJq4a")}</p>
               <div className="flex flex-wrap gap-4 py-3">
                 <Image
@@ -568,7 +568,7 @@ export default async function Page() {
               </div>
             </div>
             {/* category button */}
-            <div className="mt-6">
+            <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
               <Link href={`/categories/${HomeAndPetCare?._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-homeAndPetCare">
                   <span className="relative z-10 flex items-center gap-1">
