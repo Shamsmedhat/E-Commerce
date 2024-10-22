@@ -131,7 +131,7 @@ export default async function Page() {
   )[0];
 
   return (
-    <section className="container mb-10">
+    <section className="mb-10 px-1 xsm:container">
       {/* Page title */}
       <Heading className={cn(handleEnText(locale))}>
         {t("1jlVZjp6n-h8arU7z4VEx")}
@@ -171,27 +171,27 @@ export default async function Page() {
                   height={25}
                   width={25}
                   alt=""
-                  className="pointer-events-none h-4 w-4 select-none drop-shadow-md xsm:h-12 xsm:w-12"
+                  className="pointer-events-none h-4 w-4 select-none drop-shadow-md xsm:h-6 xsm:w-6"
                 />
                 <Image
                   src={ElectronicesLogo2}
                   height={10}
                   width={50}
                   alt=""
-                  className="pointer-events-none h-5 w-7 select-none drop-shadow-md xsm:h-12 xsm:w-12"
+                  className="pointer-events-none h-5 w-7 select-none drop-shadow-md xsm:h-7 xsm:w-9"
                 />
                 <Image
                   src={ElectronicesLogo4}
                   height={25}
                   width={50}
                   alt=""
-                  className="pointer-events-none h-5 w-7 select-none drop-shadow-md xsm:h-12 xsm:w-12"
+                  className="pointer-events-none h-5 w-7 select-none drop-shadow-md xsm:h-7 xsm:w-7"
                 />
                 <Image
                   src={ElectronicesLogo3}
                   height={25}
                   width={50}
-                  className="pointer-events-none h-5 w-7 select-none rounded-lg drop-shadow-md xsm:h-12 xsm:w-12"
+                  className="pointer-events-none h-5 w-7 select-none rounded-lg drop-shadow-md xsm:h-7 xsm:w-10"
                   alt=""
                 />
               </div>
@@ -337,14 +337,14 @@ export default async function Page() {
                   height={50}
                   width={50}
                   alt=""
-                  className="pointer-events-none h-7 w-9 select-none drop-shadow-md xsm:h-12 xsm:w-12"
+                  className="pointer-events-none h-7 w-9 select-none drop-shadow-md xsm:h-7 xsm:w-10"
                 />
                 <Image
                   src={HealthAndPersonalCareLogo2}
                   height={25}
                   width={50}
                   alt=""
-                  className="pointer-events-none h-7 w-8 select-none drop-shadow-md xsm:h-12 xsm:w-12"
+                  className="pointer-events-none h-7 w-8 select-none drop-shadow-md xsm:h-7 xsm:w-9"
                 />
               </div>
             </div>
@@ -443,8 +443,8 @@ export default async function Page() {
           />
           <Image
             src={HealthAndPersonalCare2}
-            height={320}
-            width={220}
+            height={280}
+            width={180}
             className="pointer-events-none absolute bottom-2 rotate-12 animate-bounce-stand drop-shadow-lg"
             alt=""
           />
@@ -513,14 +513,14 @@ export default async function Page() {
             src={babyAndToddler2}
             height={250}
             width={150}
-            className="pointer-events-none absolute -top-5 rotate-12 animate-bounce-rotate drop-shadow-lg"
+            className="pointer-events-none absolute top-0 h-[100px] w-[100px] rotate-12 animate-bounce-rotate drop-shadow-lg xsm:-top-5 xsm:h-[140px] xsm:w-[140px]"
             alt=""
           />
           <Image
             src={babyAndToddler1}
             height={320}
             width={220}
-            className="pointer-events-none absolute -bottom-2 rotate-12 animate-bounce-stand drop-shadow-lg"
+            className="pointer-events-none absolute bottom-5 h-[100px] w-[100px] rotate-12 animate-bounce-stand drop-shadow-lg xsm:-bottom-2 xsm:h-[200px] xsm:w-[200px]"
             alt=""
           />
         </div>

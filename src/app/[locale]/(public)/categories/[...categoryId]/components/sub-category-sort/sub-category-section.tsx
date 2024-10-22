@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import SubCategorySort from "./sub-category-sort";
-import { useSearchParams } from "next/navigation";
 
 export default function SubCategorySection({
   products,

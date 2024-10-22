@@ -8,7 +8,6 @@ export default function RatingSection({ products }: { products: Product[] }) {
     new Set(products.map((p) => p.ratings?.average)),
   );
 
-  console.log("uniqueRatings", uniqueRatings);
   return (
     <ul className="flex flex-col">
       {uniqueRatings.map((rating) => {
