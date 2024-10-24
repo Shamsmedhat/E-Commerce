@@ -33,7 +33,7 @@ export default async function Header() {
       numbersOfitemsInCart = cart.cart.items.length;
     }
   } catch (error) {
-    console.log("Error fetching cart:", error);
+    console.error("Error fetching cart:", error);
     // Continue rendering, but with cart fallback
   }
 

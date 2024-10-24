@@ -6,35 +6,16 @@ import {
 } from "@tanstack/react-query";
 import {
   getProductByIdAction,
-  getProductsAction,
   getProductsByCategoryAction,
   getProductsByCategoryIdAction,
+  getProductsBySubCategoryAction,
   getTopRatingProductsAction,
   getTopSellingProductsAction,
 } from "../../actions/products-actions";
 
-export async function getProductsData() {
-  try {
-    // Call the action function to get the response from the server
-    const { data, status } = await getProductsAction();
-
-    // validation of the data
-    if (!data || typeof data !== "object") {
-      throw new Error("Invalid data received");
-    }
-    // Return the validated data
-    return data;
-
-    // handle error
-  } catch (error) {
-    console.error("Error in getCategoriesData:", error);
-    throw new Error(`Data retrieval error: ${error}`);
-  }
-}
-
 export async function getProductByIdData(
   productId: string,
-): Promise<SingleProduct> {
+): Promise<ProductData> {
   try {
     // Call the action function to get the response from the server
     const { data, status } = await getProductByIdAction(productId);
@@ -53,8 +34,7 @@ export async function getProductByIdData(
   }
 }
 
-//todo
-// using useQuery get the products based on the category selected function recive category name and locale
+// using useQuery get the products based on the category selected function recive category name
 export function useProductsByCategory(categoryName: string) {
   const {
     data: productsByCategory,
@@ -97,8 +77,7 @@ export function useTopRatingProducts() {
   return { topRatingProducts, isFetching, isError, isPending };
 }
 
-//todo
-// using useQuery get the products based on the category selected function recive category name and locale
+// using useQuery get the products based on the category selected function recive category name
 export function useProductsByCategoryId(categoryId: string) {
   const {
     data: productsByCategoryId,
@@ -111,4 +90,22 @@ export function useProductsByCategoryId(categoryId: string) {
     enabled: !!categoryId, // only run the query if categoryName is truthy
   });
   return { productsByCategoryId, isFetching, isError, isPending };
+}
+
+// using useQuery get the products based on the subCategoryId selected function recive subCategoryId & categoryId
+export function useProductsBySubCategory(
+  subCategoryId: string,
+  categoryId: string,
+) {
+  const {
+    data: productsBySubCategory,
+    isFetching,
+    isError,
+    isPending,
+  } = useQuery({
+    queryKey: ["product-by-subCategory", subCategoryId], // identify the data based on the subCategoryId
+    queryFn: () => getProductsBySubCategoryAction(subCategoryId, categoryId),
+    enabled: !!subCategoryId, // only run the query if subCategoryId is truthy
+  });
+  return { productsBySubCategory, isFetching, isError, isPending };
 }

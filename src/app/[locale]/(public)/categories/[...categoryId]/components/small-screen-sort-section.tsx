@@ -26,8 +26,6 @@ export default function SmallScreenSortSection({
   categoryName,
 }: SmallScreenSortSectionTypes) {
   const t = useTranslations();
-  const x = useSearchParams();
-  console.log("xxxx", x);
   return (
     <SheetContent>
       <SheetHeader>

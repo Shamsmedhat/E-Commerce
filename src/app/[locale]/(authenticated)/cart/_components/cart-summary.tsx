@@ -64,7 +64,6 @@ export default function CartSummary({ cart, className }: CartListProps) {
       </div>
       <Link
         href="/checkout"
-        onClick={(e) => console.log(e)}
         className="w-full rounded-b-lg bg-primary py-2 text-center text-lg font-bold uppercase text-white"
       >
         {t("uGXddxwBlKfC6WsNEeTG4")}

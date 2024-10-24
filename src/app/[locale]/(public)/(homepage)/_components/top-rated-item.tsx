@@ -22,7 +22,6 @@ export default function TopRatingItem({
   const t = useTranslations();
 
   const imageUrl = product.cover ?? imageFallback;
-  // console.log("product", product);
 
   return (
     // product card

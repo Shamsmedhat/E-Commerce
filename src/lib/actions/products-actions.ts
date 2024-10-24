@@ -4,40 +4,6 @@ import axios from "axios";
 import { getLocale } from "next-intl/server";
 import { AppError } from "../utils/catchAsync";
 
-export async function getProductsAction(): Promise<ProductsAPIResponse> {
-  try {
-    const res = await axios<ProductsAPIResponse>(
-      `${process.env.BASE_URL}/products`,
-    );
-
-    // return data
-    return res.data;
-  } catch (error) {
-    // Axios error object handling
-    if (axios.isAxiosError(error)) {
-      // Handle specific Axios error, Server responded with a status code other than 2xx
-      if (error.response) {
-        console.error(
-          `Error: ${error.response.status} - ${error.response.statusText}`,
-        );
-        throw new Error(`Server error: ${error.response.status}`);
-        // No response received after request was sent network issues or the server is down
-      } else if (error.request) {
-        console.error("No response received:", error.request);
-        throw new Error("No response received from server.");
-        // Some other error happened configuration issues, incorrect URLs, or errors that occur while setting up the request
-      } else {
-        console.error("Axios error:", error.message);
-        throw new Error(error.message || "An unknown error occurred.");
-      }
-      // Non-Axios error JavaScript runtime errors, logic errors, or other kinds of exceptions
-    } else {
-      console.error("Unexpected error:", error);
-      throw new Error("An unexpected error occurred.");
-    }
-  }
-}
-
 // get products based on the required category
 export async function getProductsByCategoryAction(
   categoryName: string,
@@ -221,6 +187,84 @@ export async function getProductsByCategoryIdAction(
   const locale = await getLocale();
   const res = await fetch(
     `${process.env.BASE_URL}/products?category>_id=${categoryId}`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
+    },
+  );
+  const data: APIResponse<ProductData> = await res.json();
+
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+  // return data
+  return data.data;
+}
+
+// get products based on the required subCategory
+export async function getProductsBySubCategoryAction(
+  categoryId: string,
+  subCategoryId: string,
+): Promise<ProductData> {
+  // get web locae
+  const locale = await getLocale();
+  const res = await fetch(
+    `${process.env.BASE_URL}/products?subCategory>_id=${subCategoryId}&category>_id=${categoryId}`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
+    },
+  );
+  const data: APIResponse<ProductData> = await res.json();
+
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+  // return data
+  return data.data;
+}
+
+// get products based on the required brand
+export async function getProductsByBrandAction(
+  categoryId: string,
+  brandId: string,
+): Promise<ProductData> {
+  // get web locae
+  const locale = await getLocale();
+  const res = await fetch(
+    `${process.env.BASE_URL}/products?brand>_id=${brandId}&category>_id=${categoryId}`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
+    },
+  );
+  const data: APIResponse<ProductData> = await res.json();
+
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+  // return data
+  return data.data;
+}
+
+// get products based on the required rating
+export async function getProductsByRatingAction(
+  categoryId: string,
+  ratingNum: number,
+): Promise<ProductData> {
+  // get web locae
+  const locale = await getLocale();
+  const res = await fetch(
+    `${process.env.BASE_URL}/products?ratings>average=${ratingNum}&category>_id=${categoryId}`,
     {
       headers: {
         "Accept-Language": locale,

@@ -24,12 +24,10 @@ import { getCategoriesAction } from "@/lib/actions/categories-actions";
 
 export default async function Footer() {
   const t = await getTranslations();
-  //TODO data
 
   const data = await getCategoriesAction();
 
   const categories = data.data.categories;
-  console.log("data", data);
 
   return (
     <footer className="shadow-md">

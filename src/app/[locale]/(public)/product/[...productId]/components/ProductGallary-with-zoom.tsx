@@ -15,14 +15,12 @@ export default function ProductGallery({
     product.image.replaceAll(" ", "%20"),
   );
   const images = imageLinksArray;
-  console.log("images", images);
 
   const [currentImg, setCurrentImg] = useState(images[0]);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const imageZoomRef = useRef<HTMLDivElement>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [isZoomVisible, setIsZoomVisible] = useState(false);
-  console.log("currentImg", currentImg);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { offsetWidth, offsetHeight } = e.currentTarget;

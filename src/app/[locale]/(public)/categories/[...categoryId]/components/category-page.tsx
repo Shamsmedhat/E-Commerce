@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { categoryColor } from "@/lib/utils/helpers";
 
@@ -19,6 +20,8 @@ import { Link } from "@/navigarion";
 import { getLocale, getTranslations } from "next-intl/server";
 import RatingSection from "./Rating-sort/rating-section";
 import RatingStars from "@/components/common/RatingStars";
+import { useLocale, useTranslations } from "next-intl";
+import { useProductsBySubCategory } from "@/lib/utils/data/products-data";
 
 // Types
 type CategoryPageProps = {
@@ -26,13 +29,16 @@ type CategoryPageProps = {
   searchParams: { subCategory: string[]; brand: string[]; rating: string[] };
 };
 
-export default async function CategoryPage({
+export default function CategoryPage({
   products,
   searchParams,
 }: CategoryPageProps) {
   // Translation
-  const t = await getTranslations();
-  const locale = await getLocale();
+  const t = useTranslations();
+  const locale = useLocale();
+  const categoryName = products.map(
+    (p) => p.category?.translations.data.name,
+  )[0];
 
   // Variables
   const isEn = locale === "en";
@@ -44,37 +50,35 @@ export default async function CategoryPage({
       ? [Number(searchParams.rating)] // Wrap it in an array
       : []; // If no rating, return an empty array  console.log(sortedRating);
 
-  const categoryName = products.map(
-    (p) => p.category?.translations.data.name,
-  )[0];
+  // const { productsBySubCategory } = useProductsBySubCategory();
+  // console.log("productsBySubCategory", productsBySubCategory);
+  // function filterProducts(p: Product) {
+  //   // We see the matches categories if there is sub category selected match the product subcategory or not
+  //   const matchesCategory =
+  //     // This checks if no categories are selected and return true to display all products
+  //     sortedCategories.length === 0 ||
+  //     // This condition checks whether the products subcategory name exists in the sortedCategories array.
+  //     // If it does, it means the product belongs to one of the selected categories.
+  //     sortedCategories.includes(p.subCategory?.translations.data.name!);
 
-  function filterProducts(p: Product) {
-    // We see the matches categories if there is sub category selected match the product subcategory or not
-    const matchesCategory =
-      // This checks if no categories are selected and return true to display all products
-      sortedCategories.length === 0 ||
-      // This condition checks whether the products subcategory name exists in the sortedCategories array.
-      // If it does, it means the product belongs to one of the selected categories.
-      sortedCategories.includes(p.subCategory?.translations.data.name!);
+  //   // We see the matches brands if there is brand selected match the product brand or not
+  //   const matchesBrand =
+  //     // This checks if no brands are selected and return true to display all products
+  //     sortedBrands.length === 0 ||
+  //     // This condition checks whether the products brand name exists in the sortedBrands array.
+  //     // If it does, it means the product belongs to one of the selected brands.
+  //     sortedBrands.includes(p.brand?.translations.data.name!);
 
-    // We see the matches brands if there is brand selected match the product brand or not
-    const matchesBrand =
-      // This checks if no brands are selected and return true to display all products
-      sortedBrands.length === 0 ||
-      // This condition checks whether the products brand name exists in the sortedBrands array.
-      // If it does, it means the product belongs to one of the selected brands.
-      sortedBrands.includes(p.brand?.translations.data.name!);
+  //   // We see the matches brands if there is brand selected match the product brand or not
+  //   const matchesRating =
+  //     sortedRating.length === 0 || // If no rating filter is applied, show all products
+  //     (Array.isArray(sortedRating) // Check if sortedRating is an array
+  //       ? sortedRating.includes(p.ratings?.average!) // If it's an array, check if the product's rating is in the array
+  //       : sortedRating === p.ratings?.average!); // If it's a single value, compare it directly
 
-    // We see the matches brands if there is brand selected match the product brand or not
-    const matchesRating =
-      sortedRating.length === 0 || // If no rating filter is applied, show all products
-      (Array.isArray(sortedRating) // Check if sortedRating is an array
-        ? sortedRating.includes(p.ratings?.average!) // If it's an array, check if the product's rating is in the array
-        : sortedRating === p.ratings?.average!); // If it's a single value, compare it directly
-
-    // Ensures that the product is shown only if both the subcategory and brand match the selected filters.
-    return matchesCategory && matchesBrand && matchesRating;
-  }
+  //   // Ensures that the product is shown only if both the subcategory and brand match the selected filters.
+  //   return matchesCategory && matchesBrand && matchesRating;
+  // }
 
   // If no data //TODO ui
   if (!products) return <p> no data</p>;
@@ -159,7 +163,6 @@ export default async function CategoryPage({
             <div className="row-auto mt-[2rem] grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {/* First filter the products based on the given sort valus */}
               {products
-                .filter((p) => filterProducts(p))
                 // After filter the products we map over it to display
                 .map((p, i) => (
                   <div

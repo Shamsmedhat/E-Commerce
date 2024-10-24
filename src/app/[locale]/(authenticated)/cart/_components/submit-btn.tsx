@@ -23,7 +23,6 @@ export default function SubmitBtn() {
   return (
     <Link
       href="/checkout"
-      onClick={() => console.log("")}
       className="mb-10 mt-5 rounded-lg bg-primary px-3 py-2 text-lg font-bold uppercase text-white"
     >
       {t("uGXddxwBlKfC6WsNEeTG4")}
