@@ -1,7 +1,7 @@
 import { getProductsByCategoryIdAction } from "@/lib/actions/products-actions";
 
 // ui
-import CategoriesPage from "@/app/[locale]/(public)/categories/[...categoryId]/components/category-page";
+import CategoryPage from "@/app/[locale]/(public)/categories/[...categoryId]/components/category-page";
 
 // Types
 type PageProps = {
@@ -21,8 +21,9 @@ export default async function Page({ params, searchParams }: PageProps) {
   return (
     <section className="w-full">
       {/* Categories page with all the category products & search params for sort data */}
-      <CategoriesPage
+      <CategoryPage
         products={productsBySelectedCategory}
+        categoryId={params.categoryId[0]}
         searchParams={searchParams}
       />
     </section>

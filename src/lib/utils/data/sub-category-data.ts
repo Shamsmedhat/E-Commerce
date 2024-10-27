@@ -1,25 +1,40 @@
-import { getSubCategoryAction } from "../../actions/sub-category-actions";
-import { AppError } from "../catchAsync";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import {
+  getSubCategoriesByCategoryIdAction,
+  getSubCategoryAction,
+} from "../../actions/sub-category-actions";
 
-export async function getSubCategoriesData(subCategoryId: string) {
-  // Call the action function to get the response from the server
-  const result: { [key: string]: SubCategory } | AppError =
-    await getSubCategoryAction(subCategoryId);
+// Get //* SubCategory by id
+export function useSubCategory(subCategoryId: string) {
+  const {
+    data: subCategory,
+    isFetching,
+    isError,
+    isPending,
+  }: UseQueryResult<SubCategory> = useQuery({
+    queryKey: ["subCategory", subCategoryId],
+    queryFn: ({ queryKey }) => {
+      return getSubCategoryAction(queryKey[1] as string); // Get the the subCategoryId
+    },
+    enabled: !!subCategoryId, // Only run the query if subCategoryId is defined
+  });
 
-  // Type guard to check if result is an AppError
-  if (result instanceof AppError) {
-    // Handle the error (e.g., log it or throw it further)
-    throw new AppError(result.message, 500);
-  }
+  return { subCategory, isFetching, isError, isPending };
+}
 
-  // Type guard to check if result contains the subCategory key
-  if ("subCategory" in result) {
-    const data: { subCategory: SubCategory } = {
-      subCategory: result.subCategory,
-    };
+export function useSubCategories(categoryId: string) {
+  const {
+    data: subCategories,
+    isFetching,
+    isError,
+    isPending,
+  }: UseQueryResult<SubCategories> = useQuery({
+    queryKey: ["subCategories", categoryId],
+    queryFn: ({ queryKey }) => {
+      return getSubCategoriesByCategoryIdAction(queryKey[1] as string); // Get the the categoryId
+    },
+    enabled: !!categoryId, // Only run the query if categoryId is defined
+  });
 
-    return data;
-  } else {
-    throw new Error("Invalid data structure: 'subCategory' not found");
-  }
+  return { subCategories, isFetching, isError, isPending };
 }

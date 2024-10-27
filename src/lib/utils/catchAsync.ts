@@ -18,7 +18,7 @@ export class AppError extends Error {
  */
 export default function catchAsync<T extends any[], R>(
   asyncFunction: (...params: T) => Promise<R>,
-) {
+): (...params: T) => Promise<R> {
   return async (...params: T) => {
     try {
       return await asyncFunction(...params);
@@ -36,8 +36,33 @@ export default function catchAsync<T extends any[], R>(
         );
       }
 
-      // Rethrow any other error as AppError
-      return error;
+      // Throw the error to ensure catchAsync never returns an error type
+      throw error;
     }
   };
 }
+// export default function catchAsync<T extends any[], R>(
+//   asyncFunction: (...params: T) => Promise<R>,
+// ) {
+//   return async (...params: T) => {
+//     try {
+//       return await asyncFunction(...params);
+//     } catch (err: any) {
+//       let error: AppError;
+
+//       // Check if the error is an instance of AppError
+//       if (err instanceof AppError) {
+//         error = err;
+//       } else {
+//         // If it's a generic error, wrap it in AppError
+//         error = new AppError(
+//           err.message || "Server error",
+//           err.statusCode || 500,
+//         );
+//       }
+
+//       // Rethrow any other error as AppError
+//       return error;
+//     }
+//   };
+// }

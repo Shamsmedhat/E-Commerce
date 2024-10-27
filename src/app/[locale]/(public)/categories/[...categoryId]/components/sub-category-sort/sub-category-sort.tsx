@@ -7,14 +7,16 @@ import React, { useCallback } from "react";
 
 type SubCategorySortProps = {
   key: string;
-  product: Product;
+  // product: Product;
+  subCategoryName: string;
   selectedSubCategory: string[]; // Passed from parent
   setSelectedSubCategory: React.Dispatch<React.SetStateAction<string[]>>; // Passed from parent
 };
 
 export default function SubCategorySort({
   key,
-  product,
+  // product,
+  subCategoryName,
   selectedSubCategory,
   setSelectedSubCategory,
 }: SubCategorySortProps) {
@@ -40,7 +42,7 @@ export default function SubCategorySort({
     [searchParams],
   );
 
-  const subCategoryName = product.subCategory?.translations.data.name;
+  // const subCategoryName = product.subCategory?.translations.data.name;
 
   const isChecked = subCategoryName
     ? selectedSubCategory.includes(subCategoryName)

@@ -1,32 +1,33 @@
 "use client";
 import React, { useState } from "react";
 import SubCategorySort from "./sub-category-sort";
+import {
+  useSubCategories,
+  useSubCategory,
+} from "@/lib/utils/data/sub-category-data";
 
 export default function SubCategorySection({
-  products,
+  categoryId,
 }: {
-  products: Product[];
+  categoryId: string;
 }) {
   const [selectedSubCategory, setSelectedSubCategory] = useState<string[]>([]);
-  const uniqueSubCategories = Array.from(
-    new Set(products.map((p) => p.subCategory?.translations.data.name)),
-  );
 
+  //todo
+  const { subCategories, isFetching, isError, isPending } =
+    useSubCategories(categoryId);
   return (
     <ul className="flex flex-col">
-      {uniqueSubCategories.map((subCategoryName) => {
-        // Find a product with this subcategory to pass to SubCategorySort
-        const product = products.find(
-          (p) => p.subCategory?.translations.data.name === subCategoryName,
-        );
+      {subCategories?.subCategories.map((subCategory) => {
         return (
           <SubCategorySort
-            key={product?._id!}
-            product={product!}
+            key={subCategory._id}
+            subCategoryName={subCategory.translations.data.name}
             selectedSubCategory={selectedSubCategory}
             setSelectedSubCategory={setSelectedSubCategory}
           />
         );
+        ` `;
       })}
     </ul>
   );

@@ -1,36 +1,32 @@
 "use client";
 import Image from "next/image";
-import { categoryColor } from "@/lib/utils/helpers";
 
 // Icons
 import { LuHeart, LuScale } from "react-icons/lu";
 
 // Ui
 import { ComboboxDemo } from "../../../../../../components/ui/combobox";
-import DiscountSection from "@/app/[locale]/(public)/(homepage)/_components/discount-section";
 import TopSellingItems from "@/app/[locale]/(public)/(homepage)/_components/top-selling-items";
 import AddToCart from "../../../../../../components/common/AddToCart";
-import BrandsSection from "./brands-sort/brands-section";
-import SortSection from "./sub-category-sort/sub-category-section";
 
 // Navigation
 import { Link } from "@/navigarion";
 
 // Translations
-import { getLocale, getTranslations } from "next-intl/server";
-import RatingSection from "./Rating-sort/rating-section";
 import RatingStars from "@/components/common/RatingStars";
 import { useLocale, useTranslations } from "next-intl";
-import { useProductsBySubCategory } from "@/lib/utils/data/products-data";
+import AsideSortSection from "./aside-sort-section";
 
 // Types
 type CategoryPageProps = {
   products: Product[];
-  searchParams: { subCategory: string[]; brand: string[]; rating: string[] };
+  categoryId: string;
+  searchParams: { subCategory?: string[]; brand?: string[]; rating?: string[] };
 };
 
 export default function CategoryPage({
   products,
+  categoryId,
   searchParams,
 }: CategoryPageProps) {
   // Translation
@@ -42,43 +38,6 @@ export default function CategoryPage({
 
   // Variables
   const isEn = locale === "en";
-  const sortedCategories = searchParams.subCategory || [];
-  const sortedBrands = searchParams.brand || [];
-  const sortedRating = Array.isArray(searchParams.rating) // Ensure rating is an array
-    ? searchParams.rating.map((r) => Number(r)) // Map over the array if it exists
-    : searchParams.rating // If it's a single value, convert it to a number
-      ? [Number(searchParams.rating)] // Wrap it in an array
-      : []; // If no rating, return an empty array  console.log(sortedRating);
-
-  // const { productsBySubCategory } = useProductsBySubCategory();
-  // console.log("productsBySubCategory", productsBySubCategory);
-  // function filterProducts(p: Product) {
-  //   // We see the matches categories if there is sub category selected match the product subcategory or not
-  //   const matchesCategory =
-  //     // This checks if no categories are selected and return true to display all products
-  //     sortedCategories.length === 0 ||
-  //     // This condition checks whether the products subcategory name exists in the sortedCategories array.
-  //     // If it does, it means the product belongs to one of the selected categories.
-  //     sortedCategories.includes(p.subCategory?.translations.data.name!);
-
-  //   // We see the matches brands if there is brand selected match the product brand or not
-  //   const matchesBrand =
-  //     // This checks if no brands are selected and return true to display all products
-  //     sortedBrands.length === 0 ||
-  //     // This condition checks whether the products brand name exists in the sortedBrands array.
-  //     // If it does, it means the product belongs to one of the selected brands.
-  //     sortedBrands.includes(p.brand?.translations.data.name!);
-
-  //   // We see the matches brands if there is brand selected match the product brand or not
-  //   const matchesRating =
-  //     sortedRating.length === 0 || // If no rating filter is applied, show all products
-  //     (Array.isArray(sortedRating) // Check if sortedRating is an array
-  //       ? sortedRating.includes(p.ratings?.average!) // If it's an array, check if the product's rating is in the array
-  //       : sortedRating === p.ratings?.average!); // If it's a single value, compare it directly
-
-  //   // Ensures that the product is shown only if both the subcategory and brand match the selected filters.
-  //   return matchesCategory && matchesBrand && matchesRating;
-  // }
 
   // If no data //TODO ui
   if (!products) return <p> no data</p>;
@@ -100,47 +59,11 @@ export default function CategoryPage({
         {/* Aside section & Products list */}
         <div className="flex justify-around pb-[4rem]">
           {/* Aside Section */}
-          <aside className="w-[15%]">
-            {/* Sub category Section */}
-            <div
-              className={`bg-${categoryColor(categoryName!)} mb-[2rem] min-w-[200px] rounded-md p-5 text-white`}
-            >
-              {/* Title */}
-              <h3 className="mb-3 text-xl font-bold">
-                {t("dKK2yEL4B-GcSul9ZivDx")}
-              </h3>
-
-              {/* Sort component [Subcategories]*/}
-              <div className="flex flex-col items-start space-x-2 text-lg font-bold">
-                <SortSection products={products} />
-              </div>
-            </div>
-
-            {/* Brand Section */}
-            <div className="mb-[2rem] min-w-[200px] rounded-md bg-white p-5 text-primary-foreground">
-              {/* Title */}
-              <h3 className="mb-3 text-xl font-bold">
-                {t("0Yio04Ct9UZq80n-Mnrjp")}
-              </h3>
-
-              {/* Sort component [Brands]*/}
-              <div className="flex flex-col items-start space-x-2 text-lg font-bold">
-                <BrandsSection products={products} />
-              </div>
-            </div>
-
-            {/*Rating section */}
-            <div className="mb-[2rem] min-w-[200px] rounded-md bg-white p-5 text-primary-foreground">
-              <h3 className="mb-3 text-xl font-bold">
-                {t("mADNIsXxfc4IBjTJ7ANrC")}
-              </h3>
-
-              {/* Sort component [Rating]*/}
-              <div className="flex flex-col items-start space-x-2 text-lg font-bold">
-                <RatingSection products={products} />
-              </div>
-            </div>
-          </aside>
+          <AsideSortSection
+            products={products}
+            categoryName={categoryName}
+            categoryId={categoryId}
+          />
 
           {/*Producsts section  */}
           <div className="w-[75%]">
@@ -246,7 +169,7 @@ export default function CategoryPage({
 
       {/* Bottom section for DiscountSection & TopSellingItems*/}
       <div className="my-[8rem]">
-        <DiscountSection />
+        {/* <DiscountSection /> */}
         <TopSellingItems />
       </div>
     </div>

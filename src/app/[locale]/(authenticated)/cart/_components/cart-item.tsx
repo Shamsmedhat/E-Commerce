@@ -2,15 +2,14 @@
 import QuantityBtn from "@/components/common/QuantityBtn";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { cn } from "@/lib/utils";
-import { getCategoryData } from "@/lib/utils/data/categories-data";
-import { getSubCategoriesData } from "@/lib/utils/data/sub-category-data";
-import { generateColors } from "@/lib/utils/generateCategoryColors";
+import { useCategory } from "@/lib/utils/data/categories-data";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 
 import DeleteProductFromCart from "./delete-product-from-cart";
+import { useSubCategory } from "@/lib/utils/data/sub-category-data";
 
 type CartItemProps = {
   item: ProductItem;
@@ -20,30 +19,24 @@ export default function CartItem({ item }: CartItemProps) {
   const t = useTranslations();
 
   const { rowStyle, columnStyle } = useAppSelector((state) => state.cart);
-  const [subCategory, setSubCategory] = useState<SubCategory | null>(null);
-  const [category, setCategory] = useState<Category | null>(null);
+
   const locale = useLocale();
   const isEn = locale === "en";
 
   const [productPrice, setProductPrice] = useState(item.price);
+  const {
+    subCategory,
+    isError: isSubCategoryError,
+    isFetching: isSubCategoryFetching,
+    isPending: isSubCategoryPending,
+  } = useSubCategory(item.product.subCategory);
 
-  useEffect(() => {
-    try {
-      (async () => {
-        const [subCategoryData, categoryData] = await Promise.all([
-          getSubCategoriesData(item.product.subCategory),
-          getCategoryData(item.product.category),
-        ]);
-
-        setSubCategory(subCategoryData.subCategory);
-        setCategory(categoryData.category);
-      })();
-    } catch (error) {}
-  }, [item.product.subCategory, item.product.category]);
-
-  const uniqCategoryColor = generateColors(
-    category?.translations.data.name || "",
-  );
+  const {
+    category,
+    isError: isCategoryError,
+    isFetching: isCategoryFetching,
+    isPending: isCategoryPending,
+  } = useCategory(item.product.category);
 
   return (
     <li
@@ -53,7 +46,6 @@ export default function CartItem({ item }: CartItemProps) {
         // `${categoryBorderColor(category!)} `,
         "my-5 items-center gap-8 rounded-md bg-white p-3 shadow-sm",
       )}
-      style={{ borderColor: uniqCategoryColor.backgroundColor }}
     >
       {/* Product image */}
       <div className="mx-4">
@@ -75,8 +67,8 @@ export default function CartItem({ item }: CartItemProps) {
         )}
       >
         <span className="text-sm text-primary-foreground/70">
-          {category?.translations.data.name} -{" "}
-          {subCategory?.translations.data.name}
+          {category?.category.translations.data.name} -{" "}
+          {subCategory?.subCategory.translations.data.name}
         </span>
         <h2>{item.product.translations.data.name}</h2>
         {(item.product.stock <= 3 || item.quantity === item.product.stock) && (

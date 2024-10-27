@@ -14,9 +14,10 @@ import Logo from "./Logo";
 import LoginHeaderSection from "./LoginHeaderSection";
 
 // data
-import { getCategoriesData } from "@/lib/utils/data/categories-data";
+// import { getCategoriesData } from "@/lib/utils/data/categories-data";
 import Navbar from "./nav-bar";
 import { getCartAction } from "@/lib/actions/cart-actions";
+import { getCategoriesAction } from "@/lib/actions/categories-actions";
 
 export default async function Header() {
   // translation
@@ -41,7 +42,8 @@ export default async function Header() {
   const session = await getServerSession(authOptions);
 
   //TODO make sure the data came before distructure data (categories)
-  const data = await getCategoriesData();
+  // const data = await getCategoriesData();
+  const data = await getCategoriesAction();
 
   return (
     <header>

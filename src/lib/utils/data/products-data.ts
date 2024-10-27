@@ -13,12 +13,10 @@ import {
   getTopSellingProductsAction,
 } from "../../actions/products-actions";
 
-export async function getProductByIdData(
-  productId: string,
-): Promise<ProductData> {
+export async function getProductByIdData(productId: string): Promise<Product> {
   try {
     // Call the action function to get the response from the server
-    const { data, status } = await getProductByIdAction(productId);
+    const { product: data } = await getProductByIdAction(productId);
 
     // validation of the data
     if (!data || typeof data !== "object") {
@@ -29,7 +27,7 @@ export async function getProductByIdData(
 
     // handle error
   } catch (error) {
-    console.error("Error in getCategoriesData:", error);
+    console.error("Error in getProductByIdData:", error);
     throw new Error(`Data retrieval error: ${error}`);
   }
 }
@@ -94,7 +92,7 @@ export function useProductsByCategoryId(categoryId: string) {
 
 // using useQuery get the products based on the subCategoryId selected function recive subCategoryId & categoryId
 export function useProductsBySubCategory(
-  subCategoryId: string,
+  subCategoryIds: string[],
   categoryId: string,
 ) {
   const {
@@ -103,9 +101,9 @@ export function useProductsBySubCategory(
     isError,
     isPending,
   } = useQuery({
-    queryKey: ["product-by-subCategory", subCategoryId], // identify the data based on the subCategoryId
-    queryFn: () => getProductsBySubCategoryAction(subCategoryId, categoryId),
-    enabled: !!subCategoryId, // only run the query if subCategoryId is truthy
+    queryKey: ["products-by-subCategory", subCategoryIds], // identify the data based on the subCategoryIds
+    queryFn: () => getProductsBySubCategoryAction(subCategoryIds, categoryId),
+    enabled: !!subCategoryIds, // only run the query if subCategoryId is truthy
   });
   return { productsBySubCategory, isFetching, isError, isPending };
 }

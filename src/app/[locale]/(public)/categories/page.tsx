@@ -14,7 +14,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 
 // Icons
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { getCategoriesData } from "@/lib/utils/data/categories-data";
+// import { getCategoriesData } from "@/lib/utils/data/categories-data";
 
 // Electronices brands logo
 import ElectronicesLogo from "@/../public/assets/apple-logo.png";
@@ -67,14 +67,15 @@ import babyAndToddler2 from "@/../public/assets/babyAndToddler2.png";
 import HomeAndPetCare1 from "@/../public/assets/HomeAndPetCare1.png";
 import HomeAndPetCare2 from "@/../public/assets/HomeAndPetCare2.png";
 import HomeAndPetCare3 from "@/../public/assets/HomeAndPetCare3.png";
+import { getCategoriesAction } from "@/lib/actions/categories-actions";
 
 export default async function Page() {
   // Translations
   const t = await getTranslations();
 
   // Categories data
-  const data: CategoriesData = await getCategoriesData();
-
+  // const data: CategoriesData = await getCategoriesData();
+  const data = await getCategoriesAction();
   // Locale
   const locale = await getLocale();
 
@@ -87,47 +88,47 @@ export default async function Page() {
       </section>
     );
   }
-
   // Electronics category data
   const Electronics = data.categories?.filter(
     (c) =>
-      c.translations.data.name === "Electronics" ||
-      c.translations.data.name === "الالكترونيات",
+      c.category.translations.data.name === "Electronics" ||
+      c.category.translations.data.name === "الالكترونيات",
   )[0];
 
   // Babies category data
   const Babies = data.categories?.filter(
     (c) =>
-      c.translations.data.name === "Babies" ||
-      c.translations.data.name === "الاطفال",
+      c.category.translations.data.name === "Babies" ||
+      c.category.translations.data.name === "الاطفال",
   )[0];
 
   // HomeAndPetCare category data
   const HomeAndPetCare = data.categories?.filter(
     (c) =>
-      c.translations.data.name === "Home and Pet Care" ||
-      c.translations.data.name === "العناية بالمنزل والحيوانات الأليفة",
+      c.category.translations.data.name === "Home and Pet Care" ||
+      c.category.translations.data.name ===
+        "العناية بالمنزل والحيوانات الأليفة",
   )[0];
 
   // Beverages category data
   const Beverages = data.categories?.filter(
     (c) =>
-      c.translations.data.name === "Beverages" ||
-      c.translations.data.name === "المشروبات",
+      c.category.translations.data.name === "Beverages" ||
+      c.category.translations.data.name === "المشروبات",
   )[0];
 
   // HealthAndPersonalCare category data
   const HealthAndPersonalCare = data.categories?.filter(
     (c) =>
-      c.translations.data.name === "Health and Personal Care" ||
-      c.translations.data.name === "الصحة والعناية الشخصية",
+      c.category.translations.data.name === "Health and Personal Care" ||
+      c.category.translations.data.name === "الصحة والعناية الشخصية",
   )[0];
 
   // Food category data
   const Food = data.categories?.filter(
     (c) =>
-      c.translations.data.name === "Food" ||
-      c.translations.data.name === "طعام",
+      c.category.translations.data.name === "Food" ||
+      c.category.translations.data.name === "طعام",
   )[0];
 
   return (
@@ -144,13 +145,13 @@ export default async function Page() {
           <div className="p-6 font-bold" dir="ltr">
             {/* category name */}
             <p className="text-2xl text-white">
-              {Electronics?.translations.data.name}
+              {Electronics?.category.translations.data.name}
             </p>
 
             {/* sub category name */}
             <div className="mb-6 mr-auto mt-3 flex w-[70%] flex-wrap gap-2">
-              {Electronics?.subCategories.map((c) => {
-                return (
+              {Array.isArray(Electronics?.category.subCategories) &&
+                Electronics.category.subCategories.map((c) => (
                   <Badge
                     variant="secondary"
                     key={c._id}
@@ -158,8 +159,7 @@ export default async function Page() {
                   >
                     {c.translations.data.name}
                   </Badge>
-                );
-              })}
+                ))}
             </div>
 
             {/* best brands */}
@@ -199,7 +199,7 @@ export default async function Page() {
 
             {/* category button */}
             <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
-              <Link href={`/categories/${Electronics?._id}`}>
+              <Link href={`/categories/${Electronics?.category._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-electronics">
                   <span className="relative z-10 flex items-center gap-1">
                     {t("EP20JBrzdd-XOrQxzYM0s")} <FaLongArrowAltRight />
@@ -240,12 +240,12 @@ export default async function Page() {
           <div className="p-6 font-bold" dir="ltr">
             {/* category name */}
             <p className="text-2xl text-white">
-              {Food?.translations.data.name}
+              {Food?.category.translations.data.name}
             </p>
             {/* sub category name */}
             <div className="mb-6 mr-auto mt-3 flex w-[70%] flex-wrap gap-2">
-              {Food?.subCategories.map((c) => {
-                return (
+              {Array.isArray(Food?.category.subCategories) &&
+                Food.category.subCategories.map((c) => (
                   <Badge
                     variant="secondary"
                     key={c._id}
@@ -253,8 +253,7 @@ export default async function Page() {
                   >
                     {c.translations.data.name}
                   </Badge>
-                );
-              })}
+                ))}
             </div>
             {/* best brands */}
             <div dir="ltr" className="w-[70%] text-white 2xl:text-base">
@@ -278,7 +277,7 @@ export default async function Page() {
             </div>
             {/* category button */}
             <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
-              <Link href={`/categories/${Food?._id}`}>
+              <Link href={`/categories/${Food?.category._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-food">
                   <span className="relative z-10 flex items-center gap-1">
                     {t("EP20JBrzdd-XOrQxzYM0s")} <FaLongArrowAltRight />
@@ -312,12 +311,12 @@ export default async function Page() {
           <div className="mr-auto w-[70%] p-3 font-bold xsm:p-6" dir="ltr">
             {/* category name */}
             <p className="text-xl text-white">
-              {HealthAndPersonalCare?.translations.data.name}
+              {HealthAndPersonalCare?.category.translations.data.name}
             </p>
             {/* sub category name */}
             <div className="mb-6 mr-auto mt-3 flex w-[70%] flex-wrap gap-2">
-              {HealthAndPersonalCare?.subCategories.map((c) => {
-                return (
+              {Array.isArray(HealthAndPersonalCare?.category.subCategories) &&
+                HealthAndPersonalCare.category.subCategories.map((c) => (
                   <Badge
                     variant="secondary"
                     key={c._id}
@@ -325,8 +324,7 @@ export default async function Page() {
                   >
                     {c.translations.data.name}
                   </Badge>
-                );
-              })}
+                ))}
             </div>
             {/* best brands */}
             <div dir="ltr" className="w-[70%] text-sm text-white">
@@ -350,7 +348,7 @@ export default async function Page() {
             </div>
             {/* category button */}
             <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
-              <Link href={`/categories/${HealthAndPersonalCare?._id}`}>
+              <Link href={`/categories/${HealthAndPersonalCare?.category._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-healthAndPersonalCare">
                   <span className="relative z-10 flex items-center gap-1">
                     {t("EP20JBrzdd-XOrQxzYM0s")} <FaLongArrowAltRight />
@@ -384,12 +382,12 @@ export default async function Page() {
           <div className="p-6 font-bold" dir="ltr">
             {/* category name */}
             <p className="text-2xl text-white">
-              {Beverages?.translations.data.name}
+              {Beverages?.category.translations.data.name}
             </p>
             {/* sub category name */}
             <div className="mb-6 mr-auto mt-3 flex w-[70%] flex-wrap">
-              {Beverages?.subCategories.map((c) => {
-                return (
+              {Array.isArray(Beverages?.category.subCategories) &&
+                Beverages.category.subCategories.map((c) => (
                   <Badge
                     variant="secondary"
                     key={c._id}
@@ -397,8 +395,7 @@ export default async function Page() {
                   >
                     {c.translations.data.name}
                   </Badge>
-                );
-              })}
+                ))}
             </div>
             {/* best brands */}
             <div dir="ltr" className="w-[70%] text-white 2xl:text-base">
@@ -422,7 +419,7 @@ export default async function Page() {
             </div>
             {/* category button */}
             <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
-              <Link href={`/categories/${Beverages?._id}`}>
+              <Link href={`/categories/${Beverages?.category._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-beverages">
                   <span className="relative z-10 flex items-center gap-1">
                     {t("EP20JBrzdd-XOrQxzYM0s")} <FaLongArrowAltRight />
@@ -456,12 +453,12 @@ export default async function Page() {
           <div className="p-6 font-bold" dir="ltr">
             {/* category name */}
             <p className="text-2xl text-primary-foreground">
-              {Babies?.translations.data.name}
+              {Babies?.category.translations.data.name}
             </p>
             {/* sub category name */}
             <div className="mb-6 mr-auto mt-3 flex w-[70%] flex-wrap">
-              {Babies?.subCategories.map((c) => {
-                return (
+              {Array.isArray(Babies?.category.subCategories) &&
+                Babies.category.subCategories.map((c) => (
                   <Badge
                     variant="secondary"
                     key={c._id}
@@ -469,8 +466,7 @@ export default async function Page() {
                   >
                     {c.translations.data.name}
                   </Badge>
-                );
-              })}
+                ))}
             </div>
             {/* best brands */}
             <div
@@ -497,7 +493,7 @@ export default async function Page() {
             </div>
             {/* category button */}
             <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
-              <Link href={`/categories/${Babies?._id}`}>
+              <Link href={`/categories/${Babies?.category._id}`}>
                 <button className="text-prborder-primary-foreground group relative items-center gap-1 overflow-hidden border border-primary-foreground p-1 px-[6px] shadow-md transition-all hover:text-categories-babyAndToddler">
                   <span className="relative z-10 flex items-center gap-1">
                     {t("EP20JBrzdd-XOrQxzYM0s")} <FaLongArrowAltRight />
@@ -531,12 +527,12 @@ export default async function Page() {
           <div className="mr-auto w-[70%] p-6 font-bold" dir="ltr">
             {/* category name */}
             <p className="text-2xl text-white">
-              {HomeAndPetCare?.translations.data.name}
+              {HomeAndPetCare?.category.translations.data.name}
             </p>
             {/* sub category name */}
             <div className="mb-6 mr-auto mt-3 flex w-[70%] flex-wrap">
-              {HomeAndPetCare?.subCategories.map((c) => {
-                return (
+              {Array.isArray(HomeAndPetCare?.category.subCategories) &&
+                HomeAndPetCare.category.subCategories.map((c) => (
                   <Badge
                     variant="secondary"
                     key={c._id}
@@ -544,8 +540,7 @@ export default async function Page() {
                   >
                     {c.translations.data.name}
                   </Badge>
-                );
-              })}
+                ))}
             </div>
             {/* best brands */}
             <div dir="ltr" className="w-[70%] text-white 2xl:text-base">
@@ -569,7 +564,7 @@ export default async function Page() {
             </div>
             {/* category button */}
             <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
-              <Link href={`/categories/${HomeAndPetCare?._id}`}>
+              <Link href={`/categories/${HomeAndPetCare?.category._id}`}>
                 <button className="group relative items-center gap-1 overflow-hidden border border-white p-1 px-[6px] text-white shadow-md transition-all hover:text-categories-homeAndPetCare">
                   <span className="relative z-10 flex items-center gap-1">
                     {t("EP20JBrzdd-XOrQxzYM0s")} <FaLongArrowAltRight />

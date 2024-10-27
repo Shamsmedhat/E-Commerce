@@ -1,9 +1,10 @@
 import Heading from "@/components/common/Heading";
-import { getCategoriesData } from "@/lib/utils/data/categories-data";
+// import { getCategoriesData } from "@/lib/utils/data/categories-data";
 import { handleEnText } from "@/lib/utils/helpers";
 import { getLocale, getTranslations } from "next-intl/server";
 import TabNav from "./tab-nav";
 import { cn } from "@/lib/utils";
+import { getCategoriesAction } from "@/lib/actions/categories-actions";
 
 export default async function DealsOfTheDay() {
   const t = await getTranslations();
@@ -16,7 +17,8 @@ export default async function DealsOfTheDay() {
   let categories: Category[] = [];
   let pagination = {};
 
-  const data = await getCategoriesData();
+  // const data = await getCategoriesData();
+  const data = await getCategoriesAction();
 
   // if no data is received we show no data available
   if (!data.categories) {

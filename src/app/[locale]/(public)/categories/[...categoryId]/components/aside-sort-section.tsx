@@ -1,20 +1,25 @@
+"use client";
 import React from "react";
 import RatingSection from "./Rating-sort/rating-section";
 import BrandsSection from "./brands-sort/brands-section";
 import { getTranslations } from "next-intl/server";
 import SortSection from "./sub-category-sort/sub-category-section";
 import { categoryColor } from "@/lib/utils/helpers";
+import SubCategorySection from "./sub-category-sort/sub-category-section";
+import { useTranslations } from "next-intl";
 
 type AsideSortSectionTypes = {
   products: Product[];
   categoryName: string;
+  categoryId: string;
 };
 
-export default async function AsideSortSection({
+export default function AsideSortSection({
   products,
   categoryName,
+  categoryId,
 }: AsideSortSectionTypes) {
-  const t = await getTranslations();
+  const t = useTranslations();
 
   return (
     <aside className="hidden w-[15%] lg:block">
@@ -27,7 +32,7 @@ export default async function AsideSortSection({
 
         {/* Sort component [Subcategories]*/}
         <div className="flex flex-col items-start space-x-2 text-lg font-bold">
-          <SortSection products={products} />
+          <SubCategorySection categoryId={categoryId} />
         </div>
       </div>
 

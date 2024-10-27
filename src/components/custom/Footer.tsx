@@ -27,8 +27,6 @@ export default async function Footer() {
 
   const data = await getCategoriesAction();
 
-  const categories = data.data.categories;
-
   return (
     <footer className="shadow-md">
       {/* footer-img is custom class for footer img in globle css */}
@@ -50,7 +48,7 @@ export default async function Footer() {
                 {t("xe7r7PEc2CpQZsK2CYHxZ")}
               </h5>
               <ul className="space-y-2">
-                {categories?.map((c) => (
+                {data.categories?.map((c) => (
                   <li key={c._id}>
                     <Link href={`/categories/${c._id}`}>
                       {c.translations.data.name}

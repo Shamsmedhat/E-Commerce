@@ -14,9 +14,9 @@ export default async function ProductPage({ params }: { params: Params }) {
   const locale = await getLocale();
   const isEn = locale === "en";
   const productId = params.productId[0];
-  const data = await getProductByIdData(productId);
+  const product = await getProductByIdData(productId);
 
-  if (!data.product) {
+  if (!product) {
     //TODO skeleton
     return <h1>Loading........</h1>;
   }
@@ -30,7 +30,7 @@ export default async function ProductPage({ params }: { params: Params }) {
     stock,
     subCategory,
     translations,
-  } = data.product;
+  } = product;
 
   return (
     <>

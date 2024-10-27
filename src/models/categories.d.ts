@@ -1,34 +1,42 @@
 declare global {
   // Define the interface for translations
-  interface CategoriesTranslation {
+  interface CategoryTranslation {
+    language: string;
     data: {
       name: string;
       slug: string;
     };
-    language: string;
     _id: string;
   }
 
-  // SubCategory model
-  interface SubCategory {
+  interface Category_subCategory {
     _id: string;
     category: string;
     image: string;
-    translations: CategoriesTranslation;
+    translations: SubCategoryTranslations;
     createdAt: string;
     updatedAt: string;
   }
 
+  interface SingelCategory {
+    createdAt: string;
+    image: string;
+    subCategories: Category_subCategory | Category_subCategory[];
+    translations: CategoryTranslation;
+    updatedAt: string;
+    _id: string;
+  }
   // Category model with subCategories as an array of SubCategory
   interface Category {
-    _id: string;
-    image: string;
-    translations: CategoriesTranslation;
-    createdAt: string;
-    updatedAt: string;
-    subCategories: SubCategory[]; // SubCategory array
+    _id: Key | null | undefined;
+    translations: any;
+    category: SingelCategory;
   }
 
+  interface FlatCategory {
+    [x: string]: any;
+    SingelCategory;
+  }
   // Pagination info
   interface Pagination {
     total: number;
@@ -40,15 +48,12 @@ declare global {
 
   // CategoriesData for both categories and subCategories
   interface CategoriesData {
-    categories?: Category[]; // Optional: For category response
-    subCategories?: SubCategory[]; // Optional: For subcategory response
+    categories: Category[];
     pagination: Pagination;
   }
-
-  // Categories response model
-  interface CategoriesAPIResponse {
-    status: string;
-    data: CategoriesData;
+  interface FlatCategoriesData {
+    categories: FlatCategory[];
+    pagination: Pagination;
   }
 }
 
