@@ -11,23 +11,31 @@ export default function SubCategorySection({
 }: {
   categoryId: string;
 }) {
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string[]>([]);
-
   //todo
   const { subCategories, isFetching, isError, isPending } =
     useSubCategories(categoryId);
+
+  if (isFetching || isPending) {
+    return <p>loading...</p>;
+  }
+
+  if (!subCategories) {
+    return <p>no subcategories</p>;
+  }
+
+  const subCategoryIds = subCategories?.subCategories.map((s) => s._id);
   return (
     <ul className="flex flex-col">
       {subCategories?.subCategories.map((subCategory) => {
         return (
           <SubCategorySort
             key={subCategory._id}
+            subCategoryId={subCategory._id}
             subCategoryName={subCategory.translations.data.name}
-            selectedSubCategory={selectedSubCategory}
-            setSelectedSubCategory={setSelectedSubCategory}
+            subCategoryIds={subCategoryIds}
+            categoryId={categoryId}
           />
         );
-        ` `;
       })}
     </ul>
   );

@@ -3,38 +3,49 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 type SubCategorySortProps = {
   key: string;
   // product: Product;
+  subCategoryId: string;
   subCategoryName: string;
-  selectedSubCategory: string[]; // Passed from parent
-  setSelectedSubCategory: React.Dispatch<React.SetStateAction<string[]>>; // Passed from parent
+  // selectedSubCategory: string[]; // Passed from parent
+  // setSelectedSubCategory: React.Dispatch<React.SetStateAction<string[]>>; // Passed from parent
+  subCategoryIds: string[];
+  categoryId: string;
 };
 
 export default function SubCategorySort({
   key,
-  // product,
+  subCategoryId,
   subCategoryName,
-  selectedSubCategory,
-  setSelectedSubCategory,
+  subCategoryIds,
+  categoryId,
 }: SubCategorySortProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Create query string by merging current search params with key-value pairs
   const createQueryString = useCallback(
-    (subCategories: string[]) => {
+    (values: string[]) => {
       const params = new URLSearchParams(searchParams.toString());
 
-      // Clear previous subCategory params
-      params.delete("subCategory");
-
-      // Add selected subcategories one by one
-      subCategories.forEach((subcategory) => {
-        params.append("subCategory", subcategory); // Use 'append' for multiple same keys
+      values.forEach((id) => {
+        // Check if the ID already exists in the params
+        if (params.getAll("subCategory").includes(id)) {
+          // Remove the ID if it exists
+          const existingValues = params
+            .getAll("subCategory")
+            .filter((value) => value !== id);
+          params.delete("subCategory");
+          existingValues.forEach((value) =>
+            params.append("subCategory", value),
+          );
+        } else {
+          // Append the ID if it does not exist
+          params.append("subCategory", id);
+        }
       });
 
       return params.toString();
@@ -42,36 +53,23 @@ export default function SubCategorySort({
     [searchParams],
   );
 
-  // const subCategoryName = product.subCategory?.translations.data.name;
+  function handleSortCheck(values: string[]) {
+    const searchParam = createQueryString(values);
+    router.push(`${pathname}?${searchParam}`);
+  }
 
-  const isChecked = subCategoryName
-    ? selectedSubCategory.includes(subCategoryName)
-    : false;
-
-  const handleCheckboxChange = () => {
-    if (subCategoryName) {
-      const updatedSubCategories = !isChecked
-        ? [...selectedSubCategory, subCategoryName] // Add subcategory
-        : selectedSubCategory.filter((item) => item !== subCategoryName); // Remove subcategory
-
-      setSelectedSubCategory(updatedSubCategories);
-
-      // Update URL with the current state of selectedSubCategories
-      const updatedQueryString = createQueryString(updatedSubCategories);
-      router.push(`${pathname}?${updatedQueryString}`);
-    }
-  };
+  const isChecked = searchParams.getAll("subCategory").includes(subCategoryId);
 
   return (
     <li key={key}>
       <Checkbox
-        id={subCategoryName}
+        id={subCategoryId}
         className="me-3"
         checked={isChecked}
-        onCheckedChange={handleCheckboxChange}
-        value={selectedSubCategory}
+        onCheckedChange={() => handleSortCheck([subCategoryId])}
+        // value={}
       />
-      <Label htmlFor={subCategoryName} className="text-lg">
+      <Label htmlFor={subCategoryId} className="text-lg">
         {subCategoryName || "Unnamed Subcategory"}
       </Label>
     </li>

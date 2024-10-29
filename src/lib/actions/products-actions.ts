@@ -194,6 +194,7 @@ export async function getProductsBySubCategoryAction(
   const subCategoryQuery = subCategoryIds
     .map((id) => `subCategory>_id=${id}`)
     .join("&");
+  console.log(subCategoryQuery);
   const res = await fetch(
     `${process.env.BASE_URL}/products?category>_id=${categoryId}&${subCategoryQuery}`,
     {
