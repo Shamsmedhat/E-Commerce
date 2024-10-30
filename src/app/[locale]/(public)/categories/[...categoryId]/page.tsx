@@ -1,6 +1,6 @@
 import {
+  getFilteredProductsAction,
   getProductsByCategoryIdAction,
-  getProductsBySubCategoryAction,
 } from "@/lib/actions/products-actions";
 
 // ui
@@ -9,7 +9,7 @@ import CategoryPage from "@/app/[locale]/(public)/categories/[...categoryId]/com
 // Types
 type PageProps = {
   params: { locale: string; categoryId: string };
-  searchParams: { subCategory: string[]; brand: string[] };
+  searchParams: { subCategory: string[]; brand: string[]; rating: string[] };
 };
 export default async function Page({ params, searchParams }: PageProps) {
   // Ensure searchParams.subCategory is always an array
@@ -17,19 +17,22 @@ export default async function Page({ params, searchParams }: PageProps) {
     ? searchParams.subCategory
     : [searchParams.subCategory].filter(Boolean);
 
+  const ratings = Array.isArray(searchParams.rating)
+    ? searchParams.rating
+    : [searchParams.rating].filter(Boolean);
+  const brands = Array.isArray(searchParams.brand)
+    ? searchParams.brand
+    : [searchParams.brand].filter(Boolean);
+
   // Fetch data based on subCategory presence
   let data: ProductData;
-  if (subCategory.length) {
-    console.log(111111111111111);
-    data = await getProductsBySubCategoryAction(
-      subCategory,
-      params.categoryId[0],
-    );
-  } else {
-    console.log(222222222);
 
-    data = await getProductsByCategoryIdAction(params.categoryId[0]);
-  }
+  data = await getFilteredProductsAction(
+    params.categoryId[0],
+    subCategory,
+    ratings,
+    brands,
+  );
 
   console.log("params", params);
   console.log("searchParams", searchParams);

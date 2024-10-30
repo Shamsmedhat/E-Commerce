@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import RatingSort from "./rating-sort";
 
 export default function RatingSection({ products }: { products: Product[] }) {

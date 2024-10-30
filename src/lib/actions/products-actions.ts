@@ -184,36 +184,6 @@ export async function getTopRatingProductsAction() {
   return data.data;
 }
 
-// Get products //* by subCategory
-export async function getProductsBySubCategoryAction(
-  subCategoryIds: string[],
-  categoryId: string,
-): Promise<ProductData> {
-  // get web locae
-  const locale = await getLocale();
-  const subCategoryQuery = subCategoryIds
-    .map((id) => `subCategory>_id=${id}`)
-    .join("&");
-  console.log(subCategoryQuery);
-  const res = await fetch(
-    `${process.env.BASE_URL}/products?category>_id=${categoryId}&${subCategoryQuery}`,
-    {
-      headers: {
-        "Accept-Language": locale,
-      },
-    },
-  );
-  const data: APIResponse<ProductData> = await res.json();
-
-  if (data.status !== "success") {
-    throw new AppError(data.message, 500);
-  } else if (!data.data) {
-    throw new AppError("Something went wrong!", 500);
-  }
-  // return data
-  return data.data;
-}
-
 // Get products //* by brand
 export async function getProductsByBrandAction(
   categoryId: string,
@@ -263,5 +233,57 @@ export async function getProductsByRatingAction(
     throw new AppError("Something went wrong!", 500);
   }
   // return data
+  return data.data;
+}
+
+// Get products with optional filters for subCategory, rating, and brand
+export async function getFilteredProductsAction(
+  categoryId: string,
+  subCategoryIds?: string[],
+  ratings?: string[],
+  brandIds?: string[],
+): Promise<ProductData> {
+  // Get locale
+  const locale = await getLocale();
+
+  // Initialize query with category filter
+  let query = `category>_id=${categoryId}`;
+
+  // Add subcategory filter using "|" if subCategoryIds are provided
+  if (subCategoryIds && subCategoryIds.length > 0) {
+    const subCategoryQuery = `subCategory>_id=${subCategoryIds.join("|")}`;
+    query += `&${subCategoryQuery}`;
+  }
+
+  // Add rating filter using "|" if ratings are provided
+  if (ratings && ratings.length > 0) {
+    const ratingQuery = `ratings>average=${ratings.join("|")}`;
+    query += `&${ratingQuery}`;
+  }
+
+  // Add brand filter using "|" if brandIds are provided
+  if (brandIds && brandIds.length > 0) {
+    const brandQuery = `brand>_id=${brandIds.join("|")}`;
+    query += `&${brandQuery}`;
+  }
+
+  // Fetch products with constructed query
+  const res = await fetch(`${process.env.BASE_URL}/products?${query}`, {
+    headers: {
+      "Accept-Language": locale,
+    },
+  });
+
+  // Parse response data
+  const data: APIResponse<ProductData> = await res.json();
+
+  // Handle errors
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+
+  // Return product data
   return data.data;
 }

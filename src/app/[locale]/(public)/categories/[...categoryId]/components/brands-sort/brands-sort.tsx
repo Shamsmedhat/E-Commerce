@@ -8,31 +8,30 @@ import React, { useCallback } from "react";
 type SubCategorySortProps = {
   key: string;
   product: Product;
-  selectedBrands: string[]; // Passed from parent
-  setSelectedBrands: React.Dispatch<React.SetStateAction<string[]>>; // Passed from parent
 };
 
-export default function BrandsSort({
-  key,
-  product,
-  selectedBrands,
-  setSelectedBrands,
-}: SubCategorySortProps) {
+export default function BrandsSort({ key, product }: SubCategorySortProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  // Create query string by merging current search params with key-value pairs
+  console.log("product", product);
   const createQueryString = useCallback(
-    (brands: string[]) => {
+    (values: string[]) => {
       const params = new URLSearchParams(searchParams.toString());
 
-      // Clear previous subCategory params
-      params.delete("brand");
-
-      // Add selected subcategories one by one
-      brands.forEach((subcategory) => {
-        params.append("brand", subcategory); // Use 'append' for multiple same keys
+      values.forEach((id) => {
+        // Check if the ID already exists in the params
+        if (params.getAll("brand").includes(id)) {
+          // Remove the ID if it exists
+          const existingValues = params
+            .getAll("brand")
+            .filter((value) => value !== id);
+          params.delete("brand");
+          existingValues.forEach((value) => params.append("brand", value));
+        } else {
+          // Append the ID if it does not exist
+          params.append("brand", id);
+        }
       });
 
       return params.toString();
@@ -40,35 +39,27 @@ export default function BrandsSort({
     [searchParams],
   );
 
-  const brandName = product.brand?.translations.data.name;
+  function handleCheckboxChange(values: string[]) {
+    const searchParam = createQueryString(values);
+    router.push(`${pathname}?${searchParam}`);
+  }
 
-  const isChecked = brandName ? selectedBrands.includes(brandName) : false;
-
-  const handleCheckboxChange = () => {
-    if (brandName) {
-      const updatedSubCategories = !isChecked
-        ? [...selectedBrands, brandName] // Add subcategory
-        : selectedBrands.filter((item) => item !== brandName); // Remove subcategory
-
-      setSelectedBrands(updatedSubCategories);
-
-      // Update URL with the current state of selectedSubCategories
-      const updatedQueryString = createQueryString(updatedSubCategories);
-      router.push(`${pathname}?${updatedQueryString}`);
-    }
-  };
+  const isChecked = searchParams
+    .getAll("brand")
+    .includes(String(product.brand._id));
 
   return (
     <li key={key}>
       <Checkbox
-        id={brandName}
+        id={product.brand._id}
         className="me-3"
         checked={isChecked}
-        onCheckedChange={handleCheckboxChange}
-        value={selectedBrands}
+        onCheckedChange={() =>
+          handleCheckboxChange([String(product.brand._id)])
+        }
       />
-      <Label htmlFor={brandName} className="text-lg">
-        {brandName || "Unnamed Subcategory"}
+      <Label htmlFor={product.brand._id} className="text-lg">
+        {product.brand.translations.data.name || "Unnamed Subcategory"}
       </Label>
     </li>
   );
