@@ -1,3 +1,5 @@
+"use client";
+
 import RatingStars from "@/components/common/RatingStars";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,29 +8,56 @@ import { LuUserCircle } from "react-icons/lu";
 
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
+import { AddReviewForm } from "./add-review-form";
+import { getSession, useSession } from "next-auth/react";
+import UserReview from "./user-review";
 
+type ProductTableProps = {
+  category: string;
+  brand: string;
+  subCategory: string;
+  reviews: ReviewsData;
+  translations: any;
+  productId: string;
+};
 export default function ProductTable({
   category,
   brand,
   subCategory,
+  reviews,
   translations,
-}: Product) {
+  productId,
+}: ProductTableProps) {
   const t = useTranslations();
 
   const locale = useLocale();
   const isEn = locale === "en";
-  const dir = () => (isEn ? "ltr" : "rtl");
-  // const maxRatingStars = 5;
-  // const countOfUserRatingMaxRating =
-  //   reviews?.filter((r) => r.rating === maxRatingStars).length || 0;
-  // const countOfUserRating4 = reviews?.filter((r) => r.rating === 4).length || 0;
-  // const countOfUserRating3 = reviews?.filter((r) => r.rating === 3).length || 0;
-  // const countOfUserRating2 = reviews?.filter((r) => r.rating === 2).length || 0;
-  // const countOfUserRating1 = reviews?.filter((r) => r.rating === 1).length || 0;
+  const dir = isEn ? "ltr" : "rtl";
+  const maxRatingStars = 5;
+  const totalReviews = reviews?.reviews.length || 0;
+  const session: UserSession = useSession();
+
+  const countOfUserRatingMaxRating =
+    reviews?.reviews.filter((r) => r.rating === maxRatingStars).length || 0;
+  const countOfUserRating4 =
+    reviews?.reviews.filter((r) => r.rating === 4).length || 0;
+  const countOfUserRating3 =
+    reviews?.reviews.filter((r) => r.rating === 3).length || 0;
+  const countOfUserRating2 =
+    reviews?.reviews.filter((r) => r.rating === 2).length || 0;
+  const countOfUserRating1 =
+    reviews?.reviews.filter((r) => r.rating === 1).length || 0;
+
+  const userHasReviewed = reviews?.reviews.some(
+    (r) => r.user.email === session.data?.user.email,
+  );
+
+  const getPercentage = (count: number) =>
+    totalReviews ? (count / totalReviews) * 100 : 0;
 
   return (
     <div>
-      <Tabs defaultValue="Specifications" dir={dir()}>
+      <Tabs defaultValue="Specifications" dir={dir}>
         {/* Tabs list */}
         <TabsList className="mb-3 bg-white">
           <TabsTrigger
@@ -116,24 +145,18 @@ export default function ProductTable({
               <h4 className="text-xl font-semibold text-primary">
                 {t("nA2_BG-9DmiBUbklDZw8Z")}
               </h4>
-              {/* {reviews?.map((r) => (
-                <div
-                  key={r.user}
-                  className="w-[70%] border-b-2 border-primary-foreground/5 pb-4"
-                >
-                  <div className="mt-5 flex gap-2 align-middle">
-                    <span>
-                      <LuUserCircle strokeWidth={1} />
-                    </span>
-                    <span className="font-semibold">{r.user}</span>
-                  </div>
-                  <p className="mb-3 mt-1">
-                    <RatingStars rate={r.rating} />
-                  </p>
-                  <p className="text-primary-foreground">{r.review}</p>
-                </div>
-              ))} */}
+              {reviews?.reviews.map((r) => (
+                <UserReview
+                  review={r}
+                  session={session}
+                  key={r._id}
+                  myReview={session.data?.user.email === r.user.email}
+                />
+              ))}
+              {userHasReviewed ? null : <AddReviewForm productId={productId} />}
+              {/* <AddReviewForm productId={productId} /> */}
             </div>
+
             {/* Stars percentage */}
             <div className="w-1/2">
               <h4 className="text-xl font-semibold text-primary">
@@ -142,75 +165,73 @@ export default function ProductTable({
               <div className="mt-6 flex flex-col gap-4">
                 {/* 5 stars progress */}
                 <div className="flex items-center justify-start gap-6">
-                  <span>{t("N4Kq8AbMtmFJMa6sKicR_")}</span>
-                  {/* <div className="w-[80%]">
+                  <span>5 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
+                  <div className="w-[80%]">
                     <Progress
-                      value={
-                        (countOfUserRatingMaxRating / maxRatingStars) * 100
-                      }
+                      value={getPercentage(countOfUserRatingMaxRating)}
                       max={maxRatingStars}
                     />
                   </div>
-                  <span className="text-backup">
-                    {(countOfUserRatingMaxRating / maxRatingStars) * 100} %
-                  </span> */}
+                  <span className="text-xs text-backup">
+                    {getPercentage(countOfUserRatingMaxRating)} %
+                  </span>
                 </div>
 
                 {/* 4 stars progress */}
-                {/* <div className="flex items-center justify-start gap-6">
-                  <span>4 نجوم</span>
+                <div className="flex items-center justify-start gap-6">
+                  <span>4 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
                   <span className="w-[80%]">
                     <Progress
-                      value={(countOfUserRating4 / maxRatingStars) * 100}
+                      value={getPercentage(countOfUserRating4)}
                       max={maxRatingStars}
                     />
                   </span>
-                  <span className="text-backup">
-                    {(countOfUserRating4 / maxRatingStars) * 100} %
+                  <span className="text-xs text-backup">
+                    {getPercentage(countOfUserRating4)} %
                   </span>
-                </div> */}
+                </div>
 
                 {/* 3 stars progress */}
-                {/* <div className="flex items-center justify-start gap-6">
-                  <span>3 نجوم</span>
+                <div className="flex items-center justify-start gap-6">
+                  <span>3 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
                   <span className="w-[80%]">
                     <Progress
-                      value={(countOfUserRating3 / maxRatingStars) * 100}
+                      value={getPercentage(countOfUserRating3)}
                       max={maxRatingStars}
                     />
                   </span>
-                  <span className="text-backup">
-                    {(countOfUserRating3 / maxRatingStars) * 100} %
+                  <span className="text-xs text-backup">
+                    {getPercentage(countOfUserRating3)} %
                   </span>
-                </div> */}
+                </div>
 
                 {/* 2 stars progress */}
-                {/* <div className="flex items-center justify-start gap-6">
-                  <span>2 نجوم</span>
+                <div className="flex items-center justify-start gap-6">
+                  <span>2 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
                   <span className="w-[80%]">
                     <Progress
-                      value={(countOfUserRating2 / maxRatingStars) * 100}
+                      value={getPercentage(countOfUserRating2)}
                       max={maxRatingStars}
                     />
                   </span>
-                  <span className="text-backup">
-                    {(countOfUserRating2 / maxRatingStars) * 100} %
+                  <span className="text-xs text-backup">
+                    {getPercentage(countOfUserRating2)} %
                   </span>
-                </div> */}
+                </div>
 
                 {/* 1 stars progress */}
-                {/* <div className="flex items-center justify-start gap-6">
-                  <span>1 نجوم</span>
+                <div className="flex items-center justify-start gap-6">
+                  <span>1 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
                   <span className="w-[80%]">
                     <Progress
-                      value={(countOfUserRating1 / maxRatingStars) * 100}
+                      value={getPercentage(countOfUserRating1)}
                       max={maxRatingStars}
                     />
                   </span>
-                  <span className="text-backup">
-                    {(countOfUserRating1 / maxRatingStars) * 100} %
+                  <span className="text-xs text-backup">
+                    {getPercentage(countOfUserRating1)} %
                   </span>
-                </div> */}
+                </div>
                 {/* ============ */}
               </div>
             </div>

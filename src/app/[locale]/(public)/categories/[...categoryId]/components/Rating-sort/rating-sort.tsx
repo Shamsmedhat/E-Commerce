@@ -9,31 +9,30 @@ import React, { useCallback } from "react";
 type RatingSortProps = {
   key: string;
   product: Product;
-  selectedRating: number[]; // Passed from parent
-  setSelectedRating: React.Dispatch<React.SetStateAction<number[]>>; // Passed from parent
 };
 
-export default function RatingSort({
-  key,
-  product,
-  selectedRating,
-  setSelectedRating,
-}: RatingSortProps) {
+export default function RatingSort({ key, product }: RatingSortProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Create query string by merging current search params with key-value pairs
   const createQueryString = useCallback(
-    (rating: number[]) => {
+    (values: string[]) => {
       const params = new URLSearchParams(searchParams.toString());
 
-      // Clear previous subCategory params
-      params.delete("rating");
-
-      // Add selected subcategories one by one
-      rating.forEach((r) => {
-        params.append("rating", String(r)); // Use 'append' for multiple same keys
+      values.forEach((id) => {
+        // Check if the ID already exists in the params
+        if (params.getAll("rating").includes(id)) {
+          // Remove the ID if it exists
+          const existingValues = params
+            .getAll("rating")
+            .filter((value) => value !== id);
+          params.delete("rating");
+          existingValues.forEach((value) => params.append("rating", value));
+        } else {
+          // Append the ID if it does not exist
+          params.append("rating", id);
+        }
       });
 
       return params.toString();
@@ -41,40 +40,33 @@ export default function RatingSort({
     [searchParams],
   );
 
-  const rating = product.ratings?.average;
+  function handleCheckboxChange(values: string[]) {
+    const searchParam = createQueryString(values);
+    router.push(`${pathname}?${searchParam}`);
+  }
 
-  const isChecked = rating ? selectedRating.includes(rating) : false;
-
-  const handleCheckboxChange = () => {
-    if (rating) {
-      const updatedSubCategories = !isChecked
-        ? [...selectedRating, rating] // Add subcategory
-        : selectedRating.filter((item) => item !== rating); // Remove subcategory
-
-      setSelectedRating(updatedSubCategories);
-
-      // Update URL with the current state of selectedSubCategories
-      const updatedQueryString = createQueryString(updatedSubCategories);
-      router.push(`${pathname}?${updatedQueryString}`);
-    }
-  };
-
-  if (Number(rating) === 0) return;
+  const isChecked = searchParams
+    .getAll("rating")
+    .includes(String(product.ratings?.average));
 
   return (
     <li key={key} className="mb-3 flex items-center">
       <Checkbox
-        id={String(rating!)}
+        id={String(product.ratings?.average!)}
         className="me-3"
         checked={isChecked}
-        onCheckedChange={handleCheckboxChange}
-        value={String(selectedRating)}
+        onCheckedChange={() =>
+          handleCheckboxChange([String(product.ratings?.average)])
+        }
+        // value={String(selectedRating)}
       />
-      <Label htmlFor={String(rating)} className="text-lg">
-        <RatingStars rate={rating} />
+      <Label htmlFor={String(product.ratings?.average)} className="text-lg">
+        <RatingStars rate={product.ratings?.average} />
       </Label>
 
-      <span className="mx-2 text-sm font-normal">({rating})</span>
+      <span className="mx-2 text-sm font-normal">
+        ({product.ratings?.average})
+      </span>
     </li>
   );
 }

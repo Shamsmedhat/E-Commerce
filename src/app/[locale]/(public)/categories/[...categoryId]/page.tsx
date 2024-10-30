@@ -20,11 +20,14 @@ export default async function Page({ params, searchParams }: PageProps) {
   // Fetch data based on subCategory presence
   let data: ProductData;
   if (subCategory.length) {
+    console.log(111111111111111);
     data = await getProductsBySubCategoryAction(
       subCategory,
       params.categoryId[0],
     );
   } else {
+    console.log(222222222);
+
     data = await getProductsByCategoryIdAction(params.categoryId[0]);
   }
 
