@@ -8,7 +8,7 @@ export default function BrandsSection({ products }: { products: Product[] }) {
   );
 
   return (
-    <ul className="flex flex-col">
+    <ul className="flex flex-col gap-2">
       {uniqueBrands.map((brandName) => {
         // Find a product with this subcategory to pass to SubCategorySort
         const product = products.find(

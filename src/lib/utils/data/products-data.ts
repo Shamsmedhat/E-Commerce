@@ -8,7 +8,6 @@ import {
   getProductByIdAction,
   getProductsByCategoryAction,
   getProductsByCategoryIdAction,
-  getProductsBySubCategoryAction,
   getTopRatingProductsAction,
   getTopSellingProductsAction,
 } from "../../actions/products-actions";
@@ -91,19 +90,19 @@ export function useProductsByCategoryId(categoryId: string) {
 }
 
 // using useQuery get the products based on the subCategoryId selected function recive subCategoryId & categoryId
-export function useProductsBySubCategory(
-  subCategoryIds: string[],
-  categoryId: string,
-) {
-  const {
-    data: productsBySubCategory,
-    isFetching,
-    isError,
-    isPending,
-  } = useQuery({
-    queryKey: ["products-by-subCategory", subCategoryIds], // identify the data based on the subCategoryIds
-    queryFn: () => getProductsBySubCategoryAction(subCategoryIds, categoryId),
-    enabled: !!subCategoryIds, // only run the query if subCategoryId is truthy
-  });
-  return { productsBySubCategory, isFetching, isError, isPending };
-}
+// export function useProductsBySubCategory(
+//   subCategoryIds: string[],
+//   categoryId: string,
+// ) {
+//   const {
+//     data: productsBySubCategory,
+//     isFetching,
+//     isError,
+//     isPending,
+//   } = useQuery({
+//     queryKey: ["products-by-subCategory", subCategoryIds], // identify the data based on the subCategoryIds
+//     queryFn: () => getProductsBySubCategoryAction(subCategoryIds, categoryId),
+//     enabled: !!subCategoryIds, // only run the query if subCategoryId is truthy
+//   });
+//   return { productsBySubCategory, isFetching, isError, isPending };
+// }

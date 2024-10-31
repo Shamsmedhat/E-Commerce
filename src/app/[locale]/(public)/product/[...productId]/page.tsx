@@ -32,13 +32,14 @@ export default async function ProductPage({ params }: { params: Params }) {
     stock,
     subCategory,
     translations,
+    _id,
   } = product;
 
   return (
     <>
       <section className="container mx-auto mt-10">
         <div
-          className="flex flex-col rounded-md bg-white px-[2rem] py-6 shadow-sm md:flex-row md:pe-[4rem] lg:min-h-[60vh]"
+          className="flex flex-col rounded-md bg-white px-[2rem] py-6 shadow-sm md:flex-row md:pe-[4rem] lg:h-[50vh]"
           dir={isEn ? "ltr" : "rtl"}
         >
           <div className="flex md:w-1/2">
@@ -46,6 +47,7 @@ export default async function ProductPage({ params }: { params: Params }) {
           </div>
           <div className="ms-8 flex flex-shrink flex-col gap-y-4 md:w-1/2">
             <ProductDetails
+              productId={_id}
               category={category.translations.data.name}
               name={translations.data.name}
               overview={translations.data.overview}

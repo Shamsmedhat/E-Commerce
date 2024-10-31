@@ -50,7 +50,10 @@ export default function RatingSort({ key, product }: RatingSortProps) {
     .includes(String(product.ratings?.average));
 
   return (
-    <li key={key} className="mb-3 flex items-center">
+    <li
+      key={key}
+      className="mb-3 flex flex-row-reverse items-center gap-2 lg:flex-row lg:gap-0"
+    >
       <Checkbox
         id={String(product.ratings?.average!)}
         className="me-3"
@@ -60,7 +63,10 @@ export default function RatingSort({ key, product }: RatingSortProps) {
         }
         // value={String(selectedRating)}
       />
-      <Label htmlFor={String(product.ratings?.average)} className="text-lg">
+      <Label
+        htmlFor={String(product.ratings?.average)}
+        className="cursor-pointer text-lg"
+      >
         <RatingStars rate={product.ratings?.average} />
       </Label>
 

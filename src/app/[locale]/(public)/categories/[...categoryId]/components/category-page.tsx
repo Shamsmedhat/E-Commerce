@@ -3,6 +3,7 @@ import Image from "next/image";
 
 // Icons
 import { LuHeart, LuScale } from "react-icons/lu";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 // Ui
 import { ComboboxDemo } from "../../../../../../components/ui/combobox";
@@ -16,6 +17,8 @@ import { Link } from "@/navigarion";
 import RatingStars from "@/components/common/RatingStars";
 import { useLocale, useTranslations } from "next-intl";
 import AsideSortSection from "./aside-sort-section";
+import SmallScreenSortSection from "./small-screen-sort-section";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 
 // Types
 type CategoryPageProps = {
@@ -59,31 +62,40 @@ export default function CategoryPage({
         {/* Aside section & Products list */}
         <div className="flex justify-around pb-[4rem]">
           {/* Aside Section */}
-          <AsideSortSection
-            products={products}
-            categoryName={categoryName}
-            categoryId={categoryId}
-          />
+          <div className="hidden lg:block">
+            <AsideSortSection
+              products={products}
+              categoryName={categoryName}
+              categoryId={categoryId}
+            />
+          </div>
 
           {/*Producsts section  */}
           <div className="w-[75%]">
             {/* Sort section */}
-            <div className="rounded-md bg-white p-3">
-              <span>
+            <div className="flex rounded-sm border-l-4 border-l-primary bg-white py-3 lg:hidden">
+              <Sheet>
                 {/* Title */}
-                <h4 className="text-lg font-bold">
-                  {t("MpJWTay2TLMOWLqh1Wjbc")}
-                </h4>
+                <SheetTrigger className="my-auto flex h-full items-center gap-2 ps-3 text-lg font-bold hover:text-primary">
+                  <span className="uppercase">
+                    {t("MpJWTay2TLMOWLqh1Wjbc")}
+                  </span>
+                  <MdKeyboardArrowDown />
+                </SheetTrigger>
 
                 {/* Sort component [list]*/}
                 <span className="ms-4">
-                  <SortBy />
+                  <SmallScreenSortSection
+                    products={products}
+                    categoryName={categoryName}
+                    categoryId={categoryId}
+                  />
                 </span>
-              </span>
+              </Sheet>
             </div>
 
             {/* Products cart */}
-            <div className="row-auto mt-[2rem] grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+            <div className="row-auto mt-[2rem] grid grid-cols-1 gap-4 lg:mt-0 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {/* First filter the products based on the given sort valus */}
               {products
                 // After filter the products we map over it to display

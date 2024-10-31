@@ -25,7 +25,7 @@ export default function SubCategorySection({
 
   const subCategoryIds = subCategories?.subCategories.map((s) => s._id);
   return (
-    <ul className="flex flex-col">
+    <ul className="flex flex-col gap-2">
       {subCategories?.subCategories.map((subCategory) => {
         return (
           <SubCategorySort

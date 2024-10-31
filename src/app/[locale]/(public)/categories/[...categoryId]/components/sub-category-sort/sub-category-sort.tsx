@@ -61,7 +61,10 @@ export default function SubCategorySort({
   const isChecked = searchParams.getAll("subCategory").includes(subCategoryId);
 
   return (
-    <li key={key}>
+    <li
+      key={key}
+      className="flex flex-row-reverse items-center gap-2 lg:flex-row lg:gap-0"
+    >
       <Checkbox
         id={subCategoryId}
         className="me-3"
@@ -69,7 +72,7 @@ export default function SubCategorySort({
         onCheckedChange={() => handleSortCheck([subCategoryId])}
         // value={}
       />
-      <Label htmlFor={subCategoryId} className="text-lg">
+      <Label htmlFor={subCategoryId} className="cursor-pointer text-lg">
         {subCategoryName || "Unnamed Subcategory"}
       </Label>
     </li>

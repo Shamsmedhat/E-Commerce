@@ -10,6 +10,7 @@ import { getCartAction } from "@/lib/actions/cart-actions";
 // UI
 import EmptyCart from "./_components/empty-cart";
 import CartContent from "./_components/cart-content";
+import { AppError } from "@/lib/utils/catchAsync";
 
 export default async function Cart() {
   // Translation
@@ -21,17 +22,26 @@ export default async function Cart() {
 
   // Get cart data
 
-  const cart = await getCartAction();
-
-  // If received cart and there is a status code in the cart that's signed for an error we check if this error is 401 in validate-session
-  if (cart && "statusCode" in cart) {
+  // Initialize cart data variable
+  let cart;
+  try {
+    // Attempt to get cart data
+    cart = await getCartAction();
+  } catch (error) {
+    // Handle specific errors based on their properties
     if (
-      cart.message === "There is no cart for the currently logged in user!" &&
-      cart.statusCode === 500
+      error instanceof AppError &&
+      error.message === "There is no cart for the currently logged in user!" &&
+      error.statusCode === 500
     ) {
       return <EmptyCart isEn={isEn} />;
     }
-    return <ValidateResponse message={cart.message} callbackUrl="/cart" />;
+    return (
+      <ValidateResponse
+        message={(error as AppError).message || "An error occurred"}
+        callbackUrl="/cart"
+      />
+    );
   }
 
   return (

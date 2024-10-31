@@ -49,7 +49,10 @@ export default function BrandsSort({ key, product }: SubCategorySortProps) {
     .includes(String(product.brand._id));
 
   return (
-    <li key={key}>
+    <li
+      key={key}
+      className="flex flex-row-reverse items-center gap-2 lg:flex-row lg:gap-0"
+    >
       <Checkbox
         id={product.brand._id}
         className="me-3"
@@ -58,7 +61,7 @@ export default function BrandsSort({ key, product }: SubCategorySortProps) {
           handleCheckboxChange([String(product.brand._id)])
         }
       />
-      <Label htmlFor={product.brand._id} className="text-lg">
+      <Label htmlFor={product.brand._id} className="cursor-pointer text-lg">
         {product.brand.translations.data.name || "Unnamed Subcategory"}
       </Label>
     </li>

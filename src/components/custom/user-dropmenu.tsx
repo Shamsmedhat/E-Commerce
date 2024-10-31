@@ -56,17 +56,6 @@ export default function UserDropmenu() {
           </Link>
         </DropdownMenuItem>
 
-        {/* payments */}
-        <DropdownMenuItem>
-          <Link
-            href="/profile"
-            className="flex w-full items-center gap-2 rtl:flex-row-reverse"
-          >
-            <LuCreditCard className="h-4 w-4" />
-            <span>{t("Y30H6LYenliZ-2M0l6pQB")}</span>
-          </Link>
-        </DropdownMenuItem>
-
         {/* dashboard */}
         <DropdownMenuItem>
           <Link

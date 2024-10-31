@@ -8,7 +8,7 @@ export default function RatingSection({ products }: { products: Product[] }) {
   );
 
   return (
-    <ul className="flex flex-col">
+    <ul className="flex flex-col gap-2">
       {uniqueRatings.map((rating) => {
         // Find a product with this rating to pass to RatingSort
         const product = products.find((p) => p.ratings?.average === rating);

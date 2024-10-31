@@ -22,7 +22,7 @@ export default function AsideSortSection({
   const t = useTranslations();
 
   return (
-    <aside className="hidden w-[15%] lg:block">
+    <aside className="w-[15%]">
       {/* Sub category Section */}
       <div
         className={`bg-${categoryColor(categoryName!)} mb-[2rem] min-w-[200px] rounded-md p-5 text-white`}

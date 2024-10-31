@@ -34,9 +34,6 @@ export default async function Page({ params, searchParams }: PageProps) {
     brands,
   );
 
-  console.log("params", params);
-  console.log("searchParams", searchParams);
-
   // Get products
   const productsBySelectedCategory = data.products;
 
