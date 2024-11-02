@@ -21,7 +21,7 @@ import "swiper/css/pagination";
 
 // ui
 import Heading from "@/components/common/Heading";
-import TopSellingItemSkeleton from "./top-selling-item-skeleton";
+import HorizontalProductsSliderSkeleton from "./horizontal-products-slider-skeleton";
 
 export default function TopSellingItemsSkeleton() {
   const t = useTranslations();
@@ -84,7 +84,7 @@ export default function TopSellingItemsSkeleton() {
 
             {skeletonArray.map((p, i) => (
               <SwiperSlide key={i}>
-                <TopSellingItemSkeleton locale={locale} />
+                <HorizontalProductsSliderSkeleton locale={locale} />
               </SwiperSlide>
             ))}
           </ul>

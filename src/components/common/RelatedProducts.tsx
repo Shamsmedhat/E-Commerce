@@ -1,31 +1,31 @@
 "use client";
-import Imge3 from "@/../public/assets/Dog_Food.webp";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 // import required modules
-import { Autoplay, Navigation } from "swiper/modules";
-import Link from "next/link";
-import Heading from "@/components/common/Heading";
-import TopSellingItem from "@/app/[locale]/(public)/(homepage)/_components/top-selling-item";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { Autoplay, Navigation } from "swiper/modules";
+import HorizontalProductsSlider from "@/app/[locale]/(public)/(homepage)/_components/horizontal-products-slider";
+import { useProductsByCategoryId } from "@/lib/utils/data/products-data";
 
 export default function RelatedProducts({
-  relatedProduct,
+  categoryId,
 }: {
-  relatedProduct: any;
+  categoryId: string;
 }) {
   const t = useTranslations();
-  // Fetching only 20 of products that rated by 5 stars only
-  const allProducts = relatedProduct
-    .map((product) => product.data)
-    .slice(0, 20);
 
+  const { productsByCategoryId, isError, isFetching, isPending } =
+    useProductsByCategoryId(categoryId);
+  // Fetching only 20 of products that rated by 5 stars only
+  const allProducts = productsByCategoryId?.products.slice(0, 20);
+
+  console.log(productsByCategoryId?.products);
   return (
     <>
       <div className="flex justify-between ps-[8rem]">
@@ -57,11 +57,11 @@ export default function RelatedProducts({
           }}
         >
           <ul>
-            {/* {allProducts.map((product, i) => ( */}
-            {/* <SwiperSlide key={i}> */}
-            {/* <TopSellingItem product={product} key={i} /> */}
-            {/* </SwiperSlide> */}
-            {/* ))} */}
+            {allProducts?.map((product, i) => (
+              <SwiperSlide key={i}>
+                <HorizontalProductsSlider product={product} key={i} />
+              </SwiperSlide>
+            ))}
           </ul>
           <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent"></div>
           <div className="swiper-button-next"></div>

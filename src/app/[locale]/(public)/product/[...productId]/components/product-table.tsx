@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import { PRODUCT_DATA } from "@/models/products";
 import { LuUserCircle } from "react-icons/lu";
+import { FaStar } from "react-icons/fa";
 
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
@@ -62,19 +63,19 @@ export default function ProductTable({
         <TabsList className="mb-3 bg-white">
           <TabsTrigger
             value="Specifications"
-            className="me-4 rounded-none border-transparent py-3 text-sm font-bold data-[state=active]:border-b-2 data-[state=active]:border-primary md:text-xl"
+            className="me-4 rounded-none border-transparent px-1 py-3 text-sm font-bold data-[state=active]:border-b-2 data-[state=active]:border-primary md:px-3 md:text-xl"
           >
             {t("KzO_7oERWTdtyXABYy4AD")}
           </TabsTrigger>
           <TabsTrigger
             value="Description"
-            className="me-4 rounded-none border-transparent py-3 text-sm font-bold data-[state=active]:border-b-2 data-[state=active]:border-primary md:text-xl"
+            className="me-4 rounded-none border-transparent px-1 py-3 text-sm font-bold data-[state=active]:border-b-2 data-[state=active]:border-primary md:px-3 md:text-xl"
           >
             {t("50-4lWEWRLiw7Bh_yTQuo")}
           </TabsTrigger>
           <TabsTrigger
             value="Reviews&Ratings"
-            className="me-4 rounded-none border-transparent py-3 text-sm font-bold data-[state=active]:border-b-2 data-[state=active]:border-primary md:text-xl"
+            className="me-4 rounded-none border-transparent px-1 py-3 text-sm font-bold data-[state=active]:border-b-2 data-[state=active]:border-primary md:px-3 md:text-xl"
           >
             {t("ExlDLpe-akYBrf_OKvbbS")}
           </TabsTrigger>
@@ -85,34 +86,34 @@ export default function ProductTable({
           <ul
             className={cn(
               isEn && "text-left",
-              "my-4 flex !list-inside list-disc flex-col gap-3 px-7",
+              "my-4 flex !list-inside list-disc flex-col gap-3 md:px-7",
             )}
           >
-            <li className="line-hieght flex items-center gap-40 bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70">
+            <li className="line-hieght flex items-center gap-3 bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
               <span className="w-36 font-bold">
                 {t("9DGUyxCbWagDhi7rBaBgJ")}:{" "}
               </span>
               <span>{translations?.data.name}</span>
             </li>
-            <li className="line-hieght flex items-center gap-40 ps-2 font-semibold leading-8 text-primary-foreground/70">
+            <li className="line-hieght flex items-center ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
               <span className="w-36 font-bold">
                 {t("fHxQkBf-__PPbP8Av8QT2")}:{" "}
               </span>
               <span>{translations?.data.details?.model}</span>
             </li>
-            <li className="line-hieght flex items-center gap-40 bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70">
+            <li className="line-hieght flex items-center bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
               <span className="w-36 font-bold">
                 {t("r8AmQp0KoM6Aeum5viXK-")}:{" "}
               </span>
               <span>{brand?.translations.data.name}</span>
             </li>
-            <li className="line-hieght flex items-center gap-40 ps-2 font-semibold leading-8 text-primary-foreground/70">
+            <li className="line-hieght flex items-center ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
               <span className="w-36 font-bold">
                 {t("zOItEysA70YIzajHcTuYo")}:{" "}
               </span>
               <span>{category?.translations.data.name}</span>
             </li>
-            <li className="line-hieght flex items-center gap-40 bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70">
+            <li className="line-hieght flex items-center bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
               <span className="w-36 font-bold">
                 {t("dKK2yEL4B-GcSul9ZivDx")}:{" "}
               </span>
@@ -139,9 +140,9 @@ export default function ProductTable({
 
         {/* Reviews&Ratings content */}
         <TabsContent value="Reviews&Ratings">
-          <div className="flex">
+          <div className="flex flex-col md:flex-row">
             {/* Users reviews */}
-            <div className="my-2 w-1/2">
+            <div className="my-2 md:w-1/2">
               <h4 className="text-xl font-semibold text-primary">
                 {t("nA2_BG-9DmiBUbklDZw8Z")}
               </h4>
@@ -158,14 +159,19 @@ export default function ProductTable({
             </div>
 
             {/* Stars percentage */}
-            <div className="w-1/2">
+            <div className="md:w-1/2">
               <h4 className="text-xl font-semibold text-primary">
                 {/* {reviews?.length} {t("_j9aUg9_1lQ5ekSOGOROU")} */}
               </h4>
               <div className="mt-6 flex flex-col gap-4">
                 {/* 5 stars progress */}
-                <div className="flex items-center justify-start gap-6">
-                  <span>5 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
+                <div className="flex items-center justify-start gap-[2px] text-sm md:gap-6 md:text-base">
+                  <p className="flex items-center gap-2">
+                    <span>5</span>
+                    <span>
+                      <FaStar color="#febf31" />
+                    </span>
+                  </p>
                   <div className="w-[80%]">
                     <Progress
                       value={getPercentage(countOfUserRatingMaxRating)}
@@ -178,8 +184,14 @@ export default function ProductTable({
                 </div>
 
                 {/* 4 stars progress */}
-                <div className="flex items-center justify-start gap-6">
-                  <span>4 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
+                <div className="flex items-center justify-start gap-2 text-sm md:gap-6 md:text-base">
+                  <p className="flex items-center gap-2">
+                    <span>4</span>
+                    <span>
+                      <FaStar color="#febf31" />
+                    </span>
+                  </p>
+
                   <span className="w-[80%]">
                     <Progress
                       value={getPercentage(countOfUserRating4)}
@@ -192,8 +204,13 @@ export default function ProductTable({
                 </div>
 
                 {/* 3 stars progress */}
-                <div className="flex items-center justify-start gap-6">
-                  <span>3 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
+                <div className="flex items-center justify-start gap-2 text-sm md:gap-6 md:text-base">
+                  <p className="flex items-center gap-2">
+                    <span>3</span>
+                    <span>
+                      <FaStar color="#febf31" />
+                    </span>
+                  </p>
                   <span className="w-[80%]">
                     <Progress
                       value={getPercentage(countOfUserRating3)}
@@ -206,8 +223,13 @@ export default function ProductTable({
                 </div>
 
                 {/* 2 stars progress */}
-                <div className="flex items-center justify-start gap-6">
-                  <span>2 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
+                <div className="flex items-center justify-start gap-2 text-sm md:gap-6 md:text-base">
+                  <p className="flex items-center gap-2">
+                    <span>2</span>
+                    <span>
+                      <FaStar color="#febf31" />
+                    </span>
+                  </p>
                   <span className="w-[80%]">
                     <Progress
                       value={getPercentage(countOfUserRating2)}
@@ -220,8 +242,13 @@ export default function ProductTable({
                 </div>
 
                 {/* 1 stars progress */}
-                <div className="flex items-center justify-start gap-6">
-                  <span>1 {t("N4Kq8AbMtmFJMa6sKicR_")}</span>
+                <div className="flex items-center justify-start gap-2 text-sm md:gap-6 md:text-base">
+                  <p className="flex items-center gap-2">
+                    <span>1</span>
+                    <span>
+                      <FaStar color="#febf31" />
+                    </span>
+                  </p>
                   <span className="w-[80%]">
                     <Progress
                       value={getPercentage(countOfUserRating1)}

@@ -23,7 +23,7 @@ export default function UserReview({
   return (
     <div
       key={key}
-      className="w-[70%] border-b-2 border-primary-foreground/5 pb-4"
+      className="border-b-2 border-primary-foreground/5 px-2 pb-4 md:w-[70%] md:px-0"
     >
       <div className="mt-5 flex items-center justify-between">
         {/* User info */}

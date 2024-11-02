@@ -29,6 +29,7 @@ import TopRatingItem from "./top-rated-item";
 import { useTopRatingProducts } from "@/lib/utils/data/products-data";
 import { useEffect, useState } from "react";
 import TopSellingItemsSkeleton from "@/components/skeletons/top-selling-items-skeleton";
+import HorizontalProductsSlider from "./horizontal-products-slider";
 
 export default function TopRatedItems() {
   const t = useTranslations();
@@ -110,7 +111,11 @@ export default function TopRatedItems() {
             {/* top rated products data */}
             {topRatingDisplayedProducts.map((product, i) => (
               <SwiperSlide key={i}>
-                <TopRatingItem product={product} key={i} locale={locale} />
+                <HorizontalProductsSlider
+                  product={product}
+                  key={i}
+                  locale={locale}
+                />
               </SwiperSlide>
             ))}
           </ul>

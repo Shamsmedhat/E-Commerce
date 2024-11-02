@@ -4,7 +4,11 @@ import { cn } from "@/lib/utils";
 // ui
 import { Skeleton } from "../ui/skeleton";
 
-export default function TopSellingItemSkeleton({ locale }: { locale: string }) {
+export default function HorizontalProductsSliderSkeleton({
+  locale,
+}: {
+  locale: string;
+}) {
   return (
     // product card
     <div

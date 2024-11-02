@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { LuChevronDown, LuChevronUp, LuZoomIn } from "react-icons/lu";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styles from "../product-style.module.css";
 import Image from "next/image";
 
@@ -32,10 +32,10 @@ export default function ProductGallery({
   }
 
   return (
-    <div className="flex w-full flex-shrink flex-row-reverse justify-between px-8 md:pe-8">
+    <div className="flex w-full flex-shrink flex-row-reverse justify-between md:px-8 md:pe-8">
       {/* Main Image Display */}
       <div
-        className={`${styles.imageZoom} relative flex w-full items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-4`}
+        className={`${styles.imageZoom} relative flex w-full items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-2 md:p-4`}
       >
         <Image
           src={currentImg}

@@ -11,8 +11,9 @@ import imageFallback from "@/../public/assets/fallbackImage.jpeg";
 // ui
 import RatingStars from "@/components/common/RatingStars";
 import AddToCart from "@/components/common/AddToCart";
+import { Link } from "@/navigarion";
 
-export default function TopSellingItem({
+export default function HorizontalProductsSlider({
   product,
   locale,
 }: {
@@ -28,13 +29,14 @@ export default function TopSellingItem({
     <div
       className={cn(
         locale === "en" ? "items-end" : "items-start",
-        "flex h-[360px] cursor-pointer flex-col justify-between gap-2 p-4 align-middle",
+        "flex h-[360px] flex-col justify-between gap-2 p-4 align-middle",
       )}
     >
-      {/* <HoverCardTrigger> */}
-
       {/* product image */}
-      <div className="relative flex h-[160px] w-full items-center justify-center">
+      <Link
+        className="relative flex h-[160px] w-full items-center justify-center"
+        href={`/product/${product._id}`}
+      >
         <Image
           src={imageUrl}
           width={100}
@@ -42,7 +44,7 @@ export default function TopSellingItem({
           alt=""
           className="h-full max-h-[160px] w-auto object-contain"
         />
-      </div>
+      </Link>
 
       {/* product info section */}
       <div
@@ -62,11 +64,14 @@ export default function TopSellingItem({
         )}
 
         {/* product name */}
-        <h4 className="mb-2 items-start text-lg font-bold text-primary-foreground">
+        <Link
+          className="mb-2 items-start text-lg font-bold text-primary-foreground transition-all hover:text-primary"
+          href={`/product/${product._id}`}
+        >
           {product.translations?.data.name.length! > 30
             ? `...${product.translations?.data.name.slice(0, 30)}`
             : product.translations?.data.name}
-        </h4>
+        </Link>
 
         {/* product price */}
         <div className="flex w-full flex-row-reverse items-center">

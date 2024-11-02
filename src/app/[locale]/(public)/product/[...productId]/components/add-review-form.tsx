@@ -57,7 +57,10 @@ export function AddReviewForm({ productId }: { productId: string }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="my-5 space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="my-5 space-y-8 px-1 md:px-0"
+      >
         <FormField
           control={form.control}
           name="review"

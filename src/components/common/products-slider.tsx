@@ -21,18 +21,23 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // ui
-import HorizontalProductsSlider from "./horizontal-products-slider";
 import Heading from "@/components/common/Heading";
 
 import { useTopSellingProducts } from "@/lib/utils/data/products-data";
 import { useEffect, useState } from "react";
 import TopSellingItemsSkeleton from "@/components/skeletons/top-selling-items-skeleton";
-
-export default function TopSellingItems() {
+import HorizontalProductsSlider from "@/app/[locale]/(public)/(homepage)/_components/horizontal-products-slider";
+type ProductsSliderProps<T> = {
+  products: T[];
+  title: string;
+};
+export default function ProductsSlider<T extends Product>({
+  products,
+  title,
+}: ProductsSliderProps<T>) {
   const t = useTranslations();
 
-  const [topSellingDisplayedProducts, setTopSellingDisplayedProducts] =
-    useState<Product[]>();
+  const [recivedProduct, setRecivedProduct] = useState<Product[]>();
 
   // get locale for text dir
   const locale = useLocale();
@@ -43,14 +48,12 @@ export default function TopSellingItems() {
   const isSmallScreen = useMediaQuery({ query: "(min-width: 590px)" });
   const isExtraSmallScreen = useMediaQuery({ query: "(min-width: 400px)" });
 
-  const { topSellingProducts } = useTopSellingProducts();
-
   // Fetching products that got most sales
   useEffect(() => {
-    setTopSellingDisplayedProducts(topSellingProducts?.products);
-  }, [topSellingProducts?.products]);
+    setRecivedProduct(products);
+  }, [products]);
 
-  if (!topSellingDisplayedProducts) {
+  if (!recivedProduct) {
     return <TopSellingItemsSkeleton />;
   }
 
@@ -64,11 +67,9 @@ export default function TopSellingItems() {
           "my-6 flex justify-between",
         )}
       >
-        <Heading className="flex items-center">
-          {t("uZZQUtSnWv_5AZL2Q5qi9")}
-        </Heading>
+        <Heading className="flex items-center">{title}</Heading>
       </div>
-      {/* top selling products slider */}
+      {/*  products slider */}
       <div>
         <Swiper
           // lg screen show 6.25 products md screen show 4.25 sm screen 3.25 extra sm screen show 2.25 less show 1.25
@@ -100,7 +101,7 @@ export default function TopSellingItems() {
           <ul>
             {/* top selling products data */}
 
-            {topSellingDisplayedProducts.map((p) => (
+            {recivedProduct.map((p) => (
               <SwiperSlide key={p._id}>
                 <HorizontalProductsSlider product={p} locale={locale} />
               </SwiperSlide>

@@ -1,10 +1,13 @@
 import { getProductByIdData } from "@/lib/utils/data/products-data";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import React from "react";
 import ProductDetails from "./components/product-details";
 import ProductGallary from "./components/product-gallary";
 import ProductTable from "./components/product-table";
 import { getReviewByProductIdAction } from "@/lib/actions/reviews-actions";
+import RelatedProducts from "@/components/common/RelatedProducts";
+import ProductsSlider from "@/components/common/products-slider";
+import { getProductsByCategoryIdAction } from "@/lib/actions/products-actions";
 
 type Params = {
   locale: string;
@@ -12,11 +15,15 @@ type Params = {
 };
 
 export default async function ProductPage({ params }: { params: Params }) {
+  const t = await getTranslations();
   const locale = await getLocale();
   const isEn = locale === "en";
   const productId = params.productId[0];
   const product = await getProductByIdData(productId);
   const productReviews = await getReviewByProductIdAction(productId);
+  const productsWithSameCategory = await getProductsByCategoryIdAction(
+    product.category._id,
+  );
 
   if (!product) {
     //TODO skeleton
@@ -37,15 +44,15 @@ export default async function ProductPage({ params }: { params: Params }) {
 
   return (
     <>
-      <section className="container mx-auto mt-10">
+      <section className="container mx-auto mt-10 px-4">
         <div
-          className="flex flex-col rounded-md bg-white px-[2rem] py-6 shadow-sm md:flex-row md:pe-[4rem] lg:h-[50vh]"
+          className="flex flex-col rounded-md bg-white px-[0.5rem] py-6 shadow-sm md:px-[2rem] md:pe-[4rem] lg:h-auto lg:flex-row"
           dir={isEn ? "ltr" : "rtl"}
         >
-          <div className="flex md:w-1/2">
+          <div className="flex lg:w-1/2">
             <ProductGallary gallery={gallery!} />
           </div>
-          <div className="ms-8 flex flex-shrink flex-col gap-y-4 md:w-1/2">
+          <div className="ms-2 flex flex-shrink flex-col gap-y-4 md:ms-8 lg:w-1/2">
             <ProductDetails
               productId={_id}
               category={category.translations.data.name}
@@ -59,8 +66,7 @@ export default async function ProductPage({ params }: { params: Params }) {
           </div>
         </div>
 
-        <div className="my-10 rounded-md bg-white p-7 shadow-sm">
-          {/* //TODO  reviews={reviews}  */}
+        <div className="my-10 overflow-hidden rounded-md bg-white p-2 shadow-sm md:p-7">
           <ProductTable
             productId={productId}
             category={category}
@@ -72,7 +78,10 @@ export default async function ProductPage({ params }: { params: Params }) {
         </div>
       </section>
       <section className="w-full pb-20">
-        {/* <RelatedProducts relatedProduct={relatedProduct} /> */}
+        <ProductsSlider
+          products={productsWithSameCategory.products}
+          title={t("JPKX_XZ_nNCNyORC3Z58V")}
+        />
       </section>
     </>
   );
