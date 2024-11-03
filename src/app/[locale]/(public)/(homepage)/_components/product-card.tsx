@@ -13,9 +13,9 @@ import RatingStars from "@/components/common/RatingStars";
 import { cn } from "@/lib/utils";
 
 // icons
-import { useAddToCart } from "@/lib/utils/data/cart-data";
 import { LuHeart, LuScale } from "react-icons/lu";
 import { BsInfoCircle } from "react-icons/bs";
+import { useAddToWishlist } from "@/lib/utils/data/wishlist-data";
 
 // prop type
 type ProductProps = {
@@ -28,6 +28,7 @@ type ProductProps = {
 // product card component take the product info and the index of this product to change the UI layout basedon it , isEn  boolean (true) when the locale is English
 export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
   const t = useTranslations();
+  const { addToWishlist, isAddingToWishlist } = useAddToWishlist();
 
   // is first product to render it differentially
   const isFirstProduct = i === 0;
@@ -197,7 +198,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
 
               <div className="flex gap-2">
                 {/* wishlist btn */}
-                <button>
+                <button className="" onClick={() => addToWishlist(p._id)}>
                   <div className="rounded-full bg-primary-foreground/20 p-[10px]">
                     <LuHeart strokeWidth={1} />
                   </div>
