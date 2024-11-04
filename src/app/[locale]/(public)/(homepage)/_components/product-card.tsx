@@ -15,7 +15,11 @@ import { cn } from "@/lib/utils";
 // icons
 import { LuHeart, LuScale } from "react-icons/lu";
 import { BsInfoCircle } from "react-icons/bs";
-import { useAddToWishlist } from "@/lib/utils/data/wishlist-data";
+import {
+  useAddToWishlist,
+  useRemoveFromWishlist,
+} from "@/lib/utils/data/wishlist-data";
+import WishlistButton from "./wishlist-button";
 
 // prop type
 type ProductProps = {
@@ -28,7 +32,6 @@ type ProductProps = {
 // product card component take the product info and the index of this product to change the UI layout basedon it , isEn  boolean (true) when the locale is English
 export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
   const t = useTranslations();
-  const { addToWishlist, isAddingToWishlist } = useAddToWishlist();
 
   // is first product to render it differentially
   const isFirstProduct = i === 0;
@@ -166,7 +169,19 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             )}
           >
             {/* Priceing */}
-            <span className="flex w-auto gap-2 xl:text-xl">
+            <div className="flex w-auto flex-col gap-2 xl:text-xl">
+              {p.stock! <= 3 && (
+                <div
+                  className={cn(
+                    isEn ? "flex-row" : "flex-row-reverse",
+                    "flex w-fit items-center gap-1 text-start text-sm text-red-600",
+                  )}
+                >
+                  <BsInfoCircle />
+                  <span>{p.stock}</span>
+                  <span>{t("ulEKKGYVTG1jhVjuPy2B0")}</span>
+                </div>
+              )}
               {/* //TODO discound  */}
               <span className="text-sm text-primary-foreground/40 line-through">
                 1000 {t("fU01whrYbLGxy6qtBGMEo")}
@@ -175,20 +190,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
               <span className="font-extrabold text-primary-foreground">
                 {p.price} {t("fU01whrYbLGxy6qtBGMEo")}
               </span>
-            </span>
-
-            {p.stock! <= 3 && (
-              <div
-                className={cn(
-                  isEn ? "flex-row" : "flex-row-reverse",
-                  "flex w-fit items-center gap-1 text-start text-sm text-red-600",
-                )}
-              >
-                <BsInfoCircle />
-                <span>{p.stock}</span>
-                <span>{t("ulEKKGYVTG1jhVjuPy2B0")}</span>
-              </div>
-            )}
+            </div>
 
             {/* Buttons Section */}
             <div className="flex w-auto items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-end">
@@ -196,14 +198,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
               <AddToCart productId={p._id!} />
               {/* <AddToCartServer productId={p._id!} /> */}
 
-              <div className="flex gap-2">
-                {/* wishlist btn */}
-                <button className="" onClick={() => addToWishlist(p._id)}>
-                  <div className="rounded-full bg-primary-foreground/20 p-[10px]">
-                    <LuHeart strokeWidth={1} />
-                  </div>
-                </button>
-              </div>
+              <WishlistButton productId={p._id} />
             </div>
           </div>
         </div>

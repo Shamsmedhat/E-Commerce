@@ -15,7 +15,8 @@ export default async function validateSession(
   // Ensure the response is 401
   if (
     message === "You are not logged in, please log in to have access!" ||
-    message === "Invalid token, please login again!"
+    message === "Invalid token, please login again!" ||
+    message === "Your token has expired, please login again!"
   ) {
     cookies().delete("next-auth.session-token");
     cookies().delete("user_token");
@@ -24,6 +25,7 @@ export default async function validateSession(
     // Return false if no items in the cart
     return false;
   } else {
+    console.log("message", message);
     throw new AppError(message, 500);
   }
 }

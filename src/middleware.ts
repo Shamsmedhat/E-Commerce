@@ -20,7 +20,7 @@ const publicPages = [
 const adminPages = ["/dashboard"];
 
 // accessible for only users
-const userPages = ["/cart", "/profile", "/checkout", "orders"];
+const userPages = ["/cart", "/profile", "/checkout", "/orders", "wishlist"];
 
 // handling translations
 const handleI18nRouting = createMiddleware(routing);

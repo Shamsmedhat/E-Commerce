@@ -19,6 +19,7 @@ import { useLocale, useTranslations } from "next-intl";
 import AsideSortSection from "./aside-sort-section";
 import SmallScreenSortSection from "./small-screen-sort-section";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import WishlistButton from "../../../(homepage)/_components/wishlist-button";
 
 // Types
 type CategoryPageProps = {
@@ -161,14 +162,7 @@ export default function CategoryPage({
                       {/* Product buttons */}
                       <div className="my-4 flex items-center gap-3">
                         <AddToCart productId={p._id!} />
-                        <div className="rounded-full bg-primary-foreground/20 p-2">
-                          <LuHeart strokeWidth={1} size={18} />
-                        </div>
-                        <button>
-                          <div className="rounded-full bg-primary-foreground/20 p-2">
-                            <LuScale strokeWidth={1} size={18} />
-                          </div>
-                        </button>
+                        <WishlistButton productId={p._id} />
                       </div>
                     </div>
                   </div>

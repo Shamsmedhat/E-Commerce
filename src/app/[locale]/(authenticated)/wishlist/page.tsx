@@ -8,9 +8,12 @@ import ValidateResponse from "@/components/custom/validate-response";
 import { getCartAction } from "@/lib/actions/cart-actions";
 
 // UI
-import EmptyCart from "./_components/empty-cart";
-import CartContent from "./_components/cart-content";
+
 import { AppError } from "@/lib/utils/catchAsync";
+import EmptyCart from "../cart/_components/empty-cart";
+import WishlistContent from "./components/wishlist-content";
+import { getWishlistAction } from "@/lib/actions/wishlist.actions";
+import EmptyWishlist from "./components/empty-wishlist";
 
 export default async function Cart() {
   // Translation
@@ -23,33 +26,39 @@ export default async function Cart() {
   // Get cart data
 
   // Initialize cart data variable
-  let cart;
+  let wishlist;
   try {
     // Attempt to get cart data
-    cart = await getCartAction();
+    wishlist = await getWishlistAction();
   } catch (error) {
     // Handle specific errors based on their properties
     if (
       error instanceof AppError &&
-      error.message === "There is no cart for the currently logged in user!" &&
+      error.message ===
+        "There is no wishlist for the currently logged in user!" &&
       error.statusCode === 500
     ) {
-      return <EmptyCart isEn={isEn} />;
+      return <EmptyWishlist isEn={isEn} />;
     }
     return (
       <ValidateResponse
         message={(error as AppError).message || "An error occurred"}
-        callbackUrl="/cart"
+        callbackUrl="/wishlist"
       />
     );
   }
 
+  if (wishlist?.wishlist.length === 0) {
+    return <EmptyWishlist isEn={isEn} />;
+  }
+
+  console.log("wishlist", wishlist);
   return (
     <section
-      className="container my-10 flex flex-col md:flex-row"
+      className="container mt-7 flex flex-col md:flex-row"
       dir={isEn ? "ltr" : "rtl"}
     >
-      <CartContent cart={cart} />
+      <WishlistContent wishlist={wishlist} />
     </section>
   );
 }
