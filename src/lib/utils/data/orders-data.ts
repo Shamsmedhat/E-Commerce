@@ -1,6 +1,6 @@
 import {
   getOrdersAction,
-  getSortedOrdersByOldestAction,
+  // getSortedOrdersByOldestAction,
   placeOrderAction,
 } from "@/lib/actions/order-actions";
 import { useRouter } from "@/navigarion";
@@ -12,31 +12,18 @@ import {
 } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-export function useOrders() {
+export function useOrders(pageNumber: number, isSort: boolean) {
   const {
     data: orders,
     isFetching,
     isError,
     isPending,
   }: UseQueryResult<OrdersData> = useQuery({
-    queryKey: ["orders"],
-    queryFn: () => getOrdersAction(),
+    queryKey: ["orders", pageNumber, isSort],
+    queryFn: () => getOrdersAction(pageNumber, isSort),
   });
 
   return { orders, isFetching, isError, isPending };
-}
-export function useSortedOrdersByOldest() {
-  const {
-    data: sortedOrders,
-    isFetching,
-    isError,
-    isPending,
-  }: UseQueryResult<OrdersData> = useQuery({
-    queryKey: ["sorted-orders"],
-    queryFn: () => getSortedOrdersByOldestAction(),
-  });
-
-  return { sortedOrders, isFetching, isError, isPending };
 }
 
 export function usePlaceOrder() {

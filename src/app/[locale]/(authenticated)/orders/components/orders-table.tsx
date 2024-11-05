@@ -1,9 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  useOrders,
-  useSortedOrdersByOldest,
-} from "@/lib/utils/data/orders-data";
+import { useOrders } from "@/lib/utils/data/orders-data";
 import {
   Table,
   TableBody,
@@ -21,43 +18,41 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import OrdersTableSkeleton from "@/components/skeletons/orders-table-skeleton";
 import EmptyOrders from "./empty-orders";
+import { Button } from "@/components/ui/button";
 
 export default function OrdersTable() {
   const t = useTranslations();
-
   const [isSort, setIsSort] = useState<boolean>(false);
-  const {
-    orders,
-    isError: isOrdersError,
-    isFetching: isOrdersFetching,
-    isPending: isOrdersPending,
-  } = useOrders();
-  // Ensure we get the last status from the progress array safely
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const {
-    sortedOrders,
-    isError: isSorterOrdersError,
-    isFetching: isSortedOrdersFetching,
-    isPending: isSortedOrdersPending,
-  } = useSortedOrdersByOldest();
-  // Ensure we get the last status from the progress array safely
+  const { orders, isError, isFetching } = useOrders(currentPage, isSort);
 
   const getLastProgress = (order: Order) => {
     const progress = order?.progress;
     if (!progress || progress.length === 0) return undefined;
     return progress[progress.length - 1]?.status;
   };
-  if (isOrdersFetching || isSortedOrdersFetching) {
+
+  if (isFetching) {
     return <OrdersTableSkeleton />;
   }
 
-  // if (!orders && !sortedOrders) {
-  if (!orders && !sortedOrders) {
+  if (!orders) {
     return <EmptyOrders />;
   }
 
-  const ordersToDisplay = isSort ? sortedOrders?.orders : orders?.orders;
+  const ordersToDisplay = orders?.orders;
 
+  function handleNextPage() {
+    if (currentPage === orders?.pagination.pages) return;
+    setCurrentPage((prev) => prev + 1);
+  }
+
+  function handlePreviousPage() {
+    if (currentPage === 1) return;
+    setCurrentPage((prev) => prev - 1);
+  }
+  // const displayOrders = console.log("orders", orders);
   return (
     <Table>
       <TableCaption>{t("9GD9qa6frmZv5IVNLnes3")}</TableCaption>
@@ -150,6 +145,31 @@ export default function OrdersTable() {
               .reduce((acc, curr) => acc + curr)
               .toFixed(2)}{" "}
             {t("fU01whrYbLGxy6qtBGMEo")}
+          </TableCell>
+        </TableRow>
+        <TableRow className="text-base font-semibold">
+          <TableCell colSpan={3} className="capitalize">
+            <Button
+              variant={"outline"}
+              disabled={currentPage === 1}
+              onClick={handlePreviousPage}
+            >
+              Previous
+            </Button>
+          </TableCell>
+          <TableCell className="pe-28 text-center" colSpan={2}>
+            <span>
+              page {currentPage} of {orders?.pagination.pages}
+            </span>
+          </TableCell>
+          <TableCell className="pe-28 text-end" colSpan={3}>
+            <Button
+              variant={"outline"}
+              disabled={currentPage === orders?.pagination.pages}
+              onClick={handleNextPage}
+            >
+              Next
+            </Button>
           </TableCell>
         </TableRow>
       </TableFooter>
