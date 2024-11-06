@@ -12,9 +12,7 @@ export default async function Page() {
     <section className="container" dir={isEn ? "ltr" : "rtl"}>
       <Heading>{t("ULz9dLFPeav6LCqCrW-05")}</Heading>
 
-      <div className="my-10 rounded-lg border border-primary-foreground/30 shadow-sm">
-        <OrdersTable />
-      </div>
+      <OrdersTable />
     </section>
   );
 }

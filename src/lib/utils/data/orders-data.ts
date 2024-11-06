@@ -1,5 +1,6 @@
 import {
   getOrdersAction,
+  getTotalOrdersAction,
   // getSortedOrdersByOldestAction,
   placeOrderAction,
 } from "@/lib/actions/order-actions";
@@ -24,6 +25,19 @@ export function useOrders(pageNumber: number, isSort: boolean) {
   });
 
   return { orders, isFetching, isError, isPending };
+}
+export function useTotalOrders() {
+  const {
+    data: totalOrders,
+    isFetching,
+    isError,
+    isPending,
+  }: UseQueryResult<OrdersData> = useQuery({
+    queryKey: ["total-orders"],
+    queryFn: () => getTotalOrdersAction(),
+  });
+
+  return { totalOrders, isFetching, isError, isPending };
 }
 
 export function usePlaceOrder() {

@@ -31,66 +31,6 @@ export const placeOrderAction = catchAsync(async (orderData: PlaceOrder) => {
   return data.data;
 });
 
-// Get orders data action
-// export const getOrdersAction = catchAsync(async (pageNumber) => {
-//   const locale = await getLocale();
-//   const res = await fetch(
-//     `${process.env.BASE_URL}/orders/me?page=${pageNumber}`,
-//     {
-//       method: "GET",
-//       headers: {
-//         "Accept-Language": locale,
-//         // Function to return the token
-//         ...(await getAuthorizationHeader()),
-//       },
-//       credentials: "include",
-//     },
-//   );
-//   console.log("pageNumber", pageNumber);
-//   // Parse data into a object
-//   const data: APIResponse<OrdersData> = await res.json();
-
-//   console.log("data", data);
-//   // If the data is not success we pass the error as an AppError object
-//   if (data.status !== "success") {
-//     throw new AppError(data.message, 500);
-//   } else if (!data.data) {
-//     throw new AppError("Something went wrong!", 500);
-//   }
-
-//   // Return order data
-//   return data.data;
-// });
-
-// // Get orders data action
-// export const getSortedOrdersByOldestAction = catchAsync(async () => {
-//   const locale = await getLocale();
-
-//   const res = await fetch(`${process.env.BASE_URL}/orders/me?sort=createdAt`, {
-//     method: "GET",
-//     headers: {
-//       "Accept-Language": locale,
-//       // Function to return the token
-//       ...(await getAuthorizationHeader()),
-//     },
-//     credentials: "include",
-//   });
-
-//   // Parse data into a object
-//   const data: APIResponse<OrdersData> = await res.json();
-
-//   // If the data is not success we pass the error as an AppError object
-//   if (data.status !== "success") {
-//     throw new AppError(data.message, 500);
-//   } else if (!data.data) {
-//     throw new AppError("Something went wrong!", 500);
-//   }
-
-//   // Return order data
-//   return data.data;
-// });
-
-// Get orders data action with sorting and pagination
 export const getOrdersAction = catchAsync(
   async (pageNumber: number, isSort: boolean) => {
     const locale = await getLocale();
@@ -119,3 +59,26 @@ export const getOrdersAction = catchAsync(
     return data.data;
   },
 );
+
+export const getTotalOrdersAction = catchAsync(async () => {
+  const locale = await getLocale();
+  const res = await fetch(`${process.env.BASE_URL}/orders/me?limit=99`, {
+    method: "GET",
+    headers: {
+      "Accept-Language": locale,
+      ...(await getAuthorizationHeader()),
+    },
+    credentials: "include",
+  });
+
+  const data: APIResponse<OrdersData> = await res.json();
+
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+
+  // Return order data
+  return data.data;
+});

@@ -78,3 +78,16 @@ export const handleCreateUserToaster = () => {
 export const handleDeleteUserToaster = () => {
   localStorage.setItem("showToast", "deleteUser");
 };
+
+export function formatToCurrency(
+  value: number,
+  locale = "ar-EG",
+  currency = "EGP",
+) {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
+}
