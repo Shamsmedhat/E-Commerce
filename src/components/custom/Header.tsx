@@ -25,14 +25,19 @@ export default async function Header() {
   const t = await getTranslations();
 
   let cart;
+  let wishlist;
   let numbersOfitemsInCart = 0;
+  let numbersOfitemsInWishlist = 0;
 
   try {
     cart = await getCartAction();
-
+    wishlist = await getWishlistAction();
     // If cart is not an error and contains items, use the data
     if (cart && !("statusCode" in cart)) {
       numbersOfitemsInCart = cart.cart.items.length;
+    }
+    if (wishlist && !("statusCode" in wishlist)) {
+      numbersOfitemsInWishlist = wishlist.wishlist.length;
     }
   } catch (error) {
     console.error("Error fetching cart:", error);
@@ -46,8 +51,8 @@ export default async function Header() {
   // const data = await getCategoriesData();
   const data = await getCategoriesAction();
 
-  const wishlistItems = await getWishlistAction();
-  const numberOfItemsInWishlist = wishlistItems.wishlist.length;
+  // const wishlistItems = await getWishlistAction();
+  // const numberOfItemsInWishlist = wishlistItems.wishlist.length;
 
   return (
     <header>
@@ -90,9 +95,9 @@ export default async function Header() {
                 </li>
                 <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
                   <Link href="/wishlist" className="relative">
-                    {numberOfItemsInWishlist === 0 ? null : (
+                    {numbersOfitemsInWishlist === 0 ? null : (
                       <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
-                        {numberOfItemsInWishlist}
+                        {numbersOfitemsInWishlist}
                       </span>
                     )}
 
