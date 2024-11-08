@@ -15,10 +15,7 @@ import { cn } from "@/lib/utils";
 // icons
 import { LuHeart, LuScale } from "react-icons/lu";
 import { BsInfoCircle } from "react-icons/bs";
-import {
-  useAddToWishlist,
-  useRemoveFromWishlist,
-} from "@/lib/utils/data/wishlist-data";
+
 import WishlistButton from "./wishlist-button";
 
 // prop type
@@ -173,7 +170,6 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
               {p.stock! <= 3 && (
                 <div
                   className={cn(
-                    isEn ? "flex-row" : "flex-row-reverse",
                     "flex w-fit items-center gap-1 text-start text-sm text-red-600",
                   )}
                 >

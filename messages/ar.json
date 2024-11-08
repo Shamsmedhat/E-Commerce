@@ -198,5 +198,16 @@
   "3MP1XlEFf-7KjGY9cHjW1": "دفع كاش",
   "WMYpo4hjNfyYvAFwga1Yl": "التالي",
   "nAS8VRAwwpzLSK9WneNKw": "السابق",
-  "j8xVhdlecqNJU_Oo_4l79": "صفحة"
+  "j8xVhdlecqNJU_Oo_4l79": "صفحة",
+  "mn2N54k4e_q2MpCUkihfv": "Name must be at least 2 characters",
+  "nkuzjsBa0sEDba1d-6QmI": "يجب أن يكون الاسم مكونًا من حرفين على الأقل.",
+  "KZFjUAMlQhugvtSkcmYbk": "يجب أن يكون اسم المدينة بحد أقصى 20 حرفًا",
+  "RFbEH6qG91PIpg5yZoM7M": "يجب أن يكون اسم المدينة مكونًا من 3 أحرف على الأقل",
+  "QxQW5bU51dpTtkI4dGrQ1": "يجب أن يكون اسم الشارع بحد أقصى 30 حرفًا.",
+  "vmNnxIXcgnVs2U_7nW6Iz": "يجب أن يكون اسم الشارع مكونًا من 3 أحرف على الأقل.",
+  "L3ZZzp1iMnM3Lc2kaaxWt": "يجب أن يكون العنوان بحد أقصى 30 حرفًا.",
+  "vOcwsl_3OUOgX8CDIflDW": "يجب أن يكون العنوان مكونًا من 5 أحرف على الأقل.",
+  "4leZm1z7cxhKnjZBQL-pb": "يجب أن يبدأ رقم الهاتف بـ 01.",
+  "Gz_z_GsLUtMCkEF4Rmy-8": "يجب أن يكون رقم الهاتف مكونًا من 11 رقمًا على الأقل.",
+  "t1_Bcabo_uFXvZX8gTqDA": "يجب أن يكون رقم الهاتف بحد اقصي مكونًا من 11 رقمًا"
 }

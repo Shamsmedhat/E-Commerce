@@ -8,7 +8,7 @@ import { useMediaQuery } from "react-responsive";
 export default function SubmitBtn() {
   const t = useTranslations();
 
-  const isSmallScreen = useMediaQuery({ query: "(min-width: 767px)" });
+  const isSmallScreen = useMediaQuery({ query: "(min-width: 1024px)" });
 
   // Insure this condition trigger only on client
   if (typeof window !== "undefined") {

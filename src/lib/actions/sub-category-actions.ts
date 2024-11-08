@@ -24,7 +24,6 @@ export const getSubCategoryAction = catchAsync(
     } else if (!data.data) {
       throw new AppError("Something went wrong!", 500);
     }
-    console.log("data.data", data.data);
     return data.data;
   },
 );

@@ -1,6 +1,12 @@
 "use client";
 
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { handleEnText } from "@/lib/utils/helpers";
@@ -29,27 +35,6 @@ import {
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { MdVerified } from "react-icons/md";
 
-// Validation address form schema
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  city: z
-    .string()
-    .max(20, { message: "City must be by max 20 characters" })
-    .min(2, { message: "City must be at least 3 characters" }),
-  street: z
-    .string()
-    .max(30, { message: "Street must be by max 30 characters" })
-    .min(3, { message: "Street must be at least 3 characters" }),
-  address: z
-    .string()
-    .max(30, { message: "Address must be by max 30 characters" })
-    .min(8, { message: "Address must be at least 5 characters" }),
-  phoneNumber: z
-    .string()
-    .regex(/^01/, { message: "Phone number must start with 01" })
-    .min(11, { message: "Phone number must be at least 11 digits" }),
-});
-
 // Typs
 type AddressFormProps = {
   cart: CartData;
@@ -76,6 +61,32 @@ export function AddressForm({
   // Translation
   const t = useTranslations();
 
+  // Validation address form schema
+  const formSchema = z.object({
+    name: z.string().min(2, { message: t("nkuzjsBa0sEDba1d-6QmI") }),
+    city: z
+      .string()
+      .max(20, { message: t("KZFjUAMlQhugvtSkcmYbk") })
+      .min(2, { message: t("RFbEH6qG91PIpg5yZoM7M") }),
+    street: z
+      .string()
+      .max(60, { message: t("QxQW5bU51dpTtkI4dGrQ1") })
+      .min(3, { message: t("vmNnxIXcgnVs2U_7nW6Iz") }),
+    address: z
+      .string()
+      .max(60, { message: t("L3ZZzp1iMnM3Lc2kaaxWt") })
+      .min(3, { message: t("vOcwsl_3OUOgX8CDIflDW") }),
+    phoneNumber: z
+      .string()
+      .regex(/^01/, { message: t("4leZm1z7cxhKnjZBQL-pb") })
+      .min(11, {
+        message: t("Gz_z_GsLUtMCkEF4Rmy-8"),
+      })
+      .max(11, {
+        message: t("t1_Bcabo_uFXvZX8gTqDA"),
+      }),
+  });
+
   // Locale
   const locale = useLocale();
 
@@ -88,6 +99,7 @@ export function AddressForm({
   // Use form configuration
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
     defaultValues: {
       name: userName,
       city: "",
@@ -178,7 +190,7 @@ export function AddressForm({
                     {t("tlnNNAqRJ5eIhodZwFSR6")}
                   </FormLabel>
                   <div className="w-full">
-                    <FormControl>
+                    <FormControl className="mb-2">
                       <Input
                         placeholder="Mohamed ahmed"
                         {...field}
@@ -201,13 +213,14 @@ export function AddressForm({
                     {t("rm_yPJhwo8iXo3-YwjlcI")}
                   </FormLabel>
                   <div className="w-full">
-                    <FormControl>
+                    <FormControl className="mb-2">
                       <Input
                         placeholder="Cairo"
                         {...field}
                         className="text-left placeholder:text-left"
                       />
                     </FormControl>
+
                     <FormMessage />
                   </div>
                 </FormItem>
@@ -224,7 +237,7 @@ export function AddressForm({
                     {t("IrsHp_zHBIWL320yKSASk")}
                   </FormLabel>
                   <div className="w-full">
-                    <FormControl>
+                    <FormControl className="mb-2">
                       <Input
                         placeholder="Nile Street"
                         {...field}
@@ -244,10 +257,10 @@ export function AddressForm({
               render={({ field }) => (
                 <FormItem className="flex flex-row-reverse items-center gap-2">
                   <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*']">
-                    Address
+                    {t("X73uyJtHXlL_VOZZYWFyl")}
                   </FormLabel>
                   <div className="w-full">
-                    <FormControl>
+                    <FormControl className="mb-2">
                       <Input
                         placeholder="15 Nile Street, Cairo, Egypt"
                         {...field}
@@ -270,7 +283,7 @@ export function AddressForm({
                     {t("bu6dQACtNKhPl5evXvAX7")}
                   </FormLabel>
                   <div className="w-full">
-                    <FormControl>
+                    <FormControl className="mb-2">
                       <Input
                         placeholder="01234567899"
                         {...field}

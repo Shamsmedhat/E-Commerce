@@ -18,7 +18,7 @@ export default function CartContent({ cart }: CartContentProps) {
   return (
     <>
       {/* Cart content */}
-      <div className="flex-grow">
+      <div className="mb-6 flex-grow">
         {/* Heading */}
         <div className="flex items-center justify-between">
           <Heading>{t("_Kg79lEkLCt2SxOaeQJZ2")}</Heading>
@@ -29,12 +29,12 @@ export default function CartContent({ cart }: CartContentProps) {
           <CartList cart={cart} />
         </div>
         {/* checkout submit btn */}
-        <div className="">
+        <div>
           <SubmitBtn />
         </div>
       </div>
       {/* Cart summary */}
-      <div className="ms-[3rem] flex h-fit min-w-[20%] flex-col items-center rounded-lg bg-white pt-4 shadow-sm">
+      <div className="flex h-fit min-w-full flex-col items-center rounded-lg bg-white pt-4 shadow-sm lg:ms-[2rem] lg:min-w-[20%]">
         <CartSummary cart={cart} />
       </div>
     </>

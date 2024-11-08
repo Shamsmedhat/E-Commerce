@@ -12,14 +12,18 @@ import {
 import { toast } from "react-toastify";
 
 // using useQuery get the products based on the category selected function recive category name and locale
-export function useAddToCart() {
+export function useAddToCart(usage = "cart") {
   const queryClient = useQueryClient();
   const { mutate: addToCart, isPending: isAddingToCart } = useMutation({
     mutationFn: async (productData: { product: string; quantity: number }) => {
       addToCartAction(productData);
     },
     onSuccess: () => {
-      toast.success("Product has been added to the cart successfully.");
+      usage === "cart" &&
+        toast.success("Product has been added to the cart successfully.");
+      usage === "quantity" &&
+        toast.success("The quantity of the product has been changed.");
+
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (err) => {

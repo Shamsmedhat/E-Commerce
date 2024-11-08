@@ -67,7 +67,7 @@ export default function SubCategorySort({
     >
       <Checkbox
         id={subCategoryId}
-        className="me-3"
+        className="me-3 border-white"
         checked={isChecked}
         onCheckedChange={() => handleSortCheck([subCategoryId])}
         // value={}

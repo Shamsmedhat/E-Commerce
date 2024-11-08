@@ -49,19 +49,13 @@ export default function QuantityBtn({
   const [qty, setQty] = useState(currentQty);
   // Store the fixed unit price
   const [unitPrice] = useState(productPrice);
-  const { addToCart, isAddingToCart } = useAddToCart();
+  const { addToCart, isAddingToCart } = useAddToCart("quantity");
 
   /**
    * Handles the change event for the input, ensuring the quantity remains non-negative.
    *
    * @param {React.ChangeEvent<HTMLInputElement>} e - The change event from the input element.
    */
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = Math.max(1, Number(e.target.value));
-    setQty(value);
-    // Calculate the total price based on the unit price
-    setProductPrice(unitPrice * value);
-  }
 
   function handleIncrease() {
     // Check if the current qty is already equal to or greater than the stock

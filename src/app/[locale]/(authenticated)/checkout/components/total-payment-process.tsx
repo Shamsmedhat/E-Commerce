@@ -65,12 +65,12 @@ export default function TotalPaymentProcess(cart: CartData) {
         </CarouselItem>
 
         {/* Message section last step */}
-        {orderData.paymentType === "cash" ||
-          (orderData.paymentType === "card" && (
-            <CarouselItem>
-              <SuccefullyOrder />
-            </CarouselItem>
-          ))}
+        {(orderData.paymentType === "cash" ||
+          orderData.paymentType === "card") && (
+          <CarouselItem>
+            <SuccefullyOrder />
+          </CarouselItem>
+        )}
       </CarouselContent>
 
       {/* Next and previous btns */}

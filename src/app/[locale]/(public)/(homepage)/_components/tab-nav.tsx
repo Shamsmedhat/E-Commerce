@@ -75,7 +75,6 @@ export default function TabNav({
           isEn={isEn}
           products={productsByCategory?.data.products}
         />
-        ;
       </Tabs>
     );
   }

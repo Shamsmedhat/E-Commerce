@@ -196,5 +196,15 @@
   "3MP1XlEFf-7KjGY9cHjW1": "Pay by cash",
   "WMYpo4hjNfyYvAFwga1Yl": "Next",
   "nAS8VRAwwpzLSK9WneNKw": "Previous",
-  "j8xVhdlecqNJU_Oo_4l79": "page"
+  "j8xVhdlecqNJU_Oo_4l79": "page",
+  "nkuzjsBa0sEDba1d-6QmI": "Name must be at least 2 characters.",
+  "KZFjUAMlQhugvtSkcmYbk": "City must be by max 20 characters.",
+  "RFbEH6qG91PIpg5yZoM7M": "City must be at least 3 characters.",
+  "QxQW5bU51dpTtkI4dGrQ1": "Street must be by max 30 characters.",
+  "vmNnxIXcgnVs2U_7nW6Iz": "Street must be at least 3 characters.",
+  "L3ZZzp1iMnM3Lc2kaaxWt": "Address must be by max 30 characters.",
+  "vOcwsl_3OUOgX8CDIflDW": "Address must be at least 5 characters.",
+  "4leZm1z7cxhKnjZBQL-pb": "Phone number must start with 01.",
+  "Gz_z_GsLUtMCkEF4Rmy-8": "Phone number must be at least 11 digits.",
+  "t1_Bcabo_uFXvZX8gTqDA": "Phone number must be at most 11 digits."
 }

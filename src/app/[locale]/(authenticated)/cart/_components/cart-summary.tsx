@@ -13,7 +13,7 @@ export default function CartSummary({ cart, className }: CartListProps) {
   const t = useTranslations();
   return (
     <>
-      <div className={cn(className, "px-4")}>
+      <div className={cn(className, "w-full px-4")}>
         {/* title */}
         <h3 className="border-b-2 border-primary-foreground/10 py-3 text-xl font-semibold uppercase">
           {t("ubNic2h-DPEijW_LliPJA")}
@@ -43,6 +43,7 @@ export default function CartSummary({ cart, className }: CartListProps) {
 
             {/* total */}
           </div>
+
           {/* total & shipping info */}
           <div className="flex flex-col items-center justify-between">
             {/* total */}

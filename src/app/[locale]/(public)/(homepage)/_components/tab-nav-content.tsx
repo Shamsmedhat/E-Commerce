@@ -1,18 +1,14 @@
 "use client";
-import Image from "next/image";
 
 // navigation
 import { Link } from "@/navigarion";
 
 // icones
-import { LuHeart, LuScale } from "react-icons/lu";
 
 // ui
 import { TabsContent } from "@/components/ui/tabs";
-import RatingStars from "@/components/common/RatingStars";
-import AddToCart from "@/components/common/AddToCart";
-import ProductCard from "./product-card";
 import { useTranslations } from "next-intl";
+import ProductCard from "./product-card";
 
 // props type
 type CategoriesAndProductsListProp = {

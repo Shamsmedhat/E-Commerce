@@ -10,6 +10,8 @@ import { BsInfoCircle } from "react-icons/bs";
 
 import DeleteProductFromCart from "./delete-product-from-cart";
 import { useSubCategory } from "@/lib/utils/data/sub-category-data";
+import WishlistButton from "@/app/[locale]/(public)/(homepage)/_components/wishlist-button";
+import { formatToCurrency } from "@/lib/utils/helpers";
 
 type CartItemProps = {
   item: ProductItem;
@@ -53,60 +55,77 @@ export default function CartItem({ item }: CartItemProps) {
           src={item.product.cover}
           alt={item.product.translations.data.name}
           // make sure all images is the same width to avoid UI issue
-          className="min-h-[75px] min-w-[75px] object-scale-down"
+          className="min-h-[75px] min-w-[50px] object-scale-down"
           width={75}
           height={75}
         />
       </div>
-      {/* product details */}
-      <div
-        className={cn(
-          rowStyle && "w-[50%]",
-          columnStyle && "w-full",
-          "flex h-full flex-col justify-evenly",
-        )}
-      >
-        <span className="text-sm text-primary-foreground/70">
-          {category?.category.translations.data.name} -{" "}
-          {subCategory?.subCategory.translations.data.name}
-        </span>
-        <h2>{item.product.translations.data.name}</h2>
-        {(item.product.stock <= 3 || item.quantity === item.product.stock) && (
-          <div
-            className={cn(
-              isEn ? "flex-row" : "flex-row-reverse",
-              "flex w-fit items-center gap-1 text-start text-sm text-red-600",
-            )}
-          >
-            <BsInfoCircle />
-            <span>{item.product.stock}</span>
-            <span>{t("ulEKKGYVTG1jhVjuPy2B0")}</span>
-          </div>
-        )}
-
-        <DeleteProductFromCart isEn={isEn} item={item} />
-      </div>
 
       <div
         className={cn(
-          columnStyle && "flex w-full items-center justify-evenly",
-          rowStyle && "flex items-center",
+          rowStyle && "flex w-full flex-col justify-between gap-3 lg:flex-row",
+          columnStyle && "flex w-full flex-col",
         )}
       >
-        {/* product quantity */}
-        <QuantityBtn
-          className={rowStyle && "mr-12"}
-          currentQty={item.quantity}
-          productPrice={productPrice}
-          setProductPrice={setProductPrice}
-          productId={item.product._id}
-          stock={item.product.stock}
-        />
-        {/* product price */}
-        <div className={rowStyle && "mr-12"}>
-          <span className="font-bold">
-            {productPrice.toFixed(3)} {t("fU01whrYbLGxy6qtBGMEo")}
+        {/* product details */}
+        <div
+          className={cn(
+            rowStyle && "w-full",
+            columnStyle && "w-full",
+            "flex h-full flex-col justify-evenly",
+          )}
+        >
+          <span className="text-sm text-primary-foreground/70">
+            {category?.category.translations.data.name} -{" "}
+            {subCategory?.subCategory.translations.data.name}
           </span>
+          <h2 className="w-full">{item.product.translations.data.name}</h2>
+          {(item.product.stock <= 3 ||
+            item.quantity === item.product.stock) && (
+            <div
+              className={cn(
+                isEn ? "flex-row" : "flex-row-reverse",
+                "flex w-fit items-center gap-1 text-start text-sm text-red-600",
+              )}
+            >
+              <BsInfoCircle />
+              <span>{item.product.stock}</span>
+              <span>{t("ulEKKGYVTG1jhVjuPy2B0")}</span>
+            </div>
+          )}
+
+          <div className="my-2 flex items-center gap-2">
+            <DeleteProductFromCart isEn={isEn} item={item} />
+
+            <WishlistButton productId={item.product._id} />
+          </div>
+        </div>
+
+        {/* Buttons and price */}
+        <div
+          className={cn(
+            columnStyle &&
+              "flex w-full flex-col items-start justify-start gap-3 sm:flex-row sm:items-center",
+            rowStyle &&
+              "flex flex-col items-start gap-2 sm:flex-row sm:items-center",
+          )}
+        >
+          {/* product quantity */}
+          <QuantityBtn
+            className={rowStyle && "mr-12"}
+            currentQty={item.quantity}
+            productPrice={productPrice}
+            setProductPrice={setProductPrice}
+            productId={item.product._id}
+            stock={item.product.stock}
+          />
+
+          {/* product price */}
+          <div className={rowStyle && "mr-12"}>
+            <span className="text-xl font-bold">
+              {formatToCurrency(Number(productPrice), isEn ? "en-EG" : "ar-EG")}
+            </span>
+          </div>
         </div>
       </div>
     </li>

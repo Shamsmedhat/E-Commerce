@@ -28,6 +28,7 @@ export default async function Cart() {
     // Attempt to get cart data
     cart = await getCartAction();
   } catch (error) {
+    console.log(1, error);
     // Handle specific errors based on their properties
     if (
       error instanceof AppError &&
@@ -46,7 +47,7 @@ export default async function Cart() {
 
   return (
     <section
-      className="container my-10 flex flex-col md:flex-row"
+      className="container my-10 flex flex-col lg:flex-row"
       dir={isEn ? "ltr" : "rtl"}
     >
       <CartContent cart={cart} />
