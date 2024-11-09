@@ -21,8 +21,7 @@ export const getCartAction = catchAsync(async () => {
 
   // Parse data into a object
   const data: APIResponse<CartData> = await res.json();
-
-  console.log(2, data);
+  console.log("data", data);
   // If the data is not success we pass the error as an AppError object
   if (data.status !== "success") {
     throw new AppError(data.message, 500);

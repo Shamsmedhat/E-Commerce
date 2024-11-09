@@ -1,13 +1,34 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import successfullyOrder from "@/../public/assets/successfully.png";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/navigarion";
+import { Link, useRouter } from "@/navigarion";
 export default function SuccefullyOrder() {
   const t = useTranslations();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const updateHistory = (curr: string) => {
+      window.history.pushState({ path: curr }, "", curr);
+    };
+
+    updateHistory("#success");
+
+    const handlePopState = () => {
+      router.replace("/");
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [router]);
+
   return (
     <div className="flex flex-col items-center justify-center gap-3">
       <Image src={successfullyOrder} width={250} height={250} alt="ecommerce" />

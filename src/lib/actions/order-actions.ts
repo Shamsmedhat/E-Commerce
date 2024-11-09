@@ -27,6 +27,7 @@ export const placeOrderAction = catchAsync(async (orderData: PlaceOrder) => {
   } else if (!data.data) {
     throw new AppError("Something went wrong!", 500);
   }
+
   // Return order data
   return data.data;
 });

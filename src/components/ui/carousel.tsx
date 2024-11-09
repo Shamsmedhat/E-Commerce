@@ -71,6 +71,7 @@ const Carousel = React.forwardRef<
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
 
+    console.log(api?.selectedScrollSnap());
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
         return;
@@ -189,7 +190,11 @@ const CarouselPrevious = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
   const t = useTranslations();
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+  const { orientation, scrollPrev, canScrollPrev, api } = useCarousel();
+
+  if (api?.selectedScrollSnap() === 2) {
+    return null;
+  }
 
   return (
     <Button
@@ -231,14 +236,14 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, CarouselNextProps>(
     ref,
   ) => {
     const t = useTranslations();
-    const { orientation, scrollNext, canScrollNext } = useCarousel();
+    const { orientation, scrollNext, canScrollNext, api } = useCarousel();
 
     if (!canScrollNext) {
       return null;
     }
 
     function handleSubmit() {
-      if (orderData.paymentType) {
+      if (orderData.paymentType && api?.selectedScrollSnap() === 1) {
         placeOrder(orderData);
       }
       scrollNext();

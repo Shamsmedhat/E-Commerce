@@ -28,12 +28,11 @@ export default async function Cart() {
     // Attempt to get cart data
     cart = await getCartAction();
   } catch (error) {
-    console.log(1, error);
     // Handle specific errors based on their properties
     if (
       error instanceof AppError &&
       error.message === "There is no cart for the currently logged in user!" &&
-      error.statusCode === 500
+      error.statusCode === 404
     ) {
       return <EmptyCart isEn={isEn} />;
     }

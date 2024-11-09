@@ -11,6 +11,19 @@ import {
 } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
+export function useCart() {
+  const {
+    data: cart,
+    isFetching,
+    isError,
+    isPending,
+  }: UseQueryResult<CartData> = useQuery({
+    queryKey: ["cart"],
+    queryFn: () => getCartAction(),
+  });
+  return { cart, isFetching, isError, isPending };
+}
+
 // using useQuery get the products based on the category selected function recive category name and locale
 export function useAddToCart(usage = "cart") {
   const queryClient = useQueryClient();
@@ -55,18 +68,4 @@ export function useDeleteProductFromCart() {
   });
 
   return { deleteProductFromCart, isDeleteingProductFromCart };
-}
-
-export function useCart() {
-  const {
-    data: cart,
-    isFetching,
-    isError,
-    isPending,
-  }: UseQueryResult<CartData> = useQuery({
-    queryKey: ["cart"],
-    queryFn: () => getCartAction(),
-  });
-
-  return { cart, isFetching, isError, isPending };
 }

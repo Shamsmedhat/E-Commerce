@@ -30,18 +30,26 @@ export default async function Header() {
   let numbersOfitemsInWishlist = 0;
 
   try {
-    cart = await getCartAction();
-    wishlist = await getWishlistAction();
-    // If cart is not an error and contains items, use the data
-    if (cart && !("statusCode" in cart)) {
-      numbersOfitemsInCart = cart.cart.items.length;
+    [cart, wishlist] = await Promise.allSettled([
+      getCartAction(),
+      getWishlistAction(),
+    ]);
+
+    if (cart.status === "fulfilled" && !("statusCode" in cart.value)) {
+      numbersOfitemsInCart = cart.value.cart.items.length;
+    } else if (cart.status === "rejected") {
+      console.error("Error fetching cart:", cart.reason);
+      // Fallback for cart if needed
     }
-    if (wishlist && !("statusCode" in wishlist)) {
-      numbersOfitemsInWishlist = wishlist.wishlist.length;
+
+    if (wishlist.status === "fulfilled" && !("statusCode" in wishlist.value)) {
+      numbersOfitemsInWishlist = wishlist.value.wishlist.length;
+    } else if (wishlist.status === "rejected") {
+      console.error("Error fetching wishlist:", wishlist.reason);
+      // Fallback for wishlist if needed
     }
   } catch (error) {
-    console.error("Error fetching cart:", error);
-    // Continue rendering, but with cart fallback
+    console.error("Unexpected error:", error);
   }
 
   // user session
@@ -50,9 +58,6 @@ export default async function Header() {
   //TODO make sure the data came before distructure data (categories)
   // const data = await getCategoriesData();
   const data = await getCategoriesAction();
-
-  // const wishlistItems = await getWishlistAction();
-  // const numberOfItemsInWishlist = wishlistItems.wishlist.length;
 
   return (
     <header>
@@ -79,6 +84,7 @@ export default async function Header() {
             {session && (
               <>
                 <li className="flex h-14 items-center justify-center border-e px-6 font-semibold">
+                  {/* Cart btn */}
                   <Link href="/cart" className="relative">
                     {numbersOfitemsInCart === 0 ? null : (
                       <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
@@ -93,6 +99,8 @@ export default async function Header() {
                     />
                   </Link>
                 </li>
+
+                {/* Wishlist btn */}
                 <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
                   <Link href="/wishlist" className="relative">
                     {numbersOfitemsInWishlist === 0 ? null : (

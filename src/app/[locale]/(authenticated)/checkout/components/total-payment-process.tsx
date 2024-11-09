@@ -17,7 +17,6 @@ import Heading from "@/components/common/Heading";
 import { AddressForm } from "./address-form";
 import { PaymentSelect } from "./payment-select";
 import { usePlaceOrder } from "@/lib/utils/data/orders-data";
-import useEmblaCarousel from "embla-carousel-react";
 import SuccefullyOrder from "./succefully-order";
 
 export default function TotalPaymentProcess(cart: CartData) {
@@ -38,7 +37,7 @@ export default function TotalPaymentProcess(cart: CartData) {
     coupon: "NEW_PERCENTAGE",
   });
 
-  const { isPlacingOrder, placeOrder } = usePlaceOrder();
+  const { isPlacingOrder, placeOrder, isOrderSuccess } = usePlaceOrder();
 
   return (
     <Carousel className="w-full" opts={{ watchDrag: false }}>
@@ -86,7 +85,9 @@ export default function TotalPaymentProcess(cart: CartData) {
         />
 
         {/* Previous btn */}
-        <CarouselPrevious className={cn("px-6 text-lg font-semibold")} />
+        {(!isOrderSuccess || isPlacingOrder) && (
+          <CarouselPrevious className={cn("px-6 text-lg font-semibold")} />
+        )}
       </div>
     </Carousel>
   );

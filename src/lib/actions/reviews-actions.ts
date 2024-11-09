@@ -71,6 +71,5 @@ export const deleteReviewAction = catchAsync(
 
     // Revalidate cart & home page to refresh the cache
     revalidatePath(`/product/${productId}`);
-    revalidatePath("/");
   },
 );
