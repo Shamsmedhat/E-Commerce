@@ -30,7 +30,7 @@ export default async function LocalLayout({
       <Header />
 
       {/* main section */}
-      <main className="relative flex min-h-[calc(100vh-210px)] flex-col items-center bg-zinc-100 dark:bg-black/30">
+      <main className="relative flex min-h-[calc(100vh-210px)] flex-col items-center bg-zinc-100 dark:bg-black/20">
         {/* toaster container */}
         <ToastContainer
           stacked

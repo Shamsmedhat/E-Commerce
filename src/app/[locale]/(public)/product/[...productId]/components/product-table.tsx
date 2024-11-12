@@ -60,7 +60,7 @@ export default function ProductTable({
     <div>
       <Tabs defaultValue="Specifications" dir={dir}>
         {/* Tabs list */}
-        <TabsList className="mb-3 bg-white">
+        <TabsList className="mb-3 bg-white dark:bg-background">
           <TabsTrigger
             value="Specifications"
             className="me-4 rounded-none border-transparent px-1 py-3 text-sm font-bold data-[state=active]:border-b-2 data-[state=active]:border-primary md:px-3 md:text-xl"
@@ -89,35 +89,45 @@ export default function ProductTable({
               "my-4 flex !list-inside list-disc flex-col gap-3 md:px-7",
             )}
           >
-            <li className="line-hieght flex items-center gap-3 bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
-              <span className="w-36 font-bold">
+            <li className="line-hieght flex items-center gap-3 bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 dark:bg-white/5 md:gap-40">
+              <span className="w-36 font-bold dark:text-white">
                 {t("9DGUyxCbWagDhi7rBaBgJ")}:{" "}
               </span>
-              <span>{translations?.data.name}</span>
+              <span className="dark:text-slate-50/50">
+                {translations?.data.name}
+              </span>
             </li>
             <li className="line-hieght flex items-center ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
-              <span className="w-36 font-bold">
+              <span className="w-36 font-bold dark:text-white">
                 {t("fHxQkBf-__PPbP8Av8QT2")}:{" "}
               </span>
-              <span>{translations?.data.details?.model}</span>
+              <span className="dark:text-slate-50/50">
+                {translations?.data.details?.model}
+              </span>
             </li>
-            <li className="line-hieght flex items-center bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
-              <span className="w-36 font-bold">
+            <li className="line-hieght flex items-center bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 dark:bg-white/5 md:gap-40">
+              <span className="w-36 font-bold dark:text-white">
                 {t("r8AmQp0KoM6Aeum5viXK-")}:{" "}
               </span>
-              <span>{brand?.translations.data.name}</span>
+              <span className="dark:text-slate-50/50">
+                {brand?.translations.data.name}
+              </span>
             </li>
             <li className="line-hieght flex items-center ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
-              <span className="w-36 font-bold">
+              <span className="w-36 font-bold dark:text-white">
                 {t("zOItEysA70YIzajHcTuYo")}:{" "}
               </span>
-              <span>{category?.translations.data.name}</span>
+              <span className="dark:text-slate-50/50">
+                {category?.translations.data.name}
+              </span>
             </li>
-            <li className="line-hieght flex items-center bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
-              <span className="w-36 font-bold">
+            <li className="line-hieght flex items-center bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 dark:bg-white/5 md:gap-40">
+              <span className="w-36 font-bold dark:text-white">
                 {t("dKK2yEL4B-GcSul9ZivDx")}:{" "}
               </span>
-              <span>{subCategory?.translations.data.name}</span>
+              <span className="dark:text-slate-50/50">
+                {subCategory?.translations.data.name}
+              </span>
             </li>
           </ul>
         </TabsContent>
@@ -128,7 +138,7 @@ export default function ProductTable({
             <p
               className={cn(
                 isEn && "text-left",
-                "line-hieght flex items-center ps-2 font-semibold leading-8 text-primary-foreground/70",
+                "line-hieght flex items-center ps-2 font-semibold leading-8 text-primary-foreground/70 dark:text-white/50",
               )}
             >
               {translations.data.overview}

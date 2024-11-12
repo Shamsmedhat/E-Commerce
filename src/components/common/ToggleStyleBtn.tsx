@@ -8,7 +8,7 @@ export default function ToggleStyleBtn() {
   const dispatch = useAppDispatch();
   const { rowStyle, columnStyle } = useAppSelector((state) => state.cart);
   return (
-    <div className="flex w-auto items-center justify-between rounded-full bg-white px-1 py-1">
+    <div className="flex w-auto items-center justify-between rounded-full bg-white px-1 py-1 dark:bg-background">
       <div
         className={cn(
           rowStyle && `bg-primary text-white`,

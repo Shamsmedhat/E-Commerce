@@ -21,7 +21,9 @@ export default function CartContent({ cart }: CartContentProps) {
       <div className="mb-6 flex-grow">
         {/* Heading */}
         <div className="flex items-center justify-between">
-          <Heading>{t("_Kg79lEkLCt2SxOaeQJZ2")}</Heading>
+          <Heading className="dark:text-white">
+            {t("_Kg79lEkLCt2SxOaeQJZ2")}
+          </Heading>
           <ToggleStyleBtn />
         </div>
         {/* List of Cart items */}
@@ -34,7 +36,7 @@ export default function CartContent({ cart }: CartContentProps) {
         </div>
       </div>
       {/* Cart summary */}
-      <div className="flex h-fit min-w-full flex-col items-center rounded-lg bg-white pt-4 shadow-sm lg:ms-[2rem] lg:min-w-[20%]">
+      <div className="flex h-fit min-w-full flex-col items-center rounded-lg bg-white pt-4 shadow-sm dark:bg-background lg:ms-[2rem] lg:min-w-[20%]">
         <CartSummary cart={cart} />
       </div>
     </>

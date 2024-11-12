@@ -35,7 +35,7 @@ export default function ProductGallery({
     <div className="flex w-full flex-shrink flex-row-reverse justify-between md:px-8 md:pe-8">
       {/* Main Image Display */}
       <div
-        className={`${styles.imageZoom} relative flex w-full items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-2 md:p-4`}
+        className={`${styles.imageZoom} relative flex w-full items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-2 dark:border-white/20 md:p-4`}
       >
         <Image
           src={currentImg}
@@ -49,11 +49,14 @@ export default function ProductGallery({
       {/* Thumbnail and Controls Section */}
       <div className="flex flex-col items-center gap-y-1">
         <button
-          className="rounded-lg border-2 border-primary-foreground/10 transition hover:scale-105 hover:border-primary"
+          className="rounded-lg border-2 border-primary-foreground/10 transition hover:scale-105 hover:border-primary dark:border-white/20"
           onClick={onClickUp}
           disabled={currentImgIndex === 0}
         >
-          <LuChevronUp size={20} className="text-primary-foreground/40" />
+          <LuChevronUp
+            size={20}
+            className="text-primary-foreground/40 dark:text-white/70"
+          />
         </button>
         <div className={cn("overflow-hidden")}>
           <div
@@ -72,8 +75,8 @@ export default function ProductGallery({
               <button
                 className={cn(
                   currentImg === img
-                    ? "scale-105 border-primary shadow-md shadow-primary/60 backdrop-blur-3xl"
-                    : "border-primary-foreground/10 shadow-sm hover:scale-105 hover:border-primary hover:shadow-primary/60 hover:backdrop-blur-3xl",
+                    ? "scale-105 border-primary shadow-md shadow-primary/60 backdrop-blur-3xl dark:border-primary dark:shadow-primary/60"
+                    : "border-primary-foreground/10 shadow-sm hover:scale-105 hover:border-primary hover:shadow-primary/60 hover:backdrop-blur-3xl dark:border-white/20",
                   "rounded-lg border-2 p-1 transition duration-300",
                 )}
                 key={img}
@@ -92,13 +95,13 @@ export default function ProductGallery({
           </div>
         </div>
         <button
-          className="rounded-lg border-2 border-primary-foreground/10 transition hover:scale-105 hover:border-primary"
+          className="rounded-lg border-2 border-primary-foreground/10 transition hover:scale-105 hover:border-primary dark:border-white/20"
           onClick={onClickDown}
           disabled={currentImgIndex === images.length - 1}
         >
           <LuChevronDown
             size={20}
-            className="cursor-pointer text-primary-foreground/40"
+            className="cursor-pointer text-primary-foreground/40 dark:text-white/70"
           />
         </button>
       </div>

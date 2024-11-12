@@ -61,9 +61,10 @@ export default function Navbar({ categories, pagination }: CategoriesData) {
                 alt={c.translations.data.name}
                 width={25}
                 height={25}
+                className="dark:rounded-full dark:bg-white"
               />
               {/* render the category name in en or ar based on the data and the current locale */}
-              <span className="hidden lg:block lg:text-[1rem]">
+              <span className="hidden dark:text-white lg:block lg:text-[1rem]">
                 {c.translations.data.name}
               </span>
             </div>

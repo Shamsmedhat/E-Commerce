@@ -4,6 +4,8 @@ import { signOut } from "next-auth/react";
 
 import { useTranslations } from "next-intl";
 import { handleSignOutToaster } from "@/lib/utils/helpers";
+import { cookies } from "next/headers";
+import { removeUserToken } from "@/lib/actions/remove-token-actions";
 
 export default function SignOut() {
   const t = useTranslations();
@@ -12,6 +14,7 @@ export default function SignOut() {
     await signOut({ redirect: true, callbackUrl: "/" }).then(
       handleSignOutToaster,
     );
+    removeUserToken();
     // loggedOutSuccessfully();
     // setIsLoggedOut(true); // Mark as logged out
   }

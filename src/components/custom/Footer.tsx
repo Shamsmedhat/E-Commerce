@@ -160,7 +160,11 @@ export default async function Footer() {
       <div className="flex h-[80px] items-center justify-around bg-[#1b1b1b] p-4 text-center text-white">
         {/* lang */}
         <span className="ml-4 text-primary-foreground">
-          <LangBtn ar="العربية" en="English" />
+          <LangBtn
+            ar="العربية"
+            en="English"
+            className="!w-fit dark:!text-white"
+          />
         </span>
         {/* copyright */}
         <span className="">Copyright &copy; 2024, All Rights Reserved</span>

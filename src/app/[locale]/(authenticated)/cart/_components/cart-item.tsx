@@ -46,7 +46,7 @@ export default function CartItem({ item }: CartItemProps) {
         columnStyle && "box-border flex flex-col border-b-8",
         rowStyle && "flex flex-grow flex-row border-l-8",
         // `${categoryBorderColor(category!)} `,
-        "my-5 items-center gap-8 rounded-md bg-white p-3 shadow-sm",
+        "my-5 items-center gap-8 rounded-md bg-white p-3 shadow-sm dark:bg-background",
       )}
     >
       {/* Product image */}
@@ -75,7 +75,7 @@ export default function CartItem({ item }: CartItemProps) {
             "flex h-full flex-col justify-evenly",
           )}
         >
-          <span className="text-sm text-primary-foreground/70">
+          <span className="text-sm text-primary-foreground/70 dark:text-white/60">
             {category?.category.translations.data.name} -{" "}
             {subCategory?.subCategory.translations.data.name}
           </span>

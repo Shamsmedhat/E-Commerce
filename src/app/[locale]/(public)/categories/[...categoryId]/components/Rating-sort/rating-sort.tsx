@@ -56,7 +56,7 @@ export default function RatingSort({ key, product }: RatingSortProps) {
     >
       <Checkbox
         id={String(product.ratings?.average!)}
-        className="me-3"
+        className="me-3 dark:border-white"
         checked={isChecked}
         onCheckedChange={() =>
           handleCheckboxChange([String(product.ratings?.average)])

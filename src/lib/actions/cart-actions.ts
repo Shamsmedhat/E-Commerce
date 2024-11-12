@@ -24,7 +24,7 @@ export const getCartAction = catchAsync(async () => {
   console.log("data", data);
   // If the data is not success we pass the error as an AppError object
   if (data.status !== "success") {
-    throw new AppError(data.message, 500);
+    throw new AppError(data.message, 404);
   } else if (!data.data) {
     throw new AppError("Something went wrong!", 500);
   }

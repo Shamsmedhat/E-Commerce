@@ -134,7 +134,7 @@ export default async function Page() {
   return (
     <section className="mb-10 px-1 xsm:container">
       {/* Page title */}
-      <Heading className={cn(handleEnText(locale))}>
+      <Heading className={cn(handleEnText(locale), "dark:text-white")}>
         {t("1jlVZjp6n-h8arU7z4VEx")}
       </Heading>
 
@@ -494,7 +494,7 @@ export default async function Page() {
             {/* category button */}
             <div className="mt-3 text-xs xsm:mt-6 xsm:text-base">
               <Link href={`/categories/${Babies?._id}`}>
-                <button className="text-prborder-primary-foreground group relative items-center gap-1 overflow-hidden border border-primary-foreground p-1 px-[6px] shadow-md transition-all hover:text-categories-babyAndToddler">
+                <button className="group relative items-center gap-1 overflow-hidden border border-primary-foreground p-1 px-[6px] shadow-md transition-all hover:text-categories-babyAndToddler dark:text-background dark:hover:text-white">
                   <span className="relative z-10 flex items-center gap-1">
                     {t("EP20JBrzdd-XOrQxzYM0s")} <FaLongArrowAltRight />
                   </span>

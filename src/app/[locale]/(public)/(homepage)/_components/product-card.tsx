@@ -43,12 +43,12 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
       className={cn(
         // style in only first product
         isFirstProduct
-          ? "col-span-2 row-span-2 flex h-full flex-col items-center justify-between bg-white p-5 shadow-sm xsm:col-span-2 md:col-span-2 md:row-span-1 xl:row-span-2"
+          ? "col-span-2 row-span-2 flex h-full flex-col items-center justify-between bg-white p-5 shadow-sm dark:bg-background xsm:col-span-2 md:col-span-2 md:row-span-1 xl:row-span-2"
           : // style in only sec and third product
             isSecAndThirdProduct
-            ? "col-span-2 row-span-2 bg-white p-5 shadow-sm md:col-span-2 md:row-span-1"
+            ? "col-span-2 row-span-2 bg-white p-5 shadow-sm dark:bg-background md:col-span-2 md:row-span-1"
             : // style in rest of the product
-              "col-span-2 row-span-2 bg-white p-5 shadow-sm md:col-span-2 md:row-span-1 xl:col-span-1 xl:row-span-1",
+              "col-span-2 row-span-2 bg-white p-5 shadow-sm dark:bg-background md:col-span-2 md:row-span-1 xl:col-span-1 xl:row-span-1",
         "rounded-lg",
       )}
     >
@@ -107,7 +107,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
           )}
         >
           {/* sub category */}
-          <span className="font-bold text-primary-foreground/70">
+          <span className="font-bold text-primary-foreground/70 dark:text-white">
             {p.subCategory?.translations.data.name}
           </span>
 
@@ -115,16 +115,18 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
           <h3
             className={cn(
               // Style for the first product
-              isFirstProduct && "text-xl xsm:text-base md:text-xl xl:text-2xl",
+              isFirstProduct &&
+                "text-xl dark:text-white xsm:text-base md:text-xl xl:text-2xl",
               // Style for the second and third products
-              isSecAndThirdProduct && "text-xl xsm:text-base md:text-xl",
+              isSecAndThirdProduct &&
+                "text-xl dark:text-white xsm:text-base md:text-xl",
               // Basic style
-              "font-bold text-primary-foreground",
+              "font-bold text-primary-foreground dark:text-white",
             )}
           >
             <Link
               href={`/product/${p._id}`}
-              className="transition-all hover:text-primary"
+              className="transition-all hover:text-primary dark:text-white dark:hover:text-primary"
             >
               {p.translations?.data.name.length! > 40
                 ? `${p.translations?.data.name.slice(0, 40)}...`
@@ -134,7 +136,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
 
           {/* display the Product description only in first product*/}
           {isFirstProduct && (
-            <p className="hidden text-primary-foreground/70 xl:block">
+            <p className="hidden text-primary-foreground/70 dark:text-white xl:block">
               {p.translations?.data.overview?.split(" ").slice(0, 20).join(" ")}{" "}
               ...
             </p>
@@ -144,7 +146,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
           {p.ratings?.average !== 0 && (
             <div className="flex items-center gap-2">
               <RatingStars rate={p.ratings?.average} />
-              <span className="text-sm text-primary-foreground">
+              <span className="text-sm text-primary-foreground dark:text-white">
                 {t("flKadk1uiQBgrD9BptCEt")} {p.ratings?.count}
               </span>
             </div>
@@ -162,7 +164,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
                 !isSecAndThirdProduct &&
                 "flex-col justify-start gap-1",
               // basic style
-              "mt-3 flex items-start xl:mt-0",
+              "mt-3 flex items-start dark:text-white xl:mt-0",
             )}
           >
             {/* Priceing */}
@@ -179,11 +181,11 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
                 </div>
               )}
               {/* //TODO discound  */}
-              <span className="text-sm text-primary-foreground/40 line-through">
+              <span className="text-sm text-primary-foreground/40 line-through dark:text-white">
                 1000 {t("fU01whrYbLGxy6qtBGMEo")}
               </span>
               {/* product price */}
-              <span className="font-extrabold text-primary-foreground">
+              <span className="font-extrabold text-primary-foreground dark:text-white">
                 {p.price} {t("fU01whrYbLGxy6qtBGMEo")}
               </span>
             </div>

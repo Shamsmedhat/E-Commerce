@@ -64,7 +64,7 @@ export default function TopSellingItems() {
           "my-6 flex justify-between",
         )}
       >
-        <Heading className="flex items-center">
+        <Heading className="container flex items-center dark:text-white">
           {t("uZZQUtSnWv_5AZL2Q5qi9")}
         </Heading>
       </div>
@@ -108,8 +108,8 @@ export default function TopSellingItems() {
           </ul>
 
           {/* next button */}
-          <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent"></div>
-          <div className="swiper-button-next"></div>
+          <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent dark:from-background"></div>
+          <div className="swiper-button-next dark:after:bg-black/30"></div>
         </Swiper>
       </div>
     </section>

@@ -55,7 +55,7 @@ export default function BrandsSort({ key, product }: SubCategorySortProps) {
     >
       <Checkbox
         id={product.brand._id}
-        className="me-3"
+        className="me-3 dark:border-white"
         checked={isChecked}
         onCheckedChange={() =>
           handleCheckboxChange([String(product.brand._id)])

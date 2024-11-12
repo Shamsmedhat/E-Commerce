@@ -33,11 +33,11 @@ export default function ProductDetails({
   const t = useTranslations();
   return (
     <div className="mt-4 flex flex-shrink flex-grow flex-col justify-evenly md:mt-0">
-      <span className="text-md font-bold text-primary-foreground/50">
+      <span className="text-md font-bold text-primary-foreground/50 dark:text-white">
         {category}
       </span>
-      <h1 className="pb-3 text-3xl font-bold">{name}</h1>
-      <p className="text-md text-primary-foreground/80">
+      <h1 className="pb-3 text-3xl font-bold dark:text-white">{name}</h1>
+      <p className="text-md text-primary-foreground/80 dark:text-white/70">
         {!isShowMore ? overview?.split(" ").slice(0, 45).join(" ") : overview}{" "}
         <button
           className="text-backup"
@@ -58,10 +58,10 @@ export default function ProductDetails({
         </div>
       </div>
       <span className="flex items-center gap-2">
-        <span className="text-base text-primary-foreground/40 line-through">
+        <span className="text-base text-primary-foreground/40 line-through dark:text-white">
           10000 {t("fU01whrYbLGxy6qtBGMEo")}
         </span>
-        <span className="text-3xl font-bold text-primary-foreground">
+        <span className="text-3xl font-bold text-primary-foreground dark:text-white">
           {price} {t("fU01whrYbLGxy6qtBGMEo")}
         </span>
       </span>
@@ -69,17 +69,16 @@ export default function ProductDetails({
       {/* bottoms section */}
       <div className="my-4 flex gap-5 md:flex-col-reverse lg:flex-row">
         <div className="flex flex-row gap-4">
-          {/* <QuantityBtn
-            className="overflow-hidden rounded-3xl border-0"
-            productId={productId}
-            stock={stock}
-          /> */}
           <AddToCart productId={productId} />
         </div>
         <div className="flex gap-4">
           <button>
-            <div className="rounded-full bg-primary-foreground/20 p-2">
-              <LuHeart strokeWidth={1} size={18} />
+            <div className="rounded-full bg-primary-foreground/20 p-2 dark:bg-white">
+              <LuHeart
+                strokeWidth={1}
+                size={18}
+                className="dark:text-background"
+              />
             </div>
           </button>
         </div>

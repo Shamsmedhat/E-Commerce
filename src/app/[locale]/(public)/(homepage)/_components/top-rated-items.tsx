@@ -74,12 +74,12 @@ export default function TopRatedItems() {
         )}
       >
         {/* title h2 heading */}
-        <Heading className="flex items-center">
+        <Heading className="flex items-center dark:text-white">
           {t("CrU60-woqGv72goIWJC_l")}
         </Heading>
       </div>
       {/* top rated products slider */}
-      <div className="bg-white shadow-lg">
+      <div className="bg-white shadow-lg dark:bg-background">
         <Swiper
           // lg screen show 5 products md screen show 4 sm screen 3 extra sm screen show 2 less show 1.25
           slidesPerView={
@@ -120,8 +120,8 @@ export default function TopRatedItems() {
             ))}
           </ul>
           {/* next button */}
-          <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent"></div>
-          <div className="swiper-button-next"></div>
+          <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent dark:from-background"></div>
+          <div className="swiper-button-next dark:after:bg-black/30"></div>
         </Swiper>
       </div>
     </section>

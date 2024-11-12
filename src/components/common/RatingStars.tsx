@@ -1,3 +1,6 @@
+"use client";
+import { cn } from "@/lib/utils";
+import { useLocale } from "next-intl";
 import { LuStar } from "react-icons/lu";
 
 type Rating = {
@@ -17,8 +20,14 @@ export default function RatingStars({
   color = "#ffffff00",
   className = "",
 }: Rating) {
+  const locale = useLocale();
+  const isEn = locale === "en";
+
   return (
-    <span className="flex" dir="ltr">
+    <span
+      className={cn(isEn ? "justify-start" : "justify-end", "flex")}
+      dir="ltr"
+    >
       {Array.from({ length: starsNumber || 5 }, (_, i) => {
         const isHalfStar = rate > i && rate < i + 1;
         const fillColor = rate >= i + 1 ? "#FEBF31" : "rgb(60 64 59 / 0.3)";
@@ -30,6 +39,9 @@ export default function RatingStars({
               size={size}
               strokeWidth={weight}
               color={color}
+              className={cn(
+                fillColor === "rgb(60 64 59 / 0.3)" && "dark:fill-white",
+              )}
             />
             {isHalfStar && (
               <LuStar

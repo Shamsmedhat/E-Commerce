@@ -55,7 +55,7 @@ export default function UserReview({
       </p>
 
       {/* User comment */}
-      <p className="text-primary-foreground">{r.comment}</p>
+      <p className="text-primary-foreground dark:text-white/80">{r.comment}</p>
     </div>
   );
 }

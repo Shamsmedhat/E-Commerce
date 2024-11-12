@@ -46,7 +46,7 @@ export default async function ProductPage({ params }: { params: Params }) {
     <>
       <section className="container mx-auto mt-10 px-4">
         <div
-          className="flex flex-col rounded-md bg-white px-[0.5rem] py-6 shadow-sm md:px-[2rem] md:pe-[4rem] lg:h-auto lg:flex-row"
+          className="flex flex-col rounded-md bg-white px-[0.5rem] py-6 shadow-sm dark:bg-background md:px-[2rem] md:pe-[4rem] lg:h-auto lg:flex-row"
           dir={isEn ? "ltr" : "rtl"}
         >
           <div className="flex lg:w-1/2">
@@ -66,7 +66,7 @@ export default async function ProductPage({ params }: { params: Params }) {
           </div>
         </div>
 
-        <div className="my-10 overflow-hidden rounded-md bg-white p-2 shadow-sm md:p-7">
+        <div className="my-10 overflow-hidden rounded-md bg-white p-2 shadow-sm dark:bg-background md:p-7">
           <ProductTable
             productId={productId}
             category={category}

@@ -97,14 +97,19 @@ export default function QuantityBtn({
   }
 
   return (
-    <div className={cn(className, "flex h-fit w-fit flex-row border-[1px]")}>
+    <div
+      className={cn(
+        className,
+        "flex h-fit w-fit flex-row border-[1px] dark:border-white/70",
+      )}
+    >
       {/* Decrease Button */}
       <button
         onClick={() => handleDecrease()}
         className={cn(
           btnsClassName,
           qty > 1
-            ? "hover:bg-red-200 hover:transition-colors hover:duration-200"
+            ? "hover:bg-red-200 hover:transition-colors hover:duration-200 dark:hover:text-background"
             : "cursor-not-allowed",
           "px-2",
         )}
@@ -119,7 +124,7 @@ export default function QuantityBtn({
           type="number"
           className={cn(
             isWithBorder ? "border-y-0" : "border-0",
-            "no-spinner w-[3.5rem] rounded-none p-0 text-center focus-visible:ring-primary",
+            "no-spinner w-[3.5rem] rounded-none p-0 text-center focus-visible:ring-primary dark:border-white/70",
           )}
           value={qty}
           onChange={(e) => {
@@ -140,7 +145,7 @@ export default function QuantityBtn({
         className={cn(
           btnsClassName,
           stock > qty
-            ? "hover:bg-green-200 hover:transition-colors hover:duration-200"
+            ? "hover:bg-green-200 hover:transition-colors hover:duration-200 dark:hover:text-background"
             : "cursor-not-allowed",
           "px-2",
         )}

@@ -29,14 +29,15 @@ export default async function EmptyCart({ isEn }: { isEn: boolean }) {
       <div className="flex-grow">
         {/* Heading */}
         <div className="flex items-center justify-between">
-          <Heading>{t("_Kg79lEkLCt2SxOaeQJZ2")}</Heading>
+          <Heading className="dark:text-white">
+            {t("_Kg79lEkLCt2SxOaeQJZ2")}
+          </Heading>
           {/* toggle btn */}
-          <ToggleStyleBtn />
         </div>
         {/* cart msg */}
-        <div className="mt-3 rounded-lg bg-white p-6">
+        <div className="mt-3 rounded-lg bg-white p-6 dark:bg-background">
           {/* msg to user */}
-          <p className="text-3xl text-primary-foreground">
+          <p className="text-3xl text-primary-foreground dark:text-white/70">
             {t("ENSodfxOcBIJIy9uZxYTf")}
           </p>
 
@@ -53,6 +54,7 @@ export default async function EmptyCart({ isEn }: { isEn: boolean }) {
               alt="E commerce"
               height={500}
               width={500}
+              className="rounded-full bg-white"
             />
           </div>
         </div>

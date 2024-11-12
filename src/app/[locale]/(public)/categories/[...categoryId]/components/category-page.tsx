@@ -55,7 +55,7 @@ export default function CategoryPage({
           <h1 className="text-3xl font-bold">{categoryName}</h1>
 
           {/* Products result number*/}
-          <span className="text-lg font-semibold text-primary-foreground">
+          <span className="text-lg font-semibold text-primary-foreground dark:text-white">
             {products.length} {t("D0j4cQe3sepamyV6r68AM")}
           </span>
         </header>
@@ -74,7 +74,7 @@ export default function CategoryPage({
           {/*Producsts section  */}
           <div className="w-[75%]">
             {/* Sort section */}
-            <div className="flex rounded-sm border-l-4 border-l-primary bg-white py-3 lg:hidden">
+            <div className="flex rounded-sm border-l-4 border-l-primary bg-white py-3 dark:bg-background lg:hidden">
               <Sheet>
                 {/* Title */}
                 <SheetTrigger className="my-auto flex h-full items-center gap-2 ps-3 text-lg font-bold hover:text-primary">
@@ -103,7 +103,7 @@ export default function CategoryPage({
                 .map((p, i) => (
                   <div
                     key={i}
-                    className="flex flex-col justify-between gap-4 rounded-md bg-white p-3"
+                    className="flex flex-col justify-between gap-4 rounded-md bg-white p-3 dark:bg-background"
                   >
                     {/* Product Image */}
                     <div className="relative mx-auto h-[180px] w-[70%]">
@@ -124,7 +124,7 @@ export default function CategoryPage({
                       dir={isEn ? "ltr" : "rtl"}
                     >
                       {/* Sub category name */}
-                      <span className="text-sm font-bold text-primary-foreground/70">
+                      <span className="text-sm font-bold text-primary-foreground/70 dark:text-white">
                         {p.subCategory?.translations.data.name}
                       </span>
 
@@ -138,7 +138,7 @@ export default function CategoryPage({
                       </span>
 
                       {/* Product name */}
-                      <h3 className="text-xl font-bold text-primary-foreground">
+                      <h3 className="text-xl font-bold text-primary-foreground dark:text-white">
                         <Link
                           href={`/product/${p._id}`}
                           className="transition-all hover:text-primary"
@@ -151,10 +151,10 @@ export default function CategoryPage({
 
                       {/* Price & discount */}
                       <div>
-                        <span className="text-primary-foreground/50 line-through">
+                        <span className="text-primary-foreground/50 line-through dark:text-white">
                           1000 {t("fU01whrYbLGxy6qtBGMEo")}
                         </span>
-                        <p className="text-lg font-bold text-primary-foreground">
+                        <p className="text-lg font-bold text-primary-foreground dark:text-white">
                           {p.price} {t("fU01whrYbLGxy6qtBGMEo")}
                         </p>
                       </div>
@@ -180,32 +180,4 @@ export default function CategoryPage({
       </div>
     </div>
   );
-}
-
-//TODO
-function SortBy() {
-  const frameworks = [
-    {
-      value: "next.js",
-      label: "Next.js",
-    },
-    {
-      value: "sveltekit",
-      label: "SvelteKit",
-    },
-    {
-      value: "nuxt.js",
-      label: "Nuxt.js",
-    },
-    {
-      value: "remix",
-      label: "Remix",
-    },
-    {
-      value: "astro",
-      label: "Astro",
-    },
-  ];
-
-  return <ComboboxDemo frameworks={frameworks} />;
 }

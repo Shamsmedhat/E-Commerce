@@ -62,12 +62,11 @@ export default function ProductsSlider<T extends Product>({
       {/* title h2 heading */}
       <div
         className={cn(
-          (handleEnText(locale),
-          locale === "en" && "container flex-row-reverse"),
-          "my-6 flex justify-between",
+          (handleEnText(locale), locale === "en" && "flex-row-reverse"),
+          "container my-6 flex justify-between",
         )}
       >
-        <Heading className="flex items-center">{title}</Heading>
+        <Heading className="flex items-center dark:text-white">{title}</Heading>
       </div>
       {/*  products slider */}
       <div>
@@ -109,7 +108,7 @@ export default function ProductsSlider<T extends Product>({
           </ul>
 
           {/* next button */}
-          <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent"></div>
+          <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent dark:from-background"></div>
           <div className="swiper-button-next"></div>
         </Swiper>
       </div>

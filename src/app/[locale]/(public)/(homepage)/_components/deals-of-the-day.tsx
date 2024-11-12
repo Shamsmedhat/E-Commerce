@@ -25,7 +25,7 @@ export default async function DealsOfTheDay() {
     return (
       <section className="container my-9">
         {/* h2 heading */}
-        <Heading className={handleEnText(locale)}>
+        <Heading className={cn(handleEnText(locale), "dark:text-white")}>
           {t("EMm4-Oay1VcXIpDa1EQ_Y")}
         </Heading>
 
@@ -41,7 +41,7 @@ export default async function DealsOfTheDay() {
   return (
     <section className="container md:my-9">
       {/* h2 heading */}
-      <Heading className={cn(handleEnText(locale))}>
+      <Heading className={cn(handleEnText(locale), "dark:text-white")}>
         {t("EMm4-Oay1VcXIpDa1EQ_Y")}
       </Heading>
 

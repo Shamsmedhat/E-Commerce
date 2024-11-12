@@ -12,6 +12,7 @@ import imageFallback from "@/../public/assets/fallbackImage.jpeg";
 import RatingStars from "@/components/common/RatingStars";
 import AddToCart from "@/components/common/AddToCart";
 import { Link } from "@/navigarion";
+import WishlistButton from "./wishlist-button";
 
 export default function HorizontalProductsSlider({
   product,
@@ -29,7 +30,7 @@ export default function HorizontalProductsSlider({
     <div
       className={cn(
         locale === "en" ? "items-end" : "items-start",
-        "flex h-[360px] flex-col justify-between gap-2 p-4 align-middle",
+        "flex h-[360px] flex-col justify-between gap-2 p-4 align-middle dark:bg-background",
       )}
     >
       {/* product image */}
@@ -54,7 +55,7 @@ export default function HorizontalProductsSlider({
         )}
       >
         {/* product category name */}
-        <span className="text-sm text-primary-foreground/80">
+        <span className="text-sm text-primary-foreground/80 dark:text-white">
           {product.category?.translations.data.name}
         </span>
 
@@ -65,26 +66,29 @@ export default function HorizontalProductsSlider({
 
         {/* product name */}
         <Link
-          className="mb-2 items-start text-lg font-bold text-primary-foreground transition-all hover:text-primary"
+          className="mb-2 items-start text-lg font-bold text-primary-foreground transition-all hover:text-primary dark:text-white dark:hover:text-primary"
           href={`/product/${product._id}`}
         >
           {product.translations?.data.name.length! > 30
-            ? `...${product.translations?.data.name.slice(0, 30)}`
+            ? `${product.translations?.data.name.slice(0, 30)}...`
             : product.translations?.data.name}
         </Link>
 
         {/* product price */}
         <div className="flex w-full flex-row-reverse items-center">
           <div className="flex flex-col">
-            <span className="text-end text-sm text-primary-foreground/70 line-through">
+            <span className="text-end text-sm text-primary-foreground/70 line-through dark:text-white">
               1000 {t("fU01whrYbLGxy6qtBGMEo")}
             </span>
-            <span className="font-bold text-primary-foreground">
+            <span className="font-bold text-primary-foreground dark:text-white">
               {product.price} {t("fU01whrYbLGxy6qtBGMEo")}
             </span>
           </div>
           <div>
             <AddToCart productId={product._id!} isSmall={true} />
+          </div>
+          <div>
+            <WishlistButton productId={product._id} />
           </div>
         </div>
       </div>

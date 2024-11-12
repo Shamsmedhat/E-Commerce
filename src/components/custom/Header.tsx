@@ -87,7 +87,7 @@ export default async function Header() {
                   {/* Cart btn */}
                   <Link href="/cart" className="relative">
                     {numbersOfitemsInCart === 0 ? null : (
-                      <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
+                      <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
                         {numbersOfitemsInCart}
                       </span>
                     )}
@@ -104,7 +104,7 @@ export default async function Header() {
                 <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
                   <Link href="/wishlist" className="relative">
                     {numbersOfitemsInWishlist === 0 ? null : (
-                      <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
+                      <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
                         {numbersOfitemsInWishlist}
                       </span>
                     )}
@@ -149,7 +149,7 @@ export default async function Header() {
                   <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
                     <Link href="/cart" className="relative">
                       {numbersOfitemsInCart === 0 ? null : (
-                        <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
+                        <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
                           {numbersOfitemsInCart}
                         </span>
                       )}
@@ -165,7 +165,7 @@ export default async function Header() {
                   <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
                     <Link href="/wishlist" className="relative">
                       {numbersOfitemsInCart === 0 ? null : (
-                        <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white">
+                        <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
                           {numbersOfitemsInCart}
                         </span>
                       )}

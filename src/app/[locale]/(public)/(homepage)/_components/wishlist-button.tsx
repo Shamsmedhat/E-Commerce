@@ -44,13 +44,16 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
           isProductOnWishlist ? handleRemoveFromWishlist : handleAddToWishlist
         }
       >
-        <div className="text-pr rounded-full bg-primary-foreground/20 p-[10px]">
+        <div className="text-pr rounded-full bg-primary-foreground/20 p-[10px] dark:bg-white">
           {isAddingToWishlist || isRemovingFromWishlist || isPendingUpdate ? (
-            <ImSpinner3 className="animate-spin" size={16} />
+            <ImSpinner3
+              className="animate-spin dark:text-background"
+              size={16}
+            />
           ) : isProductOnWishlist ? (
             <FaHeart strokeWidth={1} color="#febf31" />
           ) : (
-            <LuHeart strokeWidth={1} />
+            <LuHeart strokeWidth={1} className="dark:text-background" />
           )}
         </div>
       </button>

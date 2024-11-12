@@ -2,8 +2,7 @@
 import React from "react";
 import RatingSection from "./Rating-sort/rating-section";
 import BrandsSection from "./brands-sort/brands-section";
-import { getTranslations } from "next-intl/server";
-import SortSection from "./sub-category-sort/sub-category-section";
+
 import { categoryColor } from "@/lib/utils/helpers";
 import SubCategorySection from "./sub-category-sort/sub-category-section";
 import { useTranslations } from "next-intl";
@@ -37,7 +36,7 @@ export default function AsideSortSection({
       </div>
 
       {/* Brand Section */}
-      <div className="mb-[2rem] min-w-[200px] rounded-md bg-white p-5 text-primary-foreground">
+      <div className="mb-[2rem] min-w-[200px] rounded-md bg-white p-5 text-primary-foreground dark:bg-background dark:text-white">
         {/* Title */}
         <h3 className="mb-3 text-xl font-bold">{t("0Yio04Ct9UZq80n-Mnrjp")}</h3>
 
@@ -48,7 +47,7 @@ export default function AsideSortSection({
       </div>
 
       {/*Rating section */}
-      <div className="mb-[2rem] min-w-[200px] rounded-md bg-white p-5 text-primary-foreground">
+      <div className="da mb-[2rem] min-w-[200px] rounded-md bg-white p-5 text-primary-foreground dark:bg-background dark:text-white">
         <h3 className="mb-3 text-xl font-bold">{t("mADNIsXxfc4IBjTJ7ANrC")}</h3>
 
         {/* Sort component [Rating]*/}

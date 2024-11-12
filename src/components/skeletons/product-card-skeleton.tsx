@@ -1,21 +1,9 @@
 "use client";
-import Image from "next/image";
-
-// navigation
-import { Link } from "@/navigarion";
-
-// translation
-import { useTranslations } from "next-intl";
 
 // ui
-import AddToCart from "@/components/common/AddToCart";
-import RatingStars from "@/components/common/RatingStars";
 import { cn } from "@/lib/utils";
 
 // icons
-import { useAddToCart } from "@/lib/utils/data/cart-data";
-import { LuHeart, LuScale } from "react-icons/lu";
-import { BsInfoCircle } from "react-icons/bs";
 import { Skeleton } from "../ui/skeleton";
 
 // prop type
@@ -39,12 +27,12 @@ export default function ProductCardSkeleton({ isEn, i }: ProductProps) {
       className={cn(
         // style in only first product
         isFirstProduct
-          ? "col-span-2 row-span-2 flex h-full flex-col items-center justify-between bg-white p-5 shadow-sm xsm:col-span-2 md:col-span-2 md:row-span-1 xl:row-span-2"
+          ? "col-span-2 row-span-2 flex h-full flex-col items-center justify-between bg-white p-5 shadow-sm dark:bg-background/40 xsm:col-span-2 md:col-span-2 md:row-span-1 xl:row-span-2"
           : // style in only sec and third product
             isSecAndThirdProduct
-            ? "col-span-2 row-span-2 bg-white p-5 shadow-sm md:col-span-2 md:row-span-1"
+            ? "col-span-2 row-span-2 bg-white p-5 shadow-sm dark:bg-background/40 md:col-span-2 md:row-span-1"
             : // style in rest of the product
-              "col-span-2 row-span-2 bg-white p-5 shadow-sm md:col-span-2 md:row-span-1 xl:col-span-1 xl:row-span-1",
+              "col-span-2 row-span-2 bg-white p-5 shadow-sm dark:bg-background/40 md:col-span-2 md:row-span-1 xl:col-span-1 xl:row-span-1",
         "rounded-lg",
       )}
     >
