@@ -29,9 +29,7 @@ export default async function EmptyCart({ isEn }: { isEn: boolean }) {
       <div className="flex-grow">
         {/* Heading */}
         <div className="flex items-center justify-between">
-          <Heading className="dark:text-white">
-            {t("_Kg79lEkLCt2SxOaeQJZ2")}
-          </Heading>
+          <Heading>{t("_Kg79lEkLCt2SxOaeQJZ2")}</Heading>
           {/* toggle btn */}
         </div>
         {/* cart msg */}

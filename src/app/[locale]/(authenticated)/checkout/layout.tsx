@@ -24,7 +24,7 @@ export default async function CheckoutLayout({
   if (cart && "statusCode" in cart) {
     if (
       cart.message === "There is no cart for the currently logged in user!" &&
-      cart.statusCode === 500
+      cart.statusCode === 404
     ) {
       return <EmptyCart isEn={isEn} />;
     }
@@ -33,32 +33,6 @@ export default async function CheckoutLayout({
 
   return (
     <section className="w-full">
-      <header className="border-b bg-white">
-        <nav>
-          <ul className="flex items-center justify-center gap-4 text-xl text-primary-foreground/80">
-            <li className="flex items-center justify-center gap-2 py-5">
-              <span>{t("MsTKb7d1eF3xjrrCqH58m")}</span>
-              <span className="rounded-full border-2 p-2">
-                <MdOutlineDoneOutline />
-              </span>
-            </li>
-            <li className="flex items-center justify-center gap-2 py-5">
-              <span className="mx-4 h-2 w-36 rounded-md bg-primary-foreground/40"></span>
-              <span>{t("-aN40eBi4jXBqrH8rJM27")}</span>
-              <span className="rounded-full border-2 p-2">
-                <MdOutlinePayment />
-              </span>
-            </li>
-            <li className="flex items-center justify-center gap-2 py-5">
-              <span className="mx-4 h-2 w-36 rounded-md bg-primary-foreground/40"></span>
-              <span>{t("X73uyJtHXlL_VOZZYWFyl")}</span>
-              <span className="rounded-full border-2 border-primary bg-primary p-2">
-                <FaRegAddressCard color="#fff" />
-              </span>
-            </li>
-          </ul>
-        </nav>
-      </header>
       <main className="container my-10 grid grid-cols-3 gap-8">
         <div className="col-span-1">
           <CheckoutCartSummary
@@ -66,7 +40,7 @@ export default async function CheckoutLayout({
             className="mx-8 bg-white shadow-sm"
           />
         </div>
-        <div className="col-span-2 rounded-lg bg-white p-10 pt-7 shadow-sm">
+        <div className="col-span-2 rounded-lg bg-white shadow-sm">
           {children}
         </div>
       </main>

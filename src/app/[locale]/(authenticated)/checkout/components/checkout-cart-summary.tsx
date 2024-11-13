@@ -25,7 +25,7 @@ export default function CheckoutCartSummary({
   const { shippingFees } = useAppSelector((state) => state.shippingFees);
 
   return (
-    <div className={cn(className, "rounded-lg")}>
+    <div className={cn(className, "rounded-lg dark:bg-black/30")}>
       {/* title */}
       <h3
         className={cn(
@@ -57,16 +57,10 @@ export default function CheckoutCartSummary({
           </div>
 
           {/* total & subtotal */}
-          <div className="flex flex-col space-y-2 text-end">
-            <span className="text-primary-foreground/80">
-              {t("xboHPEA9mmA4V1MQVedoM")}
-            </span>
-            <span className="text-primary-foreground/80">
-              {t("V7cnNa_QK7BF0Poh6mjxY")}
-            </span>
-            <span className="text-primary-foreground/80">
-              {t("FqoMK_5G5QKc7UcLIlqH-")}
-            </span>
+          <div className="flex flex-col space-y-2 text-end text-primary-foreground/80 dark:text-muted-foreground">
+            <span>{t("xboHPEA9mmA4V1MQVedoM")}</span>
+            <span>{t("V7cnNa_QK7BF0Poh6mjxY")}</span>
+            <span>{t("FqoMK_5G5QKc7UcLIlqH-")}</span>
           </div>
         </div>
 

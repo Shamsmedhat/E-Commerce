@@ -62,7 +62,7 @@ export default function DeleteFromWishlist({
       <DialogTrigger>
         {/* delete btn */}
         <div className="w-fit">
-          <div className="flex items-center gap-2 rounded-md border-[0.5px] border-primary-foreground/60 px-2 py-1 text-sm text-primary-foreground/60 transition-colors hover:border-red-600/70 hover:text-red-600/70">
+          <div className="flex items-center gap-2 rounded-md border-[0.5px] border-primary-foreground/60 px-2 py-1 text-sm text-primary-foreground/60 transition-colors hover:border-red-600/70 hover:text-red-600/70 dark:border-white/70 dark:text-white/70 dark:hover:border-red-600/70 dark:hover:text-red-600/70">
             <RiDeleteBin6Line />
             <span>{t("aI_K7fOdvddq4B_2iocmy")}</span>
           </div>

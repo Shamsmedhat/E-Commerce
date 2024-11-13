@@ -43,14 +43,14 @@ export default function TopSellingItems() {
   const isSmallScreen = useMediaQuery({ query: "(min-width: 590px)" });
   const isExtraSmallScreen = useMediaQuery({ query: "(min-width: 400px)" });
 
-  const { topSellingProducts } = useTopSellingProducts();
+  const { topSellingProducts, isFetching, isPending } = useTopSellingProducts();
 
   // Fetching products that got most sales
   useEffect(() => {
     setTopSellingDisplayedProducts(topSellingProducts?.products);
   }, [topSellingProducts?.products]);
 
-  if (!topSellingDisplayedProducts) {
+  if (!topSellingDisplayedProducts || isFetching) {
     return <TopSellingItemsSkeleton />;
   }
 
@@ -64,7 +64,7 @@ export default function TopSellingItems() {
           "my-6 flex justify-between",
         )}
       >
-        <Heading className="container flex items-center dark:text-white">
+        <Heading className="container flex items-center">
           {t("uZZQUtSnWv_5AZL2Q5qi9")}
         </Heading>
       </div>

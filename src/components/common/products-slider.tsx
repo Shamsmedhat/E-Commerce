@@ -66,7 +66,7 @@ export default function ProductsSlider<T extends Product>({
           "container my-6 flex justify-between",
         )}
       >
-        <Heading className="flex items-center dark:text-white">{title}</Heading>
+        <Heading className="flex items-center">{title}</Heading>
       </div>
       {/*  products slider */}
       <div>

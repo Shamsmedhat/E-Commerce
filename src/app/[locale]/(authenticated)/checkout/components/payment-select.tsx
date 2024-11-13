@@ -123,7 +123,10 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mb-7 space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="mb-7 space-y-6 p-8"
+      >
         {/*  Payment methods [credit or debit or cash] */}
         <FormField
           control={form.control}
@@ -146,7 +149,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                         paymentType === "cash"
                           ? "border-primary shadow-sm shadow-primary/40"
                           : "border-primary-foreground/20 shadow-sm shadow-primary-foreground/20",
-                        "space-y-4 border p-6",
+                        "space-y-4 border p-6 dark:bg-black/30",
                       )}
                     >
                       <FormItem className="flex flex-col items-center justify-start space-x-3 space-y-0">
@@ -171,7 +174,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                         paymentType === "card"
                           ? "border-primary shadow-sm shadow-primary/40"
                           : "border-primary-foreground/20 shadow-sm shadow-primary-foreground/20",
-                        "border p-6",
+                        "border p-6 dark:bg-black/30",
                       )}
                     >
                       <FormItem className="flex flex-col items-start justify-center space-x-3 space-y-5">
@@ -188,7 +191,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                         {/* Card images section */}
                         <div className="flex w-full gap-6">
                           {/* Visa Card */}
-                          <div className="h-full w-1/2 space-y-5 border border-primary bg-slate-50 p-4 shadow-sm">
+                          <div className="h-full w-1/2 space-y-5 border border-primary bg-slate-50 p-4 shadow-sm dark:bg-background">
                             <div className="flex gap-6">
                               <Image
                                 src={visa}
@@ -205,7 +208,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                               </p>
                             </div>
                             <div className="flex flex-col items-start">
-                              <p className="text-base uppercase text-primary-foreground/70">
+                              <p className="text-base uppercase text-primary-foreground/70 dark:text-white/50">
                                 expires end
                               </p>
                               <span className="font-bold">12/27</span>
@@ -213,7 +216,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                           </div>
 
                           {/* MasterCard */}
-                          <div className="h-full w-1/2 space-y-5 border border-primary bg-slate-50 p-4 shadow-sm">
+                          <div className="h-full w-1/2 space-y-5 border border-primary bg-slate-50 p-4 shadow-sm dark:bg-background">
                             <div className="flex gap-6">
                               <Image
                                 src={masterCard}
@@ -230,7 +233,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                               </p>
                             </div>
                             <div className="flex flex-col items-start">
-                              <p className="text-base uppercase text-primary-foreground/70">
+                              <p className="text-base uppercase text-primary-foreground/70 dark:text-white/50">
                                 expires end
                               </p>
                               <span className="font-bold">12/27</span>
@@ -257,7 +260,10 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
             // Form item
             <FormItem className="space-y-3">
               <FormControl>
-                <RadioGroup onValueChange={field.onChange}>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  className="dark:bg-black/30"
+                >
                   <div className="flex border border-primary-foreground/20 p-6 shadow-sm">
                     {/* Free delivery */}
                     <div className="flex w-1/2 border-spacing-2 flex-col items-start justify-center gap-4 space-x-2 border-r-2 p-3">
@@ -272,7 +278,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                         {t("vPSi_t8RLCFm61AEZ7bKd")}
                       </FormLabel>
 
-                      <FormDescription className="text-base font-semibold text-primary-foreground/50">
+                      <FormDescription className="text-base font-semibold text-primary-foreground/50 dark:text-muted-foreground">
                         {t("cwMUWzqHpZXZozdpScWVJ")}
                       </FormDescription>
 
@@ -294,7 +300,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                         {t("IgLKSbkOb6yVwR2bfItlz")} {getDateTwoDaysLater()}
                       </FormLabel>
 
-                      <FormDescription className="text-base font-semibold text-primary-foreground/50">
+                      <FormDescription className="text-base font-semibold text-primary-foreground/50 dark:text-muted-foreground">
                         {t("kCr5LyLTJALcWzF2E21i3")}
                       </FormDescription>
 

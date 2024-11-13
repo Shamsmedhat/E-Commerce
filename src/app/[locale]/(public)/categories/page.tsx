@@ -134,7 +134,7 @@ export default async function Page() {
   return (
     <section className="mb-10 px-1 xsm:container">
       {/* Page title */}
-      <Heading className={cn(handleEnText(locale), "dark:text-white")}>
+      <Heading className={cn(handleEnText(locale))}>
         {t("1jlVZjp6n-h8arU7z4VEx")}
       </Heading>
 

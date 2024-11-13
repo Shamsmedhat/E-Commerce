@@ -33,7 +33,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
-import { MdVerified } from "react-icons/md";
+import {
+  MdOutlineDoneOutline,
+  MdOutlinePayment,
+  MdVerified,
+} from "react-icons/md";
+import { FaRegAddressCard } from "react-icons/fa";
 
 // Typs
 type AddressFormProps = {
@@ -89,6 +94,8 @@ export function AddressForm({
 
   // Locale
   const locale = useLocale();
+
+  const isEn = locale === "en";
 
   // User session
   const session = useSession();
@@ -169,15 +176,17 @@ export function AddressForm({
     setIsFormValid(false);
   }
   return (
-    <div className="mb-6 flex flex-row-reverse gap-6 text-right">
+    <div className="mb-6 flex flex-row-reverse gap-6 p-8 text-right">
       {/* Editable form to write the delivery address */}
+
       <div
         className={cn(
           handleEnText(locale),
-          "w-1/2 border border-primary-foreground/20 p-6 shadow-md",
+          "w-1/2 border border-primary-foreground/20 p-6 shadow-md dark:bg-black/30",
         )}
       >
         {/* Form */}
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             {/* Name field */}
@@ -185,8 +194,13 @@ export function AddressForm({
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem className="flex flex-row-reverse items-center gap-2">
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*']">
+                <FormItem
+                  className={cn(
+                    isEn ? "flex-row-reverse" : "flex-row",
+                    "flex items-center gap-2",
+                  )}
+                >
+                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("tlnNNAqRJ5eIhodZwFSR6")}
                   </FormLabel>
                   <div className="w-full">
@@ -208,8 +222,13 @@ export function AddressForm({
               control={form.control}
               name="city"
               render={({ field }) => (
-                <FormItem className="flex flex-row-reverse items-center gap-2">
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*']">
+                <FormItem
+                  className={cn(
+                    isEn ? "flex-row-reverse" : "flex-row",
+                    "flex items-center gap-2",
+                  )}
+                >
+                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("rm_yPJhwo8iXo3-YwjlcI")}
                   </FormLabel>
                   <div className="w-full">
@@ -232,8 +251,13 @@ export function AddressForm({
               control={form.control}
               name="street"
               render={({ field }) => (
-                <FormItem className="flex flex-row-reverse items-center gap-2">
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*']">
+                <FormItem
+                  className={cn(
+                    isEn ? "flex-row-reverse" : "flex-row",
+                    "flex items-center gap-2",
+                  )}
+                >
+                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("IrsHp_zHBIWL320yKSASk")}
                   </FormLabel>
                   <div className="w-full">
@@ -255,8 +279,13 @@ export function AddressForm({
               control={form.control}
               name="address"
               render={({ field }) => (
-                <FormItem className="flex flex-row-reverse items-center gap-2">
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*']">
+                <FormItem
+                  className={cn(
+                    isEn ? "flex-row-reverse" : "flex-row",
+                    "flex items-center gap-2",
+                  )}
+                >
+                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("X73uyJtHXlL_VOZZYWFyl")}
                   </FormLabel>
                   <div className="w-full">
@@ -278,8 +307,13 @@ export function AddressForm({
               control={form.control}
               name="phoneNumber"
               render={({ field }) => (
-                <FormItem className="flex flex-row-reverse items-center gap-2">
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*']">
+                <FormItem
+                  className={cn(
+                    isEn ? "flex-row-reverse" : "flex-row",
+                    "flex items-center gap-2",
+                  )}
+                >
+                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("bu6dQACtNKhPl5evXvAX7")}
                   </FormLabel>
                   <div className="w-full">
@@ -329,77 +363,107 @@ export function AddressForm({
         className={cn(
           handleEnText(locale),
           isSubmitSuccessful ? "border-green-500" : "border-primary",
-          "w-1/2 space-y-4 border p-6 shadow-md",
+          "w-1/2 space-y-4 border p-6 shadow-md dark:bg-black/30",
         )}
       >
         {/* Name */}
-        <div className="flex flex-row-reverse items-center justify-start gap-5">
-          <label className="font-bold text-primary-foreground">
+        <div
+          className={cn(
+            isEn ? "flex-row-reverse" : "flex-row",
+            "flex items-center justify-start gap-5",
+          )}
+        >
+          <label className="font-bold text-primary-foreground dark:text-white/80">
             {t("tlnNNAqRJ5eIhodZwFSR6")}
           </label>
           <input
             disabled
             readOnly
             value={formData.watchedName}
-            className="bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left"
+            className="bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left dark:bg-transparent dark:text-white"
           />
         </div>
 
         {/* City */}
-        <div className="flex flex-row-reverse items-center justify-start gap-5">
-          <label className="font-bold text-primary-foreground">
+        <div
+          className={cn(
+            isEn ? "flex-row-reverse" : "flex-row",
+            "flex items-center justify-start gap-5",
+          )}
+        >
+          <label className="font-bold text-primary-foreground dark:text-white/80">
             {t("rm_yPJhwo8iXo3-YwjlcI")}
           </label>
           <input
             disabled
             readOnly
             value={formData.watchedCity}
-            className="bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left"
+            className="bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left dark:bg-transparent dark:text-white"
           />
         </div>
 
         {/* Street */}
-        <div className="flex flex-row-reverse items-start justify-start gap-5">
-          <label className="font-bold text-primary-foreground">
+        <div
+          className={cn(
+            isEn ? "flex-row-reverse" : "flex-row",
+            "flex items-center justify-start gap-5",
+          )}
+        >
+          <label className="font-bold text-primary-foreground dark:text-white/80">
             {t("IrsHp_zHBIWL320yKSASk")}
           </label>
           <textarea
             disabled
             readOnly
             value={formData.watchedStreet}
-            className="h-16 resize-none bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left"
+            className="h-16 resize-none bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left dark:bg-transparent dark:text-white"
           />
         </div>
 
         {/* Address */}
-        <div className="flex flex-row-reverse items-start justify-start gap-5">
-          <label className="font-bold text-primary-foreground">
+        <div
+          className={cn(
+            isEn ? "flex-row-reverse" : "flex-row",
+            "flex items-center justify-start gap-5",
+          )}
+        >
+          <label className="font-bold text-primary-foreground dark:text-white/80">
             {t("X73uyJtHXlL_VOZZYWFyl")}
           </label>
           <textarea
             disabled
             readOnly
             value={formData.watchedAddress}
-            className="h-16 resize-none bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left"
+            className="h-16 resize-none bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left dark:bg-transparent dark:text-white"
           />
         </div>
 
         {/* Phone */}
-        <div className="flex flex-row-reverse items-center justify-start gap-5">
-          <label className="font-bold text-primary-foreground">
+        <div
+          className={cn(
+            isEn ? "flex-row-reverse" : "flex-row",
+            "flex items-center justify-start gap-5",
+          )}
+        >
+          <label className="font-bold text-primary-foreground dark:text-white/80">
             {t("bu6dQACtNKhPl5evXvAX7")}
           </label>
           <input
             disabled
             value={formData.watchedPhoneNumber}
-            className="bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left"
+            className="bg-white text-left font-semibold text-primary-foreground/50 placeholder:text-left dark:bg-transparent dark:text-white"
             readOnly
           />
         </div>
 
         {/* Products */}
-        <div className="flex flex-row-reverse items-center justify-start gap-5">
-          <label className="font-bold text-primary-foreground">
+        <div
+          className={cn(
+            isEn ? "flex-row-reverse" : "flex-row",
+            "flex items-center justify-start gap-5",
+          )}
+        >
+          <label className="font-bold text-primary-foreground dark:text-white/80">
             {t("Q53fzcL1aeya68ijr77LG")}
           </label>
           <div className="flex w-full flex-col">
@@ -408,7 +472,7 @@ export function AddressForm({
               <input
                 disabled
                 key={p._id}
-                className="w-full bg-white text-left font-semibold text-primary-foreground/50"
+                className="w-full bg-white text-left font-semibold text-primary-foreground/50 dark:bg-transparent dark:text-white"
                 value={p.data.name.split(" ").slice(0, 4).join(" ")}
                 readOnly // To make it non-editable without using pointer-events
               />

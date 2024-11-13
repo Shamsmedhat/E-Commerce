@@ -73,7 +73,7 @@ export default function OrdersTable() {
         totalOrdersCount={totalOrdersCount}
         isTotalOrdersFetching={isTotalOrdersFetching}
       />
-      <Table className="mb-8 mt-2 rounded-lg border border-primary-foreground/30 shadow-sm">
+      <Table className="mb-8 mt-2 rounded-lg border border-primary-foreground/30 shadow-sm dark:bg-background/20">
         <TableCaption>{t("9GD9qa6frmZv5IVNLnes3")}</TableCaption>
         <TableHeader className="bg-primary-foreground/10">
           <TableRow>

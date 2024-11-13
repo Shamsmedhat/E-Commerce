@@ -14,7 +14,7 @@ export default function HorizontalProductsSliderSkeleton({
     <div
       className={cn(
         locale === "en" ? "items-end" : "items-start",
-        "flex h-[360px] cursor-pointer flex-col justify-between gap-2 p-4 align-middle",
+        "flex h-[360px] cursor-pointer flex-col justify-between gap-2 p-4 align-middle dark:bg-background",
       )}
     >
       {/* product image */}

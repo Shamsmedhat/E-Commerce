@@ -21,9 +21,7 @@ export default function CartContent({ cart }: CartContentProps) {
       <div className="mb-6 flex-grow">
         {/* Heading */}
         <div className="flex items-center justify-between">
-          <Heading className="dark:text-white">
-            {t("_Kg79lEkLCt2SxOaeQJZ2")}
-          </Heading>
+          <Heading>{t("_Kg79lEkLCt2SxOaeQJZ2")}</Heading>
           <ToggleStyleBtn />
         </div>
         {/* List of Cart items */}

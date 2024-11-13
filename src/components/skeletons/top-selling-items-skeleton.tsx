@@ -74,14 +74,8 @@ export default function TopSellingItemsSkeleton() {
           }}
           modules={[Navigation, Autoplay]}
           className="mySwiper"
-          // autoplay={{
-          //   delay: 4000,
-          //   disableOnInteraction: false,
-          // }}
         >
           <ul>
-            {/* top selling products data */}
-
             {skeletonArray.map((p, i) => (
               <SwiperSlide key={i}>
                 <HorizontalProductsSliderSkeleton locale={locale} />
@@ -90,7 +84,7 @@ export default function TopSellingItemsSkeleton() {
           </ul>
 
           {/* next button */}
-          <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent"></div>
+          <div className="absolute left-0 top-0 z-[1] h-full w-[5rem] bg-gradient-to-r from-white to-transparent dark:from-background"></div>
           <div className="swiper-button-next"></div>
         </Swiper>
       </div>

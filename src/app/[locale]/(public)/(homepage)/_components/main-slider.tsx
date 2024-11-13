@@ -33,7 +33,7 @@ export default function MainSlider({ categoriesData }: MainSliderProps) {
   return (
     <section className="container mb-[1rem] block">
       {/* h2 heading */}
-      <Heading className={cn(handleEnText(locale), "dark:text-white")}>
+      <Heading className={cn(handleEnText(locale))}>
         {t("eexZ2Z9kcPg_aoRy2DZ8N")}
       </Heading>
 

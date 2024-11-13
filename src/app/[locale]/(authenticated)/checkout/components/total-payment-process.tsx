@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
 // Translation
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 // Ui
 import {
@@ -18,6 +18,9 @@ import { AddressForm } from "./address-form";
 import { PaymentSelect } from "./payment-select";
 import { usePlaceOrder } from "@/lib/utils/data/orders-data";
 import SuccefullyOrder from "./succefully-order";
+import { MdOutlineDoneOutline, MdOutlinePayment } from "react-icons/md";
+import { FaRegAddressCard } from "react-icons/fa";
+import CheckoutProgressUi from "./checkout-progress-ui";
 
 export default function TotalPaymentProcess(cart: CartData) {
   // Translation
@@ -25,6 +28,8 @@ export default function TotalPaymentProcess(cart: CartData) {
   // State [isForm  valid to display the next btn if its not valid]
   const [isFormValid, setIsFormValid] = useState(true);
 
+  const locale = useLocale();
+  const isEn = locale === "en";
   // Collect order data in the parent
   const [orderData, setOrderData] = useState({
     paymentType: "",
@@ -40,12 +45,16 @@ export default function TotalPaymentProcess(cart: CartData) {
   const { isPlacingOrder, placeOrder, isOrderSuccess } = usePlaceOrder();
 
   return (
-    <Carousel className="w-full" opts={{ watchDrag: false }}>
+    <Carousel className="w-full dark:bg-background" opts={{ watchDrag: false }}>
       {/* Carousel content 3 pages [placing order process] */}
       <CarouselContent>
         {/* Address section first step */}
         <CarouselItem>
-          <Heading className="text-left !text-2xl">
+          <CheckoutProgressUi step={1} />
+
+          <Heading
+            className={cn(isEn ? "text-left" : "text-right", "mx-6 !text-2xl")}
+          >
             {t("X73uyJtHXlL_VOZZYWFyl")}
           </Heading>
           <AddressForm
@@ -57,7 +66,11 @@ export default function TotalPaymentProcess(cart: CartData) {
 
         {/* Payment section second step */}
         <CarouselItem>
-          <Heading className="text-left !text-2xl">
+          <CheckoutProgressUi step={2} />
+
+          <Heading
+            className={cn(isEn ? "text-left" : "text-right", "mx-6 !text-2xl")}
+          >
             {t("-aN40eBi4jXBqrH8rJM27")}
           </Heading>
           <PaymentSelect setOrderData={setOrderData} orderData={orderData} />
@@ -67,13 +80,14 @@ export default function TotalPaymentProcess(cart: CartData) {
         {(orderData.paymentType === "cash" ||
           orderData.paymentType === "card") && (
           <CarouselItem>
+            <CheckoutProgressUi step={3} />
             <SuccefullyOrder />
           </CarouselItem>
         )}
       </CarouselContent>
 
       {/* Next and previous btns */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4 p-8">
         {/* Next btn */}
         <CarouselNext
           className={cn(

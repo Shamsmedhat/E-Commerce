@@ -14,7 +14,7 @@ export default function Heading({ className, children }: Heading) {
       className={cn(
         isPhoneScreen ? "text-2xl" : "text-lg",
         className,
-        "my-4 font-extrabold text-primary-foreground sm:text-3xl",
+        "my-4 font-extrabold text-primary-foreground dark:text-white sm:text-3xl",
       )}
     >
       {children}

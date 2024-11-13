@@ -44,7 +44,7 @@ export default function OrdersStatistics({
 
   return (
     <div className="my-10 flex w-full flex-wrap items-stretch xl:flex-nowrap xl:justify-between">
-      <div className="border-1 mx-1 flex grow flex-col gap-1 rounded-lg border-primary-foreground p-5 shadow-md xl:w-1/5">
+      <div className="border-1 mx-1 flex grow flex-col gap-1 rounded-lg border-primary-foreground p-5 shadow-md dark:bg-background xl:w-1/5">
         <span className="mb-3">
           <FcMoneyTransfer size={30} />
         </span>
@@ -81,7 +81,7 @@ export default function OrdersStatistics({
         }
       </div>
 
-      <div className="border-1 mx-1 flex grow flex-col gap-1 rounded-lg border-primary-foreground p-5 shadow-md xl:w-1/5">
+      <div className="border-1 mx-1 flex grow flex-col gap-1 rounded-lg border-primary-foreground p-5 shadow-md dark:bg-background xl:w-1/5">
         <span className="mb-3">
           <FaBoxOpen size={30} color="#fec03192 " />
         </span>
@@ -100,7 +100,7 @@ export default function OrdersStatistics({
         </CountUp>
       </div>
 
-      <div className="border-1 mx-1 flex grow flex-col gap-1 rounded-lg border-primary-foreground p-5 shadow-md xl:w-1/5">
+      <div className="border-1 mx-1 flex grow flex-col gap-1 rounded-lg border-primary-foreground p-5 shadow-md dark:bg-background xl:w-1/5">
         <span className="mb-3">
           <FaBoxesStacked size={30} color="#007185" />
         </span>
@@ -119,7 +119,7 @@ export default function OrdersStatistics({
         </CountUp>
       </div>
 
-      <div className="border-1 mx-1 flex grow flex-col gap-1 rounded-lg border-primary-foreground p-5 shadow-md xl:w-1/5">
+      <div className="border-1 mx-1 flex grow flex-col gap-1 rounded-lg border-primary-foreground p-5 shadow-md dark:bg-background xl:w-1/5">
         <span className="mb-3 flex justify-between">
           <RiSecurePaymentFill size={30} color="#F03351" />
           <div className="flex items-start justify-center space-x-2">
@@ -143,22 +143,25 @@ export default function OrdersStatistics({
         </CountUp>
       </div>
 
-      <div className="border-1 mx-1 flex grow justify-between gap-1 rounded-lg border-primary-foreground p-5 shadow-md xl:w-1/5">
+      <div className="border-1 mx-1 flex grow justify-between gap-1 rounded-lg border-primary-foreground p-5 shadow-md dark:bg-background xl:w-1/5">
         <div className="flex flex-grow flex-col items-center justify-between border-e-2 border-primary-foreground/10">
           <span className="mb-3">
-            <FaCreditCard size={30} color="#3c3c3b" />
+            <FaCreditCard
+              size={30}
+              className="text-[#3c3c3b] dark:text-white"
+            />
           </span>
-          <span className="font-bold text-primary-foreground">
+          <span className="font-bold text-primary-foreground dark:text-white">
             {t("2EJfsTFsUBGyeOYvKmUob")}
           </span>
           <CountUp
-            className="text-2xl font-bold text-primary-foreground"
+            className="text-2xl font-bold text-primary-foreground dark:text-white"
             end={totalCardOrders!}
           >
             {({ countUpRef }) => (
               <span
                 ref={countUpRef}
-                className="text-2xl font-bold text-[#3c3c3b]"
+                className="text-2xl font-bold text-[#3c3c3b] dark:text-white"
               >
                 {totalCardOrders}
               </span>
@@ -167,19 +170,22 @@ export default function OrdersStatistics({
         </div>
         <div className="flex flex-grow flex-col items-center justify-between">
           <span className="mb-3">
-            <FaMoneyBillWave size={30} color="#3c3c3b" />
+            <FaMoneyBillWave
+              size={30}
+              className="text-[#3c3c3b] dark:text-white"
+            />
           </span>
-          <span className="font-bold text-primary-foreground">
+          <span className="font-bold text-primary-foreground dark:text-white">
             {t("3MP1XlEFf-7KjGY9cHjW1")}
           </span>
           <CountUp
-            className="text-2xl font-bold text-primary-foreground"
+            className="text-2xl font-bold text-primary-foreground dark:text-white"
             end={totalCashOrders!}
           >
             {({ countUpRef }) => (
               <span
                 ref={countUpRef}
-                className="text-2xl font-bold text-[#3c3c3b]"
+                className="text-2xl font-bold text-[#3c3c3b] dark:text-white"
               >
                 {totalCashOrders}
               </span>

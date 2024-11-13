@@ -30,7 +30,7 @@ export default function HorizontalProductsSlider({
     <div
       className={cn(
         locale === "en" ? "items-end" : "items-start",
-        "flex h-[360px] flex-col justify-between gap-2 p-4 align-middle dark:bg-background",
+        "flex h-[430px] min-h-fit flex-col justify-between gap-2 p-4 align-middle dark:bg-background",
       )}
     >
       {/* product image */}
@@ -75,20 +75,22 @@ export default function HorizontalProductsSlider({
         </Link>
 
         {/* product price */}
-        <div className="flex w-full flex-row-reverse items-center">
+        <div className="flex w-full flex-col">
           <div className="flex flex-col">
-            <span className="text-end text-sm text-primary-foreground/70 line-through dark:text-white">
+            <span className="text-sm text-primary-foreground/70 line-through dark:text-white">
               1000 {t("fU01whrYbLGxy6qtBGMEo")}
             </span>
             <span className="font-bold text-primary-foreground dark:text-white">
               {product.price} {t("fU01whrYbLGxy6qtBGMEo")}
             </span>
           </div>
-          <div>
-            <AddToCart productId={product._id!} isSmall={true} />
-          </div>
-          <div>
-            <WishlistButton productId={product._id} />
+          <div className="mt-2 flex items-end gap-2">
+            <div>
+              <AddToCart productId={product._id!} />
+            </div>
+            <div>
+              <WishlistButton productId={product._id} />
+            </div>
           </div>
         </div>
       </div>

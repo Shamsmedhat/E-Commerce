@@ -30,12 +30,12 @@ export default function SuccefullyOrder() {
   }, [router]);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-3">
+    <div className="mt-8 flex flex-col items-center justify-center gap-3">
       <Image src={successfullyOrder} width={250} height={250} alt="ecommerce" />
-      <p className="text-xl font-bold text-primary-foreground">
+      <p className="text-xl font-bold text-primary-foreground dark:text-white/80">
         {t("CNlBca7DecJE6gcQ1LArC")}
       </p>
-      <p className="text-lg font-semibold italic text-primary-foreground/60">
+      <p className="text-lg font-semibold italic text-primary-foreground/60 dark:text-muted-foreground">
         {t("PcAR76KKf_-RPWgxbdrOr")}
       </p>
 

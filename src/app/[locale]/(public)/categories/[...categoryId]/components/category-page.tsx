@@ -160,7 +160,7 @@ export default function CategoryPage({
                       </div>
 
                       {/* Product buttons */}
-                      <div className="my-4 flex items-center gap-3">
+                      <div className="my-4 flex items-end gap-3">
                         <AddToCart productId={p._id!} />
                         <WishlistButton productId={p._id} />
                       </div>

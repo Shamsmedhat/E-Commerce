@@ -9,13 +9,6 @@ import { useLocale } from "next-intl";
 import { usePathname } from "@/navigarion";
 import { Link } from "@/navigarion";
 
-// ui
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "../ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
 export default function Navbar({ categories, pagination }: CategoriesData) {
@@ -42,7 +35,12 @@ export default function Navbar({ categories, pagination }: CategoriesData) {
   }
 
   return (
-    <ul className="flex flex-row-reverse justify-evenly !py-0 text-center md:justify-center">
+    <ul
+      className={cn(
+        isEn ? "flex-row-reverse" : "flex-row",
+        "flex justify-evenly !py-0 text-center md:justify-center",
+      )}
+    >
       {/* map over categories for display its info */}
       {categories?.map((c) => (
         <li key={c._id} className="!mx-0">

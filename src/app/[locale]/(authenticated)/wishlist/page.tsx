@@ -52,7 +52,6 @@ export default async function Cart() {
     return <EmptyWishlist isEn={isEn} />;
   }
 
-  console.log("wishlist", wishlist);
   return (
     <section
       className="container mt-7 flex flex-col md:flex-row"

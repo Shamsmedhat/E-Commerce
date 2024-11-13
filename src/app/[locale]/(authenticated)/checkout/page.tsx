@@ -16,7 +16,7 @@ export default async function Page() {
   if (cart && "statusCode" in cart) {
     if (
       cart.message === "There is no cart for the currently logged in user!" &&
-      cart.statusCode === 500
+      cart.statusCode === 404
     ) {
       return <EmptyCart isEn={isEn} />;
     }

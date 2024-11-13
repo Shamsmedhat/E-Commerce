@@ -74,7 +74,7 @@ export default function TopRatedItems() {
         )}
       >
         {/* title h2 heading */}
-        <Heading className="flex items-center dark:text-white">
+        <Heading className="flex items-center">
           {t("CrU60-woqGv72goIWJC_l")}
         </Heading>
       </div>

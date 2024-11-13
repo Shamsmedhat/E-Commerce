@@ -35,7 +35,7 @@ export default function UserDropmenu() {
       {/*  */}
       <DropdownMenuContent>
         {/* profile */}
-        <DropdownMenuItem>
+        {/* <DropdownMenuItem>
           <Link
             href="/profile"
             className="flex w-full items-center gap-2 rtl:flex-row-reverse"
@@ -43,7 +43,7 @@ export default function UserDropmenu() {
             <LuUser className="h-4 w-4" />
             <span>{t("A2LnQ7Mg56cFySI6-yGyD")}</span>
           </Link>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
 
         {/* cart */}
         <DropdownMenuItem>
@@ -68,7 +68,7 @@ export default function UserDropmenu() {
         </DropdownMenuItem>
 
         {/* settings */}
-        <DropdownMenuItem>
+        {/* <DropdownMenuItem>
           <Link
             href="/profile"
             className="flex w-full items-center gap-2 rtl:flex-row-reverse"
@@ -76,7 +76,7 @@ export default function UserDropmenu() {
             <LuSettings className="h-4 w-4" />
             <span>{t("LADjF8050Hs5EOK91d2We")}</span>
           </Link>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
 
         {/* Logout  */}
         <DropdownMenuItem>

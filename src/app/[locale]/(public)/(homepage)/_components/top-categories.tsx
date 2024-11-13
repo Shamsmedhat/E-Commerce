@@ -44,7 +44,7 @@ export default function TopCategories({
     <section className="container mb-10 flex flex-col gap-8 px-5">
       <div className="flex flex-row-reverse items-center justify-between">
         {/* title h2 heading */}
-        <Heading className={cn(handleEnText(locale), "dark:text-white")}>
+        <Heading className={cn(handleEnText(locale))}>
           {t("4iTgMO7i9qAUoe4dCjRtT")}
         </Heading>
         <div>

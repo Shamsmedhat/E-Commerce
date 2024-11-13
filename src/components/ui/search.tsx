@@ -9,9 +9,9 @@ export interface InputProps
 const Search = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
     return (
-      <div className="flex h-10 items-center overflow-hidden rounded-full border border-input bg-background text-sm ring-offset-background has-[input:disabled]:cursor-not-allowed has-[input:disabled]:opacity-50 has-[input:focus-visible]:outline-none has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-ring has-[input:focus-visible]:ring-offset-2">
+      <div className="flex h-10 items-center overflow-hidden rounded-full border border-input bg-background text-sm ring-offset-background has-[input:disabled]:cursor-not-allowed has-[input:focus-visible]:border-primary/40 has-[input:disabled]:opacity-50 has-[input:focus-visible]:outline-none has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-primary/40 has-[input:focus-visible]:ring-offset-2 dark:border-white/70">
         <span className="ms-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary">
-          <LuSearchCode className="w-5 text-white" />
+          <LuSearchCode className="w-5 text-white dark:text-background" />
         </span>
         <input
           type="search"
