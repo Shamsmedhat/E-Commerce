@@ -176,13 +176,13 @@ export function AddressForm({
     setIsFormValid(false);
   }
   return (
-    <div className="mb-6 flex flex-row-reverse gap-6 p-8 text-right">
+    <div className="mb-6 flex flex-col gap-6 p-4 text-right xsm:p-8 md:flex-row-reverse">
       {/* Editable form to write the delivery address */}
 
       <div
         className={cn(
           handleEnText(locale),
-          "w-1/2 border border-primary-foreground/20 p-6 shadow-md dark:bg-black/30",
+          "border border-primary-foreground/20 p-6 shadow-md dark:bg-black/30 md:w-1/2",
         )}
       >
         {/* Form */}
@@ -200,7 +200,7 @@ export function AddressForm({
                     "flex items-center gap-2",
                   )}
                 >
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
+                  <FormLabel className="w-28 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("tlnNNAqRJ5eIhodZwFSR6")}
                   </FormLabel>
                   <div className="w-full">
@@ -228,7 +228,7 @@ export function AddressForm({
                     "flex items-center gap-2",
                   )}
                 >
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
+                  <FormLabel className="w-28 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("rm_yPJhwo8iXo3-YwjlcI")}
                   </FormLabel>
                   <div className="w-full">
@@ -257,7 +257,7 @@ export function AddressForm({
                     "flex items-center gap-2",
                   )}
                 >
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
+                  <FormLabel className="w-28 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("IrsHp_zHBIWL320yKSASk")}
                   </FormLabel>
                   <div className="w-full">
@@ -285,7 +285,7 @@ export function AddressForm({
                     "flex items-center gap-2",
                   )}
                 >
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
+                  <FormLabel className="w-28 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("X73uyJtHXlL_VOZZYWFyl")}
                   </FormLabel>
                   <div className="w-full">
@@ -313,7 +313,7 @@ export function AddressForm({
                     "flex items-center gap-2",
                   )}
                 >
-                  <FormLabel className="w-20 text-base font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
+                  <FormLabel className="w-28 text-[0.9rem] font-bold text-primary-foreground before:ml-0.5 before:text-red-500 before:content-['*'] dark:text-white/80">
                     {t("bu6dQACtNKhPl5evXvAX7")}
                   </FormLabel>
                   <div className="w-full">
@@ -363,7 +363,7 @@ export function AddressForm({
         className={cn(
           handleEnText(locale),
           isSubmitSuccessful ? "border-green-500" : "border-primary",
-          "w-1/2 space-y-4 border p-6 shadow-md dark:bg-black/30",
+          "space-y-4 border p-6 shadow-md dark:bg-black/30 md:w-1/2",
         )}
       >
         {/* Name */}

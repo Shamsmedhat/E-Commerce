@@ -125,7 +125,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mb-7 space-y-6 p-8"
+        className="mb-7 space-y-6 p-4 md:p-8"
       >
         {/*  Payment methods [credit or debit or cash] */}
         <FormField
@@ -189,9 +189,9 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                         </div>
 
                         {/* Card images section */}
-                        <div className="flex w-full gap-6">
+                        <div className="flex w-full flex-col gap-6 md:flex-row">
                           {/* Visa Card */}
-                          <div className="h-full w-1/2 space-y-5 border border-primary bg-slate-50 p-4 shadow-sm dark:bg-background">
+                          <div className="h-full space-y-5 border border-primary bg-slate-50 p-2 shadow-sm dark:bg-background md:w-1/2 md:p-4">
                             <div className="flex gap-6">
                               <Image
                                 src={visa}
@@ -216,7 +216,7 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                           </div>
 
                           {/* MasterCard */}
-                          <div className="h-full w-1/2 space-y-5 border border-primary bg-slate-50 p-4 shadow-sm dark:bg-background">
+                          <div className="h-full space-y-5 border border-primary bg-slate-50 p-2 shadow-sm dark:bg-background md:w-1/2 md:p-4">
                             <div className="flex gap-6">
                               <Image
                                 src={masterCard}
@@ -264,9 +264,9 @@ export function PaymentSelect({ setOrderData, orderData }: PaymentSelectProps) {
                   onValueChange={field.onChange}
                   className="dark:bg-black/30"
                 >
-                  <div className="flex border border-primary-foreground/20 p-6 shadow-sm">
+                  <div className="flex flex-col border border-primary-foreground/20 p-6 shadow-sm md:flex-row">
                     {/* Free delivery */}
-                    <div className="flex w-1/2 border-spacing-2 flex-col items-start justify-center gap-4 space-x-2 border-r-2 p-3">
+                    <div className="flex border-spacing-2 flex-col items-start justify-center gap-4 space-x-2 border-b-2 border-r-0 p-3 md:w-1/2 md:border-b-0 md:border-r-2">
                       <FormLabel
                         htmlFor="free-delivery"
                         className="flex w-full cursor-pointer items-center justify-start gap-2"

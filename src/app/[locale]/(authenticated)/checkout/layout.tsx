@@ -34,13 +34,13 @@ export default async function CheckoutLayout({
   return (
     <section className="w-full">
       <main className="container my-10 grid grid-cols-3 gap-8">
-        <div className="col-span-1">
+        <div className="col-span-3 xl:col-span-1">
           <CheckoutCartSummary
             cart={cart}
             className="mx-8 bg-white shadow-sm"
           />
         </div>
-        <div className="col-span-2 rounded-lg bg-white shadow-sm">
+        <div className="col-span-3 rounded-lg bg-white shadow-sm xl:col-span-2">
           {children}
         </div>
       </main>

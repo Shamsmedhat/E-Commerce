@@ -38,7 +38,7 @@ export default function Navbar({ categories, pagination }: CategoriesData) {
     <ul
       className={cn(
         isEn ? "flex-row-reverse" : "flex-row",
-        "flex justify-evenly !py-0 text-center md:justify-center",
+        "flex items-center justify-evenly !py-0 text-center md:justify-center",
       )}
     >
       {/* map over categories for display its info */}
