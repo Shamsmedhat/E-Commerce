@@ -4,10 +4,11 @@ import Image from "next/image";
 // ui
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import TabNavContent from "./tab-nav-content";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProductsByCategory } from "@/lib/utils/data/products-data";
 import DealsOfTheDaySkeleton from "@/components/skeletons/deals-of-the-day-skeleton";
 import { useCart } from "@/lib/utils/data/cart-data";
+import { useAppSelector } from "@/hooks/reduxHooks";
 
 // props type
 type CategoriesAndProductsListProp = {

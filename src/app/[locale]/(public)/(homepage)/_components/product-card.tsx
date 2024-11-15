@@ -17,6 +17,8 @@ import { LuHeart, LuScale } from "react-icons/lu";
 import { BsInfoCircle } from "react-icons/bs";
 
 import WishlistButton from "./wishlist-button";
+import { useEffect } from "react";
+import { useAppSelector } from "@/hooks/reduxHooks";
 
 // prop type
 type ProductProps = {
@@ -36,7 +38,6 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
   // is sec and third product to render it differentially
   const isSecAndThirdProduct = i === 1 || i === 2;
 
-  //TODO finish ui mobile
   return (
     <li
       key={productKey || i}
@@ -194,7 +195,6 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
             <div className="flex w-auto items-start justify-start gap-3 xsm:flex-col-reverse sm:flex-row sm:items-end">
               {/* cart btn */}
               <AddToCart productId={p._id!} />
-              {/* <AddToCartServer productId={p._id!} /> */}
 
               <WishlistButton productId={p._id} />
             </div>
