@@ -81,43 +81,40 @@ export default async function Header() {
             <LoginHeaderSection />
 
             {/* cart show if there is a session*/}
-            {session && (
-              <>
-                <li className="flex h-14 items-center justify-center border-e px-6 font-semibold">
-                  {/* Cart btn */}
-                  <Link href="/cart" className="relative">
-                    {numbersOfitemsInCart === 0 ? null : (
-                      <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
-                        {numbersOfitemsInCart}
-                      </span>
-                    )}
 
-                    <LuShoppingCart
-                      size={25}
-                      strokeWidth={1.5}
-                      className="transition-colors hover:text-primary"
-                    />
-                  </Link>
-                </li>
+            <li className="flex h-14 items-center justify-center border-e px-6 font-semibold">
+              {/* Cart btn */}
+              <Link href="/cart" className="relative">
+                {numbersOfitemsInCart === 0 ? null : (
+                  <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
+                    {numbersOfitemsInCart}
+                  </span>
+                )}
 
-                {/* Wishlist btn */}
-                <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
-                  <Link href="/wishlist" className="relative">
-                    {numbersOfitemsInWishlist === 0 ? null : (
-                      <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
-                        {numbersOfitemsInWishlist}
-                      </span>
-                    )}
+                <LuShoppingCart
+                  size={25}
+                  strokeWidth={1.5}
+                  className="transition-colors hover:text-primary"
+                />
+              </Link>
+            </li>
 
-                    <LuHeart
-                      size={25}
-                      strokeWidth={2}
-                      className="sm-h-[25px] h-[20px] transition-colors hover:text-primary"
-                    />
-                  </Link>
-                </li>
-              </>
-            )}
+            {/* Wishlist btn */}
+            <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
+              <Link href="/wishlist" className="relative">
+                {numbersOfitemsInWishlist === 0 ? null : (
+                  <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
+                    {numbersOfitemsInWishlist}
+                  </span>
+                )}
+
+                <LuHeart
+                  size={25}
+                  strokeWidth={2}
+                  className="sm-h-[25px] h-[20px] transition-colors hover:text-primary"
+                />
+              </Link>
+            </li>
 
             {/* colors */}
             <li className="flex h-14 items-center justify-center gap-2 rounded-lg ps-6 font-semibold">
@@ -144,41 +141,37 @@ export default async function Header() {
               <LoginHeaderSection />
 
               {/* cart show if there is a session*/}
-              {session && (
-                <>
-                  <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
-                    <Link href="/cart" className="relative">
-                      {numbersOfitemsInCart === 0 ? null : (
-                        <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
-                          {numbersOfitemsInCart}
-                        </span>
-                      )}
+              <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
+                <Link href="/cart" className="relative">
+                  {numbersOfitemsInCart === 0 ? null : (
+                    <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
+                      {numbersOfitemsInCart}
+                    </span>
+                  )}
 
-                      <LuShoppingCart
-                        size={25}
-                        strokeWidth={1.5}
-                        className="sm-h-[25px] h-[20px] transition-colors hover:text-primary"
-                      />
-                    </Link>
-                  </li>
+                  <LuShoppingCart
+                    size={25}
+                    strokeWidth={1.5}
+                    className="sm-h-[25px] h-[20px] transition-colors hover:text-primary"
+                  />
+                </Link>
+              </li>
 
-                  <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
-                    <Link href="/wishlist" className="relative">
-                      {numbersOfitemsInCart === 0 ? null : (
-                        <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
-                          {numbersOfitemsInCart}
-                        </span>
-                      )}
+              <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
+                <Link href="/wishlist" className="relative">
+                  {numbersOfitemsInCart === 0 ? null : (
+                    <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
+                      {numbersOfitemsInCart}
+                    </span>
+                  )}
 
-                      <LuHeart
-                        size={25}
-                        strokeWidth={1.5}
-                        className="sm-h-[25px] h-[20px] transition-colors hover:text-primary"
-                      />
-                    </Link>
-                  </li>
-                </>
-              )}
+                  <LuHeart
+                    size={25}
+                    strokeWidth={1.5}
+                    className="sm-h-[25px] h-[20px] transition-colors hover:text-primary"
+                  />
+                </Link>
+              </li>
 
               {/* colors */}
               <li className="flex h-6 items-center justify-center gap-2 rounded-lg ps-1 font-semibold sm:h-14 sm:ps-6">

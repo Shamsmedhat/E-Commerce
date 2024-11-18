@@ -1,7 +1,7 @@
 declare global {
   // Define the interface for translations
   interface ProductTranslation {
-    language: string;
+    language: "en" | "ar";
     data: {
       name: string;
       slug: string;

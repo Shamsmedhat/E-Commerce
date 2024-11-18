@@ -165,7 +165,7 @@ export default function ProductCard({ p, i, productKey, isEn }: ProductProps) {
                 !isSecAndThirdProduct &&
                 "flex-col justify-start gap-1",
               // basic style
-              "mt-3 flex items-start dark:text-white xl:mt-0",
+              "mt-3 flex items-end dark:text-white xl:mt-0",
             )}
           >
             {/* Priceing */}

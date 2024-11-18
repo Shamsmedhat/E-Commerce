@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 
 import CartItem from "./cart-item";
 import { useAppSelector } from "@/hooks/reduxHooks";
@@ -11,7 +10,6 @@ type CartListProps = {
 
 export default function CartList({ cart }: CartListProps) {
   const { rowStyle, columnStyle } = useAppSelector((state) => state.cart);
-
   return (
     <ul
       className={cn(

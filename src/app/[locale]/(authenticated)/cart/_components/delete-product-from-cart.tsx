@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {
   Dialog,
@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDeleteProductFromCart } from "@/lib/utils/data/cart-data";
 import { useTranslations } from "next-intl";
+import { getSession } from "next-auth/react"; // Import NextAuth for session checking
 
 type DeleteProductFromCartProps = {
   item: ProductItem;
@@ -29,11 +30,30 @@ export default function DeleteProductFromCart({
   const { deleteProductFromCart, isDeleteingProductFromCart } =
     useDeleteProductFromCart();
 
-  function handleDeleteFromCart(productId: string) {
+  // Helper function to remove product from localStorage
+  const removeFromLocalStorage = (productId: string) => {
+    const cart = localStorage.getItem("guest-cart");
+    if (cart) {
+      const parsedCart = JSON.parse(cart);
+      const updatedCart = parsedCart.filter(
+        (cartItem: any) => cartItem.product !== productId,
+      );
+      localStorage.setItem("guest-cart", JSON.stringify(updatedCart));
+    }
+  };
+
+  async function handleDeleteFromCart(productId: string) {
     // Close the dialog immediately
     setIsOpen(false);
 
-    deleteProductFromCart(productId);
+    const session = await getSession(); // Check for session
+    if (session) {
+      // User is logged in, delete from server-side cart
+      deleteProductFromCart(productId);
+    } else {
+      // User is not logged in, delete from localStorage
+      removeFromLocalStorage(productId);
+    }
   }
 
   return (
@@ -50,6 +70,7 @@ export default function DeleteProductFromCart({
             type="submit"
             className="bg-red-600 text-white hover:bg-red-600/70"
             onClick={() => handleDeleteFromCart(item.product._id)}
+            disabled={isDeleteingProductFromCart} // Disable button while deleting
           >
             {t("cH44jtWKXtfVfaS0B6a85")}
           </Button>

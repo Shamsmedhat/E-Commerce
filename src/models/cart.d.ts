@@ -31,12 +31,12 @@ declare global {
   // Cart data model
   interface CartData {
     cart: {
-      _id: string;
+      _id?: string;
       user: string;
       totalPrice: number;
       items: ProductItem[];
-      createdAt: string;
-      updatedAt: string;
+      createdAt?: string;
+      updatedAt?: string;
     };
   }
 }

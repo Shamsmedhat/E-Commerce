@@ -14,13 +14,15 @@ const publicPages = [
   "/categories",
   "/categories/[categoryId]",
   "/product/[product/Id]",
+  "/cart",
+  "wishlist",
 ];
 
 // accessible for only admins & owners
 const adminPages = ["/dashboard"];
 
 // accessible for only users
-const userPages = ["/cart", "/profile", "/checkout", "/orders", "wishlist"];
+const userPages = ["/profile", "/checkout", "/orders"];
 
 // handling translations
 const handleI18nRouting = createMiddleware(routing);

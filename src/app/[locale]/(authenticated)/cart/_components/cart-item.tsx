@@ -12,6 +12,8 @@ import DeleteProductFromCart from "./delete-product-from-cart";
 import { useSubCategory } from "@/lib/utils/data/sub-category-data";
 import WishlistButton from "@/app/[locale]/(public)/(homepage)/_components/wishlist-button";
 import { formatToCurrency } from "@/lib/utils/helpers";
+import { useSession } from "next-auth/react";
+import QuantityGuestCartBtn from "@/components/common/quantity-guest-cart-btn";
 
 type CartItemProps = {
   item: ProductItem;
@@ -24,21 +26,28 @@ export default function CartItem({ item }: CartItemProps) {
 
   const locale = useLocale();
   const isEn = locale === "en";
-
+  const session = useSession();
   const [productPrice, setProductPrice] = useState(item.price);
+
+  const subCategoryId = !session.data
+    ? item.product.subCategory._id
+    : item.product.subCategory;
+  const categoryId = !session.data
+    ? item.product.category._id
+    : item.product.category;
   const {
     subCategory,
     isError: isSubCategoryError,
     isFetching: isSubCategoryFetching,
     isPending: isSubCategoryPending,
-  } = useSubCategory(item.product.subCategory);
+  } = useSubCategory(subCategoryId);
 
   const {
     category,
     isError: isCategoryError,
     isFetching: isCategoryFetching,
     isPending: isCategoryPending,
-  } = useCategory(item.product.category);
+  } = useCategory(categoryId);
 
   return (
     <li
@@ -111,19 +120,31 @@ export default function CartItem({ item }: CartItemProps) {
           )}
         >
           {/* product quantity */}
-          <QuantityBtn
-            className={rowStyle && "mr-12"}
-            currentQty={item.quantity}
-            productPrice={productPrice}
-            setProductPrice={setProductPrice}
-            productId={item.product._id}
-            stock={item.product.stock}
-          />
+          {!session.data ? (
+            <QuantityGuestCartBtn
+              className={rowStyle && "mr-12"}
+              currentQty={item.quantity}
+              productPrice={productPrice}
+              setProductPrice={setProductPrice}
+              productId={item.product._id}
+              stock={item.product.stock}
+            />
+          ) : (
+            <QuantityBtn
+              className={rowStyle && "mr-12"}
+              currentQty={item.quantity}
+              productPrice={productPrice}
+              setProductPrice={setProductPrice}
+              productId={item.product._id}
+              stock={item.product.stock}
+            />
+          )}
 
           {/* product price */}
           <div className={rowStyle && "mr-12"}>
             <span className="text-xl font-bold">
-              {formatToCurrency(Number(productPrice), isEn ? "en-EG" : "ar-EG")}
+              {/* {formatToCurrency(Number(productPrice), isEn ? "en-EG" : "ar-EG")} */}
+              {productPrice}
             </span>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import {
   useMutation,
+  useQueries,
   useQuery,
   useQueryClient,
   UseQueryResult,
@@ -29,6 +30,22 @@ export async function getProductByIdData(productId: string): Promise<Product> {
     console.error("Error in getProductByIdData:", error);
     throw new Error(`Data retrieval error: ${error}`);
   }
+}
+
+export function useProductsByIds(productIds: string[]) {
+  const queryConfigs = productIds.map((id) => ({
+    queryKey: ["product-by-id", id],
+    queryFn: () => getProductByIdAction(id),
+    enabled: !!id, // Only fetch if ID exists
+  }));
+
+  const results = useQueries({ queries: queryConfigs }); // Wrap the array in an object
+
+  const data = results.map((query) => query.data); // Extract data
+  const isLoading = results.some((query) => query.isLoading); // Check if any are loading
+  const isError = results.some((query) => query.isError); // Check for errors
+
+  return { data, isLoading, isError };
 }
 
 // using useQuery get the products based on the category selected function recive category name

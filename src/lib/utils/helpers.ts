@@ -75,6 +75,7 @@ export const handleSignOutToaster = () => {
 export const handleCreateUserToaster = () => {
   localStorage.setItem("showToast", "createUser");
 };
+
 export const handleDeleteUserToaster = () => {
   localStorage.setItem("showToast", "deleteUser");
 };
@@ -91,3 +92,24 @@ export function formatToCurrency(
     maximumFractionDigits: 2,
   }).format(value);
 }
+
+// Helper function to handle localStorage
+export const updateLocalStorageCart = (productId: string, quantity: number) => {
+  const storedCart = JSON.parse(localStorage.getItem("guest-cart") || "[]");
+
+  // Check if the product already exists in the cart
+  const existingProduct = storedCart.find(
+    (item: { product: string; quantity: number }) => item.product === productId,
+  );
+
+  if (existingProduct) {
+    // Update quantity if the product exists
+    existingProduct.quantity += quantity;
+  } else {
+    // Add new product to the cart
+    storedCart.push({ product: productId, quantity });
+  }
+
+  // Save updated cart back to localStorage
+  localStorage.setItem("guest-cart", JSON.stringify(storedCart));
+};
