@@ -25,11 +25,32 @@ export function useCart() {
 }
 
 // using useQuery get the products based on the category selected function recive category name and locale
+// export function useAddToCart(usage = "cart") {
+//   const queryClient = useQueryClient();
+//   const { mutate: addToCart, isPending: isAddingToCart } = useMutation({
+//     mutationFn: async (productData: { product: string; quantity: number }) => {
+//       addToCartAction(productData);
+//     },
+//     onSuccess: () => {
+//       usage === "cart" &&
+//         toast.success("Product has been added to the cart successfully.");
+//       usage === "quantity" &&
+//         toast.success("The quantity of the product has been changed.");
+
+//       queryClient.invalidateQueries({ queryKey: ["cart"] });
+//     },
+//     onError: (err) => {
+//       toast.error(err.message);
+//     },
+//   });
+
+//   return { addToCart, isAddingToCart };
+// }
 export function useAddToCart(usage = "cart") {
   const queryClient = useQueryClient();
-  const { mutate: addToCart, isPending: isAddingToCart } = useMutation({
+  const { mutateAsync: addToCart, isPending: isAddingToCart } = useMutation({
     mutationFn: async (productData: { product: string; quantity: number }) => {
-      addToCartAction(productData);
+      return addToCartAction(productData); // Assuming addToCartAction returns a promise
     },
     onSuccess: () => {
       usage === "cart" &&
@@ -44,7 +65,21 @@ export function useAddToCart(usage = "cart") {
     },
   });
 
-  return { addToCart, isAddingToCart };
+  // Function to handle array of objects
+  const addMultipleToCart = async (
+    productDataArray: { product: string; quantity: number }[],
+  ) => {
+    try {
+      await Promise.all(
+        productDataArray.map((productData) => addToCart(productData)),
+      );
+      toast.success("All products have been added to the cart successfully.");
+    } catch (error) {
+      toast.error("An error occurred while adding products to the cart.");
+    }
+  };
+
+  return { addToCart, addMultipleToCart, isAddingToCart };
 }
 
 // using useQuery get the products based on the category selected function recive category name and locale

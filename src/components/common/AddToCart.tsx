@@ -384,6 +384,7 @@ export default function AddToCart({
       dispatch(addToGuestCart({ product: productId, quantity }));
 
       setIsProductAddedToCart(true);
+      window.dispatchEvent(new Event("storage"));
     }
   }
 

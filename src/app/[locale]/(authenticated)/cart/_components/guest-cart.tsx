@@ -4,37 +4,14 @@ import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { useProductsByIds } from "@/lib/utils/data/products-data";
 import CartContent from "./cart-content";
+import EmptyCart from "./empty-cart";
+import { useLocale } from "next-intl";
+import { useGuestCart } from "@/hooks/use-guest-cart";
 
 export default function GuestCart() {
-  const [guestCart, setGuestCart] = useState([]); // Initialize state for guest cart
-
-  useEffect(() => {
-    // Function to handle loading cart data from localStorage
-    const loadCartFromLocalStorage = () => {
-      if (typeof window !== "undefined") {
-        const storedCart = JSON.parse(
-          localStorage.getItem("guest-cart") || "[]",
-        );
-        setGuestCart(storedCart);
-      }
-    };
-
-    // Initial load
-    loadCartFromLocalStorage();
-
-    // Listen to storage changes
-    const handleStorageChange = () => {
-      loadCartFromLocalStorage();
-    };
-
-    // Add event listener for localStorage changes
-    window.addEventListener("storage", handleStorageChange);
-
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
+  const locale = useLocale();
+  const isEn = locale === "en";
+  const guestCart = useGuestCart();
 
   const productIds = guestCart.map(
     (item: { product: string; quantity: number }) => item.product,
@@ -100,6 +77,9 @@ export default function GuestCart() {
     },
   };
 
+  if (guestCart.length === 0) {
+    return <EmptyCart isEn={isEn} />;
+  }
   return (
     <section className="container my-10 flex flex-col lg:flex-row">
       <CartContent cart={guestCartData} />

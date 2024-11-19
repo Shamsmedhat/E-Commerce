@@ -19,6 +19,7 @@ import Navbar from "./nav-bar";
 import { getCartAction } from "@/lib/actions/cart-actions";
 import { getCategoriesAction } from "@/lib/actions/categories-actions";
 import { getWishlistAction } from "@/lib/actions/wishlist.actions";
+import CartIcone from "./cart-icone";
 
 export default async function Header() {
   // translation
@@ -79,26 +80,11 @@ export default async function Header() {
             {/* user info or auth section*/}
             {/* li is inside for making some conditional rendering */}
             <LoginHeaderSection />
-
             {/* cart show if there is a session*/}
-
             <li className="flex h-14 items-center justify-center border-e px-6 font-semibold">
               {/* Cart btn */}
-              <Link href="/cart" className="relative">
-                {numbersOfitemsInCart === 0 ? null : (
-                  <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
-                    {numbersOfitemsInCart}
-                  </span>
-                )}
-
-                <LuShoppingCart
-                  size={25}
-                  strokeWidth={1.5}
-                  className="transition-colors hover:text-primary"
-                />
-              </Link>
+              <CartIcone numbersOfitemsInCart={numbersOfitemsInCart} />
             </li>
-
             {/* Wishlist btn */}
             <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
               <Link href="/wishlist" className="relative">
@@ -115,13 +101,11 @@ export default async function Header() {
                 />
               </Link>
             </li>
-
             {/* colors */}
             <li className="flex h-14 items-center justify-center gap-2 rounded-lg ps-6 font-semibold">
               {/* <ColorSelector /> */}
               <ModeToggler />
             </li>
-
             {/* lang */}
             <li className="ms-4 flex cursor-pointer items-center justify-center gap-2">
               <LangBtn />

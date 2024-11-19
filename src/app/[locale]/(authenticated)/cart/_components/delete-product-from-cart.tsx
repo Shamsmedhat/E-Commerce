@@ -53,6 +53,7 @@ export default function DeleteProductFromCart({
     } else {
       // User is not logged in, delete from localStorage
       removeFromLocalStorage(productId);
+      window.dispatchEvent(new Event("storage"));
     }
   }
 

@@ -1,14 +1,14 @@
+"use client";
 import Image from "next/image";
 
 // navigation
 import { Link } from "@/navigarion";
 
 // translation
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 // ui
 import Heading from "@/components/common/Heading";
-import ToggleStyleBtn from "@/components/common/ToggleStyleBtn";
 
 // image
 import emptyCartImg from "@/../public/assets/empty cart.webp";
@@ -16,9 +16,9 @@ import emptyCartImg from "@/../public/assets/empty cart.webp";
 // icone
 import { GoArrowUpRight } from "react-icons/go";
 
-export default async function EmptyCart({ isEn }: { isEn: boolean }) {
+export default function EmptyCart({ isEn }: { isEn: boolean }) {
   // translation
-  const t = await getTranslations();
+  const t = useTranslations();
 
   return (
     <section

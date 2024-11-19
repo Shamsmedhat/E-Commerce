@@ -27,13 +27,9 @@ export default async function Cart() {
 
   // Initialize cart data variable
   let cart;
-  console.log(session);
   if (!session) {
-    console.log(1);
     return <GuestCart />;
   } else {
-    console.log(2);
-
     try {
       // Attempt to get cart data
       cart = await getCartAction();

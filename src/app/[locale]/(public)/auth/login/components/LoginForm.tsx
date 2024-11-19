@@ -26,6 +26,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/navigarion";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useGuestCart } from "@/hooks/use-guest-cart";
+import { useAddToCart } from "@/lib/utils/data/cart-data";
 
 export default function LoginForm({ session }: { session: Session | null }) {
   const t = useTranslations();
@@ -34,6 +36,15 @@ export default function LoginForm({ session }: { session: Session | null }) {
   // navigation
   const router = useRouter();
   const searchParams = useSearchParams();
+  const guestCart = useGuestCart();
+  const { addMultipleToCart } = useAddToCart();
+
+  const guestCartData = guestCart.map((p) => {
+    return {
+      product: p.product,
+      quantity: p.quantity,
+    };
+  });
 
   // state if the credentials is incorrect
   const [credentialsIncorrect, setCredentialsIncorrect] = useState<
@@ -75,9 +86,9 @@ export default function LoginForm({ session }: { session: Session | null }) {
 
         // then show the toaster
         handleSignInToaster();
-
         // refresh to show the cart - rerender and check if there is a session
         router.refresh();
+        guestCart.length === 0 ? null : addMultipleToCart(guestCartData);
       } else {
         // if the credentials is incorrect
         setCredentialsIncorrect(res?.error);
