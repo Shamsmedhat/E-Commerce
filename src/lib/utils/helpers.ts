@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { getCartAction } from "../actions/cart-actions";
 import { ROLE } from "../constants/roles";
 
@@ -109,6 +110,7 @@ export const updateLocalStorageCart = (productId: string, quantity: number) => {
     // Add new product to the cart
     storedCart.push({ product: productId, quantity });
   }
+  toast.success("Product has been added to the cart successfully.");
 
   // Save updated cart back to localStorage
   localStorage.setItem("guest-cart", JSON.stringify(storedCart));

@@ -9,9 +9,10 @@ import {
   useQueryClient,
   UseQueryResult,
 } from "@tanstack/react-query";
+import { Session } from "next-auth";
 import { toast } from "react-toastify";
 
-export function useCart() {
+export function useCart(session: Session) {
   const {
     data: cart,
     isFetching,
@@ -20,6 +21,7 @@ export function useCart() {
   }: UseQueryResult<CartData> = useQuery({
     queryKey: ["cart"],
     queryFn: () => getCartAction(),
+    enabled: !!session,
   });
   return { cart, isFetching, isError, isPending };
 }
@@ -73,7 +75,7 @@ export function useAddToCart(usage = "cart") {
       await Promise.all(
         productDataArray.map((productData) => addToCart(productData)),
       );
-      toast.success("All products have been added to the cart successfully.");
+      // toast.success("All products have been added to the cart successfully.");
     } catch (error) {
       toast.error("An error occurred while adding products to the cart.");
     }

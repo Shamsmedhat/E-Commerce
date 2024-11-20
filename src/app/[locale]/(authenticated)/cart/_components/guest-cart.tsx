@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { useProductsByIds } from "@/lib/utils/data/products-data";
 import CartContent from "./cart-content";
