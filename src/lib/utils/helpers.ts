@@ -115,3 +115,27 @@ export const updateLocalStorageCart = (productId: string, quantity: number) => {
   // Save updated cart back to localStorage
   localStorage.setItem("guest-cart", JSON.stringify(storedCart));
 };
+
+// Helper function to handle localStorage
+export const updateLocalStorageWishlist = (productId: string) => {
+  const storedWishlist = JSON.parse(
+    localStorage.getItem("guest-wishlist") || "[]",
+  );
+
+  // Check if the product already exists in the cart
+  const existingProduct = storedWishlist.find(
+    (item: { product: string }) => item.product === productId,
+  );
+
+  if (existingProduct) {
+    // Update quantity if the product exists
+    toast.info("Product already exists in your wishlist.");
+  } else {
+    // Add new product to the cart
+    storedWishlist.push({ product: productId });
+  }
+  toast.success("Product has been added to your wishlist successfully.");
+
+  // Save updated cart back to localStorage
+  localStorage.setItem("guest-wishlist", JSON.stringify(storedWishlist));
+};

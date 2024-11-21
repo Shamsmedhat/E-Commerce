@@ -11,6 +11,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { useSubCategory } from "@/lib/utils/data/sub-category-data";
 import DeleteFromWishlist from "./delete-from-wishlist";
 import AddToCart from "@/components/common/AddToCart";
+import { useSession } from "next-auth/react";
 
 type WishlistItemProps = {
   item: WishlistItem;
@@ -20,23 +21,24 @@ export default function WishlistItem({ item }: WishlistItemProps) {
   const t = useTranslations();
 
   const { rowStyle, columnStyle } = useAppSelector((state) => state.cart);
-
+  const { data: session, status } = useSession();
   const locale = useLocale();
   const isEn = locale === "en";
-
+  const subCategoryId = !session ? item.subCategory._id : item.subCategory;
+  const categoryId = !session ? item.category._id : item.category;
   const {
     subCategory,
     isError: isSubCategoryError,
     isFetching: isSubCategoryFetching,
     isPending: isSubCategoryPending,
-  } = useSubCategory(item.subCategory);
+  } = useSubCategory(subCategoryId);
 
   const {
     category,
     isError: isCategoryError,
     isFetching: isCategoryFetching,
     isPending: isCategoryPending,
-  } = useCategory(item.category);
+  } = useCategory(categoryId);
 
   return (
     <li

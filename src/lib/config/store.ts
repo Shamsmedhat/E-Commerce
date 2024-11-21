@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { cartSlice } from "../features/cart/cartSlice";
 import { shippingFeesSlice } from "../features/checkout/shipping-fees";
 import { guestCartSlice } from "../features/cart/guest-cart-slice";
+import { guestWishlistSlice } from "../features/wishlist/guest-wishlist-slice";
 
 export const makeStore = () => {
   return configureStore({
@@ -9,6 +10,7 @@ export const makeStore = () => {
       cart: cartSlice.reducer,
       shippingFees: shippingFeesSlice.reducer,
       guestCart: guestCartSlice.reducer,
+      guestWishlist: guestWishlistSlice.reducer,
     },
   });
 };

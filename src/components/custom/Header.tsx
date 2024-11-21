@@ -19,7 +19,8 @@ import Navbar from "./nav-bar";
 import { getCartAction } from "@/lib/actions/cart-actions";
 import { getCategoriesAction } from "@/lib/actions/categories-actions";
 import { getWishlistAction } from "@/lib/actions/wishlist.actions";
-import CartIcone from "./cart-icone";
+import CartIcone from "./cart-icon";
+import WishlistIcon from "./wishlist-icon";
 
 export default async function Header() {
   // translation
@@ -87,19 +88,9 @@ export default async function Header() {
             </li>
             {/* Wishlist btn */}
             <li className="flex h-7 items-center justify-center border-e px-1 font-semibold sm:h-14 sm:px-6">
-              <Link href="/wishlist" className="relative">
-                {numbersOfitemsInWishlist === 0 ? null : (
-                  <span className="absolute right-0 top-1 flex aspect-square min-h-4 min-w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-primary p-1 text-xs text-white dark:text-background">
-                    {numbersOfitemsInWishlist}
-                  </span>
-                )}
-
-                <LuHeart
-                  size={25}
-                  strokeWidth={2}
-                  className="sm-h-[25px] h-[20px] transition-colors hover:text-primary"
-                />
-              </Link>
+              <WishlistIcon
+                numbersOfitemsInWishlist={numbersOfitemsInWishlist}
+              />
             </li>
             {/* colors */}
             <li className="flex h-14 items-center justify-center gap-2 rounded-lg ps-6 font-semibold">

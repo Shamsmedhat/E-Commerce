@@ -19,14 +19,14 @@ declare global {
         name: string;
         slug: string;
         overview: string;
-        details: {
+        details?: {
           model: string;
         };
       };
       _id: string;
     };
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
   }
   // Cart data model
   interface WishlistData {

@@ -26,15 +26,16 @@ export default function CartItem({ item }: CartItemProps) {
 
   const locale = useLocale();
   const isEn = locale === "en";
-  const session = useSession();
+  const { data: session, status } = useSession();
   const [productPrice, setProductPrice] = useState(item.price);
 
-  const subCategoryId = !session.data
+  const subCategoryId = !session
     ? item.product.subCategory._id
     : item.product.subCategory;
-  const categoryId = !session.data
+  const categoryId = !session
     ? item.product.category._id
     : item.product.category;
+
   const {
     subCategory,
     isError: isSubCategoryError,
@@ -120,7 +121,7 @@ export default function CartItem({ item }: CartItemProps) {
           )}
         >
           {/* product quantity */}
-          {!session.data ? (
+          {!session ? (
             <QuantityGuestCartBtn
               className={rowStyle && "mr-12"}
               currentQty={item.quantity}

@@ -9,9 +9,10 @@ import {
   useQueryClient,
   UseQueryResult,
 } from "@tanstack/react-query";
+import { Session } from "next-auth";
 import { toast } from "react-toastify";
 
-export function useWishlist() {
+export function useWishlist(session: Session) {
   const {
     data: wishlist,
     isFetching,
@@ -20,6 +21,7 @@ export function useWishlist() {
   }: UseQueryResult<WishlistData> = useQuery({
     queryKey: ["wishlist"],
     queryFn: () => getWishlistAction(),
+    enabled: !!session,
   });
 
   return { wishlist, isFetching, isError, isPending };

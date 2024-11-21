@@ -30,7 +30,7 @@ export default function DeleteProductFromCart({
   const { deleteProductFromCart, isDeleteingProductFromCart } =
     useDeleteProductFromCart();
 
-  // Helper function to remove product from localStorage
+  //todo [reusable] Helper function to remove product from localStorage
   const removeFromLocalStorage = (productId: string) => {
     const cart = localStorage.getItem("guest-cart");
     if (cart) {

@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useDeleteFromWishlist } from "@/lib/utils/data/wishlist-data";
+import { useSession } from "next-auth/react";
 
 type DeleteFromWishlistProps = {
   item: WishlistItem;
@@ -32,12 +33,30 @@ export default function DeleteFromWishlist({
     isRemovingFromWishlistSuccess,
     removeFromWishlist,
   } = useDeleteFromWishlist();
+  const { data: session, status } = useSession();
 
+  const removeFromLocalStorage = (productId: string) => {
+    const wishlist = localStorage.getItem("guest-wishlist");
+    if (wishlist) {
+      const stoardWishlist = JSON.parse(wishlist);
+      const updatedWishlist = stoardWishlist.filter(
+        (wishlistItem: any) => wishlistItem.product !== productId,
+      );
+      localStorage.setItem("guest-wishlist", JSON.stringify(updatedWishlist));
+    }
+  };
   function handleDeleteFromWishlist(productId: string) {
     // Close the dialog immediately
     setIsOpen(false);
 
-    removeFromWishlist(productId);
+    if (session) {
+      // User is logged in, delete from server-side cart
+      removeFromWishlist(productId);
+    } else {
+      // User is not logged in, delete from localStorage
+      removeFromLocalStorage(productId);
+      window.dispatchEvent(new Event("storage"));
+    }
   }
 
   return (
