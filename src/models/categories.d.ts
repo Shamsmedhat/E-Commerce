@@ -28,6 +28,7 @@ declare global {
   }
   // Category model with subCategories as an array of SubCategory
   interface Category {
+    [x: string]: any; // Define the interface for translations
     _id: Key | null | undefined;
     translations: any;
     category: SingelCategory;
