@@ -16,7 +16,8 @@ export default function TopRatingItem({
   product,
   locale,
 }: {
-  product: Product;
+  //todo
+  product: Product | any;
   locale: string;
 }) {
   const t = useTranslations();
