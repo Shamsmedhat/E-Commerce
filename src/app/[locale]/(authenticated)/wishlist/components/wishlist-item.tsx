@@ -14,7 +14,8 @@ import AddToCart from "@/components/common/AddToCart";
 import { useSession } from "next-auth/react";
 
 type WishlistItemProps = {
-  item: WishlistItem;
+  //todo
+  item: WishlistItem | any;
 };
 
 export default function WishlistItem({ item }: WishlistItemProps) {
