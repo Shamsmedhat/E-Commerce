@@ -10,7 +10,8 @@ export default async function Page() {
   const locale = await getLocale();
   const isEn = locale === "en";
   // Get cart data
-  const cart = await getCartAction();
+  //todo
+  const cart: any = await getCartAction();
 
   // If received cart and there is a status code in the cart that's signed for an error we check if this error is 401 in validate-session
   if (cart && "statusCode" in cart) {
