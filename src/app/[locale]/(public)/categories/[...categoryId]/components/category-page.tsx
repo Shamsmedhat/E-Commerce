@@ -2,11 +2,9 @@
 import Image from "next/image";
 
 // Icons
-import { LuHeart, LuScale } from "react-icons/lu";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 // Ui
-import { ComboboxDemo } from "../../../../../../components/ui/combobox";
 import TopSellingItems from "@/app/[locale]/(public)/(homepage)/_components/top-selling-items";
 import AddToCart from "../../../../../../components/common/AddToCart";
 
@@ -15,11 +13,11 @@ import { Link } from "@/navigarion";
 
 // Translations
 import RatingStars from "@/components/common/RatingStars";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { useLocale, useTranslations } from "next-intl";
+import WishlistButton from "../../../(homepage)/_components/wishlist-button";
 import AsideSortSection from "./aside-sort-section";
 import SmallScreenSortSection from "./small-screen-sort-section";
-import { Sheet, SheetTrigger } from "@/components/ui/sheet";
-import WishlistButton from "../../../(homepage)/_components/wishlist-button";
 
 // Types
 type CategoryPageProps = {
@@ -37,7 +35,8 @@ export default function CategoryPage({
   const t = useTranslations();
   const locale = useLocale();
   const categoryName = products.map(
-    (p) => p.category?.translations.data.name,
+    //todo
+    (p) => (p.category as any)?.translations.data.name,
   )[0];
 
   // Variables
@@ -125,7 +124,8 @@ export default function CategoryPage({
                     >
                       {/* Sub category name */}
                       <span className="text-sm font-bold text-primary-foreground/70 dark:text-white">
-                        {p.subCategory?.translations.data.name}
+                        {/* todo */}
+                        {(p.subCategory as any)?.translations.data.name}
                       </span>
 
                       {/* Rating */}
