@@ -12,7 +12,7 @@ import {
 import { Session } from "next-auth";
 import { toast } from "react-toastify";
 
-export function useWishlist(session: Session) {
+export function useWishlist(session: Session | null) {
   const {
     data: wishlist,
     isFetching,
