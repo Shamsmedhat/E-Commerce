@@ -29,12 +29,12 @@ export default function CartItem({ item }: CartItemProps) {
   const { data: session, status } = useSession();
   const [productPrice, setProductPrice] = useState(item.price);
 
-  const subCategoryId = !session
-    ? item.product.subCategory._id
-    : item.product.subCategory;
-  const categoryId = !session
-    ? item.product.category._id
-    : item.product.category;
+  const subCategoryId =
+    typeof item.product.subCategory === "object"
+      ? item.product.subCategory._id
+      : item.product.subCategory;
+
+  const categoryId = item.product.category;
 
   const {
     subCategory,

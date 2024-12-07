@@ -15,7 +15,7 @@ declare global {
     product: {
       _id: string;
       category: string;
-      subCategory: string;
+      subCategory: string | { _id: string };
       brand: string;
       cover: string;
       price: number;
