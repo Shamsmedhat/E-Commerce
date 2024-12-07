@@ -79,6 +79,7 @@ export default function GuestCart() {
   if (guestCart.length === 0) {
     return <EmptyCart isEn={isEn} />;
   }
+
   return (
     <section className="container my-10 flex flex-col lg:flex-row">
       <CartContent cart={guestCartData} />

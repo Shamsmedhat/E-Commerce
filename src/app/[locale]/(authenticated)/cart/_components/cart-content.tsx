@@ -9,7 +9,8 @@ import CartSummary from "./cart-summary";
 import { useTranslations } from "next-intl";
 
 type CartContentProps = {
-  cart: CartData;
+  //todo
+  cart: CartData | any;
 };
 
 export default function CartContent({ cart }: CartContentProps) {
