@@ -7,7 +7,7 @@ import React, { useCallback } from "react";
 
 type SubCategorySortProps = {
   key: string;
-  product: Product;
+  product: Product | any;
 };
 
 export default function BrandsSort({ key, product }: SubCategorySortProps) {
