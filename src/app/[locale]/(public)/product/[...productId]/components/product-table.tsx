@@ -1,16 +1,14 @@
 "use client";
 
-import RatingStars from "@/components/common/RatingStars";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import { PRODUCT_DATA } from "@/models/products";
-import { LuUserCircle } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
 
-import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
+import { useLocale, useTranslations } from "next-intl";
 import { AddReviewForm } from "./add-review-form";
-import { getSession, useSession } from "next-auth/react";
 import UserReview from "./user-review";
 
 type ProductTableProps = {
@@ -110,7 +108,8 @@ export default function ProductTable({
                 {t("r8AmQp0KoM6Aeum5viXK-")}:{" "}
               </span>
               <span className="dark:text-slate-50/50">
-                {brand?.translations.data.name}
+                {/* todo */}
+                {(brand as any)?.translations.data.name}
               </span>
             </li>
             <li className="line-hieght flex items-center ps-2 font-semibold leading-8 text-primary-foreground/70 md:gap-40">
@@ -118,7 +117,8 @@ export default function ProductTable({
                 {t("zOItEysA70YIzajHcTuYo")}:{" "}
               </span>
               <span className="dark:text-slate-50/50">
-                {category?.translations.data.name}
+                {/* todo */}
+                {(category as any)?.translations.data.name}
               </span>
             </li>
             <li className="line-hieght flex items-center bg-primary-foreground/5 ps-2 font-semibold leading-8 text-primary-foreground/70 dark:bg-white/5 md:gap-40">
@@ -126,7 +126,8 @@ export default function ProductTable({
                 {t("dKK2yEL4B-GcSul9ZivDx")}:{" "}
               </span>
               <span className="dark:text-slate-50/50">
-                {subCategory?.translations.data.name}
+                {/* todo */}
+                {(subCategory as any)?.translations.data.name}
               </span>
             </li>
           </ul>
