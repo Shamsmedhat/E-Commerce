@@ -1,11 +1,8 @@
 import { getCartAction } from "@/lib/actions/cart-actions";
-import CartSummary from "../cart/_components/cart-summary";
 import EmptyCart from "../cart/_components/empty-cart";
 import ValidateResponse from "@/components/custom/validate-response";
 import { getLocale, getTranslations } from "next-intl/server";
-import { FaRegAddressCard } from "react-icons/fa";
-import { MdOutlinePayment } from "react-icons/md";
-import { MdOutlineDoneOutline } from "react-icons/md";
+
 import CheckoutCartSummary from "./components/checkout-cart-summary";
 
 export default async function CheckoutLayout({
@@ -18,7 +15,8 @@ export default async function CheckoutLayout({
   const isEn = locale === "en";
 
   // Get cart data
-  const cart = await getCartAction();
+  //todo
+  const cart: any = await getCartAction();
 
   // If received cart and there is a status code in the cart that's signed for an error we check if this error is 401 in validate-session
   if (cart && "statusCode" in cart) {
