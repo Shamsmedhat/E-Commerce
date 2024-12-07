@@ -1,5 +1,4 @@
 // import { columns } from "./columns";
-import { DataTable } from "./data-table";
 import { getAllUsersAction } from "@/lib/actions/users-actions";
 import { UsersList } from "@/lib/types/user";
 import { getUserRole } from "@/lib/utils/helpers";
@@ -43,9 +42,7 @@ async function Page() {
       <h2 className="py-2 text-3xl font-bold text-primary-foreground/90">
         {t("CpQmdnnSTadNa9eAOznLu")}
       </h2>
-      <div className="mx-auto py-3">
-        <DataTable data={usersTable} />
-      </div>
+      <div className="mx-auto py-3"></div>
     </section>
   );
 }
