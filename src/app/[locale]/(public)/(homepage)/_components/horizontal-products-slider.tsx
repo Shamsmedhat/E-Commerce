@@ -20,7 +20,7 @@ export default function HorizontalProductsSlider({
 }: {
   //todo
   product: Product | any;
-  locale: string;
+  locale?: string;
 }) {
   const t = useTranslations();
 
