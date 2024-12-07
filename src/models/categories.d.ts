@@ -31,6 +31,8 @@ declare global {
     _id: Key | null | undefined;
     translations: any;
     category: SingelCategory;
+    //todo
+    image?: string | any;
   }
 
   interface FlatCategory {

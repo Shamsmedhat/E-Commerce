@@ -7,8 +7,6 @@ import TabNavContent from "./tab-nav-content";
 import { useEffect, useState } from "react";
 import { useProductsByCategory } from "@/lib/utils/data/products-data";
 import DealsOfTheDaySkeleton from "@/components/skeletons/deals-of-the-day-skeleton";
-import { useCart } from "@/lib/utils/data/cart-data";
-import { useAppSelector } from "@/hooks/reduxHooks";
 
 // props type
 type CategoriesAndProductsListProp = {
@@ -78,10 +76,7 @@ export default function TabNav({
             </TabsTrigger>
           ))}
         </TabsList>
-        <DealsOfTheDaySkeleton
-          isEn={isEn}
-          products={productsByCategory?.data.products}
-        />
+        <DealsOfTheDaySkeleton isEn={isEn} />
       </Tabs>
     );
   }
