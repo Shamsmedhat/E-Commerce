@@ -49,7 +49,9 @@ export function usePlaceOrder() {
     isPending: isPlacingOrder,
     isSuccess: isOrderSuccess,
   } = useMutation({
-    mutationFn: (orderData: PlaceOrder) => placeOrderAction(orderData),
+    //todo
+    mutationFn: (orderData: PlaceOrder | any): any =>
+      placeOrderAction(orderData),
     onSuccess: (data: CardOrederData | CashOrderData) => {
       queryClient.invalidateQueries({ queryKey: ["cart", "orders"] });
       if ("checkoutUrl" in data) {
