@@ -22,7 +22,8 @@ export default async function ProductPage({ params }: { params: Params }) {
   const product = await getProductByIdData(productId);
   const productReviews = await getReviewByProductIdAction(productId);
   const productsWithSameCategory = await getProductsByCategoryIdAction(
-    product.category._id,
+    // todo
+    (product.category as any)._id,
   );
 
   if (!product) {
