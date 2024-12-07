@@ -32,12 +32,12 @@ export default function SelectStarRating({
   onSetRating = 0,
 }: {
   maxRating: number;
-  color: string;
-  size: number;
-  className: string;
-  messages: [];
+  color?: string;
+  size: number | any;
+  className?: string;
+  messages?: [];
   defaultValue: number;
-  onSetRating: number;
+  onSetRating: number | any;
 }) {
   const [rating, setRating] = useState(defaultValue);
   const [tempRating, setTempRating] = useState(0);

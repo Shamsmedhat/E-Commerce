@@ -73,6 +73,7 @@ export function AddReviewForm({ productId }: { productId: string }) {
                 maxRating={5}
                 size={18}
                 onSetRating={setUserRating}
+                defaultValue={0}
               />
               <FormControl>
                 <Input placeholder={t("DTIqKyyNRZFz1pdke2zXF")} {...field} />
