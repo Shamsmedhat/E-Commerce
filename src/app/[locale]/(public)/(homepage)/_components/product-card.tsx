@@ -13,16 +13,14 @@ import RatingStars from "@/components/common/RatingStars";
 import { cn } from "@/lib/utils";
 
 // icons
-import { LuHeart, LuScale } from "react-icons/lu";
 import { BsInfoCircle } from "react-icons/bs";
 
 import WishlistButton from "./wishlist-button";
-import { useEffect } from "react";
-import { useAppSelector } from "@/hooks/reduxHooks";
 
 // prop type
 type ProductProps = {
-  p: Product;
+  //todo
+  p: Product | any;
   i: number;
   productKey: string | undefined;
   isEn: boolean;
