@@ -32,7 +32,7 @@ import HealthAndPersonalCareLogo2 from "@/../public/assets/braun-logo.png";
 
 // Beverages brands logo
 import BeveragesLogo1 from "@/../public/assets/Beverages-logo.png";
-import BeveragesLogo2 from "/assets/Beverages2-logo.png";
+import BeveragesLogo2 from "@/../public/assets/Beverages2-Logo.png";
 
 // Babies brands logo
 import BabiesLogo1 from "@/../public/assets/Babieslogo1.png";
