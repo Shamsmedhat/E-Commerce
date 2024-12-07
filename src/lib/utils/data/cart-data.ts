@@ -12,7 +12,7 @@ import {
 import { Session } from "next-auth";
 import { toast } from "react-toastify";
 
-export function useCart(session: Session) {
+export function useCart(session: Session | null) {
   const {
     data: cart,
     isFetching,
