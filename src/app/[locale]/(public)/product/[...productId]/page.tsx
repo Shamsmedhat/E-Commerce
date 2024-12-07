@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: { params: Params }) {
           <div className="ms-2 flex flex-shrink flex-col gap-y-4 md:ms-8 lg:w-1/2">
             <ProductDetails
               productId={_id}
-              category={category.translations.data.name}
+              category={(category as any).translations.data.name}
               name={translations.data.name}
               overview={translations.data.overview}
               rating={ratings!.average}
