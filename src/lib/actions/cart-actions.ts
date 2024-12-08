@@ -4,12 +4,11 @@ import { revalidatePath } from "next/cache";
 import catchAsync, { AppError } from "../utils/catchAsync";
 import getAuthorizationHeader from "./get-authorization-header";
 import { getLocale } from "next-intl/server";
-import { BASE_URL } from "../constants/urls";
 
 // Get cart data action
 export const getCartAction = catchAsync(async () => {
   const locale = await getLocale();
-  const res = await fetch(`${BASE_URL}/carts`, {
+  const res = await fetch(`${process.env.BASE_URL}/carts`, {
     method: "GET",
     headers: {
       "Accept-Language": locale,
@@ -37,7 +36,7 @@ export const getCartAction = catchAsync(async () => {
 // Add new product or update to the cart by recive the product id and product quantity defult is 1
 export const addToCartAction = catchAsync(
   async (productData: { product: string; quantity: number }) => {
-    const res = await fetch(`${BASE_URL}/carts/product`, {
+    const res = await fetch(`${process.env.BASE_URL}/carts/product`, {
       method: "PATCH",
       headers: {
         ...(await getAuthorizationHeader()),
@@ -69,7 +68,7 @@ export const addToCartAction = catchAsync(
 // Delete product from the cart by recive the product id
 export const deleteProductFromCartAction = catchAsync(
   async (productId: string) => {
-    await fetch(`${BASE_URL}/carts/product/${productId}`, {
+    await fetch(`${process.env.BASE_URL}/carts/product/${productId}`, {
       method: "DELETE",
       headers: {
         ...(await getAuthorizationHeader()),

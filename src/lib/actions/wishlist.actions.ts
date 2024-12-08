@@ -4,12 +4,11 @@ import { getLocale } from "next-intl/server";
 import catchAsync, { AppError } from "../utils/catchAsync";
 import { revalidatePath } from "next/cache";
 import getAuthorizationHeader from "./get-authorization-header";
-import { BASE_URL } from "../constants/urls";
 
 // Get wishlist data action
 export const getWishlistAction = catchAsync(async () => {
   const locale = await getLocale();
-  const res = await fetch(`${BASE_URL}/wishlists`, {
+  const res = await fetch(`${process.env.BASE_URL}/wishlists`, {
     method: "GET",
     headers: {
       "Accept-Language": locale,
@@ -35,7 +34,7 @@ export const getWishlistAction = catchAsync(async () => {
 
 //  Add Review action
 export const addToWishlistAction = catchAsync(async (productId: string) => {
-  const res = await fetch(`${BASE_URL}/wishlists/${productId}`, {
+  const res = await fetch(`${process.env.BASE_URL}/wishlists/${productId}`, {
     method: "POST",
     headers: {
       // Function to return the token
@@ -64,7 +63,7 @@ export const addToWishlistAction = catchAsync(async (productId: string) => {
 
 //  Add Review action
 export const removeToWishlistAction = catchAsync(async (productId: string) => {
-  const res = await fetch(`${BASE_URL}/wishlists/${productId}`, {
+  const res = await fetch(`${process.env.BASE_URL}/wishlists/${productId}`, {
     method: "DELETE",
     headers: {
       // Function to return the token

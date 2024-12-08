@@ -1,6 +1,5 @@
 import axios from "axios";
 import { LoginResponse } from "../types/user";
-import { BASE_URL } from "../constants/urls";
 
 export async function signIn({
   username,
@@ -12,7 +11,7 @@ export async function signIn({
   try {
     const response = await axios({
       method: "POST",
-      url: `${BASE_URL}/auth/login`,
+      url: `${process.env.BASE_URL}/auth/login`,
       data: {
         username,
         password,

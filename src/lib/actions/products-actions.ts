@@ -3,7 +3,6 @@
 import axios from "axios";
 import { getLocale } from "next-intl/server";
 import { AppError } from "../utils/catchAsync";
-import { BASE_URL } from "../constants/urls";
 
 //todo convert all actions to fetch
 
@@ -13,7 +12,7 @@ export async function getProductByIdAction(
 ): Promise<SingleProduct> {
   // get web locae
   const locale = await getLocale();
-  const res = await fetch(`${BASE_URL}/products/${productId}`, {
+  const res = await fetch(`${process.env.BASE_URL}/products/${productId}`, {
     headers: {
       "Accept-Language": locale,
     },
@@ -38,7 +37,7 @@ export async function getProductsByCategoryAction(
 
   try {
     const res = await axios<ProductsAPIResponse>(
-      `${BASE_URL}/products?category>translations>data>name=${categoryName}`,
+      `${process.env.BASE_URL}/products?category>translations>data>name=${categoryName}`,
       {
         headers: {
           "Accept-Language": locale,
@@ -80,11 +79,14 @@ export async function getProductsByCategoryIdAction(
 ): Promise<ProductData> {
   // get web locae
   const locale = await getLocale();
-  const res = await fetch(`${BASE_URL}/products?category>_id=${categoryId}`, {
-    headers: {
-      "Accept-Language": locale,
+  const res = await fetch(
+    `${process.env.BASE_URL}/products?category>_id=${categoryId}`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
     },
-  });
+  );
   const data: APIResponse<ProductData> = await res.json();
 
   if (data.status !== "success") {
@@ -105,7 +107,7 @@ export async function getBestSellingProductsAction(
 
   try {
     const res = await axios<ProductsAPIResponse>(
-      `${BASE_URL}/products?category>translations>data>name=${categoryName}`,
+      `${process.env.BASE_URL}/products?category>translations>data>name=${categoryName}`,
       {
         headers: {
           "Accept-Language": locale,
@@ -143,7 +145,7 @@ export async function getBestSellingProductsAction(
 // Get products //* by most selling
 export async function getTopSellingProductsAction() {
   const locale = await getLocale();
-  const res = await fetch(`${BASE_URL}/products?sort=-sales`, {
+  const res = await fetch(`${process.env.BASE_URL}/products?sort=-sales`, {
     headers: {
       "Accept-Language": locale,
     },
@@ -162,11 +164,14 @@ export async function getTopSellingProductsAction() {
 // Get products //* by top rating
 export async function getTopRatingProductsAction() {
   const locale = await getLocale();
-  const res = await fetch(`${BASE_URL}/products?sort=-ratings>average`, {
-    headers: {
-      "Accept-Language": locale,
+  const res = await fetch(
+    `${process.env.BASE_URL}/products?sort=-ratings>average`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
     },
-  });
+  );
   const data: APIResponse<ProductData> = await res.json();
 
   if (data.status !== "success") {
@@ -187,7 +192,7 @@ export async function getProductsByBrandAction(
   // get web locae
   const locale = await getLocale();
   const res = await fetch(
-    `${BASE_URL}/products?brand>_id=${brandId}&category>_id=${categoryId}`,
+    `${process.env.BASE_URL}/products?brand>_id=${brandId}&category>_id=${categoryId}`,
     {
       headers: {
         "Accept-Language": locale,
@@ -213,7 +218,7 @@ export async function getProductsByRatingAction(
   // get web locae
   const locale = await getLocale();
   const res = await fetch(
-    `${BASE_URL}/products?ratings>average=${ratingNum}&category>_id=${categoryId}`,
+    `${process.env.BASE_URL}/products?ratings>average=${ratingNum}&category>_id=${categoryId}`,
     {
       headers: {
         "Accept-Language": locale,
@@ -263,7 +268,7 @@ export async function getFilteredProductsAction(
   }
 
   // Fetch products with constructed query
-  const res = await fetch(`${BASE_URL}/products?${query}`, {
+  const res = await fetch(`${process.env.BASE_URL}/products?${query}`, {
     headers: {
       "Accept-Language": locale,
     },
