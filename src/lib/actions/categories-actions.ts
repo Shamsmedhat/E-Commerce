@@ -7,14 +7,11 @@ import catchAsync, { AppError } from "../utils/catchAsync";
 export const getCategoriesAction = catchAsync<[], CategoriesData>(async () => {
   const locale = await getLocale();
 
-  const res = await fetch(
-    `https://e-commerce.thelanerealestate.com/v1/categories`,
-    {
-      headers: {
-        "Accept-Language": locale,
-      },
+  const res = await fetch(`${process.env.BASE_URL}/categories`, {
+    headers: {
+      "Accept-Language": locale,
     },
-  );
+  });
 
   if (!res.ok) {
     throw new AppError(
@@ -39,14 +36,11 @@ export const getCategoriesAction = catchAsync<[], CategoriesData>(async () => {
 export const getCategoryAction = catchAsync(async (categoryId: string) => {
   const locale = await getLocale();
 
-  const res = await fetch(
-    `https://e-commerce.thelanerealestate.com/v1/categories/${categoryId}`,
-    {
-      headers: {
-        "Accept-Language": locale,
-      },
+  const res = await fetch(`${process.env.BASE_URL}/categories/${categoryId}`, {
+    headers: {
+      "Accept-Language": locale,
     },
-  );
+  });
   const data: APIResponse<Category> = await res.json();
 
   if (data.status !== "success") {
