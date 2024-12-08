@@ -4,6 +4,7 @@ import { getLocale } from "next-intl/server";
 import catchAsync, { AppError } from "../utils/catchAsync";
 import getAuthorizationHeader from "./get-authorization-header";
 import { revalidatePath } from "next/cache";
+import { BASE_URL } from "../constants/urls";
 
 // Get products //* by the category id
 export async function getReviewByProductIdAction(
@@ -11,14 +12,11 @@ export async function getReviewByProductIdAction(
 ): Promise<ReviewsData> {
   // get web locae
   const locale = await getLocale();
-  const res = await fetch(
-    `${process.env.BASE_URL}/reviews?product=${productId}`,
-    {
-      headers: {
-        "Accept-Language": locale,
-      },
+  const res = await fetch(`${BASE_URL}/reviews?product=${productId}`, {
+    headers: {
+      "Accept-Language": locale,
     },
-  );
+  });
   const data: APIResponse<ReviewsData> = await res.json();
 
   if (data.status !== "success") {
@@ -33,7 +31,7 @@ export async function getReviewByProductIdAction(
 
 //  Add Review action
 export const addReviewAction = catchAsync(async (reviewData: AddReviewForm) => {
-  const res = await fetch(`${process.env.BASE_URL}/reviews`, {
+  const res = await fetch(`${BASE_URL}/reviews`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -62,7 +60,7 @@ export const addReviewAction = catchAsync(async (reviewData: AddReviewForm) => {
 
 export const deleteReviewAction = catchAsync(
   async (reviewId: string, productId: string) => {
-    await fetch(`${process.env.BASE_URL}/reviews/${reviewId}/me`, {
+    await fetch(`${BASE_URL}/reviews/${reviewId}/me`, {
       method: "DELETE",
       headers: {
         ...(await getAuthorizationHeader()),

@@ -2,20 +2,18 @@
 
 import { getLocale } from "next-intl/server";
 import catchAsync, { AppError } from "../utils/catchAsync";
+import { BASE_URL } from "../constants/urls";
 
 // Get subCategory //* by id
 export const getSubCategoryAction = catchAsync(
   async (subCategoryId: string) => {
     const locale = await getLocale();
 
-    const res = await fetch(
-      `${process.env.BASE_URL}/sub-categories/${subCategoryId}`,
-      {
-        headers: {
-          "Accept-Language": locale,
-        },
+    const res = await fetch(`${BASE_URL}/sub-categories/${subCategoryId}`, {
+      headers: {
+        "Accept-Language": locale,
       },
-    );
+    });
 
     const data: APIResponse<SubCategory> = await res.json();
 
@@ -35,7 +33,7 @@ export const getSubCategoriesByCategoryIdAction = catchAsync(
     const locale = await getLocale();
 
     const res = await fetch(
-      `${process.env.BASE_URL}/sub-categories?category=${categoryId}`,
+      `${BASE_URL}/sub-categories?category=${categoryId}`,
       {
         headers: {
           "Accept-Language": locale,

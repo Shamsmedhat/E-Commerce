@@ -4,10 +4,11 @@ import { getLocale } from "next-intl/server";
 import catchAsync, { AppError } from "../utils/catchAsync";
 import getAuthorizationHeader from "./get-authorization-header";
 import { revalidatePath } from "next/cache";
+import { BASE_URL } from "../constants/urls";
 
 //  Place order action
 export const placeOrderAction = catchAsync(async (orderData: PlaceOrder) => {
-  const res = await fetch(`${process.env.BASE_URL}/orders`, {
+  const res = await fetch(`${BASE_URL}/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +38,7 @@ export const getOrdersAction = catchAsync(
     const locale = await getLocale();
     const sortQuery = isSort ? "&sort=createdAt" : "";
     const res = await fetch(
-      `${process.env.BASE_URL}/orders/me?page=${pageNumber}${sortQuery}`,
+      `${BASE_URL}/orders/me?page=${pageNumber}${sortQuery}`,
       {
         method: "GET",
         headers: {
@@ -63,7 +64,7 @@ export const getOrdersAction = catchAsync(
 
 export const getTotalOrdersAction = catchAsync(async () => {
   const locale = await getLocale();
-  const res = await fetch(`${process.env.BASE_URL}/orders/me?limit=99`, {
+  const res = await fetch(`${BASE_URL}/orders/me?limit=99`, {
     method: "GET",
     headers: {
       "Accept-Language": locale,
