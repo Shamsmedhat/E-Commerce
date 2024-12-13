@@ -12,11 +12,14 @@ export async function getProductByIdAction(
 ): Promise<SingleProduct> {
   // get web locae
   const locale = await getLocale();
-  const res = await fetch(`${process.env.BASE_URL}/products/${productId}`, {
-    headers: {
-      "Accept-Language": locale,
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/products/${productId}`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
     },
-  });
+  );
   const data: APIResponse<SingleProduct> = await res.json();
 
   if (data.status !== "success") {
@@ -37,7 +40,7 @@ export async function getProductsByCategoryAction(
 
   try {
     const res = await axios<ProductsAPIResponse>(
-      `${process.env.BASE_URL}/products?category>translations>data>name=${categoryName}`,
+      `https://e-commerce.thelanerealestate.com/v1/products?category>translations>data>name=${categoryName}`,
       {
         headers: {
           "Accept-Language": locale,
@@ -80,7 +83,7 @@ export async function getProductsByCategoryIdAction(
   // get web locae
   const locale = await getLocale();
   const res = await fetch(
-    `${process.env.BASE_URL}/products?category>_id=${categoryId}`,
+    `https://e-commerce.thelanerealestate.com/v1/products?category>_id=${categoryId}`,
     {
       headers: {
         "Accept-Language": locale,
@@ -107,7 +110,7 @@ export async function getBestSellingProductsAction(
 
   try {
     const res = await axios<ProductsAPIResponse>(
-      `${process.env.BASE_URL}/products?category>translations>data>name=${categoryName}`,
+      `https://e-commerce.thelanerealestate.com/v1/products?category>translations>data>name=${categoryName}`,
       {
         headers: {
           "Accept-Language": locale,
@@ -145,11 +148,14 @@ export async function getBestSellingProductsAction(
 // Get products //* by most selling
 export async function getTopSellingProductsAction() {
   const locale = await getLocale();
-  const res = await fetch(`${process.env.BASE_URL}/products?sort=-sales`, {
-    headers: {
-      "Accept-Language": locale,
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/products?sort=-sales`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
     },
-  });
+  );
   const data: APIResponse<ProductData> = await res.json();
 
   if (data.status !== "success") {
@@ -165,7 +171,7 @@ export async function getTopSellingProductsAction() {
 export async function getTopRatingProductsAction() {
   const locale = await getLocale();
   const res = await fetch(
-    `${process.env.BASE_URL}/products?sort=-ratings>average`,
+    `https://e-commerce.thelanerealestate.com/v1/products?sort=-ratings>average`,
     {
       headers: {
         "Accept-Language": locale,
@@ -192,7 +198,7 @@ export async function getProductsByBrandAction(
   // get web locae
   const locale = await getLocale();
   const res = await fetch(
-    `${process.env.BASE_URL}/products?brand>_id=${brandId}&category>_id=${categoryId}`,
+    `https://e-commerce.thelanerealestate.com/v1/products?brand>_id=${brandId}&category>_id=${categoryId}`,
     {
       headers: {
         "Accept-Language": locale,
@@ -218,7 +224,7 @@ export async function getProductsByRatingAction(
   // get web locae
   const locale = await getLocale();
   const res = await fetch(
-    `${process.env.BASE_URL}/products?ratings>average=${ratingNum}&category>_id=${categoryId}`,
+    `https://e-commerce.thelanerealestate.com/v1/products?ratings>average=${ratingNum}&category>_id=${categoryId}`,
     {
       headers: {
         "Accept-Language": locale,
@@ -268,11 +274,14 @@ export async function getFilteredProductsAction(
   }
 
   // Fetch products with constructed query
-  const res = await fetch(`${process.env.BASE_URL}/products?${query}`, {
-    headers: {
-      "Accept-Language": locale,
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/products?${query}`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
     },
-  });
+  );
 
   // Parse response data
   const data: APIResponse<ProductData> = await res.json();

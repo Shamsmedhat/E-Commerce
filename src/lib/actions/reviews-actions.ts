@@ -12,7 +12,7 @@ export async function getReviewByProductIdAction(
   // get web locae
   const locale = await getLocale();
   const res = await fetch(
-    `${process.env.BASE_URL}/reviews?product=${productId}`,
+    `https://e-commerce.thelanerealestate.com/v1/reviews?product=${productId}`,
     {
       headers: {
         "Accept-Language": locale,
@@ -33,16 +33,19 @@ export async function getReviewByProductIdAction(
 
 //  Add Review action
 export const addReviewAction = catchAsync(async (reviewData: AddReviewForm) => {
-  const res = await fetch(`${process.env.BASE_URL}/reviews`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      // Function to return the token
-      ...(await getAuthorizationHeader()),
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/reviews`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Function to return the token
+        ...(await getAuthorizationHeader()),
+      },
+      credentials: "include",
+      body: JSON.stringify(reviewData),
     },
-    credentials: "include",
-    body: JSON.stringify(reviewData),
-  });
+  );
 
   // Parse data into a object
   const data: APIResponse<AddReviewData> = await res.json();
@@ -62,12 +65,15 @@ export const addReviewAction = catchAsync(async (reviewData: AddReviewForm) => {
 
 export const deleteReviewAction = catchAsync(
   async (reviewId: string, productId: string) => {
-    await fetch(`${process.env.BASE_URL}/reviews/${reviewId}/me`, {
-      method: "DELETE",
-      headers: {
-        ...(await getAuthorizationHeader()),
+    await fetch(
+      `https://e-commerce.thelanerealestate.com/v1/reviews/${reviewId}/me`,
+      {
+        method: "DELETE",
+        headers: {
+          ...(await getAuthorizationHeader()),
+        },
       },
-    });
+    );
 
     // Revalidate cart & home page to refresh the cache
     revalidatePath(`/product/${productId}`);

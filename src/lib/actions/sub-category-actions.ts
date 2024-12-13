@@ -9,7 +9,7 @@ export const getSubCategoryAction = catchAsync(
     const locale = await getLocale();
 
     const res = await fetch(
-      `${process.env.BASE_URL}/sub-categories/${subCategoryId}`,
+      `https://e-commerce.thelanerealestate.com/v1/sub-categories/${subCategoryId}`,
       {
         headers: {
           "Accept-Language": locale,
@@ -35,7 +35,7 @@ export const getSubCategoriesByCategoryIdAction = catchAsync(
     const locale = await getLocale();
 
     const res = await fetch(
-      `${process.env.BASE_URL}/sub-categories?category=${categoryId}`,
+      `https://e-commerce.thelanerealestate.com/v1/sub-categories?category=${categoryId}`,
       {
         headers: {
           "Accept-Language": locale,

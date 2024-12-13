@@ -7,16 +7,19 @@ import { revalidatePath } from "next/cache";
 
 //  Place order action
 export const placeOrderAction = catchAsync(async (orderData: PlaceOrder) => {
-  const res = await fetch(`${process.env.BASE_URL}/orders`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      // Function to return the token
-      ...(await getAuthorizationHeader()),
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/orders`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Function to return the token
+        ...(await getAuthorizationHeader()),
+      },
+      credentials: "include",
+      body: JSON.stringify(orderData),
     },
-    credentials: "include",
-    body: JSON.stringify(orderData),
-  });
+  );
 
   // Parse data into a object
   const data: APIResponse<OrderCash | OrderCard> = await res.json();
@@ -37,7 +40,7 @@ export const getOrdersAction = catchAsync(
     const locale = await getLocale();
     const sortQuery = isSort ? "&sort=createdAt" : "";
     const res = await fetch(
-      `${process.env.BASE_URL}/orders/me?page=${pageNumber}${sortQuery}`,
+      `https://e-commerce.thelanerealestate.com/v1/orders/me?page=${pageNumber}${sortQuery}`,
       {
         method: "GET",
         headers: {
@@ -63,14 +66,17 @@ export const getOrdersAction = catchAsync(
 
 export const getTotalOrdersAction = catchAsync(async () => {
   const locale = await getLocale();
-  const res = await fetch(`${process.env.BASE_URL}/orders/me?limit=99`, {
-    method: "GET",
-    headers: {
-      "Accept-Language": locale,
-      ...(await getAuthorizationHeader()),
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/orders/me?limit=99`,
+    {
+      method: "GET",
+      headers: {
+        "Accept-Language": locale,
+        ...(await getAuthorizationHeader()),
+      },
+      credentials: "include",
     },
-    credentials: "include",
-  });
+  );
 
   const data: APIResponse<OrdersData> = await res.json();
 

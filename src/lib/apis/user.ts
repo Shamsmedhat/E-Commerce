@@ -4,11 +4,14 @@ import { UserToken } from "../types/user";
 // get all users list to dashboard
 export async function fetchAllUsers(token: UserToken) {
   try {
-    const res = await axios(`${process.env.BASE_URL}/users`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const res = await axios(
+      `https://e-commerce.thelanerealestate.com/v1/users`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
     const data = res.data;
     return data;
   } catch (error) {
@@ -20,7 +23,7 @@ export async function fetchAllUsers(token: UserToken) {
 export async function signup(formData: FormData) {
   try {
     const res = await axios.post(
-      `${process.env.BASE_URL}/auth/signup`,
+      `https://e-commerce.thelanerealestate.com/v1/auth/signup`,
       formData,
       {
         headers: {
@@ -46,11 +49,14 @@ export async function signup(formData: FormData) {
 // delete user using in dashboard
 export async function deleteUser(id: string, token: String | undefined) {
   try {
-    await axios.delete(`${process.env.BASE_URL}/users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    await axios.delete(
+      `https://e-commerce.thelanerealestate.com/v1/users/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
   } catch (error) {
     if (isAxiosError(error)) {
       throw new Error(error.response?.data.message);
@@ -67,7 +73,7 @@ export async function updateUser(
 ) {
   try {
     const res = await axios.patch(
-      `${process.env.BASE_URL}/users/${userId}`,
+      `https://e-commerce.thelanerealestate.com/v1/users/${userId}`,
       formData,
       {
         headers: {

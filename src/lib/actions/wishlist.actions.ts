@@ -8,15 +8,18 @@ import getAuthorizationHeader from "./get-authorization-header";
 // Get wishlist data action
 export const getWishlistAction = catchAsync(async () => {
   const locale = await getLocale();
-  const res = await fetch(`${process.env.BASE_URL}/wishlists`, {
-    method: "GET",
-    headers: {
-      "Accept-Language": locale,
-      // Function to return the token
-      ...(await getAuthorizationHeader()),
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/wishlists`,
+    {
+      method: "GET",
+      headers: {
+        "Accept-Language": locale,
+        // Function to return the token
+        ...(await getAuthorizationHeader()),
+      },
+      credentials: "include",
     },
-    credentials: "include",
-  });
+  );
 
   // Parse data into a object
   const data: APIResponse<WishlistData> = await res.json();
@@ -34,14 +37,17 @@ export const getWishlistAction = catchAsync(async () => {
 
 //  Add Review action
 export const addToWishlistAction = catchAsync(async (productId: string) => {
-  const res = await fetch(`${process.env.BASE_URL}/wishlists/${productId}`, {
-    method: "POST",
-    headers: {
-      // Function to return the token
-      ...(await getAuthorizationHeader()),
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/wishlists/${productId}`,
+    {
+      method: "POST",
+      headers: {
+        // Function to return the token
+        ...(await getAuthorizationHeader()),
+      },
+      credentials: "include",
     },
-    credentials: "include",
-  });
+  );
 
   // Parse data into a object
   const data = await res.json();
@@ -63,14 +69,17 @@ export const addToWishlistAction = catchAsync(async (productId: string) => {
 
 //  Add Review action
 export const removeToWishlistAction = catchAsync(async (productId: string) => {
-  const res = await fetch(`${process.env.BASE_URL}/wishlists/${productId}`, {
-    method: "DELETE",
-    headers: {
-      // Function to return the token
-      ...(await getAuthorizationHeader()),
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/wishlists/${productId}`,
+    {
+      method: "DELETE",
+      headers: {
+        // Function to return the token
+        ...(await getAuthorizationHeader()),
+      },
+      credentials: "include",
     },
-    credentials: "include",
-  });
+  );
 
   // Parse data into a object
   const data = await res.json();

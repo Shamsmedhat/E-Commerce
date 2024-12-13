@@ -11,7 +11,7 @@ export async function signIn({
   try {
     const response = await axios({
       method: "POST",
-      url: `${process.env.BASE_URL}/auth/login`,
+      url: `https://e-commerce.thelanerealestate.com/v1/auth/login`,
       data: {
         username,
         password,
