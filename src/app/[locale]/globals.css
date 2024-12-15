@@ -11,6 +11,32 @@
   background-position: bottom;
   filter: blur(4px); /* Adjust the blur value */
 }
+.embla {
+  max-width: 48rem;
+  margin: auto;
+  --slide-height: 19rem;
+  --slide-spacing: 1rem;
+  --slide-size: 100%;
+}
+
+.embla__viewport {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  align-items: flex-start;
+  transition: height 0.2s;
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  /* padding: 10px 20px; */
+  border: 1px solid white;
+}
+
 /* Overwrite style in product gallary */
 /* .image-gallery-slide .image-gallery-image {
   width: 100%; 

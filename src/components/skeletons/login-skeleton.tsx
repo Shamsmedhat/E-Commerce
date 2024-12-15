@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function LoginSkeleton() {
   return (
     <section className="flex w-full flex-col items-center justify-center">
-      <div className="relative rounded-2xl bg-white p-10 shadow-lg">
+      <div className="relative rounded-2xl bg-white p-10 shadow-lg dark:bg-background">
         <h2 className="mb-3 text-3xl font-bold text-primary-foreground">
           <Skeleton className="h-12 w-[15rem] rounded-full bg-primary-foreground/20" />
         </h2>
@@ -29,7 +29,7 @@ export default function LoginSkeleton() {
           <Skeleton className="h-12 w-full rounded-lg bg-primary-foreground/20" />
         </form>
         <div className="relative flex items-center justify-center p-3 text-[16px] before:absolute before:h-[1px] before:w-full before:bg-primary-foreground/20 before:content-['']">
-          <span className="z-10 bg-white px-3">أو</span>
+          <span className="z-10 bg-white px-3 dark:bg-background"></span>
         </div>
         {/* <SignInProviders /> */}
         <div className="mt-8 space-y-6">

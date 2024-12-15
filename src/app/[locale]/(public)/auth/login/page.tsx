@@ -41,7 +41,9 @@ export default async function Page() {
             </p>
             <LoginForm session={session} />
             <div className="relative flex items-center justify-center p-3 text-[16px] before:absolute before:h-[1px] before:w-full before:bg-primary-foreground/20 before:content-[''] dark:before:bg-slate-50/20">
-              <span className="z-10 bg-white px-3 dark:bg-background">أو</span>
+              <span className="z-10 bg-white px-3 dark:bg-background">
+                {t("ZV6ZxYKt63kPnAF8yzCCY")}
+              </span>
             </div>
             <SignInProviders />
           </div>

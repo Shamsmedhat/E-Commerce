@@ -47,11 +47,10 @@ export default function TotalPaymentProcess(cart: CartData) {
   return (
     <Carousel className="w-full dark:bg-background" opts={{ watchDrag: false }}>
       {/* Carousel content 3 pages [placing order process] */}
-      <CarouselContent>
+      <CarouselContent className="embla__container">
         {/* Address section first step */}
         <CarouselItem>
           <CheckoutProgressUi step={1} />
-
           <Heading
             className={cn(isEn ? "text-left" : "text-right", "mx-6 !text-2xl")}
           >
@@ -67,7 +66,6 @@ export default function TotalPaymentProcess(cart: CartData) {
         {/* Payment section second step */}
         <CarouselItem>
           <CheckoutProgressUi step={2} />
-
           <Heading
             className={cn(isEn ? "text-left" : "text-right", "mx-6 !text-2xl")}
           >
@@ -87,7 +85,7 @@ export default function TotalPaymentProcess(cart: CartData) {
       </CarouselContent>
 
       {/* Next and previous btns */}
-      <div className="flex items-center justify-between gap-4 p-8">
+      <div className="flex items-center justify-between gap-4 px-8 pb-8">
         {/* Next btn */}
         <CarouselNext
           className={cn(

@@ -42,7 +42,6 @@ export default function LoginForm({ session }: { session: Session | null }) {
   const guestWishlist = useGuestWishlist();
   const { addMultipleToCart } = useAddToCart();
   const { addMultipleToWishlist } = useAddToWishlist();
-  console.log("guestWishlist", guestWishlist);
   const guestCartData = guestCart.map((p) => {
     return {
       product: p.product,
@@ -88,7 +87,6 @@ export default function LoginForm({ session }: { session: Session | null }) {
         password,
       });
 
-      console.log("res", res);
       // if the res is oky
       if (res?.ok) {
         // navigate to home
@@ -130,7 +128,10 @@ export default function LoginForm({ session }: { session: Session | null }) {
         <Label
           htmlFor="username"
           className={cn(
-            "block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white",
+            "block text-sm font-medium text-slate-700 dark:text-white",
+            isEn
+              ? "before:ml-0.5 before:text-red-500 before:content-['*']"
+              : "after:ml-0.5 after:text-red-500 after:content-['*']",
           )}
         >
           {t("WWMnAVYyfUEaHuf4cn2sj")}
@@ -154,7 +155,17 @@ export default function LoginForm({ session }: { session: Session | null }) {
         )}
       </div>
       <div className="flex flex-col gap-3">
-        <Label htmlFor="password">{t("6Ga5ADgKW5t7UIaqd1jBF")}</Label>
+        <Label
+          htmlFor="password"
+          className={cn(
+            "block text-sm font-medium text-slate-700 dark:text-white",
+            isEn
+              ? "before:ml-0.5 before:text-red-500 before:content-['*']"
+              : "after:ml-0.5 after:text-red-500 after:content-['*']",
+          )}
+        >
+          {t("6Ga5ADgKW5t7UIaqd1jBF")}
+        </Label>
         <Input
           type="password"
           id="password"

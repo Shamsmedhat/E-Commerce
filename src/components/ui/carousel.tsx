@@ -4,6 +4,7 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
+import AutoHeight from "embla-carousel-auto-height";
 
 import { cn } from "@/lib/utils";
 import { Button, ButtonProps } from "@/components/ui/button";
@@ -65,8 +66,11 @@ const Carousel = React.forwardRef<
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
+        watchResize: (api) => {
+          return true;
+        },
       },
-      plugins,
+      [AutoHeight(), ...(plugins || [])],
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
@@ -128,7 +132,7 @@ const Carousel = React.forwardRef<
         <div
           ref={ref}
           // onKeyDownCapture={handleKeyDown}
-          className={cn("relative", className)}
+          className={cn("embla__viewport embla relative", className)}
           role="region"
           aria-roledescription="carousel"
           {...props}
@@ -175,7 +179,7 @@ const CarouselItem = React.forwardRef<
       role="group"
       aria-roledescription="slide"
       className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full",
+        "embla__slide min-w-0 shrink-0 grow-0 basis-full",
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className,
       )}
