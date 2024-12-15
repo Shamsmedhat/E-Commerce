@@ -30,18 +30,18 @@ export default async function Page() {
           <div
             className={cn(
               isEn ? "text-end" : "text-start",
-              "relative rounded-2xl bg-white p-10 shadow-lg",
+              "relative rounded-2xl bg-white p-10 shadow-lg dark:bg-background dark:text-white",
             )}
           >
-            <h2 className="mb-3 text-3xl font-bold text-primary-foreground">
+            <h2 className="mb-3 text-3xl font-bold text-primary-foreground dark:text-white">
               {t("x5CK85cNmYaHmtijJxw1l")}
             </h2>
-            <p className="mb-4 text-lg text-primary-foreground/70">
+            <p className="mb-4 text-lg text-primary-foreground/70 dark:text-white/70">
               {t("IQ0KGx9ZU0j2k7BpbvyBZ")}
             </p>
             <LoginForm session={session} />
-            <div className="relative flex items-center justify-center p-3 text-[16px] before:absolute before:h-[1px] before:w-full before:bg-primary-foreground/20 before:content-['']">
-              <span className="z-10 bg-white px-3">أو</span>
+            <div className="relative flex items-center justify-center p-3 text-[16px] before:absolute before:h-[1px] before:w-full before:bg-primary-foreground/20 before:content-[''] dark:before:bg-slate-50/20">
+              <span className="z-10 bg-white px-3 dark:bg-background">أو</span>
             </div>
             <SignInProviders />
           </div>

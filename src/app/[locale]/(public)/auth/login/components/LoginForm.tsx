@@ -28,6 +28,8 @@ import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useGuestCart } from "@/hooks/use-guest-cart";
 import { useAddToCart } from "@/lib/utils/data/cart-data";
+import { useGuestWishlist } from "@/hooks/use-guest-wishlist";
+import { useAddToWishlist } from "@/lib/utils/data/wishlist-data";
 
 export default function LoginForm({ session }: { session: Session | null }) {
   const t = useTranslations();
@@ -37,12 +39,19 @@ export default function LoginForm({ session }: { session: Session | null }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const guestCart = useGuestCart();
+  const guestWishlist = useGuestWishlist();
   const { addMultipleToCart } = useAddToCart();
-
+  const { addMultipleToWishlist } = useAddToWishlist();
+  console.log("guestWishlist", guestWishlist);
   const guestCartData = guestCart.map((p) => {
     return {
       product: p.product,
       quantity: p.quantity,
+    };
+  });
+  const guestWishlistData = guestWishlist.map((p) => {
+    return {
+      product: p.product,
     };
   });
 
@@ -79,6 +88,7 @@ export default function LoginForm({ session }: { session: Session | null }) {
         password,
       });
 
+      console.log("res", res);
       // if the res is oky
       if (res?.ok) {
         // navigate to home
@@ -89,6 +99,9 @@ export default function LoginForm({ session }: { session: Session | null }) {
         // refresh to show the cart - rerender and check if there is a session
         router.refresh();
         guestCart.length === 0 ? null : addMultipleToCart(guestCartData);
+        guestWishlist.length === 0
+          ? null
+          : addMultipleToWishlist(guestWishlistData);
       } else {
         // if the credentials is incorrect
         setCredentialsIncorrect(res?.error);
@@ -117,7 +130,7 @@ export default function LoginForm({ session }: { session: Session | null }) {
         <Label
           htmlFor="username"
           className={cn(
-            "block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']",
+            "block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white",
           )}
         >
           {t("WWMnAVYyfUEaHuf4cn2sj")}
@@ -128,7 +141,7 @@ export default function LoginForm({ session }: { session: Session | null }) {
           placeholder={t("noEUTjMtwAO4g4FyCobhx")}
           className={cn(
             isEn ? "text-end" : "text-start",
-            "placeholder:text-primary-foreground/40 focus:!outline-primary",
+            "placeholder:text-primary-foreground/40 focus:!outline-primary dark:border-slate-50/20 dark:bg-primary-foreground",
           )}
           defaultValue="exampleusername"
           {...register("username")}
@@ -148,7 +161,7 @@ export default function LoginForm({ session }: { session: Session | null }) {
           placeholder="••••••••"
           className={cn(
             isEn ? "text-end" : "text-start",
-            "placeholder:text-primary-foreground/20 focus:!outline-primary",
+            "placeholder:text-primary-foreground/20 focus:!outline-primary dark:border-slate-50/20 dark:bg-primary-foreground",
           )}
           {...register("password")}
           defaultValue="Pass50091"

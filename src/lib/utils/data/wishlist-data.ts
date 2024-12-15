@@ -46,9 +46,23 @@ export function useAddToWishlist() {
       toast.error(err.message);
     },
   });
+  // Function to handle array of objects
+  const addMultipleToWishlist = async (
+    productDataArray: { product: string }[],
+  ) => {
+    try {
+      await Promise.all(
+        productDataArray.map((productId) => addToWishlist(productId.product)),
+      );
+      // toast.success("All products have been added to the cart successfully.");
+    } catch (error) {
+      toast.error("An error occurred while adding products to the wishlist.");
+    }
+  };
 
   return {
     addToWishlist,
+    addMultipleToWishlist,
     isAddingToWishlist,
     isAddingToWishlistSuccess,
     isAddingToWishlistError,

@@ -38,6 +38,7 @@ export const addToCartAction = catchAsync(
   async (productData: { product: string; quantity: number }) => {
     const res = await fetch(
       `https://e-commerce.thelanerealestate.com/v1/carts/product`,
+      // `${process.env.BASE_URL}/carts/product`,
       {
         method: "PATCH",
         headers: {
