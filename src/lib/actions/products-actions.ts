@@ -6,6 +6,30 @@ import { AppError } from "../utils/catchAsync";
 
 //todo convert all actions to fetch
 
+// Get product  //* by query
+export async function getProductByQueryAction(
+  query: string,
+): Promise<ProductData> {
+  // get web locae
+  const locale = await getLocale();
+  const res = await fetch(
+    `https://e-commerce.thelanerealestate.com/v1/products?search=${query}`,
+    {
+      headers: {
+        "Accept-Language": locale,
+      },
+    },
+  );
+  const data: APIResponse<ProductData> = await res.json();
+
+  if (data.status !== "success") {
+    throw new AppError(data.message, 500);
+  } else if (!data.data) {
+    throw new AppError("Something went wrong!", 500);
+  }
+  // return data
+  return data.data;
+}
 // Get product  //* by id
 export async function getProductByIdAction(
   productId: string,

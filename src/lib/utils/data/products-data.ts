@@ -7,13 +7,14 @@ import {
 } from "@tanstack/react-query";
 import {
   getProductByIdAction,
+  getProductByQueryAction,
   getProductsByCategoryAction,
   getProductsByCategoryIdAction,
   getTopRatingProductsAction,
   getTopSellingProductsAction,
 } from "../../actions/products-actions";
 
-export async function getProductByIdData(productId: string): Promise<Product> {
+export async function getProductByIdData(productId: string) {
   try {
     // Call the action function to get the response from the server
     const { product: data } = await getProductByIdAction(productId);
@@ -30,6 +31,18 @@ export async function getProductByIdData(productId: string): Promise<Product> {
     console.error("Error in getProductByIdData:", error);
     throw new Error(`Data retrieval error: ${error}`);
   }
+}
+export function useProductByQueryData(query: string) {
+  const {
+    data: productByQuery,
+    isFetching,
+    isError,
+  } = useQuery({
+    queryKey: ["product-by-category", query], // identify the data based on the query
+    queryFn: () => getProductByQueryAction(query),
+    enabled: !!query, // only run the query if query is truthy
+  });
+  return { productByQuery, isFetching, isError };
 }
 
 export function useProductsByIds(productIds: string[]) {

@@ -21,6 +21,7 @@ import { getCategoriesAction } from "@/lib/actions/categories-actions";
 import { getWishlistAction } from "@/lib/actions/wishlist.actions";
 import CartIcone from "./cart-icon";
 import WishlistIcon from "./wishlist-icon";
+import SearchResult from "../ui/search-result";
 
 export default async function Header() {
   // translation
@@ -69,9 +70,9 @@ export default async function Header() {
         {/* xmd: new custom breakpoint min 850px  */}
         <ul className="container hidden flex-col items-center justify-between gap-0 py-2 xmd:flex-row xmd:gap-4 xmd:py-8 lg:flex">
           {/* Logo & Search ============================================================= */}
-          <li className="flex w-full max-w-[50%] flex-grow items-center justify-start xmd:w-fit">
+          <li className="flex w-full max-w-[50%] flex-grow items-center justify-start xmd:w-1/2">
             <Logo />
-            <div className="ms-[5rem]">
+            <div className="relative ms-[5rem]">
               <Search placeholder={t("0ComiVhfwjBnZHsJ_RUxH")} />
             </div>
           </li>
