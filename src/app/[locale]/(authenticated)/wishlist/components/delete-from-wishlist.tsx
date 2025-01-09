@@ -15,6 +15,10 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useDeleteFromWishlist } from "@/lib/utils/data/wishlist-data";
 import { useSession } from "next-auth/react";
+import { useAppDispatch } from "@/hooks/reduxHooks";
+import { removeFromGuestWishlist } from "@/lib/features/wishlist/guest-wishlist-slice";
+import { useRouter } from "@/navigarion";
+import { toast } from "react-toastify";
 
 type DeleteFromWishlistProps = {
   item: WishlistItem;
@@ -25,8 +29,9 @@ export default function DeleteFromWishlist({
   item,
   isEn,
 }: DeleteFromWishlistProps) {
-  const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations();
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   const {
     isRemovingFromWishlist,
     isRemovingFromWishlistError,
@@ -34,7 +39,7 @@ export default function DeleteFromWishlist({
     removeFromWishlist,
   } = useDeleteFromWishlist();
   const { data: session, status } = useSession();
-
+  const dispatch = useAppDispatch();
   const removeFromLocalStorage = (productId: string) => {
     const wishlist = localStorage.getItem("guest-wishlist");
     if (wishlist) {
@@ -52,10 +57,18 @@ export default function DeleteFromWishlist({
     if (session) {
       // User is logged in, delete from server-side cart
       removeFromWishlist(productId);
+      toast.success(
+        "Product has been removed from your wishlist successfully.",
+      );
     } else {
       // User is not logged in, delete from localStorage
       removeFromLocalStorage(productId);
+      dispatch(removeFromGuestWishlist({ product: productId }));
+      router.refresh();
       window.dispatchEvent(new Event("storage"));
+      toast.success(
+        "Product has been removed from your wishlist successfully.",
+      );
     }
   }
 

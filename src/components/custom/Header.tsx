@@ -27,36 +27,41 @@ export default async function Header() {
   // translation
   const t = await getTranslations();
 
+  // user session
+  const session = await getServerSession(authOptions);
+
   let cart;
   let wishlist;
   let numbersOfitemsInCart = 0;
   let numbersOfitemsInWishlist = 0;
 
   try {
-    [cart, wishlist] = await Promise.allSettled([
-      getCartAction(),
-      getWishlistAction(),
-    ]);
+    if (session) {
+      [cart, wishlist] = await Promise.allSettled([
+        getCartAction(),
+        getWishlistAction(),
+      ]);
+      console.log(1);
+      if (cart.status === "fulfilled" && !("statusCode" in cart.value)) {
+        numbersOfitemsInCart = cart.value.cart.items.length;
+      } else if (cart.status === "rejected") {
+        console.error("Error fetching cart:", cart.reason);
+        // Fallback for cart if needed
+      }
 
-    if (cart.status === "fulfilled" && !("statusCode" in cart.value)) {
-      numbersOfitemsInCart = cart.value.cart.items.length;
-    } else if (cart.status === "rejected") {
-      console.error("Error fetching cart:", cart.reason);
-      // Fallback for cart if needed
-    }
-
-    if (wishlist.status === "fulfilled" && !("statusCode" in wishlist.value)) {
-      numbersOfitemsInWishlist = wishlist.value.wishlist.length;
-    } else if (wishlist.status === "rejected") {
-      console.error("Error fetching wishlist:", wishlist.reason);
-      // Fallback for wishlist if needed
+      if (
+        wishlist.status === "fulfilled" &&
+        !("statusCode" in wishlist.value)
+      ) {
+        numbersOfitemsInWishlist = wishlist.value.wishlist.length;
+      } else if (wishlist.status === "rejected") {
+        console.error("Error fetching wishlist:", wishlist.reason);
+        // Fallback for wishlist if needed
+      }
     }
   } catch (error) {
     console.error("Unexpected error:", error);
   }
-
-  // user session
-  const session = await getServerSession(authOptions);
 
   //TODO make sure the data came before distructure data (categories)
   // const data = await getCategoriesData();

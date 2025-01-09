@@ -108,6 +108,6 @@ export default async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  // Skip all paths that should not be internationalized
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+  // Ensure the middleware runs on all requests
+  matcher: ["/((?!api|_next|.*\\..*).*)", "/api/:path*"],
 };

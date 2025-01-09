@@ -25,7 +25,6 @@ export default function RelatedProducts({
   // Fetching only 20 of products that rated by 5 stars only
   const allProducts = productsByCategoryId?.products.slice(0, 20);
 
-  console.log(productsByCategoryId?.products);
   return (
     <>
       <div className="flex justify-between ps-[8rem]">

@@ -42,10 +42,8 @@ export function AddReviewForm({ productId }: { productId: string }) {
   const { addReview, isAddingReview } = useAddReview();
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(userRating);
-    console.log(values);
+    // console.log(userRating);
+    // console.log(values);
 
     const addReviewData = {
       product: productId,

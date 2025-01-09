@@ -132,9 +132,9 @@ export const updateLocalStorageWishlist = (productId: string) => {
     toast.info("Product already exists in your wishlist.");
   } else {
     // Add new product to the cart
+    toast.success("Product has been added to your wishlist successfully.");
     storedWishlist.push({ product: productId });
   }
-  toast.success("Product has been added to your wishlist successfully.");
 
   // Save updated cart back to localStorage
   localStorage.setItem("guest-wishlist", JSON.stringify(storedWishlist));

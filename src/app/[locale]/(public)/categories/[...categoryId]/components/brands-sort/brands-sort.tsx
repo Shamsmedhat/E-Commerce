@@ -15,7 +15,6 @@ export default function BrandsSort({ key, product }: SubCategorySortProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  console.log("product", product);
   const createQueryString = useCallback(
     (values: string[]) => {
       const params = new URLSearchParams(searchParams.toString());

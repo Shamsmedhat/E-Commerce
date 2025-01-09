@@ -34,7 +34,7 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
 
   // Check if the product is on the wishlist
   const allProductsWishlistId = guestWishlist?.map((i) => i.product);
-  const isProductInWishlist = allProductsWishlistId?.includes(productId);
+  const isProductInGuestWishlist = allProductsWishlistId?.includes(productId);
 
   useEffect(() => {
     if (!session) {
@@ -46,9 +46,9 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
       );
       setIsProductAddedWishlist(isProductInWishlist);
     } else {
-      setIsProductAddedWishlist(isProductInWishlist ?? false);
+      setIsProductAddedWishlist(isProductInGuestWishlist ?? false);
     }
-  }, [productId, session, isProductInWishlist]);
+  }, [productId, session, isProductInGuestWishlist]);
 
   function handleAddToWishlist() {
     if (session) {
@@ -67,28 +67,16 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
     }
   }
 
-  function handleRemoveFromWishlist() {
-    startTransition(() => {
-      removeFromWishlist(productId);
-    });
-  }
-
   return (
     <div className="flex gap-2">
-      <button
-        onClick={
-          isProductAddedWishlist
-            ? handleRemoveFromWishlist
-            : handleAddToWishlist
-        }
-      >
+      <button onClick={() => handleAddToWishlist()}>
         <div className="text-pr rounded-full bg-primary-foreground/20 p-[10px] dark:bg-white">
           {isAddingToWishlist || isRemovingFromWishlist || isPendingUpdate ? (
             <ImSpinner3
               className="animate-spin dark:text-background"
               size={16}
             />
-          ) : isProductAddedWishlist ? (
+          ) : isProductAddedWishlist || isProductInGuestWishlist ? (
             <FaHeart strokeWidth={1} color="#febf31" />
           ) : (
             <LuHeart strokeWidth={1} className="dark:text-background" />

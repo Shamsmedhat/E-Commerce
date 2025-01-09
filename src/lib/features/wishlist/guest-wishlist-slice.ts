@@ -24,8 +24,20 @@ export const guestWishlistSlice = createSlice({
         state.push(action.payload);
       }
     },
+    removeFromGuestWishlist(state, action: PayloadAction<GuestWishlistItem>) {
+      const existingProduct = state.find(
+        (item) => item.product === action.payload.product,
+      );
+
+      if (existingProduct) {
+        return state.filter((item) => item.product !== action.payload.product);
+      } else {
+        return;
+      }
+    },
   },
 });
 
-export const { addToGuestWishlist } = guestWishlistSlice.actions;
+export const { addToGuestWishlist, removeFromGuestWishlist } =
+  guestWishlistSlice.actions;
 export default guestWishlistSlice.reducer;
