@@ -51,9 +51,11 @@ export const addToWishlistAction = catchAsync(async (productId: string) => {
 
   // Parse data into a object
   const data = await res.json();
-
   // If the data is not success we pass the error as an AppError object
-  if (!res.ok) {
+  if (
+    !res.ok &&
+    data.message !== "This product already exists on the wishlist!"
+  ) {
     throw new AppError(
       data.message || "Failed to add to wishlist",
       res.status || 500,
@@ -62,7 +64,6 @@ export const addToWishlistAction = catchAsync(async (productId: string) => {
 
   // Revalidate cart & home page to refresh the cache
   revalidatePath("/");
-
   // Return the data if it oky
   return data;
 });

@@ -16,12 +16,10 @@ export default function WishlistIcon({
   useEffect(() => {
     // Function to handle loading cart data from localStorage
     const loadCartFromLocalStorage = () => {
-      if (typeof window !== "undefined") {
-        const storedWishlist = JSON.parse(
-          localStorage.getItem("guest-wishlist") || "[]",
-        );
-        setGuestWishlist(storedWishlist.length);
-      }
+      const storedWishlist = JSON.parse(
+        localStorage.getItem("guest-wishlist") || "[]",
+      );
+      setGuestWishlist(storedWishlist.length);
     };
 
     // Initial load

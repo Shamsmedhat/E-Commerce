@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { updateLocalStorageWishlist } from "@/lib/utils/helpers";
 import { addToGuestWishlist } from "@/lib/features/wishlist/guest-wishlist-slice";
+import { toast } from "react-toastify";
 
 type WishlistButtonProps = {
   productId: string;
@@ -30,6 +31,9 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
   const guestWishlist = useAppSelector((state) => state.guestWishlist);
   const dispatch = useAppDispatch();
 
+  const isProductExistsInUserWishlist = wishlist?.wishlist
+    .map((i) => i._id)
+    .includes(productId);
   const [isPendingUpdate, startTransition] = useTransition();
 
   // Check if the product is on the wishlist
@@ -52,9 +56,14 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
 
   function handleAddToWishlist() {
     if (session) {
-      startTransition(() => {
-        addToWishlist(productId);
-      });
+      if (isProductExistsInUserWishlist) {
+        toast.info("This product is already exists in wishlist.");
+      } else {
+        startTransition(() => {
+          addToWishlist(productId);
+          setIsProductAddedWishlist(true);
+        });
+      }
     } else {
       // Update localStorage
       updateLocalStorageWishlist(productId);
@@ -76,7 +85,9 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
               className="animate-spin dark:text-background"
               size={16}
             />
-          ) : isProductAddedWishlist || isProductInGuestWishlist ? (
+          ) : isProductAddedWishlist ||
+            isProductInGuestWishlist ||
+            isProductExistsInUserWishlist ? (
             <FaHeart strokeWidth={1} color="#febf31" />
           ) : (
             <LuHeart strokeWidth={1} className="dark:text-background" />

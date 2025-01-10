@@ -8,7 +8,7 @@ import ValidateResponse from "@/components/custom/validate-response";
 
 // UI
 
-import { getWishlistAction } from "@/lib/actions/wishlist.actions";
+import { getWishlistAction } from "@/lib/actions/wishlist-actions";
 import { AppError } from "@/lib/utils/catchAsync";
 import { getServerSession } from "next-auth";
 import EmptyWishlist from "./components/empty-wishlist";

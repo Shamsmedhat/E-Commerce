@@ -109,5 +109,5 @@ export default async function middleware(req: NextRequest) {
 
 export const config = {
   // Ensure the middleware runs on all requests
-  matcher: ["/((?!api|_next|.*\\..*).*)", "/api/:path*"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };

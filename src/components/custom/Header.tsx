@@ -18,7 +18,7 @@ import LoginHeaderSection from "./LoginHeaderSection";
 import Navbar from "./nav-bar";
 import { getCartAction } from "@/lib/actions/cart-actions";
 import { getCategoriesAction } from "@/lib/actions/categories-actions";
-import { getWishlistAction } from "@/lib/actions/wishlist.actions";
+import { getWishlistAction } from "@/lib/actions/wishlist-actions";
 import CartIcone from "./cart-icon";
 import WishlistIcon from "./wishlist-icon";
 import SearchResult from "../ui/search-result";
@@ -41,7 +41,6 @@ export default async function Header() {
         getCartAction(),
         getWishlistAction(),
       ]);
-      console.log(1);
       if (cart.status === "fulfilled" && !("statusCode" in cart.value)) {
         numbersOfitemsInCart = cart.value.cart.items.length;
       } else if (cart.status === "rejected") {

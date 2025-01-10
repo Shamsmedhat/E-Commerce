@@ -101,11 +101,13 @@ export default function AddToCart({
       >
         <span
           className={cn(
-            isProductAddedToCart ? "bg-green-600/40" : "bg-white",
+            isProductAddedToCart || isProductInUserCart
+              ? "bg-green-600/40"
+              : "bg-white",
             "rounded-full p-2",
           )}
         >
-          {isProductAddedToCart ? (
+          {isProductAddedToCart || isProductInUserCart ? (
             <TfiShoppingCartFull className="text-white" size={15} />
           ) : (
             <LuShoppingCart className="text-primary-foreground" size={15} />

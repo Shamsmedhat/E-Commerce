@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { useDeleteProductFromCart } from "@/lib/utils/data/cart-data";
 import { useTranslations } from "next-intl";
 import { getSession } from "next-auth/react"; // Import NextAuth for session checking
+import { useQueryClient } from "@tanstack/react-query";
 
 type DeleteProductFromCartProps = {
   item: ProductItem;
@@ -29,6 +30,7 @@ export default function DeleteProductFromCart({
   const t = useTranslations();
   const { deleteProductFromCart, isDeleteingProductFromCart } =
     useDeleteProductFromCart();
+  const queryClient = useQueryClient();
 
   //todo [reusable] Helper function to remove product from localStorage
   const removeFromLocalStorage = (productId: string) => {
@@ -50,6 +52,7 @@ export default function DeleteProductFromCart({
     if (session) {
       // User is logged in, delete from server-side cart
       deleteProductFromCart(productId);
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
     } else {
       // User is not logged in, delete from localStorage
       removeFromLocalStorage(productId);

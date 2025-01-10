@@ -2,7 +2,7 @@ import {
   addToWishlistAction,
   getWishlistAction,
   removeToWishlistAction,
-} from "@/lib/actions/wishlist.actions";
+} from "@/lib/actions/wishlist-actions";
 import {
   useMutation,
   useQuery,
@@ -34,9 +34,10 @@ export function useAddToWishlist() {
     isPending: isAddingToWishlist,
     isSuccess: isAddingToWishlistSuccess,
     isError: isAddingToWishlistError,
+    data,
   } = useMutation({
     mutationFn: async (productId: string) => {
-      addToWishlistAction(productId);
+      return await addToWishlistAction(productId);
     },
     onSuccess: () => {
       toast.success("Product has been added to the wishlist successfully.");
