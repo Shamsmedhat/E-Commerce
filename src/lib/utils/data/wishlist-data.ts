@@ -21,7 +21,7 @@ export function useWishlist(session: Session | null) {
   }: UseQueryResult<WishlistData> = useQuery({
     queryKey: ["wishlist"],
     queryFn: () => getWishlistAction(),
-    enabled: !!session,
+    // enabled: !!session,
   });
 
   return { wishlist, isFetching, isError, isPending };

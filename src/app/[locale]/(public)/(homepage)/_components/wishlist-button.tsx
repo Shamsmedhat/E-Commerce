@@ -30,7 +30,6 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
     useDeleteFromWishlist();
   const guestWishlist = useAppSelector((state) => state.guestWishlist);
   const dispatch = useAppDispatch();
-
   const isProductExistsInUserWishlist = wishlist?.wishlist
     .map((i) => i._id)
     .includes(productId);
@@ -57,8 +56,12 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
   function handleAddToWishlist() {
     if (session) {
       if (isProductExistsInUserWishlist) {
+        console.log(1);
         toast.info("This product is already exists in wishlist.");
       } else {
+        console.log(wishlist);
+        console.log(isProductExistsInUserWishlist);
+        console.log(2);
         startTransition(() => {
           addToWishlist(productId);
           setIsProductAddedWishlist(true);

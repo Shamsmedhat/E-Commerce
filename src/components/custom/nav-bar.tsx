@@ -18,7 +18,6 @@ export default function Navbar({ categories, pagination }: CategoriesData) {
 
   // get page path name
   const pathname = usePathname();
-  console.log("categories", categories);
   // get the url slugs as an array to catch the category id for conditional UIs
   const categoryPageUrl = pathname.split("/");
 
