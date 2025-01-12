@@ -6,7 +6,8 @@ import { LuChevronDown, LuChevronUp, LuZoomIn } from "react-icons/lu";
 import { useState } from "react";
 import styles from "../product-style.module.css";
 import Image from "next/image";
-
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 export default function ProductGallery({
   gallery,
 }: {
@@ -34,16 +35,35 @@ export default function ProductGallery({
   return (
     <div className="flex w-full flex-shrink flex-row-reverse justify-between md:px-8 md:pe-8">
       {/* Main Image Display */}
+
       <div
-        className={`${styles.imageZoom} relative flex w-full items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-2 dark:border-white/20 md:p-4`}
+        className={`relative flex w-full items-center justify-center rounded-lg border-2 border-primary-foreground/10 p-2 dark:border-white/20 md:p-4`}
       >
-        <Image
+        <Zoom
+          zoomImg={{
+            alt: "main product",
+            src: currentImg,
+            style: {
+              // width: "100px",
+              // height: "100px",
+            },
+          }}
+        >
+          <Image
+            alt="main product"
+            src={currentImg}
+            width={250}
+            height={400}
+            className="z-50 h-[400px] w-full object-contain transition-all duration-500 ease-in-out"
+          />
+        </Zoom>
+        {/* <Image
           src={currentImg}
           width={250}
           height={400}
           className="z-50 h-[400px] w-full object-contain transition-all duration-500 ease-in-out"
           alt="Current Product"
-        />
+        /> */}
       </div>
 
       {/* Thumbnail and Controls Section */}
@@ -85,10 +105,12 @@ export default function ProductGallery({
                   setCurrentImgIndex(index);
                 }}
               >
-                <img
+                <Image
                   src={img}
                   className="relative z-50 h-[60px] w-[60px] object-contain transition duration-300"
                   alt={`Thumbnail ${index + 1}`}
+                  width={60}
+                  height={10}
                 />
               </button>
             ))}
