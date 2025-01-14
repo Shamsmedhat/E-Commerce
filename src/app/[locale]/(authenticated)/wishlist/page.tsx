@@ -32,6 +32,7 @@ export default async function Cart() {
     return <GuestWishlist />;
   } else {
     try {
+      console.log(2);
       // Attempt to get cart data
       wishlist = await getWishlistAction();
     } catch (error) {

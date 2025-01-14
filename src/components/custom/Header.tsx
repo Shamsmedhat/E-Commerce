@@ -35,10 +35,11 @@ export default async function Header() {
   let numbersOfitemsInCart = 0;
   let numbersOfitemsInWishlist = 0;
 
-  try {
-    if (session) {
+  if (session) {
+    try {
       [cart, wishlist] = await Promise.allSettled([
         getCartAction(),
+        // console.log(1),
         getWishlistAction(),
       ]);
       if (cart.status === "fulfilled" && !("statusCode" in cart.value)) {
@@ -57,9 +58,9 @@ export default async function Header() {
         console.error("Error fetching wishlist:", wishlist.reason);
         // Fallback for wishlist if needed
       }
+    } catch (error) {
+      console.error("Unexpected error:", error);
     }
-  } catch (error) {
-    console.error("Unexpected error:", error);
   }
 
   //TODO make sure the data came before distructure data (categories)

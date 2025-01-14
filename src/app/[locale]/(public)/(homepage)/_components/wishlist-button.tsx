@@ -19,15 +19,20 @@ type WishlistButtonProps = {
 };
 
 export default function WishlistButton({ productId }: WishlistButtonProps) {
+  // Session
   const { data: session, status } = useSession();
+
+  // Wishlist Data
   const { wishlist, isFetching, isPending } = useWishlist(session);
   const { addToWishlist, isAddingToWishlist } = useAddToWishlist();
+  const { removeFromWishlist, isRemovingFromWishlist } =
+    useDeleteFromWishlist();
+
+  // State
   const productsIdExistOnWishlist = wishlist?.wishlist.map((p) => p._id);
   const [isProductAddedWishlist, setIsProductAddedWishlist] = useState(
     productsIdExistOnWishlist?.includes(productId),
   );
-  const { removeFromWishlist, isRemovingFromWishlist } =
-    useDeleteFromWishlist();
   const guestWishlist = useAppSelector((state) => state.guestWishlist);
   const dispatch = useAppDispatch();
   const isProductExistsInUserWishlist = wishlist?.wishlist
@@ -39,6 +44,7 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
   const allProductsWishlistId = guestWishlist?.map((i) => i.product);
   const isProductInGuestWishlist = allProductsWishlistId?.includes(productId);
 
+  // Effects
   useEffect(() => {
     if (!session) {
       const storedWishlist = JSON.parse(
@@ -53,15 +59,12 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
     }
   }, [productId, session, isProductInGuestWishlist]);
 
+  // Functions
   function handleAddToWishlist() {
     if (session) {
       if (isProductExistsInUserWishlist) {
-        console.log(1);
         toast.info("This product is already exists in wishlist.");
       } else {
-        console.log(wishlist);
-        console.log(isProductExistsInUserWishlist);
-        console.log(2);
         startTransition(() => {
           addToWishlist(productId);
           setIsProductAddedWishlist(true);
@@ -79,6 +82,7 @@ export default function WishlistButton({ productId }: WishlistButtonProps) {
     }
   }
 
+  // Render
   return (
     <div className="flex gap-2">
       <button onClick={() => handleAddToWishlist()}>
