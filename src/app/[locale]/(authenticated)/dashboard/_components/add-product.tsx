@@ -15,25 +15,28 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { addNewProduct } from "@/lib/actions/products-actions";
 
 export default function AddProduct() {
   const Schema = z.object({
     category: z
       .string({ required_error: "Category name is required!" })
       .min(2, { message: "Category name must be at least 2 characters long" })
-      .max(20, { message: "Category name must be at most 20 characters long" }),
+      .max(550, {
+        message: "Category name must be at most 20 characters long",
+      }),
     subCategory: z
       .string({ required_error: "subCategory name is required!" })
       .min(2, {
         message: "subCategory name must be at least 2 characters long",
       })
-      .max(20, {
+      .max(550, {
         message: "subCategory name must be at most 20 characters long",
       }),
     brand: z
       .string({ required_error: "Brand name is required!" })
       .min(2, { message: "Brand name must be at least 2 characters long" })
-      .max(20, { message: "Brand name must be at most 20 characters long" }),
+      .max(550, { message: "Brand name must be at most 20 characters long" }),
     cover: z.string({ required_error: "cover image is required!" }),
     gallery: z.array(
       z.object({
@@ -91,8 +94,9 @@ export default function AddProduct() {
     },
     resolver: zodResolver(Schema),
   });
-  function onSubmit(values: z.infer<typeof Schema>) {
+  function onSubmit(values: Inputs) {
     console.log(values);
+    addNewProduct(values);
   }
 
   return (
@@ -150,6 +154,32 @@ export default function AddProduct() {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="gallery"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Gallery Image&apos;s</FormLabel>
+              <FormControl>
+                <Input
+                  multiple
+                  type="file"
+                  onChange={(e) => {
+                    const files = e.target.files;
+                    if (files) {
+                      const images = Array.from(files).map((file) => {
+                        return { image: URL.createObjectURL(file) };
+                      });
+                      field.onChange(images);
+                    }
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="price"
@@ -157,7 +187,12 @@ export default function AddProduct() {
             <FormItem>
               <FormLabel>Price</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="Price" {...field} />
+                <Input
+                  type="number"
+                  placeholder="Price"
+                  {...field}
+                  onChange={(e) => field.onChange(Number(e.target.value))}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -170,7 +205,12 @@ export default function AddProduct() {
             <FormItem>
               <FormLabel>Stock</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="Stock" {...field} />
+                <Input
+                  type="number"
+                  placeholder="Stock"
+                  {...field}
+                  onChange={(e) => field.onChange(Number(e.target.value))}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -183,7 +223,12 @@ export default function AddProduct() {
             <FormItem>
               <FormLabel>Sales</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="Sales" {...field} />
+                <Input
+                  type="number"
+                  placeholder="Sales"
+                  {...field}
+                  onChange={(e) => field.onChange(Number(e.target.value))}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

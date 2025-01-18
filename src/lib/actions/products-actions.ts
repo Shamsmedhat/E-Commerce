@@ -3,6 +3,8 @@
 import axios from "axios";
 import { getLocale } from "next-intl/server";
 import { AppError } from "../utils/catchAsync";
+import { NewProductFields } from "../types/product";
+import getAuthorizationHeader from "./get-authorization-header";
 
 //todo convert all actions to fetch
 
@@ -319,4 +321,26 @@ export async function getFilteredProductsAction(
 
   // Return product data
   return data.data;
+}
+
+export async function addNewProduct(productData: NewProductFields) {
+  const res = await fetch(
+    "https://e-commerce.thelanerealestate.com/v1/products",
+    {
+      method: "POST",
+      body: JSON.stringify(productData),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        // Function to return the token
+        ...(await getAuthorizationHeader()),
+      },
+    },
+  );
+
+  if (!res.ok) {
+    console.log(`error from fetch ${res}`);
+  }
+  const data = await res.json();
+  console.log(data);
 }
