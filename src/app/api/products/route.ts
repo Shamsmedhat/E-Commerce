@@ -1,6 +1,4 @@
-import { NextRequest } from "next/server";
-
-export async function GET(req: NextRequest) {
+export async function GET() {
   const res = await fetch(
     "https://e-commerce.thelanerealestate.com/v1/products",
   );
