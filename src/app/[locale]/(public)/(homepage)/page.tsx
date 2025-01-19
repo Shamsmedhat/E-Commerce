@@ -10,7 +10,13 @@ import { getCategoriesAction } from "@/lib/actions/categories-actions";
 
 export default async function Page() {
   const categoriesData = await getCategoriesAction();
+  const res = await fetch("http://localhost:3000/api/products");
 
+  const data = await res.json();
+  console.log("data", data.data.data.products);
+
+  // const data = await res.json();
+  // console.log("data", data);
   return (
     <>
       <MainSlider categoriesData={categoriesData} />

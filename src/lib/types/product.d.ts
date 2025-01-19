@@ -5,8 +5,7 @@ export interface NewProductFields {
   cover: String;
   gallery: {
     image: String;
-  };
-  [];
+  }[];
   price: number;
   stock: number;
   stock: number;
@@ -20,6 +19,5 @@ export interface NewProductFields {
         model: String;
       };
     };
-  };
-  [];
+  }[];
 }

@@ -3,7 +3,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,8 +24,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { addNewProduct } from "@/lib/actions/products-actions";
+import { Link } from "@/navigarion";
+import AddProductSelectCategory from "./add-product-select-category";
+import AddProductSelectSubCategory from "./add-product-select-subcategory";
+import AddProductSelectBrand from "./add-product-select-brand";
 
-export default function AddProduct() {
+type PropsType = {
+  allCategories: CategoriesData;
+};
+
+export default function AddProduct({ allCategories }: PropsType) {
+  console.log("allCategories", allCategories);
+
   const Schema = z.object({
     category: z
       .string({ required_error: "Category name is required!" })
@@ -94,9 +112,10 @@ export default function AddProduct() {
     },
     resolver: zodResolver(Schema),
   });
+
   function onSubmit(values: Inputs) {
     console.log(values);
-    addNewProduct(values);
+    // addNewProduct(values);
   }
 
   return (
@@ -106,40 +125,27 @@ export default function AddProduct() {
           control={form.control}
           name="category"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Category</FormLabel>
-              <FormControl>
-                <Input placeholder="Category" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <AddProductSelectCategory
+              field={field}
+              allCategories={allCategories}
+            />
           )}
         />
         <FormField
           control={form.control}
           name="subCategory"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>SubCategory</FormLabel>
-              <FormControl>
-                <Input placeholder="SubCategory" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <AddProductSelectSubCategory
+              field={field}
+              allCategories={allCategories}
+              form={form}
+            />
           )}
         />
         <FormField
           control={form.control}
           name="brand"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Brand</FormLabel>
-              <FormControl>
-                <Input placeholder="Brand" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          render={({ field }) => <AddProductSelectBrand field={field} />}
         />
         <FormField
           control={form.control}
