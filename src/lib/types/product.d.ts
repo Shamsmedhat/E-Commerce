@@ -1,4 +1,4 @@
-export interface NewProductFields {
+declare interface NewProductFields {
   category: String;
   subCategory: String;
   brand: String;

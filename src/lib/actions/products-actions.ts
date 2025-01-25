@@ -3,7 +3,6 @@
 import axios from "axios";
 import { getLocale } from "next-intl/server";
 import { AppError } from "../utils/catchAsync";
-import { NewProductFields } from "../types/product";
 import getAuthorizationHeader from "./get-authorization-header";
 
 //todo convert all actions to fetch
@@ -337,10 +336,13 @@ export async function addNewProduct(productData: NewProductFields) {
       },
     },
   );
+  console.log(res);
 
   if (!res.ok) {
     console.log(`error from fetch ${res}`);
   }
   const data = await res.json();
   console.log(data);
+
+  return data;
 }

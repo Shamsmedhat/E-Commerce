@@ -28,14 +28,15 @@ import { Link } from "@/navigarion";
 import AddProductSelectCategory from "./add-product-select-category";
 import AddProductSelectSubCategory from "./add-product-select-subcategory";
 import AddProductSelectBrand from "./add-product-select-brand";
+import { useAddSingleImage } from "@/lib/utils/data/upload-single-image";
+import { useAddNewProduct } from "@/lib/utils/data/add-new-product-data";
+import { useRef } from "react";
 
 type PropsType = {
   allCategories: CategoriesData;
 };
 
 export default function AddProduct({ allCategories }: PropsType) {
-  console.log("allCategories", allCategories);
-
   const Schema = z.object({
     category: z
       .string({ required_error: "Category name is required!" })
@@ -113,9 +114,27 @@ export default function AddProduct({ allCategories }: PropsType) {
     resolver: zodResolver(Schema),
   });
 
+  const { register } = form;
+
+  const { addImageHook, data: imageLoad, error } = useAddSingleImage();
+  const { addProduct, data, error: addProductError } = useAddNewProduct();
+  const inputRef = useRef<HTMLElement | null>(null);
+
   function onSubmit(values: Inputs) {
-    console.log(values);
-    // addNewProduct(values);
+    const formData = new FormData();
+    const coverInput = inputRef.current;
+
+    if (coverInput?.files) {
+      formData.append("file", coverInput.files[0]);
+      console.log("FormData with file:", formData.get("file"));
+    }
+    console.log("inputRef", inputRef);
+    // console.log(values.cover);
+    // const img = new FormData();
+    addImageHook(formData);
+    // console.log(imageLoad);
+    // console.log(error);
+    // addProduct(values);
   }
 
   return (
@@ -154,8 +173,18 @@ export default function AddProduct({ allCategories }: PropsType) {
             <FormItem>
               <FormLabel>Cover Image</FormLabel>
               <FormControl>
-                <Input type="file" {...field} />
+                <Input
+                  type="file"
+                  {...field}
+                  ref={(e) => {
+                    field.ref(e);
+                    inputRef.current = e;
+                  }}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  // addImageHook(new FormData(e.target.files?.[0]));
+                />
               </FormControl>
+
               <FormMessage />
             </FormItem>
           )}
