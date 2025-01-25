@@ -118,17 +118,17 @@ export default function AddProduct({ allCategories }: PropsType) {
 
   const { addImageHook, data: imageLoad, error } = useAddSingleImage();
   const { addProduct, data, error: addProductError } = useAddNewProduct();
-  const inputRef = useRef<HTMLElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   function onSubmit(values: Inputs) {
     const formData = new FormData();
     const coverInput = inputRef.current;
 
     if (coverInput?.files) {
-      formData.append("file", coverInput.files[0]);
+      formData.append("file", coverInput.files?.[0]);
       console.log("FormData with file:", formData.get("file"));
     }
-    console.log("inputRef", inputRef);
+
     // console.log(values.cover);
     // const img = new FormData();
     addImageHook(formData);
