@@ -21,3 +21,5 @@ declare interface NewProductFields {
     };
   }[];
 }
+
+export {NewProductFields};
