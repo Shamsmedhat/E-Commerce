@@ -1,5 +1,6 @@
 import { addNewProduct } from "@/lib/actions/products-actions";
 import { useMutation } from "@tanstack/react-query";
+import { NewProductFields } from "@/lib/types/product";
 
 export function useAddNewProduct() {
   const {
