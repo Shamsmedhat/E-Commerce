@@ -4,6 +4,7 @@ import axios from "axios";
 import { getLocale } from "next-intl/server";
 import { AppError } from "../utils/catchAsync";
 import getAuthorizationHeader from "./get-authorization-header";
+import { NewProductFields } from "../types/product";
 
 //todo convert all actions to fetch
 
