@@ -21,7 +21,7 @@ export default async function Providers({ children }: props) {
         {/* Providing all messages to the client */}
         <NextIntlClientProvider messages={messages}>
           {/* provide theme to all app */}
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             {/* provide session to all app */}
             <AuthSessionProvider>{children}</AuthSessionProvider>
           </ThemeProvider>
