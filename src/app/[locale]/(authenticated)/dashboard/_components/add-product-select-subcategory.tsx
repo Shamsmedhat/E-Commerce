@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { NewProductFields } from "@/lib/types/product";
 import { useSubCategories } from "@/lib/utils/data/sub-category-data";
 import React from "react";
 
